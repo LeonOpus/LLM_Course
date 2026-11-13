@@ -1,0 +1,16 @@
+{
+  "seed": 2003,
+  "steps": 100,
+  "before": {
+    "examples": 64,
+    "loss": 0.6931471824645996,
+    "relative_margin": 0.0,
+    "relative_preference_accuracy": 0.0
+  },
+  "after": {
+    "examples": 64,
+    "loss": 0.6325548849999905,
+    "relative_margin": 1.2725967466831207,
+    "relative_preference_accuracy": 0.9375
+  }
+}

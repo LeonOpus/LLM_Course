@@ -1,0 +1,10 @@
+{
+  "samples": 64,
+  "seed": 2003,
+  "absolute_accuracy": {
+    "base": 0.515625,
+    "dpo": 0.515625
+  },
+  "relative_improvement_fraction": 0.9375,
+  "relative_margin_change": 1.2725962698459625
+}

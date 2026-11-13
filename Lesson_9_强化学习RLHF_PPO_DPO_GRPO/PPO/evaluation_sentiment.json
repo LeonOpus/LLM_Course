@@ -1,0 +1,49 @@
+{
+  "test_split": "IMDB test",
+  "samples": 256,
+  "seed": 42,
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 48
+  },
+  "models": {
+    "base": {
+      "positive_mean_prompt_plus_response": 0.6295015707245284,
+      "positive_mean_response_only": 0.6707000482009562,
+      "positive_fraction_response_only": 0.671875,
+      "examples": [
+        {
+          "prompt": "It's difficult to criticize a movie with the title",
+          "response": "\"Parasite,\" directed by Bong Joon-ho, is a masterful exploration of class and power dynamics in South Korea, leaving audiences breathless and questioning their own perceptions of reality.\n\nThe film follows the story of Park H"
+        },
+        {
+          "prompt": "As you know \"The Greatest Game Ever Played\"",
+          "response": "...is a cinematic masterpiece, capturing the essence of football in all its glory with unmatched skill and passion. The film's narrative is both compelling and emotionally resonant, weaving together the highs and lows of a professional soccer season in a way that"
+        },
+        {
+          "prompt": "This film marked the end of the \"serious\"",
+          "response": "...and \"serious\" was not necessarily a bad thing, but it did seem to be a bit too serious for my taste. The plot was somewhat predictable and lacked any real depth or complexity. The acting was also lacking in substance, with"
+        }
+      ]
+    },
+    "course_ppo": {
+      "positive_mean_prompt_plus_response": 0.8670019921086691,
+      "positive_mean_response_only": 0.8920412211158464,
+      "positive_fraction_response_only": 0.890625,
+      "examples": [
+        {
+          "prompt": "It's difficult to criticize a movie with the title",
+          "response": "\"Whispers of the Heart,\" a film that has been captivating and resonant for many, is a delightful blend of heart and soul. The story is rich in depth and the performances are outstanding, making it an unforgettable experience. The cinemat"
+        },
+        {
+          "prompt": "As you know \"The Greatest Game Ever Played\"",
+          "response": "... is an epic journey through the heart of the American West, where the story unfolds in a rich and complex narrative. The performances are outstanding, with each character delivering their own unique depth and complexity. The cinematography captures the vastness of"
+        },
+        {
+          "prompt": "This film marked the end of the \"serious\"",
+          "response": "... and the beginning of a new era in filmmaking, with its unique blend of humor, heart, and a touch of dark humor. The performances were outstanding, with each character delivering their own unique depth and complexity. The cinematography was"
+        }
+      ]
+    }
+  }
+}
