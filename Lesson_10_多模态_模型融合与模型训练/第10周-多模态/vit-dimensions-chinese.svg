@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
+  <!-- Background -->
+  <rect width="1000" height="600" fill="white"/>
+  
+  <!-- Title -->
+  <text x="500" y="30" font-family="Arial, Microsoft YaHei" font-size="24" text-anchor="middle" font-weight="bold">Vision Transformer (ViT) 处理流程及维度变化</text>
+  
+  <!-- Input Image -->
+  <rect x="50" y="80" width="120" height="120" fill="#A0D8EF" stroke="#333" stroke-width="2"/>
+  <text x="110" y="150" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">输入图像</text>
+  <text x="110" y="180" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">224×224×3</text>
+  
+  <!-- Arrow 1 -->
+  <line x1="170" y1="140" x2="220" y2="140" stroke="#333" stroke-width="2"/>
+  <polygon points="220,140 210,135 210,145" fill="#333"/>
+  
+  <!-- Patch Extraction -->
+  <rect x="220" y="65" width="150" height="150" fill="#FFD580" stroke="#333" stroke-width="2"/>
+  <text x="295" y="100" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">图像分块</text>
+  <text x="295" y="120" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">14×14个块</text>
+  <text x="295" y="140" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">每个块大小：</text>
+  <text x="295" y="160" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">16×16×3</text>
+  <text x="295" y="185" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">（共196个块）</text>
+  
+  <!-- Arrow 2 -->
+  <line x1="370" y1="140" x2="420" y2="140" stroke="#333" stroke-width="2"/>
+  <polygon points="420,140 410,135 410,145" fill="#333"/>
+  
+  <!-- Flattening -->
+  <rect x="420" y="80" width="140" height="120" fill="#D8BFD8" stroke="#333" stroke-width="2"/>
+  <text x="490" y="120" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">展平图像块</text>
+  <text x="490" y="150" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">196 × (16×16×3)</text>
+  <text x="490" y="170" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">= 196 × 768</text>
+  
+  <!-- Arrow 3 -->
+  <line x1="560" y1="140" x2="610" y2="140" stroke="#333" stroke-width="2"/>
+  <polygon points="610,140 600,135 600,145" fill="#333"/>
+  
+  <!-- Linear Projection -->
+  <rect x="610" y="80" width="140" height="120" fill="#C1FFC1" stroke="#333" stroke-width="2"/>
+  <text x="680" y="115" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">线性投影</text>
+  <text x="680" y="155" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">196 × D</text>
+  <text x="680" y="175" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">（D = 768）</text>
+  
+  <!-- Position Embedding Box -->
+  <rect x="520" y="230" width="140" height="80" fill="#FFEB99" stroke="#333" stroke-width="2"/>
+  <text x="590" y="260" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">位置编码</text>
+  <text x="590" y="285" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">(197 × D)</text>
+  
+  <!-- Arrow from Position Embedding -->
+  <line x1="590" y1="230" x2="590" y2="200" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="590" y1="200" x2="680" y2="200" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+  <polygon points="680,200 670,195 670,205" fill="#333"/>
+  
+  <!-- Class Token Box -->
+  <rect x="700" y="230" width="120" height="80" fill="#FFC0CB" stroke="#333" stroke-width="2"/>
+  <text x="760" y="260" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">[类别]标记</text>
+  <text x="760" y="280" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">添加到序列前</text>
+  <text x="760" y="300" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">(1 × D)</text>
+  
+  <!-- Arrow from Class Token -->
+  <line x1="760" y1="230" x2="760" y2="200" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+  <polygon points="760,200 755,210 765,210" fill="#333"/>
+  
+  <!-- Arrow 4 -->
+  <line x1="750" y1="140" x2="800" y2="140" stroke="#333" stroke-width="2"/>
+  <polygon points="800,140 790,135 790,145" fill="#333"/>
+  
+  <!-- Transformer Encoder Box -->
+  <rect x="800" y="40" width="150" height="200" fill="#B0C4DE" stroke="#333" stroke-width="2"/>
+  <text x="875" y="65" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle" font-weight="bold">Transformer</text>
+  <text x="875" y="85" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle" font-weight="bold">编码器</text>
+  <text x="875" y="115" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">输入：</text>
+  <text x="875" y="135" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">197 × D</text>
+  <text x="875" y="165" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">L个Transformer</text>
+  <text x="875" y="185" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">块 (L=12)</text>
+  <text x="875" y="215" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">输出：</text>
+  <text x="875" y="235" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">197 × D</text>
+  
+  <!-- Arrow 5 -->
+  <line x1="875" y1="240" x2="875" y2="290" stroke="#333" stroke-width="2"/>
+  <polygon points="875,290 870,280 880,280" fill="#333"/>
+  
+  <!-- Extract CLS Token -->
+  <rect x="800" y="290" width="150" height="80" fill="#FFB6C1" stroke="#333" stroke-width="2"/>
+  <text x="875" y="320" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">提取[类别]标记</text>
+  <text x="875" y="350" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">(1 × D)</text>
+  
+  <!-- Arrow 6 -->
+  <line x1="875" y1="370" x2="875" y2="420" stroke="#333" stroke-width="2"/>
+  <polygon points="875,420 870,410 880,410" fill="#333"/>
+  
+  <!-- MLP Head -->
+  <rect x="800" y="420" width="150" height="80" fill="#FFA07A" stroke="#333" stroke-width="2"/>
+  <text x="875" y="450" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">MLP分类头</text>
+  <text x="875" y="470" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">输入: 1 × D</text>
+  <text x="875" y="490" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">输出: 1 × 类别数</text>
+  
+  <!-- Arrow 7 -->
+  <line x1="875" y1="500" x2="875" y2="535" stroke="#333" stroke-width="2"/>
+  <polygon points="875,535 870,525 880,525" fill="#333"/>
+  
+  <!-- Classification Output -->
+  <rect x="800" y="535" width="150" height="40" fill="#90EE90" stroke="#333" stroke-width="2"/>
+  <text x="875" y="560" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">类别预测结果</text>
+  
+  <!-- Transformer Block Detail -->
+  <rect x="220" y="370" width="500" height="210" fill="#F0F0F0" stroke="#333" stroke-width="2" rx="10" ry="10"/>
+  <text x="470" y="395" font-family="Arial, Microsoft YaHei" font-size="18" text-anchor="middle" font-weight="bold">Transformer块结构详情 (×L)</text>
+  <text x="470" y="415" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">输入和输出维度: 197 × D (D = 768)</text>
+  
+  <!-- Transformer Block Components -->
+  <rect x="250" y="435" width="120" height="40" fill="#FFD580" stroke="#333" stroke-width="2"/>
+  <text x="310" y="460" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">层归一化</text>
+  
+  <rect x="250" y="505" width="120" height="55" fill="#A0D8EF" stroke="#333" stroke-width="2"/>
+  <text x="310" y="530" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">多头</text>
+  <text x="310" y="550" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">自注意力</text>
+  
+  <rect x="450" y="435" width="120" height="40" fill="#FFD580" stroke="#333" stroke-width="2"/>
+  <text x="510" y="460" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">层归一化</text>
+  
+  <rect x="450" y="505" width="120" height="55" fill="#D8BFD8" stroke="#333" stroke-width="2"/>
+  <text x="510" y="535" font-family="Arial, Microsoft YaHei" font-size="16" text-anchor="middle">MLP</text>
+  
+  <!-- Arrows in Transformer Block -->
+  <line x1="310" y1="475" x2="310" y2="505" stroke="#333" stroke-width="2"/>
+  <polygon points="310,505 305,495 315,495" fill="#333"/>
+  
+  <line x1="310" y1="560" x2="310" y2="575" stroke="#333" stroke-width="2"/>
+  <line x1="310" y1="575" x2="400" y2="575" stroke="#333" stroke-width="2"/>
+  <line x1="400" y1="575" x2="400" y2="455" stroke="#333" stroke-width="2"/>
+  <line x1="400" y1="455" x2="450" y2="455" stroke="#333" stroke-width="2"/>
+  <polygon points="450,455 440,450 440,460" fill="#333"/>
+  
+  <line x1="510" y1="475" x2="510" y2="505" stroke="#333" stroke-width="2"/>
+  <polygon points="510,505 505,495 515,495" fill="#333"/>
+  
+  <line x1="510" y1="560" x2="510" y2="575" stroke="#333" stroke-width="2"/>
+  <line x1="510" y1="575" x2="600" y2="575" stroke="#333" stroke-width="2"/>
+  <line x1="600" y1="575" x2="600" y2="455" stroke="#333" stroke-width="2"/>
+  <line x1="600" y1="455" x2="630" y2="455" stroke="#333" stroke-width="2"/>
+  <polygon points="630,455 620,450 620,460" fill="#333"/>
+  
+  <!-- Residual Connections -->
+  <circle cx="400" cy="530" r="15" fill="white" stroke="#333" stroke-width="2"/>
+  <text x="400" y="535" font-family="Arial, Microsoft YaHei" font-size="20" text-anchor="middle" font-weight="bold">+</text>
+  
+  <circle cx="600" cy="530" r="15" fill="white" stroke="#333" stroke-width="2"/>
+  <text x="600" y="535" font-family="Arial, Microsoft YaHei" font-size="20" text-anchor="middle" font-weight="bold">+</text>
+  
+  <!-- Path to first add -->
+  <line x1="370" y1="530" x2="385" y2="530" stroke="#333" stroke-width="2"/>
+  <polygon points="385,530 375,525 375,535" fill="#333"/>
+  
+  <!-- Path from input to first add -->
+  <line x1="200" y1="455" x2="230" y2="455" stroke="#333" stroke-width="2"/>
+  <line x1="200" y1="455" x2="200" y2="530" stroke="#333" stroke-width="2"/>
+  <line x1="200" y1="530" x2="385" y2="530" stroke="#333" stroke-width="2"/>
+  
+  <!-- Path to second add -->
+  <line x1="570" y1="530" x2="585" y2="530" stroke="#333" stroke-width="2"/>
+  <polygon points="585,530 575,525 575,535" fill="#333"/>
+  
+  <!-- Path from first add to second add skip connection -->
+  <line x1="415" y1="530" x2="430" y2="530" stroke="#333" stroke-width="2"/>
+  <polygon points="430,530 420,525 420,535" fill="#333"/>
+  
+  <line x1="415" y1="530" x2="415" y1="495" stroke="#333" stroke-width="2"/>
+  <line x1="415" y1="495" x2="650" y2="495" stroke="#333" stroke-width="2"/>
+  <line x1="650" y1="495" x2="650" y2="530" stroke="#333" stroke-width="2"/>
+  <line x1="650" y1="530" x2="615" y2="530" stroke="#333" stroke-width="2"/>
+  
+  <!-- Input to Transformer Block -->
+  <line x1="170" y1="455" x2="250" y2="455" stroke="#333" stroke-width="2"/>
+  <polygon points="250,455 240,450 240,460" fill="#333"/>
+  
+  <!-- Output from Transformer Block -->
+  <line x1="630" y1="455" x2="680" y2="455" stroke="#333" stroke-width="2"/>
+  <polygon points="680,455 670,450 670,460" fill="#333"/>
+  
+  <!-- Labels -->
+  <text x="170" y="445" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">输入</text>
+  <text x="680" y="445" font-family="Arial, Microsoft YaHei" font-size="14" text-anchor="middle">输出</text>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <!-- Left side: Image Encoder -->
+  <rect x="50" y="30" width="300" height="40" fill="white" stroke="none"/>
+  <text x="150" y="55" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" font-weight="bold">图像编码器</text>
+  
+  <!-- Image encoder models list -->
+  <text x="70" y="100" font-family="Arial, sans-serif" font-size="16" fill="#4169E1">ResNet 50</text>
+  <text x="70" y="125" font-family="Arial, sans-serif" font-size="16" fill="#4169E1">ResNet 101</text>
+  <text x="70" y="150" font-family="Arial, sans-serif" font-size="16" fill="#4169E1">ResNet 50x4</text>
+  <text x="70" y="175" font-family="Arial, sans-serif" font-size="16" fill="#4169E1">ResNet 50x16</text>
+  <text x="70" y="200" font-family="Arial, sans-serif" font-size="16" fill="#4169E1">ResNet 50x64</text>
+  <text x="190" y="200" font-family="Arial, sans-serif" font-size="14">(10656 V100 天)</text>
+  
+  <text x="70" y="245" font-family="Arial, sans-serif" font-size="16" fill="#4169E1">ViT-B/32</text>
+  <text x="70" y="270" font-family="Arial, sans-serif" font-size="16" fill="#4169E1">ViT-B/16</text>
+  
+  <!-- Star marker -->
+  <text x="50" y="295" font-family="Arial, sans-serif" font-size="20" fill="red">★</text>
+  <text x="70" y="295" font-family="Arial, sans-serif" font-size="16" fill="#4169E1">ViT-L/14</text>
+  <text x="150" y="295" font-family="Arial, sans-serif" font-size="14">(3072 V100 天)</text>
+  
+  <!-- Additional notes -->
+  <text x="70" y="320" font-family="Arial, sans-serif" font-size="14">额外在336²336图片上训练一个epoch，提升精度。</text>
+  <text x="70" y="345" font-family="Arial, sans-serif" font-size="14">实验发现在模型深度，宽度，图像分辨率上同时增</text>
+  <text x="70" y="370" font-family="Arial, sans-serif" font-size="14">加计算量便可提升你于仅在一维度增加计算力。</text>
+  
+  <!-- Training info at bottom -->
+  <text x="360" y="420" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">4亿图文对上训练32个epoch</text>
+  
+  <!-- Right side: Text Encoder -->
+  <rect x="450" y="30" width="300" height="40" fill="white" stroke="none"/>
+  <text x="600" y="55" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" font-weight="bold">文本编码器</text>
+  
+  <!-- Text encoder diagram -->
+  <rect x="657" y="85" width="40" height="20" fill="#C0C0FF" stroke="#000000"/>
+  <text x="677" y="100" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">[EOS]</text>
+  
+  <line x1="677" y1="105" x2="677" y2="115" stroke="black" stroke-width="1"/>
+  <polygon points="677,115 673,110 681,110" fill="black"/>
+  
+  <rect x="600" y="115" width="155" height="40" fill="#C0C0FF" stroke="#000000"/>
+  <text x="677" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Layer Norm</text>
+  
+  <line x1="677" y1="155" x2="677" y2="165" stroke="black" stroke-width="1"/>
+  <polygon points="677,165 673,160 681,160" fill="black"/>
+  <circle cx="677" cy="165" r="3" fill="black"/>
+  
+  <rect x="600" y="165" width="155" height="40" fill="#FFFFC0" stroke="#000000"/>
+  <text x="677" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Feed Forward</text>
+  
+  <line x1="677" y1="205" x2="677" y2="215" stroke="black" stroke-width="1"/>
+  <polygon points="677,215 673,210 681,210" fill="black"/>
+  <text x="560" y="195" font-family="Arial, sans-serif" font-size="14">12x</text>
+  
+  <rect x="600" y="215" width="155" height="40" fill="#C0C0FF" stroke="#000000"/>
+  <text x="677" y="240" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Layer Norm</text>
+  
+  <line x1="677" y1="255" x2="677" y2="265" stroke="black" stroke-width="1"/>
+  <polygon points="677,265 673,260 681,260" fill="black"/>
+  <circle cx="677" cy="265" r="3" fill="black"/>
+  
+  <rect x="600" y="265" width="155" height="40" fill="#FFC0C0" stroke="#000000"/>
+  <text x="677" y="283" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Masked Multi-Head</text>
+  <text x="677" y="298" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Self-Attention</text>
+  
+  <line x1="677" y1="305" x2="677" y2="315" stroke="black" stroke-width="1"/>
+  <polygon points="677,315 673,310 681,310" fill="black"/>
+  
+  <rect x="600" y="315" width="155" height="40" fill="#FFFFC0" stroke="#000000"/>
+  <text x="677" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Position Embedding</text>
+  
+  <path d="M 677 355 L 677 365 L 605 365" stroke="black" stroke-width="1" fill="none"/>
+  <polygon points="605,365 610,361 610,369" fill="black"/>
+  
+  <rect x="550" y="355" width="55" height="20" fill="#C0C0FF" stroke="#000000"/>
+  <text x="577" y="370" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">[SOS]</text>
+  
+  <text x="630" y="370" font-family="Arial, sans-serif" font-size="12">输入文本</text>
+  <text x="695" y="370" font-family="Arial, sans-serif" font-size="12">[EOS]</text>
+  
+  <!-- Text encoder specifications -->
+  <text x="735" y="145" font-family="Arial, sans-serif" font-size="14">63M参数</text>
+  <text x="735" y="170" font-family="Arial, sans-serif" font-size="14">12层</text>
+  <text x="735" y="195" font-family="Arial, sans-serif" font-size="14">512宽度</text>
+  <text x="735" y="220" font-family="Arial, sans-serif" font-size="14">8个注意力头</text>
+  <text x="735" y="245" font-family="Arial, sans-serif" font-size="14">序列最大长度76</text>
+  
+  <!-- Final note -->
+  <text x="600" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">文本编码器大小对CLIP性能影响不大</text>
+</svg>

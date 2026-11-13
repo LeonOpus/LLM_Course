@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
+  <!-- Background -->
+  <rect width="1000" height="600" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="500" y="80" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#2d3e50" text-anchor="middle">多模态视觉理解核心理念</text>
+  
+  <!-- Top Horizontal Line -->
+  <line x1="140" y1="100" x2="860" y2="100" stroke="#34495e" stroke-width="2"/>
+  
+  <!-- Left Decoration -->
+  <text x="140" y="150" font-family="Arial, sans-serif" font-size="40" fill="#2980b9">﹏</text>
+  
+  <!-- Main Content Box -->
+  <rect x="165" y="200" width="670" height="200" fill="#1d3557" rx="10"/>
+  
+  <!-- Main Text -->
+  <text x="500" y="270" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">之前的ViT是预测固定类别的，有没有一个模型</text>
+  <text x="500" y="305" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">不需要专门训练能预测所有类别</text>
+  
+  <text x="500" y="350" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">之前的训练依赖于标记数据，能不能像语言模型的</text>
+  <text x="500" y="385" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">预训练一样，不依赖标注数据呢</text>
+  
+  <!-- Right Decoration -->
+  <text x="860" y="490" font-family="Arial, sans-serif" font-size="40" fill="#2980b9">﹏</text>
+  
+  <!-- Bottom Horizontal Line -->
+  <line x1="140" y1="520" x2="860" y2="520" stroke="#34495e" stroke-width="2"/>
+</svg>

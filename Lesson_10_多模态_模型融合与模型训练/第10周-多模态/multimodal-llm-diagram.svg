@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background and title section -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- Main title -->
+  <text x="400" y="60" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#2c3e50">多模态LLM系统开发课程</text>
+  
+  <!-- Subtitle -->
+  <text x="400" y="100" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#5d6d7e">图片转化为文本表达，模型理解是基础</text>
+  
+  <!-- Divider line -->
+  <line x1="100" x2="700" y1="130" y2="130" stroke="#aeb6bf" stroke-width="2"/>
+  
+  <!-- Course contents title -->
+  <text x="120" y="170" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2c3e50">课程目录</text>
+  
+  <!-- Course list items with links - blue links -->
+  <text x="120" y="220" font-family="Arial, sans-serif" font-size="20" fill="#2c3e50">
+    <tspan x="120" y="220" fill="#3498db" font-weight="bold" text-decoration="underline">1. 卷积神经网络</tspan>
+  </text>
+  
+  <text x="120" y="270" font-family="Arial, sans-serif" font-size="20" fill="#2c3e50">
+    <tspan x="120" y="270" fill="#3498db" font-weight="bold" text-decoration="underline">2. ViT</tspan>
+  </text>
+  
+  <text x="120" y="320" font-family="Arial, sans-serif" font-size="20" fill="#2c3e50">
+    <tspan x="120" y="320" fill="#3498db" font-weight="bold" text-decoration="underline">3. CLIP</tspan>
+  </text>
+  
+  <text x="120" y="370" font-family="Arial, sans-serif" font-size="20" fill="#2c3e50">
+    <tspan x="120" y="370" fill="#3498db" font-weight="bold" text-decoration="underline">4. BLIP</tspan>
+  </text>
+  
+  <text x="120" y="420" font-family="Arial, sans-serif" font-size="20" fill="#2c3e50">
+    <tspan x="120" y="420" fill="#3498db" font-weight="bold" text-decoration="underline">5. LLaVA</tspan>
+  </text>
+  
+  <!-- Right side visualization box -->
+  <rect x="450" y="190" width="250" height="250" fill="#ffffff" stroke="#aeb6bf" stroke-width="2" rx="10" ry="10"/>
+  
+  <!-- Visual models label -->
+  <rect x="670" y="200" width="90" height="30" fill="#3498db" rx="5" ry="5"/>
+  <text x="715" y="220" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">视觉模型</text>
+  
+  <!-- Text models label -->
+  <rect x="670" y="475" width="90" height="30" fill="#3498db" rx="5" ry="5"/>
+  <text x="715" y="495" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">文本理解</text>
+  
+  <!-- Circle for ViT -->
+  <circle cx="500" cy="250" r="40" fill="white" stroke="#3498db" stroke-width="2"/>
+  <text x="500" y="255" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#3498db">ViT</text>
+  
+  <!-- Circle for BERT -->
+  <circle cx="650" cy="250" r="40" fill="white" stroke="#3498db" stroke-width="2"/>
+  <text x="650" y="255" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#3498db">BERT</text>
+  
+  <!-- Circle for CLIP -->
+  <circle cx="575" cy="320" r="40" fill="white" stroke="#3498db" stroke-width="2"/>
+  <text x="575" y="325" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#3498db">CLIP</text>
+  
+  <!-- Circle for LLM -->
+  <circle cx="575" cy="400" r="40" fill="white" stroke="#3498db" stroke-width="2"/>
+  <text x="575" y="405" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#3498db">LLM</text>
+  
+  <!-- Connecting lines between circles -->
+  <line x1="525" x2="550" y1="275" y2="300" stroke="#3498db" stroke-width="1.5"/>
+  <line x1="625" x2="600" y1="275" y2="300" stroke="#3498db" stroke-width="1.5"/>
+  
+  <!-- Line connecting CLIP to LLM -->
+  <line x1="575" x2="575" y1="360" y2="380" stroke="#3498db" stroke-width="1.5"/>
+</svg>

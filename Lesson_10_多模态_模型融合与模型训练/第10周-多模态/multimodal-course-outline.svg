@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa"/>
+  
+  <!-- Title section -->
+  <rect x="0" y="0" width="800" height="140" fill="#304674"/>
+  <text x="400" y="60" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">从0-1实现一个多模态模型</text>
+  <text x="400" y="100" font-family="Arial, sans-serif" font-size="20" fill="#b7c9e2" text-anchor="middle">图片转化为文本表达 · 实现视觉与语言的对齐</text>
+  
+  <!-- Divider -->
+  <line x1="100" y1="140" x2="700" y2="140" stroke="#304674" stroke-width="2"/>
+  
+  <!-- Course objectives title -->
+  <text x="100" y="180" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#304674" text-anchor="start">课程目标</text>
+  
+  <!-- Objectives list -->
+  <text x="100" y="230" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#304674" text-anchor="start">1. 掌握transformer是怎么处理图片的</text>
+  <line x1="100" y1="240" x2="250" y2="240" stroke="#304674" stroke-width="2"/>
+  
+  <text x="120" y="270" font-family="Arial, sans-serif" font-size="18" fill="#555" text-anchor="start">· 图像编码与特征提取</text>
+  <text x="120" y="300" font-family="Arial, sans-serif" font-size="18" fill="#555" text-anchor="start">· Vision Transformer (ViT) 原理</text>
+  
+  <text x="100" y="350" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#304674" text-anchor="start">2. 掌握图片和文本怎么对齐的</text>
+  <line x1="100" y1="360" x2="250" y2="360" stroke="#304674" stroke-width="2"/>
+  
+  <text x="120" y="390" font-family="Arial, sans-serif" font-size="18" fill="#555" text-anchor="start">· CLIP对比学习原理</text>
+  <text x="120" y="420" font-family="Arial, sans-serif" font-size="18" fill="#555" text-anchor="start">· 跨模态注意力机制</text>
+  
+  <text x="100" y="470" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#304674" text-anchor="start">3. 掌握多模态模型的原理、结构和训练方式</text>
+  <line x1="100" y1="480" x2="250" y2="480" stroke="#304674" stroke-width="2"/>
+  
+  <text x="120" y="510" font-family="Arial, sans-serif" font-size="18" fill="#555" text-anchor="start">· 多模态架构设计</text>
+  <text x="120" y="540" font-family="Arial, sans-serif" font-size="18" fill="#555" text-anchor="start">· 预训练目标与数据处理</text>
+  
+  <text x="450" y="350" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#304674" text-anchor="start">4. 掌握多模态模型的微调</text>
+  <line x1="450" y1="360" x2="600" y2="360" stroke="#304674" stroke-width="2"/>
+  
+  <text x="470" y="390" font-family="Arial, sans-serif" font-size="18" fill="#555" text-anchor="start">· LoRA与参数高效微调</text>
+  <text x="470" y="420" font-family="Arial, sans-serif" font-size="18" fill="#555" text-anchor="start">· 多模态指令微调技术</text>
+  
+  <!-- Diagram -->
+  <rect x="450" y="450" width="280" height="140" fill="#e9eff8" rx="10" ry="10" stroke="#304674" stroke-width="1"/>
+  
+  <!-- Image encoder box -->
+  <rect x="470" y="470" width="100" height="40" fill="white" stroke="#304674" stroke-width="1" rx="5" ry="5"/>
+  <text x="520" y="495" font-family="Arial, sans-serif" font-size="12" fill="#304674" text-anchor="middle">图像编码器</text>
+  
+  <!-- Text encoder box -->
+  <rect x="610" y="470" width="100" height="40" fill="white" stroke="#304674" stroke-width="1" rx="5" ry="5"/>
+  <text x="660" y="495" font-family="Arial, sans-serif" font-size="12" fill="#304674" text-anchor="middle">文本编码器</text>
+  
+  <!-- Fusion module -->
+  <rect x="540" y="530" width="100" height="40" fill="white" stroke="#304674" stroke-width="1" rx="5" ry="5"/>
+  <text x="590" y="555" font-family="Arial, sans-serif" font-size="12" fill="#304674" text-anchor="middle">多模态融合</text>
+  
+  <!-- Connector lines -->
+  <line x1="520" y1="510" x2="550" y2="530" stroke="#304674" stroke-width="1"/>
+  <line x1="660" y1="510" x2="630" y2="530" stroke="#304674" stroke-width="1"/>
+</svg>

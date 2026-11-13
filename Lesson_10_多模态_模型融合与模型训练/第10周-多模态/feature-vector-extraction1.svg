@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <!-- Background style similar to the reference image -->
+  <rect width="800" height="400" fill="white"/>
+  
+  <!-- Header section with title -->
+  <rect x="150" y="20" width="500" height="60" rx="5" ry="5" fill="#1e3a5f"/>
+  <text x="400" y="60" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle" dominant-baseline="middle">特征向量提取示意图</text>
+  
+  <!-- Decorative wavy lines like in the reference -->
+  <path d="M150 100 Q 170 90, 190 100 Q 210 110, 230 100 Q 250 90, 270 100" stroke="#4b89dc" fill="none" stroke-width="2"/>
+  <path d="M530 340 Q 550 330, 570 340 Q 590 350, 610 340 Q 630 330, 650 340" stroke="#4b89dc" fill="none" stroke-width="2"/>
+  
+  <!-- Neural network architecture visualization -->
+  <!-- Input image (square) -->
+  <rect x="100" y="150" width="80" height="80" fill="#e8f4fc" stroke="#333" stroke-width="1"/>
+  <text x="140" y="240" font-family="Arial, sans-serif" font-size="14" fill="#333" text-anchor="middle">输入图像</text>
+  
+  <!-- Convolutional layers (square) -->
+  <rect x="220" y="150" width="60" height="60" fill="#b3d9ff" stroke="#333" stroke-width="1"/>
+  <rect x="230" y="160" width="60" height="60" fill="#99ccff" stroke="#333" stroke-width="1" opacity="0.8"/>
+  <rect x="240" y="170" width="60" height="60" fill="#80bfff" stroke="#333" stroke-width="1" opacity="0.8"/>
+  <text x="260" y="250" font-family="Arial, sans-serif" font-size="14" fill="#333" text-anchor="middle">卷积层</text>
+  
+  <!-- Feature maps (square) -->
+  <rect x="340" y="150" width="50" height="50" fill="#6bb5ff" stroke="#333" stroke-width="1"/>
+  <rect x="345" y="155" width="50" height="50" fill="#5aa9ff" stroke="#333" stroke-width="1" opacity="0.8"/>
+  <rect x="350" y="160" width="50" height="50" fill="#4a99ff" stroke="#333" stroke-width="1" opacity="0.8"/>
+  <text x="370" y="250" font-family="Arial, sans-serif" font-size="14" fill="#333" text-anchor="middle">特征图</text>
+  
+  <!-- Flatten operation -->
+  <path d="M410 190 L 430 190" stroke="#333" stroke-width="1.5" fill="none"/>
+  <text x="420" y="170" font-family="Arial, sans-serif" font-size="14" fill="#333" text-anchor="middle">展平</text>
+  
+  <!-- Feature vector - now as 1D array -->
+  <rect x="440" y="175" width="120" height="30" fill="#3399ff" stroke="#333" stroke-width="2" rx="5" ry="5"/>
+  <line x1="455" y1="175" x2="455" y2="205" stroke="white" stroke-width="1"/>
+  <line x1="470" y1="175" x2="470" y2="205" stroke="white" stroke-width="1"/>
+  <line x1="485" y1="175" x2="485" y2="205" stroke="white" stroke-width="1"/>
+  <line x1="500" y1="175" x2="500" y2="205" stroke="white" stroke-width="1"/>
+  <line x1="515" y1="175" x2="515" y2="205" stroke="white" stroke-width="1"/>
+  <line x1="530" y1="175" x2="530" y2="205" stroke="white" stroke-width="1"/>
+  <line x1="545" y1="175" x2="545" y2="205" stroke="white" stroke-width="1"/>
+  <text x="500" y="160" font-family="Arial, sans-serif" font-size="16" fill="#333" text-anchor="middle" font-weight="bold">特征向量</text>
+  <text x="500" y="230" font-family="Arial, sans-serif" font-size="14" fill="#333" text-anchor="middle">全连接层前的一维输出</text>
+  
+  <!-- Fully connected layers - now as 1D array -->
+  <rect x="600" y="175" width="100" height="30" fill="#cce0ff" stroke="#333" stroke-width="1" rx="5" ry="5"/>
+  <line x1="620" y1="175" x2="620" y2="205" stroke="#99ccff" stroke-width="1"/>
+  <line x1="640" y1="175" x2="640" y2="205" stroke="#99ccff" stroke-width="1"/>
+  <line x1="660" y1="175" x2="660" y2="205" stroke="#99ccff" stroke-width="1"/>
+  <line x1="680" y1="175" x2="680" y2="205" stroke="#99ccff" stroke-width="1"/>
+  <text x="650" y="230" font-family="Arial, sans-serif" font-size="14" fill="#333" text-anchor="middle">全连接层</text>
+  
+  <!-- Output -->
+  <rect x="740" y="175" width="30" height="30" fill="#e6f0ff" stroke="#333" stroke-width="1"/>
+  <text x="755" y="230" font-family="Arial, sans-serif" font-size="14" fill="#333" text-anchor="middle">输出</text>
+  
+  <!-- Arrows connecting components -->
+  <path d="M180 190 L 220 190" stroke="#333" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M310 190 L 340 190" stroke="#333" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M400 190 L 430 190" stroke="#333" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M560 190 L 600 190" stroke="#333" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M700 190 L 740 190" stroke="#333" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Main caption -->
+  <text x="400" y="340" font-family="Arial, sans-serif" font-size="16" fill="#1e3a5f" text-anchor="middle" font-weight="bold">现在我们提取全连接层前一层的输出向量，作为图像的特征表示。</text>
+  
+  <!-- Horizontal line at bottom -->
+  <line x1="150" y1="370" x2="650" y2="370" stroke="#333" stroke-width="1"/>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+</svg>
