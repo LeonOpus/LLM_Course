@@ -1,0 +1,112 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background -->
+  <rect width="800" height="500" fill="white"/>
+  
+  <!-- Grid lines - vertical -->
+  <g stroke="#e0e0e0" stroke-width="1">
+    <line x1="50" y1="50" x2="50" y2="450"/>
+    <line x1="95" y1="50" x2="95" y2="450"/>
+    <line x1="140" y1="50" x2="140" y2="450"/>
+    <line x1="185" y1="50" x2="185" y2="450"/>
+    <line x1="230" y1="50" x2="230" y2="450"/>
+    <line x1="275" y1="50" x2="275" y2="450"/>
+    <line x1="320" y1="50" x2="320" y2="450"/>
+    <line x1="365" y1="50" x2="365" y2="450"/>
+    <line x1="410" y1="50" x2="410" y2="450"/>
+    <line x1="455" y1="50" x2="455" y2="450"/>
+    <line x1="500" y1="50" x2="500" y2="450"/>
+    <line x1="545" y1="50" x2="545" y2="450"/>
+    <line x1="590" y1="50" x2="590" y2="450"/>
+    <line x1="635" y1="50" x2="635" y2="450"/>
+    <line x1="680" y1="50" x2="680" y2="450"/>
+    <line x1="725" y1="50" x2="725" y2="450"/>
+    <line x1="770" y1="50" x2="770" y2="450"/>
+  </g>
+  
+  <!-- Grid lines - horizontal -->
+  <g stroke="#e0e0e0" stroke-width="1">
+    <line x1="50" y1="50" x2="770" y2="50"/>
+    <line x1="50" y1="100" x2="770" y2="100"/>
+    <line x1="50" y1="150" x2="770" y2="150"/>
+    <line x1="50" y1="200" x2="770" y2="200"/>
+    <line x1="50" y1="250" x2="770" y2="250"/>
+    <line x1="50" y1="300" x2="770" y2="300"/>
+    <line x1="50" y1="350" x2="770" y2="350"/>
+    <line x1="50" y1="400" x2="770" y2="400"/>
+    <line x1="50" y1="450" x2="770" y2="450"/>
+  </g>
+  
+  <!-- X-axis -->
+  <line x1="50" y1="450" x2="770" y2="450" stroke="black" stroke-width="2"/>
+  
+  <!-- Y-axis -->
+  <line x1="50" y1="50" x2="50" y2="450" stroke="black" stroke-width="2"/>
+  
+  <!-- Histogram bars (blue) -->
+  <g fill="#3498db" stroke="#2980b9" stroke-width="1">
+    <rect x="50" y="447" width="23" height="3"/>
+    <rect x="73" y="445" width="23" height="5"/>
+    <rect x="96" y="442" width="23" height="8"/>
+    <rect x="119" y="437" width="23" height="13"/>
+    <rect x="142" y="430" width="23" height="20"/>
+    <rect x="165" y="415" width="23" height="35"/>
+    <rect x="188" y="390" width="23" height="60"/>
+    <rect x="211" y="350" width="23" height="100"/>
+    <rect x="234" y="300" width="23" height="150"/>
+    <rect x="257" y="240" width="23" height="210"/>
+    <rect x="280" y="180" width="23" height="270"/>
+    <rect x="303" y="130" width="23" height="320"/>
+    <rect x="326" y="100" width="23" height="350"/>
+    <rect x="349" y="80" width="23" height="370"/>
+    <rect x="372" y="80" width="23" height="370"/>
+    <rect x="395" y="80" width="23" height="370"/>
+    <rect x="418" y="100" width="23" height="350"/>
+    <rect x="441" y="130" width="23" height="320"/>
+    <rect x="464" y="180" width="23" height="270"/>
+    <rect x="487" y="240" width="23" height="210"/>
+    <rect x="510" y="300" width="23" height="150"/>
+    <rect x="533" y="350" width="23" height="100"/>
+    <rect x="556" y="390" width="23" height="60"/>
+    <rect x="579" y="415" width="23" height="35"/>
+    <rect x="602" y="430" width="23" height="20"/>
+    <rect x="625" y="437" width="23" height="13"/>
+    <rect x="648" y="442" width="23" height="8"/>
+    <rect x="671" y="445" width="23" height="5"/>
+    <rect x="694" y="447" width="23" height="3"/>
+    <rect x="717" y="448" width="23" height="2"/>
+    <rect x="740" y="449" width="23" height="1"/>
+  </g>
+  
+<!-- Bell curve removed as requested -->
+  
+  <!-- X-axis labels -->
+  <g font-family="Arial" font-size="12" text-anchor="middle">
+    <text x="50" y="470">0</text>
+    <text x="95" y="470">1</text>
+    <text x="140" y="470">2</text>
+    <text x="185" y="470">3</text>
+    <text x="230" y="470">4</text>
+    <text x="275" y="470">5</text>
+    <text x="320" y="470">6</text>
+    <text x="365" y="470">7</text>
+    <text x="410" y="470">8</text>
+    <text x="455" y="470">9</text>
+    <text x="500" y="470">10</text>
+    <text x="545" y="470">11</text>
+    <text x="590" y="470">12</text>
+    <text x="635" y="470">13</text>
+    <text x="680" y="470">14</text>
+    <text x="725" y="470">15</text>
+  </g>
+  
+  <!-- Specific markers and text from the original image -->
+  <text x="365" y="60" font-family="Arial" font-size="12" text-anchor="middle" fill="#66ccff">7.0</text>
+  <text x="230" y="230" font-family="Arial" font-size="12" text-anchor="middle" fill="#66ccff">4.5</text>
+  <text x="500" y="230" font-family="Arial" font-size="12" text-anchor="middle" fill="#66ccff">9.5</text>
+  
+<!-- Dequantize section removed as requested -->
+  
+  <!-- Bottom values - repositioned to be on either side of 14 -->
+  <text x="710" y="490" font-family="Arial" font-size="12">2.26</text>
+  <text x="650" y="490" font-family="Arial" font-size="12">-1.73</text>
+</svg>

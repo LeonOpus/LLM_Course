@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background -->
+  <rect width="800" height="350" fill="white"/>
+  
+  <!-- Attention Formula Box -->
+  <rect x="220" y="20" width="360" height="60" fill="white" stroke="black" stroke-width="1"/>
+  <text x="400" y="55" font-family="serif" font-size="18" text-anchor="middle">Attention(Q, K, V) = softmax(</text>
+  <text x="520" y="55" font-family="serif" font-size="18" text-anchor="middle">QK&#x1D40;</text>
+  <text x="550" y="55" font-family="serif" font-size="18" text-anchor="middle">)V</text>
+  <line x1="520" y1="62" x2="520" y2="62" stroke="black" stroke-width="1"/>
+  <text x="520" y="75" font-family="serif" font-size="14" text-anchor="middle">√d&#x1D4F8;&#x1D49;&#x1D463;</text>
+
+  <!-- Q Matrix -->
+  <rect x="35" y="50" width="60" height="60" fill="#FFEB3B" stroke="black" stroke-width="1"/>
+  <text x="65" y="85" font-family="Arial" font-size="30" font-weight="bold" text-anchor="middle">Q</text>
+  
+  <!-- Q Matrix details -->
+  <rect x="35" y="110" width="60" height="210" fill="#CCCCCC" stroke="black" stroke-width="1"/>
+  <!-- Purple cells at top of Q -->
+  <rect x="35" y="110" width="15" height="15" fill="#6A0DAD" stroke="black" stroke-width="1"/>
+  <rect x="50" y="110" width="15" height="15" fill="#6A0DAD" stroke="black" stroke-width="1"/>
+  <rect x="65" y="110" width="15" height="15" fill="#6A0DAD" stroke="black" stroke-width="1"/>
+  <rect x="80" y="110" width="15" height="15" fill="#6A0DAD" stroke="black" stroke-width="1"/>
+  
+  <rect x="35" y="125" width="15" height="15" fill="#6A0DAD" stroke="black" stroke-width="1"/>
+  <rect x="50" y="125" width="15" height="15" fill="#6A0DAD" stroke="black" stroke-width="1"/>
+  <rect x="65" y="125" width="15" height="15" fill="#6A0DAD" stroke="black" stroke-width="1"/>
+  <rect x="80" y="125" width="15" height="15" fill="#6A0DAD" stroke="black" stroke-width="1"/>
+  
+  <!-- Gray grid cells -->
+  <rect x="35" y="140" width="15" height="15" fill="#888888" stroke="black" stroke-width="1"/>
+  <rect x="50" y="140" width="15" height="15" fill="#888888" stroke="black" stroke-width="1"/>
+  <rect x="65" y="140" width="15" height="15" fill="#888888" stroke="black" stroke-width="1"/>
+  <rect x="80" y="140" width="15" height="15" fill="#888888" stroke="black" stroke-width="1"/>
+  
+  <!-- More gray rows -->
+  <rect x="35" y="155" width="60" height="165" fill="#CCCCCC" stroke="black" stroke-width="1"/>
+  <!-- Grid pattern for the rest of Q -->
+  <g stroke="black" stroke-width="0.5">
+    <line x1="50" y1="155" x2="50" y2="320"/>
+    <line x1="65" y1="155" x2="65" y2="320"/>
+    <line x1="80" y1="155" x2="80" y2="320"/>
+    
+    <line x1="35" y1="170" x2="95" y2="170"/>
+    <line x1="35" y1="185" x2="95" y2="185"/>
+    <line x1="35" y1="200" x2="95" y2="200"/>
+    <line x1="35" y1="215" x2="95" y2="215"/>
+    <line x1="35" y1="230" x2="95" y2="230"/>
+    <line x1="35" y1="245" x2="95" y2="245"/>
+    <line x1="35" y1="260" x2="95" y2="260"/>
+    <line x1="35" y1="275" x2="95" y2="275"/>
+    <line x1="35" y1="290" x2="95" y2="290"/>
+    <line x1="35" y1="305" x2="95" y2="305"/>
+  </g>
+
+  <!-- @ symbol for Q -->
+  <text x="110" y="220" font-family="Arial" font-size="24" text-anchor="middle">@</text>
+
+  <!-- K Matrix -->
+  <rect x="135" y="135" width="60" height="60" fill="#FFEB3B" stroke="black" stroke-width="1"/>
+  <text x="165" y="170" font-family="Arial" font-size="30" font-weight="bold" text-anchor="middle">K</text>
+  
+  <!-- K Matrix details -->
+  <rect x="135" y="195" width="210" height="60" fill="#CCCCCC" stroke="black" stroke-width="1"/>
+  <!-- Colored cells on the left of K -->
+  <rect x="135" y="195" width="15" height="15" fill="#FF6347" stroke="black" stroke-width="1"/>
+  <rect x="135" y="210" width="15" height="15" fill="#FF6347" stroke="black" stroke-width="1"/>
+  <rect x="135" y="225" width="15" height="15" fill="#FF6347" stroke="black" stroke-width="1"/>
+  <rect x="135" y="240" width="15" height="15" fill="#FF6347" stroke="black" stroke-width="1"/>
+  
+  <rect x="150" y="195" width="15" height="15" fill="#228B22" stroke="black" stroke-width="1"/>
+  <rect x="150" y="210" width="15" height="15" fill="#228B22" stroke="black" stroke-width="1"/>
+  <rect x="150" y="225" width="15" height="15" fill="#228B22" stroke="black" stroke-width="1"/>
+  <rect x="150" y="240" width="15" height="15" fill="#228B22" stroke="black" stroke-width="1"/>
+  
+  <!-- Rest of K as gray grid -->
+  <rect x="165" y="195" width="180" height="60" fill="#CCCCCC" stroke="black" stroke-width="1"/>
+  <!-- Grid pattern for the rest of K -->
+  <g stroke="black" stroke-width="0.5">
+    <line x1="180" y1="195" x2="180" y2="255"/>
+    <line x1="195" y1="195" x2="195" y2="255"/>
+    <line x1="210" y1="195" x2="210" y2="255"/>
+    <line x1="225" y1="195" x2="225" y2="255"/>
+    <line x1="240" y1="195" x2="240" y2="255"/>
+    <line x1="255" y1="195" x2="255" y2="255"/>
+    <line x1="270" y1="195" x2="270" y2="255"/>
+    <line x1="285" y1="195" x2="285" y2="255"/>
+    <line x1="300" y1="195" x2="300" y2="255"/>
+    <line x1="315" y1="195" x2="315" y2="255"/>
+    <line x1="330" y1="195" x2="330" y2="255"/>
+    
+    <line x1="165" y1="210" x2="345" y2="210"/>
+    <line x1="165" y1="225" x2="345" y2="225"/>
+    <line x1="165" y1="240" x2="345" y2="240"/>
+  </g>
+
+  <!-- Equals sign -->
+  <text x="380" y="220" font-family="Arial" font-size="30" text-anchor="middle">=</text>
+
+  <!-- Result Matrix in center -->
+  <rect x="405" y="110" width="210" height="210" fill="#CCCCCC" stroke="black" stroke-width="1"/>
+  <!-- Grid pattern for the result matrix -->
+  <g stroke="black" stroke-width="0.5">
+    <!-- Vertical lines -->
+    <line x1="420" y1="110" x2="420" y2="320"/>
+    <line x1="435" y1="110" x2="435" y2="320"/>
+    <line x1="450" y1="110" x2="450" y2="320"/>
+    <line x1="465" y1="110" x2="465" y2="320"/>
+    <line x1="480" y1="110" x2="480" y2="320"/>
+    <line x1="495" y1="110" x2="495" y2="320"/>
+    <line x1="510" y1="110" x2="510" y2="320"/>
+    <line x1="525" y1="110" x2="525" y2="320"/>
+    <line x1="540" y1="110" x2="540" y2="320"/>
+    <line x1="555" y1="110" x2="555" y2="320"/>
+    <line x1="570" y1="110" x2="570" y2="320"/>
+    <line x1="585" y1="110" x2="585" y2="320"/>
+    <line x1="600" y1="110" x2="600" y2="320"/>
+    
+    <!-- Horizontal lines -->
+    <line x1="405" y1="125" x2="615" y2="125"/>
+    <line x1="405" y1="140" x2="615" y2="140"/>
+    <line x1="405" y1="155" x2="615" y2="155"/>
+    <line x1="405" y1="170" x2="615" y2="170"/>
+    <line x1="405" y1="185" x2="615" y2="185"/>
+    <line x1="405" y1="200" x2="615" y2="200"/>
+    <line x1="405" y1="215" x2="615" y2="215"/>
+    <line x1="405" y1="230" x2="615" y2="230"/>
+    <line x1="405" y1="245" x2="615" y2="245"/>
+    <line x1="405" y1="260" x2="615" y2="260"/>
+    <line x1="405" y1="275" x2="615" y2="275"/>
+    <line x1="405" y1="290" x2="615" y2="290"/>
+    <line x1="405" y1="305" x2="615" y2="305"/>
+  </g>
+
+  <!-- @ symbol for V -->
+  <text x="640" y="220" font-family="Arial" font-size="24" text-anchor="middle">@</text>
+
+  <!-- V Matrix -->
+  <rect x="665" y="50" width="60" height="60" fill="#FFEB3B" stroke="black" stroke-width="1"/>
+  <text x="695" y="85" font-family="Arial" font-size="30" font-weight="bold" text-anchor="middle">V</text>
+  
+  <!-- V Matrix details -->
+  <rect x="665" y="110" width="60" height="210" fill="#CCCCCC" stroke="black" stroke-width="1"/>
+  <!-- Teal cells at top of V -->
+  <rect x="665" y="110" width="15" height="15" fill="#20B2AA" stroke="black" stroke-width="1"/>
+  <rect x="680" y="110" width="15" height="15" fill="#20B2AA" stroke="black" stroke-width="1"/>
+  <rect x="695" y="110" width="15" height="15" fill="#20B2AA" stroke="black" stroke-width="1"/>
+  <rect x="710" y="110" width="15" height="15" fill="#20B2AA" stroke="black" stroke-width="1"/>
+  
+  <rect x="665" y="125" width="15" height="15" fill="#20B2AA" stroke="black" stroke-width="1"/>
+  <rect x="680" y="125" width="15" height="15" fill="#20B2AA" stroke="black" stroke-width="1"/>
+  <rect x="695" y="125" width="15" height="15" fill="#20B2AA" stroke="black" stroke-width="1"/>
+  <rect x="710" y="125" width="15" height="15" fill="#20B2AA" stroke="black" stroke-width="1"/>
+  
+  <!-- Gray grid cells -->
+  <rect x="665" y="140" width="15" height="15" fill="#888888" stroke="black" stroke-width="1"/>
+  <rect x="680" y="140" width="15" height="15" fill="#888888" stroke="black" stroke-width="1"/>
+  <rect x="695" y="140" width="15" height="15" fill="#888888" stroke="black" stroke-width="1"/>
+  <rect x="710" y="140" width="15" height="15" fill="#888888" stroke="black" stroke-width="1"/>
+  
+  <!-- More gray rows -->
+  <rect x="665" y="155" width="60" height="165" fill="#CCCCCC" stroke="black" stroke-width="1"/>
+  <!-- Grid pattern for the rest of V -->
+  <g stroke="black" stroke-width="0.5">
+    <line x1="680" y1="155" x2="680" y2="320"/>
+    <line x1="695" y1="155" x2="695" y2="320"/>
+    <line x1="710" y1="155" x2="710" y2="320"/>
+    
+    <line x1="665" y1="170" x2="725" y2="170"/>
+    <line x1="665" y1="185" x2="725" y2="185"/>
+    <line x1="665" y1="200" x2="725" y2="200"/>
+    <line x1="665" y1="215" x2="725" y2="215"/>
+    <line x1="665" y1="230" x2="725" y2="230"/>
+    <line x1="665" y1="245" x2="725" y2="245"/>
+    <line x1="665" y1="260" x2="725" y2="260"/>
+    <line x1="665" y1="275" x2="725" y2="275"/>
+    <line x1="665" y1="290" x2="725" y2="290"/>
+    <line x1="665" y1="305" x2="725" y2="305"/>
+  </g>
+</svg>

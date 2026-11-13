@@ -1,0 +1,82 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- 白色背景 -->
+  <rect width="800" height="500" fill="white"/>
+  
+  <!-- 标题 -->
+  <text x="400" y="50" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">量化和反量化</text>
+  
+  <!-- 原始值线 (较短) -->
+  <line x1="250" y1="150" x2="550" y2="150" stroke="#4285F4" stroke-width="3"/>
+  
+  <!-- 量化值线 (较长) -->
+  <line x1="100" y1="350" x2="700" y2="350" stroke="#EA4335" stroke-width="3"/>
+  
+  <!-- 原始值刻度和标签 -->
+  <line x1="250" y1="145" x2="250" y2="155" stroke="#333" stroke-width="2"/>
+  <text x="250" y="135" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">-2.11</text>
+  
+  <line x1="300" y1="145" x2="300" y2="155" stroke="#333" stroke-width="2"/>
+  <text x="300" y="135" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">-1.53</text>
+  
+  <line x1="400" y1="145" x2="400" y2="155" stroke="#333" stroke-width="2"/>
+  <text x="400" y="135" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">0</text>
+  
+  <line x1="475" y1="145" x2="475" y2="155" stroke="#333" stroke-width="2"/>
+  <text x="475" y="135" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">1.0</text>
+  
+  <line x1="550" y1="145" x2="550" y2="155" stroke="#333" stroke-width="2"/>
+  <text x="550" y="135" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">2.11</text>
+  
+  <!-- 量化值刻度和标签 -->
+  <line x1="100" y1="345" x2="100" y2="355" stroke="#333" stroke-width="2"/>
+  <text x="100" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">-127</text>
+  
+  <line x1="250" y1="345" x2="250" y2="355" stroke="#333" stroke-width="2"/>
+  <text x="250" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">-64</text>
+  
+  <line x1="400" y1="345" x2="400" y2="355" stroke="#333" stroke-width="2"/>
+  <text x="400" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">0</text>
+  
+  <line x1="550" y1="345" x2="550" y2="355" stroke="#333" stroke-width="2"/>
+  <text x="550" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">64</text>
+  
+  <line x1="700" y1="345" x2="700" y2="355" stroke="#333" stroke-width="2"/>
+  <text x="700" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">127</text>
+  
+  <!-- 原始值点 -->
+  <circle cx="300" cy="150" r="8" fill="#FBBC05"/>
+  <circle cx="325" cy="150" r="8" fill="#FBBC05"/>
+  <circle cx="350" cy="150" r="8" fill="#FBBC05"/>
+  <circle cx="400" cy="150" r="8" fill="#FBBC05"/>
+  <circle cx="425" cy="150" r="8" fill="#FBBC05"/>
+  <circle cx="450" cy="150" r="8" fill="#FBBC05"/>
+  <circle cx="475" cy="150" r="8" fill="#FBBC05"/>
+  <circle cx="525" cy="150" r="8" fill="#FBBC05"/>
+  
+  <!-- 量化值点 -->
+  <circle cx="130" cy="350" r="8" fill="#EA4335"/>
+  <circle cx="200" cy="350" r="8" fill="#EA4335"/>
+  <circle cx="275" cy="350" r="8" fill="#EA4335"/>
+  <circle cx="400" cy="350" r="8" fill="#EA4335"/>
+  <circle cx="490" cy="350" r="8" fill="#EA4335"/>
+  <circle cx="550" cy="350" r="8" fill="#EA4335"/>
+  <circle cx="625" cy="350" r="8" fill="#EA4335"/>
+  <circle cx="680" cy="350" r="8" fill="#EA4335"/>
+  
+  <!-- 非线性映射连接线 -->
+  <line x1="300" y1="158" x2="130" y2="342" stroke="#333" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <line x1="325" y1="158" x2="200" y2="342" stroke="#333" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <line x1="350" y1="158" x2="275" y2="342" stroke="#333" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <line x1="400" y1="158" x2="400" y2="342" stroke="#333" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <line x1="425" y1="158" x2="490" y2="342" stroke="#333" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <line x1="450" y1="158" x2="550" y2="342" stroke="#333" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <line x1="475" y1="158" x2="625" y2="342" stroke="#333" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <line x1="525" y1="158" x2="680" y2="342" stroke="#333" stroke-width="1.5" stroke-dasharray="5,5"/>
+  
+  <!-- 标签说明 -->
+  <text x="400" y="100" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#4285F4">原始值（浮点数：-2.11 ~ 2.11）</text>
+  <text x="400" y="410" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#EA4335">量化值（整数：-127 ~ 127）</text>
+  
+  <text x="150" y="450" font-family="Arial, sans-serif" font-size="16" fill="#333">量化: 将连续/高精度值映射为离散/低精度值</text>
+  <text x="150" y="480" font-family="Arial, sans-serif" font-size="16" fill="#333">反量化: 将量化后的值映射回原始值域（有损过程）</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="white" />
+  
+  <!-- 标题 -->
+  <text x="400" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#4285f4" font-weight="bold">原始值（浮点数: -2.11 ~ 2.11）</text>
+  
+  <!-- 上面的数轴 - 浮点数 -->
+  <line x1="100" y1="150" x2="700" y2="150" stroke="#4285f4" stroke-width="3" />
+  <line x1="100" y1="140" x2="100" y2="160" stroke="#000" stroke-width="2" />
+  <line x1="700" y1="140" x2="700" y2="160" stroke="#000" stroke-width="2" />
+  
+  <!-- 上面数轴的刻度值 -->
+  <text x="100" y="130" font-family="Arial" font-size="16" text-anchor="middle">-2.11</text>
+  <text x="150" y="130" font-family="Arial" font-size="16" text-anchor="middle">-1.8</text>
+  <text x="190" y="130" font-family="Arial" font-size="16" text-anchor="middle">-1.53</text>
+  <text x="230" y="130" font-family="Arial" font-size="16" text-anchor="middle">-1.2</text>
+  <text x="260" y="130" font-family="Arial" font-size="16" text-anchor="middle">-0.5</text>
+  <text x="280" y="130" font-family="Arial" font-size="16" text-anchor="middle">0</text>
+  <text x="700" y="130" font-family="Arial" font-size="16" text-anchor="middle">2.11</text>
+  
+  <!-- 上面数轴的点 - 集中在左侧，只有一个在最右侧 -->
+  <circle cx="100" cy="150" r="12" fill="#FFC107" stroke="#FF9800" stroke-width="2" />
+  <circle cx="150" cy="150" r="12" fill="#FFC107" stroke="#FF9800" stroke-width="2" />
+  <circle cx="190" cy="150" r="12" fill="#FFC107" stroke="#FF9800" stroke-width="2" />
+  <circle cx="230" cy="150" r="12" fill="#FFC107" stroke="#FF9800" stroke-width="2" />
+  <circle cx="260" cy="150" r="12" fill="#FFC107" stroke="#FF9800" stroke-width="2" />
+  <circle cx="280" cy="150" r="12" fill="#FFC107" stroke="#FF9800" stroke-width="2" />
+  <circle cx="700" cy="150" r="12" fill="#FFC107" stroke="#FF9800" stroke-width="2" />
+  
+  <!-- 下面的数轴 - 整数 -->
+  <line x1="100" y1="450" x2="700" y2="450" stroke="#E53935" stroke-width="3" />
+  <line x1="100" y1="440" x2="100" y2="460" stroke="#000" stroke-width="2" />
+  <line x1="700" y1="440" x2="700" y2="460" stroke="#000" stroke-width="2" />
+  
+  <!-- 下面数轴的刻度值 -->
+  <text x="100" y="480" font-family="Arial" font-size="16" text-anchor="middle">-127</text>
+  <text x="220" y="480" font-family="Arial" font-size="16" text-anchor="middle">-64</text>
+  <text x="400" y="480" font-family="Arial" font-size="16" text-anchor="middle">0</text>
+  <text x="580" y="480" font-family="Arial" font-size="16" text-anchor="middle">64</text>
+  <text x="700" y="480" font-family="Arial" font-size="16" text-anchor="middle">127</text>
+  
+  <!-- 下面数轴的点 -->
+  <circle cx="100" cy="450" r="12" fill="#E53935" stroke="#B71C1C" stroke-width="2" />
+  <circle cx="160" cy="450" r="12" fill="#E53935" stroke="#B71C1C" stroke-width="2" />
+  <circle cx="220" cy="450" r="12" fill="#E53935" stroke="#B71C1C" stroke-width="2" />
+  <circle cx="280" cy="450" r="12" fill="#E53935" stroke="#B71C1C" stroke-width="2" />
+  <circle cx="340" cy="450" r="12" fill="#E53935" stroke="#B71C1C" stroke-width="2" />
+  <circle cx="400" cy="450" r="12" fill="#E53935" stroke="#B71C1C" stroke-width="2" />
+  <circle cx="700" cy="450" r="12" fill="#E53935" stroke="#B71C1C" stroke-width="2" />
+  
+  <!-- 连线 - 虚线 -->
+  <line x1="100" y1="162" x2="100" y2="438" stroke="#333" stroke-width="2" stroke-dasharray="10,5" />
+  <line x1="150" y1="162" x2="160" y2="438" stroke="#333" stroke-width="2" stroke-dasharray="10,5" />
+  <line x1="190" y1="162" x2="220" y2="438" stroke="#333" stroke-width="2" stroke-dasharray="10,5" />
+  <line x1="230" y1="162" x2="280" y2="438" stroke="#333" stroke-width="2" stroke-dasharray="10,5" />
+  <line x1="260" y1="162" x2="340" y2="438" stroke="#333" stroke-width="2" stroke-dasharray="10,5" />
+  <line x1="280" y1="162" x2="400" y2="438" stroke="#333" stroke-width="2" stroke-dasharray="10,5" />
+  <line x1="700" y1="162" x2="700" y2="438" stroke="#333" stroke-width="2" stroke-dasharray="10,5" />
+  
+  <!-- 底部标签 -->
+  <text x="400" y="520" font-family="Arial" font-size="18" text-anchor="middle" fill="#333">量化后的整数值（INT8: -127 ~ 127）</text>
+</svg>

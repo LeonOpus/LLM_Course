@@ -1,0 +1,121 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect x="10" y="10" width="780" height="480" rx="10" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  <text x="400" y="40" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold">神经网络计算的硬件数据流</text>
+  
+  <!-- HBM 区域 -->
+  <rect x="50" y="80" width="200" height="320" rx="8" fill="#e2e3e5" stroke="#495057" stroke-width="2"/>
+  <text x="150" y="110" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">HBM</text>
+  <text x="150" y="130" font-family="Arial" font-size="14" text-anchor="middle">(高带宽内存)</text>
+  
+  <!-- HBM 内部数据 -->
+  <rect x="70" y="150" width="160" height="40" rx="5" fill="#ffffff" stroke="#6c757d" stroke-width="1"/>
+  <text x="150" y="175" font-family="Arial" font-size="14" text-anchor="middle">Q, K, V 矩阵</text>
+  
+  <rect x="70" y="200" width="160" height="40" rx="5" fill="#ffffff" stroke="#6c757d" stroke-width="1"/>
+  <text x="150" y="225" font-family="Arial" font-size="14" text-anchor="middle">S = QK^T</text>
+  
+  <rect x="70" y="250" width="160" height="40" rx="5" fill="#ffffff" stroke="#6c757d" stroke-width="1"/>
+  <text x="150" y="275" font-family="Arial" font-size="14" text-anchor="middle">P = softmax(S)</text>
+  
+  <rect x="70" y="300" width="160" height="40" rx="5" fill="#ffffff" stroke="#6c757d" stroke-width="1"/>
+  <text x="150" y="325" font-family="Arial" font-size="14" text-anchor="middle">O = PV (结果)</text>
+  
+  <text x="150" y="380" font-family="Arial" font-size="12" text-anchor="middle" fill="#495057">特点: 高带宽, 大容量</text>
+  <text x="150" y="395" font-family="Arial" font-size="12" text-anchor="middle" fill="#495057">为GPU提供数据存储</text>
+  
+  <!-- SRAM 区域 -->
+  <rect x="300" y="80" width="200" height="320" rx="8" fill="#cff4fc" stroke="#0dcaf0" stroke-width="2"/>
+  <text x="400" y="110" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">SRAM</text>
+  <text x="400" y="130" font-family="Arial" font-size="14" text-anchor="middle">(静态随机访问内存)</text>
+  
+  <!-- SRAM 内部数据 -->
+  <rect x="320" y="150" width="160" height="40" rx="5" fill="#ffffff" stroke="#0dcaf0" stroke-width="1"/>
+  <text x="400" y="175" font-family="Arial" font-size="14" text-anchor="middle">临时数据缓存</text>
+  
+  <rect x="320" y="200" width="160" height="40" rx="5" fill="#ffffff" stroke="#0dcaf0" stroke-width="1"/>
+  <text x="400" y="225" font-family="Arial" font-size="14" text-anchor="middle">矩阵运算中间值</text>
+  
+  <text x="400" y="380" font-family="Arial" font-size="12" text-anchor="middle" fill="#0dcaf0">特点: 高速, 低延迟</text>
+  <text x="400" y="395" font-family="Arial" font-size="12" text-anchor="middle" fill="#0dcaf0">CPU/GPU的临时数据存储</text>
+  
+  <!-- GPU 区域 -->
+  <rect x="550" y="80" width="200" height="320" rx="8" fill="#d1e7dd" stroke="#198754" stroke-width="2"/>
+  <text x="650" y="110" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">GPU</text>
+  <text x="650" y="130" font-family="Arial" font-size="14" text-anchor="middle">(图形处理器)</text>
+  
+  <!-- GPU 内部功能 -->
+  <rect x="570" y="150" width="160" height="40" rx="5" fill="#ffffff" stroke="#198754" stroke-width="1"/>
+  <text x="650" y="175" font-family="Arial" font-size="14" text-anchor="middle">矩阵乘法 QK^T</text>
+  
+  <rect x="570" y="200" width="160" height="40" rx="5" fill="#ffffff" stroke="#198754" stroke-width="1"/>
+  <text x="650" y="225" font-family="Arial" font-size="14" text-anchor="middle">softmax计算</text>
+  
+  <rect x="570" y="250" width="160" height="40" rx="5" fill="#ffffff" stroke="#198754" stroke-width="1"/>
+  <text x="650" y="275" font-family="Arial" font-size="14" text-anchor="middle">矩阵乘法 PV</text>
+  
+  <text x="650" y="380" font-family="Arial" font-size="12" text-anchor="middle" fill="#198754">特点: 大规模并行计算</text>
+  <text x="650" y="395" font-family="Arial" font-size="12" text-anchor="middle" fill="#198754">适合矩阵运算</text>
+  
+  <!-- 数据流动箭头和步骤 -->
+  <!-- 1. 从HBM加载Q,K到SRAM -->
+  <path d="M 250,160 L 300,160" fill="none" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <circle cx="275" cy="160" r="15" fill="white" stroke="#dc3545" stroke-width="2"/>
+  <text x="275" y="165" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc3545">1</text>
+  
+  <!-- 2. 将Q,K加载到GPU计算HS = QK^T -->
+  <path d="M 500,160 L 550,160" fill="none" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <circle cx="525" cy="160" r="15" fill="white" stroke="#dc3545" stroke-width="2"/>
+  <text x="525" y="165" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc3545">2</text>
+  
+  <!-- 3. 将S写到HBM -->
+  <path d="M 570,180 C 450,180 400,210 300,210 L 250,210" fill="none" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <circle cx="410" cy="195" r="15" fill="white" stroke="#dc3545" stroke-width="2"/>
+  <text x="410" y="200" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc3545">3</text>
+  
+  <!-- 4. 将S加载到SRAM -->
+  <path d="M 250,220 L 300,220" fill="none" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <circle cx="275" cy="220" r="15" fill="white" stroke="#dc3545" stroke-width="2"/>
+  <text x="275" y="225" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc3545">4</text>
+  
+  <!-- 5. 将S加载到GPU计算P = softmax(S) -->
+  <path d="M 500,220 L 550,220" fill="none" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <circle cx="525" cy="220" r="15" fill="white" stroke="#dc3545" stroke-width="2"/>
+  <text x="525" y="225" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc3545">5</text>
+  
+  <!-- 6. 将P写到HBM -->
+  <path d="M 570,240 C 450,240 400,260 300,260 L 250,260" fill="none" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <circle cx="410" cy="250" r="15" fill="white" stroke="#dc3545" stroke-width="2"/>
+  <text x="410" y="255" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc3545">6</text>
+  
+  <!-- 7. 从HBM加载P和V到SRAM -->
+  <path d="M 250,280 L 300,280" fill="none" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <circle cx="275" cy="280" r="15" fill="white" stroke="#dc3545" stroke-width="2"/>
+  <text x="275" y="285" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc3545">7</text>
+  
+  <!-- 8. 将P,V加载到GPU计算O = PV -->
+  <path d="M 500,280 L 550,280" fill="none" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <circle cx="525" cy="280" r="15" fill="white" stroke="#dc3545" stroke-width="2"/>
+  <text x="525" y="285" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc3545">8</text>
+  
+  <!-- 9. 把O写回到HBM -->
+  <path d="M 570,300 C 450,300 400,310 300,310 L 250,310" fill="none" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <circle cx="410" cy="305" r="15" fill="white" stroke="#dc3545" stroke-width="2"/>
+  <text x="410" y="310" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc3545">9</text>
+  
+  <!-- 10. 返回O -->
+  <path d="M 150,340 L 150,430 L 650,430 L 650,340" fill="none" stroke="#dc3545" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <circle cx="400" cy="430" r="15" fill="white" stroke="#dc3545" stroke-width="2"/>
+  <text x="400" y="435" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc3545">10</text>
+  
+  <!-- 算法步骤说明 -->
+  <rect x="20" y="450" width="760" height="30" rx="5" fill="none"/>
+  <text x="400" y="470" font-family="Arial" font-size="14" text-anchor="middle">神经网络注意力机制计算步骤: Q,K,V ∈ ℝⁿᵈ</text>
+  
+  <!-- 箭头定义 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#dc3545"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,86 @@
+<svg viewBox="0 0 800 650" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景和标题 -->
+  <rect width="800" height="650" fill="#f8f9fa" />
+  <text x="400" y="30" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">FP16 到 INT4 的量化和反量化过程</text>
+  
+  <!-- FP16示例值 -->
+  <rect x="50" y="70" width="200" height="40" rx="5" fill="#4285f4" />
+  <text x="150" y="95" font-family="Arial" font-size="16" text-anchor="middle" fill="white">FP16张量: [1.25, -0.5, 3.75, -2.0]</text>
+  
+  <!-- 量化过程框 - 增加高度 -->
+  <rect x="50" y="140" width="700" height="230" rx="10" fill="#e1f5fe" stroke="#81d4fa" stroke-width="2" />
+  <text x="400" y="165" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold">量化过程(Quantization)</text>
+  
+  <!-- 找最大最小值 -->
+  <rect x="70" y="185" width="200" height="60" rx="5" fill="#bbdefb" />
+  <text x="170" y="205" font-family="Arial" font-size="14" text-anchor="middle">步骤1: 找出最大值和最小值</text>
+  <text x="170" y="225" font-family="Arial" font-size="12" text-anchor="middle">最小值: -2.0, 最大值: 3.75</text>
+  
+  <!-- 缩放因子计算 -->
+  <rect x="300" y="185" width="200" height="80" rx="5" fill="#bbdefb" />
+  <text x="400" y="205" font-family="Arial" font-size="14" text-anchor="middle">步骤2: 计算缩放因子(scale)</text>
+  <text x="400" y="225" font-family="Arial" font-size="12" text-anchor="middle">scale = (max - min) / (2^n - 1)</text>
+  <text x="400" y="245" font-family="Arial" font-size="12" text-anchor="middle">= (3.75 - (-2.0)) / (2^4 - 1)</text>
+  <text x="400" y="265" font-family="Arial" font-size="12" text-anchor="middle">= 5.75 / 15 ≈ 0.3833</text>
+  
+  <!-- 量化公式 -->
+  <rect x="530" y="185" width="200" height="60" rx="5" fill="#bbdefb" />
+  <text x="630" y="205" font-family="Arial" font-size="14" text-anchor="middle">步骤3: 应用量化公式</text>
+  <text x="630" y="225" font-family="Arial" font-size="12" text-anchor="middle">q = round((x - min) / scale)</text>
+  <text x="630" y="245" font-family="Arial" font-size="12" text-anchor="middle">q = clamp(q, 0, 2^n - 1)</text>
+  
+  <!-- 具体例子的计算 -->
+  <rect x="70" y="285" width="660" height="70" rx="5" fill="#c8e6c9" />
+  <text x="400" y="305" font-family="Arial" font-size="14" text-anchor="middle">应用到示例值: [1.25, -0.5, 3.75, -2.0]</text>
+  
+  <!-- 计算过程 - 整体下移，确保在框内 -->
+  <text x="200" y="325" font-family="Arial" font-size="12" text-anchor="middle">1.25: round((1.25-(-2.0))/0.3833) = round(3.26/0.3833) = round(8.51) = 9</text>
+  <text x="200" y="345" font-family="Arial" font-size="12" text-anchor="middle">-0.5: round((-0.5-(-2.0))/0.3833) = round(1.5/0.3833) = round(3.91) = 4</text>
+  <text x="600" y="325" font-family="Arial" font-size="12" text-anchor="middle">3.75: round((3.75-(-2.0))/0.3833) = round(5.75/0.3833) = round(15.0) = 15</text>
+  <text x="600" y="345" font-family="Arial" font-size="12" text-anchor="middle">-2.0: round((-2.0-(-2.0))/0.3833) = round(0/0.3833) = 0</text>
+  
+  <!-- INT4 量化后结果 -->
+  <rect x="50" y="390" width="200" height="40" rx="5" fill="#34a853" />
+  <text x="150" y="415" font-family="Arial" font-size="16" text-anchor="middle" fill="white">INT4量化值: [9, 4, 15, 0]</text>
+  <text x="150" y="435" font-family="Arial" font-size="12" text-anchor="middle" fill="white">每个值只需要4位二进制表示</text>
+  
+  <!-- 量化信息存储 -->
+  <rect x="300" y="390" width="400" height="40" rx="5" fill="#d0d9ff" />
+  <text x="500" y="410" font-family="Arial" font-size="14" text-anchor="middle">存储信息</text>
+  <text x="500" y="430" font-family="Arial" font-size="12" text-anchor="middle">量化值: [9, 4, 15, 0], 最小值: -2.0, 缩放因子: 0.3833</text>
+  
+  <!-- 反量化过程框 - 增加高度 -->
+  <rect x="50" y="450" width="700" height="160" rx="10" fill="#ffebee" stroke="#ffcdd2" stroke-width="2" />
+  <text x="400" y="475" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold">反量化过程(Dequantization)</text>
+  
+  <!-- 反量化公式 -->
+  <rect x="70" y="495" width="300" height="40" rx="5" fill="#ffcdd2" />
+  <text x="220" y="520" font-family="Arial" font-size="14" text-anchor="middle">反量化公式: x' = q * scale + min</text>
+  
+  <!-- 反量化示例 -->
+  <rect x="400" y="495" width="330" height="40" rx="5" fill="#ffcdd2" />
+  <text x="565" y="520" font-family="Arial" font-size="14" text-anchor="middle">应用到量化值: [9, 4, 15, 0]</text>
+  
+  <!-- 反量化计算 -->
+  <text x="220" y="555" font-family="Arial" font-size="12" text-anchor="middle">9 * 0.3833 + (-2.0) = 3.45 - 2.0 = 1.45</text>
+  <text x="220" y="575" font-family="Arial" font-size="12" text-anchor="middle">4 * 0.3833 + (-2.0) = 1.53 - 2.0 = -0.47</text>
+  <text x="565" y="555" font-family="Arial" font-size="12" text-anchor="middle">15 * 0.3833 + (-2.0) = 5.75 - 2.0 = 3.75</text>
+  <text x="565" y="575" font-family="Arial" font-size="12" text-anchor="middle">0 * 0.3833 + (-2.0) = 0 - 2.0 = -2.0</text>
+  
+  <!-- 反量化结果 -->
+  <rect x="300" y="600" width="200" height="30" rx="5" fill="#ea4335" />
+  <text x="400" y="620" font-family="Arial" font-size="16" text-anchor="middle" fill="white">反量化结果: [1.45, -0.47, 3.75, -2.0]</text>
+  
+  <!-- 箭头 - 调整位置以适应新的布局 -->
+  <line x1="150" y1="110" x2="150" y2="140" stroke="#333" stroke-width="2" />
+  <polygon points="150,140 145,130 155,130" fill="#333" />
+  
+  <line x1="150" y1="370" x2="150" y2="390" stroke="#333" stroke-width="2" />
+  <polygon points="150,390 145,380 155,380" fill="#333" />
+  
+  <line x1="150" y1="430" x2="150" y2="450" stroke="#333" stroke-width="2" />
+  <polygon points="150,450 145,440 155,440" fill="#333" />
+  
+  <line x1="400" y1="535" x2="400" y2="600" stroke="#333" stroke-width="2" />
+  <polygon points="400,600 395,590 405,590" fill="#333" />
+</svg>

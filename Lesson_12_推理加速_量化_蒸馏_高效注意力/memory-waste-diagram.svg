@@ -1,0 +1,46 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景和标题 -->
+  <rect width="800" height="600" fill="#f9f9f9"/>
+  <text x="400" y="40" font-size="24" text-anchor="middle" font-weight="bold">大模型推理时的显存浪费情况</text>
+  
+  <!-- 显存总容量表示 -->
+  <rect x="50" y="80" width="700" height="50" fill="#e0e0e0" stroke="#000" stroke-width="2"/>
+  <text x="400" y="110" font-size="18" text-anchor="middle">GPU显存总容量</text>
+  
+  <!-- 情况1: 预分配但不会用到 -->
+  <rect x="50" y="170" width="700" height="100" fill="#e0e0e0" stroke="#000" stroke-width="2"/>
+  <rect x="50" y="170" width="250" height="100" fill="#4CAF50" stroke="#000" stroke-width="2"/>
+  <rect x="300" y="170" width="250" height="100" fill="#FF9800" stroke="#000" stroke-width="2"/>
+  <rect x="550" y="170" width="200" height="100" fill="#e0e0e0" stroke="#000" stroke-width="2"/>
+  
+  <text x="175" y="220" font-size="16" text-anchor="middle" fill="white">已使用</text>
+  <text x="425" y="220" font-size="16" text-anchor="middle" fill="black">预分配但不会用到</text>
+  <text x="650" y="220" font-size="16" text-anchor="middle">空闲显存</text>
+  
+  <text x="400" y="290" font-size="18" text-anchor="middle" font-weight="bold">情况1: 预分配但不会用到</text>
+  <text x="400" y="315" font-size="14" text-anchor="middle">为最长序列预分配，但实际生成的序列长度远小于最大长度</text>
+  
+  <!-- 情况2: 预分配但尚未用到 -->
+  <rect x="50" y="350" width="700" height="100" fill="#e0e0e0" stroke="#000" stroke-width="2"/>
+  <rect x="50" y="350" width="200" height="100" fill="#4CAF50" stroke="#000" stroke-width="2"/>
+  <rect x="250" y="350" width="300" height="100" fill="#2196F3" stroke="#000" stroke-width="2"/>
+  <rect x="550" y="350" width="200" height="100" fill="#e0e0e0" stroke="#000" stroke-width="2"/>
+  
+  <text x="150" y="400" font-size="16" text-anchor="middle" fill="white">当前已使用</text>
+  <text x="400" y="400" font-size="16" text-anchor="middle" fill="white">预分配但尚未用到</text>
+  <text x="650" y="400" font-size="16" text-anchor="middle">空闲显存</text>
+  
+  <text x="400" y="470" font-size="18" text-anchor="middle" font-weight="bold">情况2: 预分配但尚未用到</text>
+  <text x="400" y="495" font-size="14" text-anchor="middle">随着序列生成，这部分显存将逐步被使用</text>
+  
+  <!-- 情况3: 显存碎片 -->
+  <rect x="50" y="530" width="700" height="50" fill="#e0e0e0" stroke="#000" stroke-width="2"/>
+  <rect x="50" y="530" width="120" height="50" fill="#4CAF50" stroke="#000" stroke-width="2"/>
+  <rect x="190" y="530" width="80" height="50" fill="#e0e0e0" stroke="#000" stroke-width="2"/>
+  <rect x="270" y="530" width="150" height="50" fill="#4CAF50" stroke="#000" stroke-width="2"/>
+  <rect x="440" y="530" width="60" height="50" fill="#e0e0e0" stroke="#000" stroke-width="2"/>
+  <rect x="500" y="530" width="180" height="50" fill="#4CAF50" stroke="#000" stroke-width="2"/>
+  <rect x="680" y="530" width="70" height="50" fill="#e0e0e0" stroke="#000" stroke-width="2"/>
+  
+  <text x="400" y="595" font-size="18" text-anchor="middle" font-weight="bold">情况3: 显存碎片</text>
+</svg>

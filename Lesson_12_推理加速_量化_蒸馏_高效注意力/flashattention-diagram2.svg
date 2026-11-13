@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background and title -->
+  <rect width="800" height="620" fill="#f8f9fa" rx="5" ry="5"/>
+  <text x="400" y="35" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle">FlashAttention Algorithm Flow</text>
+  
+  <!-- Memory sections -->
+  <rect x="50" y="60" width="700" height="70" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="5" ry="5"/>
+  <text x="400" y="95" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">HBM (High Bandwidth Memory)</text>
+  
+  <rect x="50" y="160" width="700" height="340" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="5" ry="5"/>
+  <text x="400" y="185" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">SRAM (Fast On-Chip Memory)</text>
+  
+  <!-- Input matrices in HBM -->
+  <rect x="80" y="75" width="80" height="40" fill="#bbdefb" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="120" y="100" font-family="Arial" font-size="16" text-anchor="middle">Q</text>
+  
+  <rect x="200" y="75" width="80" height="40" fill="#bbdefb" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="240" y="100" font-family="Arial" font-size="16" text-anchor="middle">K</text>
+  
+  <rect x="320" y="75" width="80" height="40" fill="#bbdefb" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="360" y="100" font-family="Arial" font-size="16" text-anchor="middle">V</text>
+  
+  <rect x="640" y="75" width="80" height="40" fill="#bbdefb" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="680" y="100" font-family="Arial" font-size="16" text-anchor="middle">O</text>
+  
+  <!-- Block processing in SRAM -->
+  <rect x="80" y="210" width="60" height="35" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5"/>
+  <text x="110" y="232" font-family="Arial" font-size="14" text-anchor="middle">Q_i</text>
+  
+  <rect x="200" y="210" width="60" height="35" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5"/>
+  <text x="230" y="232" font-family="Arial" font-size="14" text-anchor="middle">K_j</text>
+  
+  <rect x="320" y="210" width="60" height="35" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5"/>
+  <text x="350" y="232" font-family="Arial" font-size="14" text-anchor="middle">V_j</text>
+  
+  <!-- Tiled matrix multiplication -->
+  <rect x="160" y="270" width="140" height="40" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5" rx="5" ry="5"/>
+  <text x="230" y="295" font-family="Arial" font-size="14" text-anchor="middle">S_ij = Q_i @ K_j^T</text>
+  
+  <!-- Find max and Softmax numerator -->
+  <rect x="110" y="330" width="240" height="40" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5" rx="5" ry="5"/>
+  <text x="230" y="355" font-family="Arial" font-size="14" text-anchor="middle">Find m_ij_new = max(S_ij)</text>
+  
+  <rect x="110" y="390" width="240" height="40" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5" rx="5" ry="5"/>
+  <text x="230" y="415" font-family="Arial" font-size="14" text-anchor="middle">Update m_i_new = max(m_i_old, m_ij_new)</text>
+  
+  <rect x="110" y="450" width="240" height="40" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5" rx="5" ry="5"/>
+  <text x="230" y="475" font-family="Arial" font-size="14" text-anchor="middle">P_ij = exp(S_ij - m_i_new)</text>
+  
+  <!-- Accumulation part -->
+  <rect x="440" y="270" width="280" height="220" fill="#d7ccc8" stroke="#795548" stroke-width="2" rx="5" ry="5"/>
+  <text x="580" y="295" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">State Update</text>
+  
+  <rect x="460" y="310" width="240" height="35" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5" rx="5" ry="5"/>
+  <text x="580" y="333" font-family="Arial" font-size="14" text-anchor="middle">scale = exp(m_i_old - m_i_new)</text>
+  
+  <rect x="460" y="355" width="240" height="35" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5" rx="5" ry="5"/>
+  <text x="580" y="378" font-family="Arial" font-size="14" text-anchor="middle">l_i_new = l_i_old * scale + sum(P_ij)</text>
+  
+  <rect x="460" y="400" width="240" height="35" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5" rx="5" ry="5"/>
+  <text x="580" y="423" font-family="Arial" font-size="14" text-anchor="middle">O_i_new = O_i_old * scale + P_ij @ V_j</text>
+  
+  <rect x="460" y="445" width="240" height="35" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5" rx="5" ry="5"/>
+  <text x="580" y="468" font-family="Arial" font-size="14" text-anchor="middle">Update m_i_old, l_i_old, O_i_old</text>
+  
+  <!-- Final normalization -->
+  <rect x="360" y="520" width="240" height="40" fill="#ffecb3" stroke="#ffa000" stroke-width="2" rx="5" ry="5"/>
+  <text x="480" y="545" font-family="Arial" font-size="16" text-anchor="middle">O_i = O_i_final / l_i_final</text>
+  
+  <!-- Arrows -->
+  <!-- HBM to SRAM -->
+  <line x1="120" y1="115" x2="110" y2="210" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="240" y1="115" x2="230" y2="210" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="360" y1="115" x2="350" y2="210" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  
+  <!-- Computation flow -->
+  <line x1="140" y1="228" x2="200" y2="270" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="230" y1="245" x2="230" y2="270" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="230" y1="310" x2="230" y2="330" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="230" y1="370" x2="230" y2="390" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="230" y1="430" x2="230" y2="450" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  
+  <!-- To state update -->
+  <line x1="350" y1="470" x2="460" y2="370" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="350" y1="228" x2="440" y2="310" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  
+  <!-- Loop back/next block -->
+  <path d="M 440 500 Q 370 520 350 485 Q 330 450 350 420" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowhead)"/>
+  <text x="370" y="515" font-family="Arial" font-size="12" text-anchor="middle">Next (K_j, V_j) block</text>
+  
+  <!-- Final output -->
+  <line x1="480" y1="480" x2="480" y2="520" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="480" y1="560" x2="680" y2="560" x2="680" y2="115" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="580" y="580" font-family="Arial" font-size="14" text-anchor="middle">Write back to HBM after all K_j, V_j blocks are processed</text>
+  
+  <!-- Arrowhead definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000"/>
+    </marker>
+  </defs>
+  
+  <!-- Legend -->
+  <rect x="50" y="520" width="290" height="90" fill="#ffffff" stroke="#555555" stroke-width="1" rx="5" ry="5"/>
+  <text x="60" y="540" font-family="Arial" font-size="14" font-weight="bold">Legend:</text>
+  
+  <rect x="60" y="550" width="15" height="15" fill="#bbdefb" stroke="#1976d2" stroke-width="1"/>
+  <text x="85" y="562" font-family="Arial" font-size="12">Data in HBM</text>
+  
+  <rect x="60" y="575" width="15" height="15" fill="#c8e6c9" stroke="#388e3c" stroke-width="1"/>
+  <text x="85" y="587" font-family="Arial" font-size="12">Data & Computation in SRAM</text>
+  
+  <rect x="60" y="600" width="15" height="15" fill="#ffecb3" stroke="#ffa000" stroke-width="1"/>
+  <text x="85" y="612" font-family="Arial" font-size="12">Final Normalization</text>
+  
+  <path d="M 200 555 L 230 555" stroke="#000" stroke-width="1.5"/>
+  <text x="250" y="560" font-family="Arial" font-size="12">Data flow</text>
+  
+  <path d="M 200 580 L 230 580" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="250" y="585" font-family="Arial" font-size="12">Block iteration</text>
+</svg>

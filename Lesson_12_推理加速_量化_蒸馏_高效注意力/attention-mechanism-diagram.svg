@@ -1,0 +1,183 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14px">
+
+  <!-- White Background -->
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Main Matrix Representations -->
+  <g id="matrix-Q">
+    <text x="50" y="135" font-weight="bold">Q: N x d</text>
+    <rect x="50" y="150" width="40" height="20" fill="#87CEEB" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="170" width="40" height="20" fill="#ADD8E6" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="190" width="40" height="20" fill="#B0E0E6" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="210" width="40" height="20" fill="#87CEEB" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="230" width="40" height="20" fill="#ADD8E6" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="250" width="40" height="20" fill="#B0E0E6" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="270" width="40" height="20" fill="#87CEEB" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="290" width="40" height="20" fill="#ADD8E6" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="310" width="40" height="20" fill="#B0E0E6" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="330" width="40" height="20" fill="#87CEEB" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="350" width="40" height="20" fill="#ADD8E6" stroke="#333" stroke-width="0.5"/>
+    <rect x="50" y="370" width="40" height="20" fill="#B0E0E6" stroke="#333" stroke-width="0.5"/>
+    <!-- Label for tile size -->
+    <rect x="60" y="215" width="20" height="10" fill="none" stroke="black" stroke-width="1" />
+    <text x="35" y="223" font-size="10px">rxd</text>
+  </g>
+
+  <g id="matrix-KT">
+    <text x="300" y="45" font-weight="bold">K^T: d x N</text>
+    <rect x="200" y="60" width="20" height="40" fill="#DDA0DD" stroke="#333" stroke-width="0.5"/>
+    <rect x="220" y="60" width="20" height="40" fill="#EE82EE" stroke="#333" stroke-width="0.5"/>
+    <rect x="240" y="60" width="20" height="40" fill="#DA70D6" stroke="#333" stroke-width="0.5"/>
+    <rect x="260" y="60" width="20" height="40" fill="#DDA0DD" stroke="#333" stroke-width="0.5"/>
+    <rect x="280" y="60" width="20" height="40" fill="#EE82EE" stroke="#333" stroke-width="0.5"/>
+    <rect x="300" y="60" width="20" height="40" fill="#DA70D6" stroke="#333" stroke-width="0.5"/>
+    <rect x="320" y="60" width="20" height="40" fill="#DDA0DD" stroke="#333" stroke-width="0.5"/>
+    <rect x="340" y="60" width="20" height="40" fill="#EE82EE" stroke="#333" stroke-width="0.5"/>
+    <rect x="360" y="60" width="20" height="40" fill="#DA70D6" stroke="#333" stroke-width="0.5"/>
+    <rect x="380" y="60" width="20" height="40" fill="#DDA0DD" stroke="#333" stroke-width="0.5"/>
+    <rect x="400" y="60" width="20" height="40" fill="#EE82EE" stroke="#333" stroke-width="0.5"/>
+    <rect x="420" y="60" width="20" height="40" fill="#DA70D6" stroke="#333" stroke-width="0.5"/>
+     <!-- Label for tile size -->
+    <rect x="225" y="70" width="10" height="20" fill="none" stroke="black" stroke-width="1" />
+    <text x="230" y="60" font-size="10px">dxc</text>
+  </g>
+
+  <g id="matrix-V">
+     <text x="660" y="135" font-weight="bold">V: N x d</text>
+    <rect x="660" y="150" width="40" height="20" fill="#FFA07A" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="170" width="40" height="20" fill="#FA8072" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="190" width="40" height="20" fill="#E9967A" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="210" width="40" height="20" fill="#FFA07A" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="230" width="40" height="20" fill="#FA8072" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="250" width="40" height="20" fill="#E9967A" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="270" width="40" height="20" fill="#FFA07A" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="290" width="40" height="20" fill="#FA8072" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="310" width="40" height="20" fill="#E9967A" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="330" width="40" height="20" fill="#FFA07A" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="350" width="40" height="20" fill="#FA8072" stroke="#333" stroke-width="0.5"/>
+    <rect x="660" y="370" width="40" height="20" fill="#E9967A" stroke="#333" stroke-width="0.5"/>
+     <!-- Label for tile size -->
+    <rect x="670" y="295" width="20" height="10" fill="none" stroke="black" stroke-width="1" />
+    <text x="695" y="303" font-size="10px">cxd</text>
+  </g>
+
+  <g id="matrix-Output">
+    <text x="250" y="555" font-weight="bold">sm(Q@K^T)V: N x d</text>
+    <rect x="200" y="500" width="20" height="40" fill="#A9A9A9" stroke="#333" stroke-width="0.5"/>
+    <rect x="220" y="500" width="20" height="40" fill="#C0C0C0" stroke="#333" stroke-width="0.5"/>
+    <rect x="240" y="500" width="20" height="40" fill="#D3D3D3" stroke="#333" stroke-width="0.5"/>
+    <rect x="260" y="500" width="20" height="40" fill="#A9A9A9" stroke="#333" stroke-width="0.5"/>
+    <rect x="280" y="500" width="20" height="40" fill="#C0C0C0" stroke="#333" stroke-width="0.5"/>
+    <rect x="300" y="500" width="20" height="40" fill="#D3D3D3" stroke="#333" stroke-width="0.5"/>
+    <rect x="320" y="500" width="20" height="40" fill="#A9A9A9" stroke="#333" stroke-width="0.5"/>
+    <rect x="340" y="500" width="20" height="40" fill="#C0C0C0" stroke="#333" stroke-width="0.5"/>
+    <rect x="360" y="500" width="20" height="40" fill="#D3D3D3" stroke="#333" stroke-width="0.5"/>
+    <rect x="380" y="500" width="20" height="40" fill="#A9A9A9" stroke="#333" stroke-width="0.5"/>
+    <rect x="400" y="500" width="20" height="40" fill="#C0C0C0" stroke="#333" stroke-width="0.5"/>
+    <rect x="420" y="500" width="20" height="40" fill="#D3D3D3" stroke="#333" stroke-width="0.5"/>
+     <!-- Label for tile size -->
+    <rect x="405" y="510" width="10" height="20" fill="none" stroke="black" stroke-width="1" />
+    <text x="420" y="523" font-size="10px">rxd</text>
+  </g>
+
+  <!-- Attention Matrix Representation (Center) -->
+  <g id="attention-matrix">
+    <text x="380" y="145" font-weight="bold">N x N</text>
+    <!-- Draw a grid to represent the large matrix -->
+    <defs>
+      <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+         <rect width="20" height="20" fill="#E0E0E0" />
+         <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#B0B0B0" stroke-width="0.5"/>
+      </pattern>
+       <pattern id="innerGridPattern" width="15" height="15" patternUnits="userSpaceOnUse">
+         <rect width="15" height="15" fill="#AFEEEE" /> <!-- Light Turquoise for SRAM -->
+         <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#70C0C0" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect x="180" y="150" width="380" height="240" fill="url(#gridPattern)"/>
+    <!-- SRAM Area -->
+    <rect x="220" y="180" width="300" height="180" fill="url(#innerGridPattern)" stroke="#4682B4" stroke-width="2"/>
+    <text x="470" y="198" fill="#2F4F4F" font-weight="bold">SRAM</text>
+  </g>
+
+  <!-- Tiled Computation inside SRAM -->
+  <g id="sram-computation">
+    <!-- Tile Q_i (r x d) -->
+    <g id="tile-q">
+       <rect x="250" y="210" width="30" height="15" fill="#4682B4" stroke="#1E90FF" stroke-width="1"/>
+       <rect x="250" y="225" width="30" height="15" fill="#4169E1" stroke="#1E90FF" stroke-width="1"/>
+       <rect x="250" y="240" width="30" height="15" fill="#00BFFF" stroke="#1E90FF" stroke-width="1"/>
+    </g>
+
+     <!-- Tile K_j^T (d x c) -->
+    <g id="tile-kt">
+       <rect x="280" y="210" width="15" height="45" fill="#9370DB" stroke="#8A2BE2" stroke-width="1"/>
+       <rect x="295" y="210" width="15" height="45" fill="#8A2BE2" stroke="#8A2BE2" stroke-width="1"/>
+       <rect x="310" y="210" width="15" height="45" fill="#9932CC" stroke="#8A2BE2" stroke-width="1"/>
+    </g>
+
+    <!-- Intermediate Score S_ij = Q_i @ K_j^T (r x c) -->
+     <g id="tile-s">
+        <rect x="265" y="225" width="15" height="15" fill="#7B68EE" stroke="#483D8B" stroke-width="1"/>
+        <rect x="280" y="225" width="15" height="15" fill="#6A5ACD" stroke="#483D8B" stroke-width="1"/>
+        <rect x="295" y="225" width="15" height="15" fill="#483D8B" stroke="#483D8B" stroke-width="1"/>
+        <rect x="265" y="240" width="15" height="15" fill="#7B68EE" stroke="#483D8B" stroke-width="1"/>
+        <rect x="280" y="240" width="15" height="15" fill="#6A5ACD" stroke="#483D8B" stroke-width="1"/>
+        <rect x="295" y="240" width="15" height="15" fill="#483D8B" stroke="#483D8B" stroke-width="1"/>
+        <rect x="265" y="255" width="15" height="15" fill="#7B68EE" stroke="#483D8B" stroke-width="1"/>
+        <rect x="280" y="255" width="15" height="15" fill="#6A5ACD" stroke="#483D8B" stroke-width="1"/>
+        <rect x="295" y="255" width="15" height="15" fill="#483D8B" stroke="#483D8B" stroke-width="1"/>
+        <text x="315" y="250" font-size="12px">r x c</text>
+    </g>
+
+    <!-- Tile V_j (c x d) -->
+    <g id="tile-v">
+       <rect x="350" y="290" width="15" height="15" fill="#FF7F50" stroke="#FF4500" stroke-width="1"/>
+       <rect x="365" y="290" width="15" height="15" fill="#FF6347" stroke="#FF4500" stroke-width="1"/>
+       <rect x="380" y="290" width="15" height="15" fill="#FF4500" stroke="#FF4500" stroke-width="1"/>
+       <rect x="350" y="305" width="15" height="15" fill="#FF7F50" stroke="#FF4500" stroke-width="1"/>
+       <rect x="365" y="305" width="15" height="15" fill="#FF6347" stroke="#FF4500" stroke-width="1"/>
+       <rect x="380" y="305" width="15" height="15" fill="#FF4500" stroke="#FF4500" stroke-width="1"/>
+       <rect x="350" y="320" width="15" height="15" fill="#FF7F50" stroke="#FF4500" stroke-width="1"/>
+       <rect x="365" y="320" width="15" height="15" fill="#FF6347" stroke="#FF4500" stroke-width="1"/>
+       <rect x="380" y="320" width="15" height="15" fill="#FF4500" stroke="#FF4500" stroke-width="1"/>
+       <text x="400" y="315" font-size="12px">c x d</text>
+    </g>
+
+     <!-- Intermediate Output O_i += S_ij @ V_j (r x d) -->
+    <g id="tile-o">
+       <rect x="290" y="350" width="15" height="15" fill="#F4A460" stroke="#8B4513" stroke-width="1"/>
+       <rect x="305" y="350" width="15" height="15" fill="#D2691E" stroke="#8B4513" stroke-width="1"/>
+       <rect x="320" y="350" width="15" height="15" fill="#A0522D" stroke="#8B4513" stroke-width="1"/>
+       <rect x="290" y="365" width="15" height="15" fill="#F4A460" stroke="#8B4513" stroke-width="1"/>
+       <rect x="305" y="365" width="15" height="15" fill="#D2691E" stroke="#8B4513" stroke-width="1"/>
+       <rect x="320" y="365" width="15" height="15" fill="#A0522D" stroke="#8B4513" stroke-width="1"/>
+       <rect x="290" y="380" width="15" height="15" fill="#F4A460" stroke="#8B4513" stroke-width="1"/>
+       <rect x="305" y="380" width="15" height="15" fill="#D2691E" stroke="#8B4513" stroke-width="1"/>
+       <rect x="320" y="380" width="15" height="15" fill="#A0522D" stroke="#8B4513" stroke-width="1"/>
+       <!-- Dimension label will be added near the final output connection -->
+    </g>
+  </g>
+
+  <!-- Connection Lines -->
+  <g id="connections" stroke="#555" stroke-width="1.5" stroke-dasharray="4,4">
+    <!-- Q -> SRAM Q_i -->
+    <path d="M 90 220 C 150 220, 200 230, 250 235" fill="none"/>
+    <!-- K^T -> SRAM K_j^T -->
+    <path d="M 235 100 C 235 150, 280 180, 300 210" fill="none"/>
+    <!-- Q_i, K_j^T -> S_ij -->
+    <line x1="280" y1="255" x2="280" y2="225"/> <!-- Implicit connection visual -->
+    <line x1="280" y1="270" x2="288" y2="270"/> <!-- Arrow hint -->
+
+     <!-- V -> SRAM V_j -->
+    <path d="M 660 300 C 580 300, 450 310, 395 315" fill="none"/>
+    <!-- S_ij -> O_i Calculation (implicit with V_j) -->
+     <line x1="288" y1="270" x2="312" y2="350"/>
+     <!-- V_j -> O_i Calculation -->
+     <line x1="372" y1="335" x2="312" y2="350"/>
+
+    <!-- O_i -> Final Output -->
+    <path d="M 312 395 C 312 450, 380 480, 410 500" fill="none"/>
+  </g>
+
+</svg>

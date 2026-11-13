@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  <text x="400" y="40" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle">白盒知识蒸馏流程 - 概率分布对齐</text>
+
+  <!-- 输入数据 -->
+  <g transform="translate(60, 100)">
+    <rect width="120" height="60" rx="10" ry="10" fill="#4285f4" opacity="0.8"/>
+    <text x="60" y="35" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">输入数据</text>
+  </g>
+
+  <!-- 箭头 -->
+  <path d="M180 130 L230 100" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M180 130 L230 200" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 教师模型 -->
+  <g transform="translate(230, 70)">
+    <rect width="180" height="80" rx="10" ry="10" fill="#34a853" opacity="0.9"/>
+    <text x="90" y="35" font-family="Arial" font-size="18" font-weight="bold" fill="white" text-anchor="middle">教师模型</text>
+    <text x="90" y="55" font-family="Arial" font-size="14" fill="white" text-anchor="middle">(预训练大模型)</text>
+  </g>
+
+  <!-- 学生模型 -->
+  <g transform="translate(230, 170)">
+    <rect width="180" height="80" rx="10" ry="10" fill="#fbbc05" opacity="0.9"/>
+    <text x="90" y="35" font-family="Arial" font-size="18" font-weight="bold" fill="white" text-anchor="middle">学生模型</text>
+    <text x="90" y="55" font-family="Arial" font-size="14" fill="white" text-anchor="middle">(待训练小模型)</text>
+  </g>
+
+  <!-- 教师输出 -->
+  <g transform="translate(450, 70)">
+    <rect width="140" height="80" rx="10" ry="10" fill="#34a853" opacity="0.7"/>
+    <text x="70" y="30" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">教师输出</text>
+    <text x="70" y="50" font-family="Arial" font-size="12" fill="white" text-anchor="middle">软标签 (p_teacher)</text>
+    <text x="70" y="65" font-family="Arial" font-size="12" fill="white" text-anchor="middle">概率分布</text>
+  </g>
+
+  <!-- 学生输出 -->
+  <g transform="translate(450, 170)">
+    <rect width="140" height="80" rx="10" ry="10" fill="#fbbc05" opacity="0.7"/>
+    <text x="70" y="30" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">学生输出</text>
+    <text x="70" y="50" font-family="Arial" font-size="12" fill="white" text-anchor="middle">预测 (p_student)</text>
+    <text x="70" y="65" font-family="Arial" font-size="12" fill="white" text-anchor="middle">概率分布</text>
+  </g>
+
+  <!-- 箭头 -->
+  <path d="M410 110 L450 110" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M410 210 L450 210" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- KL散度计算 -->
+  <g transform="translate(630, 120)">
+    <rect width="140" height="60" rx="10" ry="10" fill="#ea4335" opacity="0.8"/>
+    <text x="70" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">KL散度</text>
+    <text x="70" y="45" font-family="Arial" font-size="12" fill="white" text-anchor="middle">D_KL(p_teacher || p_student)</text>
+  </g>
+
+  <!-- 箭头到KL散度 -->
+  <path d="M590 110 L630 140" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M590 210 L630 160" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 反向传播 -->
+  <path d="M700 150 L700 220 L330 220 L330 250" stroke="#333" stroke-width="2" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+  <text x="550" y="240" font-family="Arial" font-size="14" text-anchor="middle">反向传播（仅更新学生模型参数）</text>
+
+  <!-- 中间层对齐 -->
+  <g transform="translate(100, 280)">
+    <rect width="600" height="80" rx="10" ry="10" fill="#e8eaed" stroke="#dadce0" stroke-width="2"/>
+    <text x="300" y="30" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">可选：中间隐藏层对齐</text>
+    <line x1="50" y1="45" x2="550" y2="45" stroke="#dadce0" stroke-width="1"/>
+    
+    <g transform="translate(60, 60)">
+      <rect width="100" height="10" rx="2" ry="2" fill="#34a853" opacity="0.7"/>
+      <text x="50" y="-5" font-family="Arial" font-size="12" text-anchor="middle">教师中间层</text>
+    </g>
+    
+    <g transform="translate(310, 60)">
+      <rect width="100" height="10" rx="2" ry="2" fill="#fbbc05" opacity="0.7"/>
+      <text x="50" y="-5" font-family="Arial" font-size="12" text-anchor="middle">学生中间层</text>
+    </g>
+    
+    <path d="M210 60 L310 60" stroke="#333" stroke-width="1" fill="none" marker-end="url(#arrow)"/>
+    <text x="260" y="50" font-family="Arial" font-size="12" text-anchor="middle">KL散度/MSE</text>
+  </g>
+
+  <!-- 注解和公式 -->
+  <g transform="translate(100, 380)">
+    <rect width="600" height="100" rx="10" ry="10" fill="white" stroke="#dadce0" stroke-width="2"/>
+    <text x="20" y="25" font-family="Arial" font-size="16" font-weight="bold">白盒知识蒸馏的核心：</text>
+    
+    <text x="40" y="50" font-family="Arial" font-size="14">● KL散度公式：D_KL(P||Q) = ∑ P(x) log(P(x)/Q(x))</text>
+    <text x="40" y="75" font-family="Arial" font-size="14">● 损失函数：L = α·L_CE(学生预测, 真实标签) + β·L_KL(教师分布, 学生分布)</text>
+    <text x="40" y="95" font-family="Arial" font-size="12" font-style="italic">  其中α和β是权重参数，用于平衡两个损失项的重要性</text>
+  </g>
+  
+  <!-- 定义箭头标记 -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+    </marker>
+  </defs>
+</svg>

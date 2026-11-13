@@ -1,0 +1,130 @@
+<svg viewBox="0 0 900 1050" xmlns="http://www.w3.org/2000/svg">
+  <!-- 标题 -->
+  <text x="450" y="40" text-anchor="middle" font-size="24" font-weight="bold">数值格式比较：FP32、FP16、BF16、INT8和INT4</text>
+  
+  <!-- FP32 -->
+  <g transform="translate(30, 100)">
+    <text x="420" y="-30" text-anchor="middle" font-size="20" font-weight="bold">浮点格式</text>
+    <rect x="0" y="0" width="840" height="60" fill="#e6f2ff" stroke="#000" stroke-width="1"/>
+    <text x="420" y="40" text-anchor="middle" font-size="18" font-weight="bold">FP32 (单精度浮点)</text>
+    
+    <!-- FP32 位划分 -->
+    <rect x="0" y="120" width="60" height="40" fill="#ff9999" stroke="#000"/>
+    <rect x="70" y="120" width="240" height="40" fill="#99ccff" stroke="#000"/>
+    <rect x="320" y="120" width="520" height="40" fill="#99ff99" stroke="#000"/>
+    
+    <!-- 位数信息放在最上层 -->
+    <text x="30" y="145" text-anchor="middle" font-size="14" font-weight="bold">1位</text>
+    <text x="190" y="145" text-anchor="middle" font-size="14" font-weight="bold">8位</text>
+    <text x="580" y="145" text-anchor="middle" font-size="14" font-weight="bold">23位</text>
+    
+    <text x="30" y="170" text-anchor="middle" font-size="16">符号</text>
+    <text x="190" y="170" text-anchor="middle" font-size="16">指数</text>
+    <text x="580" y="170" text-anchor="middle" font-size="16">尾数</text>
+    
+    <text x="0" y="225" font-size="16">范围: ±1.18×10⁻³⁸ 到 ±3.4×10³⁸</text>
+    <text x="0" y="250" font-size="16">精度: ~7位十进制数字</text>
+  </g>
+  
+  <!-- FP16 -->
+  <g transform="translate(30, 290)">
+    <rect x="0" y="0" width="840" height="60" fill="#e6f2ff" stroke="#000" stroke-width="1"/>
+    <text x="420" y="40" text-anchor="middle" font-size="18" font-weight="bold">FP16 (半精度浮点)</text>
+    
+    <!-- FP16 位划分 -->
+    <rect x="0" y="120" width="60" height="40" fill="#ff9999" stroke="#000"/>
+    <rect x="70" y="120" width="180" height="40" fill="#99ccff" stroke="#000"/>
+    <rect x="260" y="120" width="300" height="40" fill="#99ff99" stroke="#000"/>
+    
+    <!-- 位数信息放在最上层 -->
+    <text x="30" y="145" text-anchor="middle" font-size="14" font-weight="bold">1位</text>
+    <text x="160" y="145" text-anchor="middle" font-size="14" font-weight="bold">5位</text>
+    <text x="410" y="145" text-anchor="middle" font-size="14" font-weight="bold">10位</text>
+    
+    <text x="30" y="170" text-anchor="middle" font-size="16">符号</text>
+    <text x="160" y="170" text-anchor="middle" font-size="16">指数</text>
+    <text x="410" y="170" text-anchor="middle" font-size="16">尾数</text>
+    
+    <text x="0" y="225" font-size="16">范围: ±6.0×10⁻⁸ 到 ±6.5×10⁴</text>
+    <text x="0" y="250" font-size="16">精度: ~3-4位十进制数字</text>
+  </g>
+  
+  <!-- BF16 -->
+  <g transform="translate(30, 480)">
+    <rect x="0" y="0" width="840" height="60" fill="#e6f2ff" stroke="#000" stroke-width="1"/>
+    <text x="420" y="40" text-anchor="middle" font-size="18" font-weight="bold">BF16 (脑浮点)</text>
+    
+    <!-- BF16 位划分 -->
+    <rect x="0" y="120" width="60" height="40" fill="#ff9999" stroke="#000"/>
+    <rect x="70" y="120" width="240" height="40" fill="#99ccff" stroke="#000"/>
+    <rect x="320" y="120" width="210" height="40" fill="#99ff99" stroke="#000"/>
+    
+    <!-- 位数信息放在最上层 -->
+    <text x="30" y="145" text-anchor="middle" font-size="14" font-weight="bold">1位</text>
+    <text x="190" y="145" text-anchor="middle" font-size="14" font-weight="bold">8位</text>
+    <text x="425" y="145" text-anchor="middle" font-size="14" font-weight="bold">7位</text>
+    
+    <text x="30" y="170" text-anchor="middle" font-size="16">符号</text>
+    <text x="190" y="170" text-anchor="middle" font-size="16">指数</text>
+    <text x="425" y="170" text-anchor="middle" font-size="16">尾数</text>
+    
+    <text x="0" y="225" font-size="16">范围: ±1.18×10⁻³⁸ 到 ±3.4×10³⁸ (与FP32相同)</text>
+    <text x="0" y="250" font-size="16">精度: ~2-3位十进制数字</text>
+  </g>
+  
+  <!-- INT8 -->
+  <g transform="translate(30, 670)">
+    <text x="420" y="-30" text-anchor="middle" font-size="20" font-weight="bold">整数格式</text>
+    <rect x="0" y="0" width="840" height="60" fill="#ffe6cc" stroke="#000" stroke-width="1"/>
+    <text x="420" y="40" text-anchor="middle" font-size="18" font-weight="bold">INT8 (8位整数)</text>
+    
+    <!-- INT8 位划分 -->
+    <rect x="0" y="120" width="60" height="40" fill="#ff9999" stroke="#000"/>
+    <rect x="70" y="120" width="420" height="40" fill="#d9d9d9" stroke="#000"/>
+    
+    <!-- 位数信息放在最上层 -->
+    <text x="30" y="145" text-anchor="middle" font-size="14" font-weight="bold">1位</text>
+    <text x="280" y="145" text-anchor="middle" font-size="14" font-weight="bold">7位</text>
+    
+    <text x="30" y="170" text-anchor="middle" font-size="16">符号</text>
+    <text x="280" y="170" text-anchor="middle" font-size="16">数值位</text>
+    
+    <text x="0" y="225" font-size="16">范围: -128 到 127 (有符号)</text>
+    <text x="0" y="250" font-size="16">或 0 到 255 (无符号)</text>
+  </g>
+  
+  <!-- INT4 -->
+  <g transform="translate(30, 860)">
+    <rect x="0" y="0" width="840" height="60" fill="#ffe6cc" stroke="#000" stroke-width="1"/>
+    <text x="420" y="40" text-anchor="middle" font-size="18" font-weight="bold">INT4 (4位整数)</text>
+    
+    <!-- INT4 位划分 -->
+    <rect x="0" y="120" width="60" height="40" fill="#ff9999" stroke="#000"/>
+    <rect x="70" y="120" width="180" height="40" fill="#d9d9d9" stroke="#000"/>
+    
+    <!-- 位数信息放在最上层 -->
+    <text x="30" y="145" text-anchor="middle" font-size="14" font-weight="bold">1位</text>
+    <text x="160" y="145" text-anchor="middle" font-size="14" font-weight="bold">3位</text>
+    
+    <text x="30" y="170" text-anchor="middle" font-size="16">符号</text>
+    <text x="160" y="170" text-anchor="middle" font-size="16">数值位</text>
+    
+    <text x="0" y="225" font-size="16">范围: -8 到 7 (有符号)</text>
+    <text x="0" y="250" font-size="16">或 0 到 15 (无符号)</text>
+  </g>
+  
+  <!-- 图例 -->
+  <g transform="translate(650, 750)">
+    <rect x="0" y="0" width="20" height="20" fill="#ff9999"/>
+    <text x="30" y="15" font-size="14">符号位</text>
+    
+    <rect x="0" y="30" width="20" height="20" fill="#99ccff"/>
+    <text x="30" y="45" font-size="14">指数位</text>
+    
+    <rect x="0" y="60" width="20" height="20" fill="#99ff99"/>
+    <text x="30" y="75" font-size="14">尾数位</text>
+    
+    <rect x="0" y="90" width="20" height="20" fill="#d9d9d9"/>
+    <text x="30" y="105" font-size="14">数值位</text>
+  </g>
+</svg>

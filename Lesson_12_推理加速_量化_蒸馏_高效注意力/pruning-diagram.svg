@@ -1,0 +1,62 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- 标题 -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" font-weight="bold" fill="#333">大模型剪枝流程</text>
+  
+  <!-- 初始模型 -->
+  <rect x="50" y="100" width="160" height="100" rx="5" ry="5" fill="#4285f4" opacity="0.8"/>
+  <text x="130" y="150" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="white">原始大模型</text>
+  <text x="130" y="175" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">参数量: 100%</text>
+  
+  <!-- 评估重要性 -->
+  <rect x="320" y="100" width="160" height="100" rx="5" ry="5" fill="#fbbc05" opacity="0.8"/>
+  <text x="400" y="140" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#333">参数重要性评估</text>
+  <text x="400" y="165" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">• 权重幅值</text>
+  <text x="400" y="185" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">• 梯度分析</text>
+  
+  <!-- 剪枝操作 -->
+  <rect x="590" y="100" width="160" height="100" rx="5" ry="5" fill="#34a853" opacity="0.8"/>
+  <text x="670" y="140" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="white">执行剪枝</text>
+  <text x="670" y="165" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">• 结构化剪枝</text>
+  <text x="670" y="185" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">• 非结构化剪枝</text>
+  
+  <!-- 微调 -->
+  <rect x="320" y="280" width="160" height="100" rx="5" ry="5" fill="#ea4335" opacity="0.8"/>
+  <text x="400" y="320" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="white">微调训练</text>
+  <text x="400" y="345" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">恢复模型性能</text>
+  <text x="400" y="365" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">适应稀疏结构</text>
+  
+  <!-- 最终模型 -->
+  <rect x="590" y="280" width="160" height="100" rx="5" ry="5" fill="#673ab7" opacity="0.8"/>
+  <text x="670" y="325" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="white">压缩后模型</text>
+  <text x="670" y="350" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">参数量: 20-50%</text>
+  <text x="670" y="370" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">性能损失: 微小</text>
+  
+  <!-- 评估 -->
+  <rect x="50" y="280" width="160" height="100" rx="5" ry="5" fill="#ff6d00" opacity="0.8"/>
+  <text x="130" y="320" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="white">性能评估</text>
+  <text x="130" y="345" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">• 准确率</text>
+  <text x="130" y="365" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">• 推理速度</text>
+  <text x="130" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">• 内存占用</text>
+  
+  <!-- 连接箭头 -->
+  <line x1="210" y1="150" x2="320" y2="150" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="480" y1="150" x2="590" y2="150" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="670" y1="200" x2="670" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="590" y1="330" x2="210" y2="330" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="130" y1="280" x2="130" y2="200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="210" y1="330" x2="320" y2="330" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 箭头标记定义 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+  
+  <!-- 迭代说明 -->
+  <rect x="170" y="420" width="460" height="50" rx="5" ry="5" fill="#e0e0e0" opacity="0.8"/>
+  <text x="400" y="450" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">迭代过程：剪枝→评估→微调→再剪枝，直到达到目标模型大小</text>
+</svg>

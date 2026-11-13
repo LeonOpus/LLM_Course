@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Boxes -->
+  <!-- fp32 input -->
+  <rect x="50" y="80" width="110" height="40" rx="5" fill="#5b8cdc" />
+  <text x="105" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">fp32输入</text>
+  
+  <!-- Quantization -->
+  <rect x="190" y="80" width="70" height="40" rx="5" fill="#d4803b" />
+  <text x="225" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">量化</text>
+  
+  <!-- int8 input -->
+  <rect x="290" y="80" width="110" height="40" rx="5" fill="#5b8cdc" />
+  <text x="345" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">int8输入</text>
+  
+  <!-- int8 weight -->
+  <rect x="290" y="20" width="110" height="40" rx="5" fill="#5b8cdc" />
+  <text x="345" y="45" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">int8权重</text>
+  
+  <!-- int8 calculation -->
+  <rect x="480" y="80" width="110" height="40" rx="5" fill="#5b8cdc" />
+  <text x="535" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">int8计算</text>
+  
+  <!-- Dequantization -->
+  <rect x="620" y="80" width="70" height="40" rx="5" fill="#d4803b" />
+  <text x="655" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">反量化</text>
+  
+  <!-- fp32 output -->
+  <rect x="720" y="80" width="110" height="40" rx="5" fill="#5b8cdc" />
+  <text x="775" y="105" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">fp32输出</text>
+  
+  <!-- Arrows -->
+  <!-- fp32 input to Quantization -->
+  <line x1="160" y1="100" x2="190" y2="100" stroke="black" stroke-width="2" />
+  <polygon points="188,96 198,100 188,104" fill="black" />
+  
+  <!-- Quantization to int8 input -->
+  <line x1="260" y1="100" x2="290" y2="100" stroke="black" stroke-width="2" />
+  <polygon points="288,96 298,100 288,104" fill="black" />
+  
+  <!-- int8 input to int8 calculation -->
+  <line x1="400" y1="100" x2="480" y2="100" stroke="black" stroke-width="2" />
+  <polygon points="478,96 488,100 478,104" fill="black" />
+  
+  <!-- int8 weight to int8 calculation -->
+  <line x1="400" y1="40" x2="470" y2="40" stroke="black" stroke-width="2" />
+  <line x1="470" y1="40" x2="470" y2="80" stroke="black" stroke-width="2" />
+  <line x1="470" y1="80" x2="480" y2="80" stroke="black" stroke-width="2" />
+  <polygon points="468,78 480,80 468,82" fill="black" />
+  
+  <!-- int8 calculation to Dequantization -->
+  <line x1="590" y1="100" x2="620" y2="100" stroke="black" stroke-width="2" />
+  <polygon points="618,96 628,100 618,104" fill="black" />
+  
+  <!-- Dequantization to fp32 output -->
+  <line x1="690" y1="100" x2="720" y2="100" stroke="black" stroke-width="2" />
+  <polygon points="718,96 728,100 718,104" fill="black" />
+</svg>

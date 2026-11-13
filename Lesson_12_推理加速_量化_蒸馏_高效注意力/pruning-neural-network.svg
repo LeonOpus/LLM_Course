@@ -1,0 +1,141 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- 标题 -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" font-weight="bold" fill="#333">神经网络剪枝示意图</text>
+  
+  <!-- 图例 -->
+  <circle cx="100" cy="80" r="15" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <text x="125" y="86" font-family="Arial, sans-serif" font-size="16" fill="#333">正常节点</text>
+  
+  <circle cx="250" cy="80" r="15" fill="#ea4335" stroke="#333" stroke-width="1.5"/>
+  <line x1="235" y1="80" x2="265" y2="80" stroke="#000" stroke-width="3"/>
+  <text x="275" y="86" font-family="Arial, sans-serif" font-size="16" fill="#333">被剪枝节点</text>
+  
+  <line x1="380" y1="80" x2="430" y2="80" stroke="#555" stroke-width="1.5"/>
+  <text x="450" y="86" font-family="Arial, sans-serif" font-size="16" fill="#333">连接权重</text>
+  
+  <line x1="550" y1="80" x2="600" y2="80" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="620" y="86" font-family="Arial, sans-serif" font-size="16" fill="#333">被移除连接</text>
+  
+  <!-- 神经网络结构 -->
+  <!-- 输入层 -->
+  <circle cx="100" cy="180" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <circle cx="100" cy="250" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <circle cx="100" cy="320" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <circle cx="100" cy="390" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <text x="40" y="285" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">输入层</text>
+  
+  <!-- 隐藏层1 -->
+  <circle cx="250" cy="150" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <circle cx="250" cy="220" r="20" fill="#ea4335" stroke="#333" stroke-width="1.5"/>
+  <line x1="230" y1="220" x2="270" y2="220" stroke="#000" stroke-width="3"/>
+  <circle cx="250" cy="290" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <circle cx="250" cy="360" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <circle cx="250" cy="430" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <text x="250" y="480" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">隐藏层 1</text>
+  
+  <!-- 隐藏层2 -->
+  <circle cx="400" cy="170" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <circle cx="400" cy="240" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <circle cx="400" cy="310" r="20" fill="#ea4335" stroke="#333" stroke-width="1.5"/>
+  <line x1="380" y1="310" x2="420" y2="310" stroke="#000" stroke-width="3"/>
+  <circle cx="400" cy="380" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <text x="400" y="480" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">隐藏层 2</text>
+  
+  <!-- 隐藏层3 -->
+  <circle cx="550" cy="200" r="20" fill="#ea4335" stroke="#333" stroke-width="1.5"/>
+  <line x1="530" y1="200" x2="570" y2="200" stroke="#000" stroke-width="3"/>
+  <circle cx="550" cy="270" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <circle cx="550" cy="340" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <text x="550" y="480" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">隐藏层 3</text>
+  
+  <!-- 输出层 -->
+  <circle cx="700" cy="220" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <circle cx="700" cy="320" r="20" fill="#4285f4" stroke="#333" stroke-width="1.5"/>
+  <text x="760" y="285" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#333">输出层</text>
+  
+  <!-- 连接线 - 保留正常连接 -->
+  <!-- 输入层到隐藏层1 -->
+  <line x1="120" y1="180" x2="230" y2="150" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="180" x2="230" y2="290" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="180" x2="230" y2="360" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="180" x2="230" y2="430" stroke="#555" stroke-width="1.5"/>
+  
+  <line x1="120" y1="250" x2="230" y2="150" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="250" x2="230" y2="290" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="250" x2="230" y2="360" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="250" x2="230" y2="430" stroke="#555" stroke-width="1.5"/>
+  
+  <line x1="120" y1="320" x2="230" y2="150" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="320" x2="230" y2="290" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="320" x2="230" y2="360" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="320" x2="230" y2="430" stroke="#555" stroke-width="1.5"/>
+  
+  <line x1="120" y1="390" x2="230" y2="150" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="390" x2="230" y2="290" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="390" x2="230" y2="360" stroke="#555" stroke-width="1.5"/>
+  <line x1="120" y1="390" x2="230" y2="430" stroke="#555" stroke-width="1.5"/>
+  
+  <!-- 隐藏层1到隐藏层2，排除被剪枝节点的连接 -->
+  <line x1="270" y1="150" x2="380" y2="170" stroke="#555" stroke-width="1.5"/>
+  <line x1="270" y1="150" x2="380" y2="240" stroke="#555" stroke-width="1.5"/>
+  <line x1="270" y1="150" x2="380" y2="380" stroke="#555" stroke-width="1.5"/>
+  
+  <line x1="270" y1="290" x2="380" y2="170" stroke="#555" stroke-width="1.5"/>
+  <line x1="270" y1="290" x2="380" y2="240" stroke="#555" stroke-width="1.5"/>
+  <line x1="270" y1="290" x2="380" y2="380" stroke="#555" stroke-width="1.5"/>
+  
+  <line x1="270" y1="360" x2="380" y2="170" stroke="#555" stroke-width="1.5"/>
+  <line x1="270" y1="360" x2="380" y2="240" stroke="#555" stroke-width="1.5"/>
+  <line x1="270" y1="360" x2="380" y2="380" stroke="#555" stroke-width="1.5"/>
+  
+  <line x1="270" y1="430" x2="380" y2="170" stroke="#555" stroke-width="1.5"/>
+  <line x1="270" y1="430" x2="380" y2="240" stroke="#555" stroke-width="1.5"/>
+  <line x1="270" y1="430" x2="380" y2="380" stroke="#555" stroke-width="1.5"/>
+  
+  <!-- 隐藏层2到隐藏层3 -->
+  <line x1="420" y1="170" x2="530" y2="270" stroke="#555" stroke-width="1.5"/>
+  <line x1="420" y1="170" x2="530" y2="340" stroke="#555" stroke-width="1.5"/>
+  
+  <line x1="420" y1="240" x2="530" y2="270" stroke="#555" stroke-width="1.5"/>
+  <line x1="420" y1="240" x2="530" y2="340" stroke="#555" stroke-width="1.5"/>
+  
+  <line x1="420" y1="380" x2="530" y2="270" stroke="#555" stroke-width="1.5"/>
+  <line x1="420" y1="380" x2="530" y2="340" stroke="#555" stroke-width="1.5"/>
+  
+  <!-- 隐藏层3到输出层 -->
+  <line x1="570" y1="270" x2="680" y2="220" stroke="#555" stroke-width="1.5"/>
+  <line x1="570" y1="270" x2="680" y2="320" stroke="#555" stroke-width="1.5"/>
+  
+  <line x1="570" y1="340" x2="680" y2="220" stroke="#555" stroke-width="1.5"/>
+  <line x1="570" y1="340" x2="680" y2="320" stroke="#555" stroke-width="1.5"/>
+  
+  <!-- 被剪枝的连接 - 虚线表示 -->
+  <!-- 到被剪枝节点的连接 -->
+  <line x1="120" y1="180" x2="230" y2="220" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="120" y1="250" x2="230" y2="220" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="120" y1="320" x2="230" y2="220" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="120" y1="390" x2="230" y2="220" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  
+  <line x1="270" y1="150" x2="380" y2="310" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="270" y1="290" x2="380" y2="310" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="270" y1="360" x2="380" y2="310" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="270" y1="430" x2="380" y2="310" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  
+  <line x1="420" y1="170" x2="530" y2="200" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="420" y1="240" x2="530" y2="200" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="420" y1="380" x2="530" y2="200" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  
+  <!-- 从被剪枝节点到下一层的连接 -->
+  <line x1="270" y1="220" x2="380" y2="170" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="270" y1="220" x2="380" y2="240" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="270" y1="220" x2="380" y2="380" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  
+  <line x1="420" y1="310" x2="530" y2="270" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="420" y1="310" x2="530" y2="340" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  
+  <line x1="570" y1="200" x2="680" y2="220" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="570" y1="200" x2="680" y2="320" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3"/>
+</svg>

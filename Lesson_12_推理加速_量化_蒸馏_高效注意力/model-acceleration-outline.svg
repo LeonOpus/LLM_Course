@@ -1,0 +1,52 @@
+<svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- 标题和水平线 -->
+  <text x="450" y="40" font-family="Arial" font-size="24" font-weight="bold" fill="#1a365d" text-anchor="middle">大模型推理加速</text>
+  <line x1="170" y1="50" x2="900" y2="50" stroke="#1a365d" stroke-width="2"/>
+
+  <!-- 课程目录标题 -->
+  <text x="260" y="100" font-family="Arial" font-size="28" font-weight="bold" fill="#1a365d">课程目录</text>
+
+  <!-- 主要章节 -->
+  <text x="170" y="180" font-family="Arial" font-size="24" font-weight="bold" fill="#1a365d">1. 基础知识</text>
+  <line x1="170" y1="190" x2="220" y2="190" stroke="#1a365d" stroke-width="3"/>
+
+  <text x="170" y="260" font-family="Arial" font-size="24" font-weight="bold" fill="#1a365d">2. 量化</text>
+  <line x1="170" y1="270" x2="220" y2="270" stroke="#1a365d" stroke-width="3"/>
+  
+  <!-- 量化的子章节 -->
+  <text x="220" y="320" font-family="Arial" font-size="20" fill="#1a365d">2.1 量化基础概念</text>
+  <text x="220" y="360" font-family="Arial" font-size="20" fill="#1a365d">2.2 量化与反量化</text>
+  <text x="220" y="400" font-family="Arial" font-size="20" fill="#1a365d">2.3 神经网络的量化方式</text>
+  <text x="220" y="440" font-family="Arial" font-size="20" fill="#1a365d">2.4 BNB 8bit量化</text>
+  <text x="220" y="480" font-family="Arial" font-size="20" fill="#1a365d">2.5 QLoRA 4bit量化</text>
+  <text x="220" y="520" font-family="Arial" font-size="20" fill="#1a365d">2.6 GPTQ/AWQ/GGUF</text>
+
+  <text x="170" y="570" font-family="Arial" font-size="24" font-weight="bold" fill="#1a365d">3. 蒸馏/剪枝</text>
+  <line x1="170" y1="580" x2="220" y2="580" stroke="#1a365d" stroke-width="3"/>
+
+  <!-- 右边章节延续 -->
+  <text x="600" y="180" font-family="Arial" font-size="24" font-weight="bold" fill="#1a365d">4. Flash-Attention</text>
+  <line x1="600" y1="190" x2="650" y2="190" stroke="#1a365d" stroke-width="3"/>
+
+  <text x="600" y="240" font-family="Arial" font-size="24" font-weight="bold" fill="#1a365d">5. KV Cache</text>
+  <line x1="600" y1="250" x2="650" y2="250" stroke="#1a365d" stroke-width="3"/>
+
+  <text x="600" y="300" font-family="Arial" font-size="24" font-weight="bold" fill="#1a365d">6. 加速框架介绍</text>
+  <line x1="600" y1="310" x2="650" y2="310" stroke="#1a365d" stroke-width="3"/>
+
+  <!-- 右侧图表 -->
+  <rect x="750" y="330" width="200" height="200" stroke="#1a365d" fill="none" stroke-width="2" rx="10"/>
+  
+  <circle cx="850" cy="380" r="30" stroke="#1a365d" fill="none" stroke-width="2"/>
+  <text x="850" y="385" font-family="Arial" font-size="14" fill="#1a365d" text-anchor="middle">推理</text>
+  
+  <circle cx="850" cy="480" r="30" stroke="#1a365d" fill="none" stroke-width="2"/>
+  <text x="850" y="485" font-family="Arial" font-size="14" fill="#1a365d" text-anchor="middle">加速</text>
+  
+  <circle cx="780" cy="430" r="30" stroke="#1a365d" fill="none" stroke-width="2"/>
+  <text x="780" y="435" font-family="Arial" font-size="14" fill="#1a365d" text-anchor="middle">量化</text>
+  
+  <line x1="815" y1="400" x2="850" y2="450" stroke="#1a365d" stroke-width="1.5"/>
+  <line x1="820" y1="430" x2="850" y2="450" stroke="#1a365d" stroke-width="1.5"/>
+  <line x1="805" y1="410" x2="780" y2="430" stroke="#1a365d" stroke-width="1.5"/>
+</svg>

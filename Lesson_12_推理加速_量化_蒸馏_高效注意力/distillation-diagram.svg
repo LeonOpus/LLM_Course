@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景和标题 -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  <text x="400" y="40" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle">使用大模型生成数据蒸馏到小模型的流程</text>
+  
+  <!-- 大模型 -->
+  <g transform="translate(140, 120)">
+    <rect width="180" height="120" rx="10" ry="10" fill="#4285f4" opacity="0.8"/>
+    <text x="90" y="50" font-family="Arial" font-size="20" font-weight="bold" fill="white" text-anchor="middle">大型语言模型</text>
+    <text x="90" y="80" font-family="Arial" font-size="14" fill="white" text-anchor="middle">(如GPT-4, Claude等)</text>
+    <text x="90" y="100" font-family="Arial" font-size="12" fill="white" text-anchor="middle">参数量: 数十亿至万亿</text>
+  </g>
+  
+  <!-- 箭头1 -->
+  <path d="M320 180 L420 180" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="370" y="170" font-family="Arial" font-size="14" text-anchor="middle">生成数据</text>
+  
+  <!-- 生成的数据 -->
+  <g transform="translate(420, 140)">
+    <rect width="140" height="80" rx="10" ry="10" fill="#fbbc05" opacity="0.8"/>
+    <text x="70" y="30" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">合成数据集</text>
+    <text x="70" y="50" font-family="Arial" font-size="12" fill="white" text-anchor="middle">输入-输出对</text>
+    <text x="70" y="70" font-family="Arial" font-size="12" fill="white" text-anchor="middle">(问题和回答)</text>
+  </g>
+  
+  <!-- 箭头2 -->
+  <path d="M560 180 L660 180" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="610" y="170" font-family="Arial" font-size="14" text-anchor="middle">训练</text>
+  
+  <!-- 小模型 -->
+  <g transform="translate(660, 120)">
+    <rect width="140" height="120" rx="10" ry="10" fill="#34a853" opacity="0.8"/>
+    <text x="70" y="50" font-family="Arial" font-size="20" font-weight="bold" fill="white" text-anchor="middle">小型模型</text>
+    <text x="70" y="80" font-family="Arial" font-size="14" fill="white" text-anchor="middle">(目标模型)</text>
+    <text x="70" y="100" font-family="Arial" font-size="12" fill="white" text-anchor="middle">参数量: 较少</text>
+  </g>
+  
+  <!-- 优缺点部分 -->
+  <rect x="100" y="300" width="600" height="150" rx="10" ry="10" fill="white" stroke="#ddd" stroke-width="2"/>
+  
+  <!-- 优点 -->
+  <g transform="translate(120, 320)">
+    <text font-family="Arial" font-size="18" font-weight="bold" fill="#34a853">优点:</text>
+    <g transform="translate(20, 30)">
+      <circle cx="0" cy="0" r="4" fill="#34a853"/>
+      <text x="15" y="5" font-family="Arial" font-size="14">实现简单，只需大模型生成数据、小模型学习</text>
+    </g>
+    <g transform="translate(20, 60)">
+      <circle cx="0" cy="0" r="4" fill="#34a853"/>
+      <text x="15" y="5" font-family="Arial" font-size="14">不需要直接访问大模型的参数或中间状态</text>
+    </g>
+    <g transform="translate(20, 90)">
+      <circle cx="0" cy="0" r="4" fill="#34a853"/>
+      <text x="15" y="5" font-family="Arial" font-size="14">可以生成针对特定任务的专用数据</text>
+    </g>
+  </g>
+  
+  <!-- 缺点 -->
+  <g transform="translate(450, 320)">
+    <text font-family="Arial" font-size="18" font-weight="bold" fill="#ea4335">缺点:</text>
+    <g transform="translate(20, 30)">
+      <circle cx="0" cy="0" r="4" fill="#ea4335"/>
+      <text x="15" y="5" font-family="Arial" font-size="14">蒸馏效率低，需要大量样本</text>
+    </g>
+    <g transform="translate(20, 60)">
+      <circle cx="0" cy="0" r="4" fill="#ea4335"/>
+      <text x="15" y="5" font-family="Arial" font-size="14">生成的数据可能包含大模型的偏见或错误</text>
+    </g>
+    <g transform="translate(20, 90)">
+      <circle cx="0" cy="0" r="4" fill="#ea4335"/>
+      <text x="15" y="5" font-family="Arial" font-size="14">无法直接学习大模型内部表示</text>
+    </g>
+  </g>
+  
+  <!-- 定义箭头标记 -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,43 @@
+{
+  "model": "/home/leon/Model/ModelScope/Qwen/Qwen2.5-1.5B-Instruct",
+  "input_tokens": 39,
+  "runs": 3,
+  "results": {
+    "bf16": {
+      "gpu_allocated_model_gib": 2.876246929168701,
+      "gpu_peak_gib": 2.891878604888916,
+      "generated_tokens": 64,
+      "seconds": [
+        0.9689083939883858,
+        1.0286821980262175,
+        1.0960326590575278
+      ],
+      "average_tokens_per_second": 62.063148747495404,
+      "response": "KV Cache 是一种用于存储和缓存键值对的系统，它通过将频繁访问的数据预先加载到内存中，从而提高数据访问速度和减少数据库压力。这种设计使得应用程序能够更快地响应用户请求，并且在一定程度上减少了对底层数据库的依赖。通过这种方式，KV Cache"
+    },
+    "int8": {
+      "gpu_allocated_model_gib": 1.718371868133545,
+      "gpu_peak_gib": 1.7519779205322266,
+      "generated_tokens": 64,
+      "seconds": [
+        4.652295671985485,
+        4.682811553007923,
+        4.69685424992349
+      ],
+      "average_tokens_per_second": 13.683047829286966,
+      "response": "KV Cache 是一种用于缓存键值对的存储系统，它通过将频繁访问的数据预先加载到内存中，以提高数据访问速度和减少数据库压力。在分布式环境中，KV Cache 可以帮助提升系统的整体性能和响应能力。此外，KV Cache 还可以提供数据一致性"
+    },
+    "nf4": {
+      "gpu_allocated_model_gib": 1.0737175941467285,
+      "gpu_peak_gib": 1.1023154258728027,
+      "generated_tokens": 64,
+      "seconds": [
+        1.5657066529383883,
+        1.4279210310196504,
+        1.4320277239894494
+      ],
+      "average_tokens_per_second": 43.383404784568384,
+      "response": "KV Cache（键值缓存）是一种数据存储和管理技术，它通过将频繁访问的数据项存储在内存中，以提高读取速度并减少对数据库的依赖。当需要查询或更新数据时，KV Cache会先从内存中查找，如果未找到则从数据库获取，并"
+    }
+  }
+}

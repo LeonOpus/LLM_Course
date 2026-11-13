@@ -1,0 +1,70 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect x="10" y="10" width="780" height="380" rx="10" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  <text x="400" y="40" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold">注意力机制硬件实现：QKV → O</text>
+  
+  <!-- HBM 区域 -->
+  <rect x="50" y="80" width="200" height="250" rx="8" fill="#e2e3e5" stroke="#495057" stroke-width="2"/>
+  <text x="150" y="110" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">HBM</text>
+  <text x="150" y="130" font-family="Arial" font-size="14" text-anchor="middle">(高带宽内存)</text>
+  
+  <!-- HBM 内部数据 -->
+  <rect x="70" y="150" width="160" height="60" rx="5" fill="#ffffff" stroke="#6c757d" stroke-width="1"/>
+  <text x="150" y="175" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">输入数据</text>
+  <text x="150" y="195" font-family="Arial" font-size="14" text-anchor="middle">Q, K, V 矩阵</text>
+  
+  <rect x="70" y="250" width="160" height="60" rx="5" fill="#ffffff" stroke="#6c757d" stroke-width="1"/>
+  <text x="150" y="275" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">输出数据</text>
+  <text x="150" y="295" font-family="Arial" font-size="14" text-anchor="middle">O = Attention(Q,K,V)</text>
+  
+  <!-- SRAM 区域 -->
+  <rect x="300" y="80" width="200" height="250" rx="8" fill="#cff4fc" stroke="#0dcaf0" stroke-width="2"/>
+  <text x="400" y="110" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">SRAM</text>
+  <text x="400" y="130" font-family="Arial" font-size="14" text-anchor="middle">(静态随机访问内存)</text>
+  
+  <!-- SRAM 内部表示 -->
+  <rect x="320" y="180" width="160" height="60" rx="5" fill="#ffffff" stroke="#0dcaf0" stroke-width="1"/>
+  <text x="400" y="205" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">高速数据缓存</text>
+  <text x="400" y="225" font-family="Arial" font-size="14" text-anchor="middle">计算过程中的临时数据</text>
+  
+  <!-- GPU 区域 -->
+  <rect x="550" y="80" width="200" height="250" rx="8" fill="#d1e7dd" stroke="#198754" stroke-width="2"/>
+  <text x="650" y="110" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">GPU</text>
+  <text x="650" y="130" font-family="Arial" font-size="14" text-anchor="middle">(图形处理器)</text>
+  
+  <!-- GPU 内部计算过程 -->
+  <rect x="570" y="160" width="160" height="100" rx="5" fill="#ffffff" stroke="#198754" stroke-width="1"/>
+  <text x="650" y="180" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">注意力机制计算</text>
+  <text x="650" y="205" font-family="Arial" font-size="14" text-anchor="middle">1. 计算S = QK^T</text>
+  <text x="650" y="225" font-family="Arial" font-size="14" text-anchor="middle">2. 计算P = softmax(S)</text>
+  <text x="650" y="245" font-family="Arial" font-size="14" text-anchor="middle">3. 计算O = PV</text>
+  
+  <!-- 数据流动主要箭头 -->
+  <!-- 1. 从HBM加载QKV到SRAM -->
+  <path d="M 230,180 L 300,180" fill="none" stroke="#dc3545" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="265" y="170" font-family="Arial" font-size="12" text-anchor="middle">加载输入</text>
+  
+  <!-- 2. SRAM到GPU -->
+  <path d="M 500,180 L 550,180" fill="none" stroke="#dc3545" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="525" y="170" font-family="Arial" font-size="12" text-anchor="middle">传送数据</text>
+  
+  <!-- 3. GPU到SRAM (中间结果) -->
+  <path d="M 550,220 L 500,220" fill="none" stroke="#dc3545" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="525" y="240" font-family="Arial" font-size="12" text-anchor="middle">中间结果</text>
+  
+  <!-- 4. SRAM到HBM (最终结果) -->
+  <path d="M 300,280 L 230,280" fill="none" stroke="#dc3545" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="265" y="300" font-family="Arial" font-size="12" text-anchor="middle">存储结果</text>
+  
+  <!-- 整体数据流向 -->
+  <path d="M 150,330 L 400,330 L 650,330" fill="none" stroke="#0d6efd" stroke-width="4" stroke-dasharray="8,4"/>
+  <polygon points="640,325 650,330 640,335" fill="#0d6efd"/>
+  <text x="400" y="350" font-family="Arial" font-size="16" text-anchor="middle" fill="#0d6efd">数据流向：QKV → O</text>
+  
+  <!-- 箭头定义 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#dc3545"/>
+    </marker>
+  </defs>
+</svg>
