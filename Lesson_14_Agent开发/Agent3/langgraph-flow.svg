@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d9ff"/>
+      <stop offset="100%" style="stop-color:#00ff88"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d5a87"/>
+      <stop offset="100%" style="stop-color:#1e3a5f"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text x="960" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="url(#accent)">LangGraph 构建流程</text>
+  <text x="960" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#888">Building Stateful AI Agents Step by Step</text>
+
+  <!-- Step 1: State -->
+  <g transform="translate(120, 180)" filter="url(#shadow)">
+    <rect width="280" height="200" rx="15" fill="#1e2d3d" stroke="#00d9ff" stroke-width="2"/>
+    <circle cx="140" cy="-20" r="25" fill="url(#accent)"/>
+    <text x="140" y="-12" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#1a1a2e">1</text>
+    <text x="140" y="45" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#00d9ff">State</text>
+    <text x="140" y="70" text-anchor="middle" font-family="Arial" font-size="14" fill="#888">定义状态结构</text>
+    <text x="20" y="100" font-family="monospace" font-size="12" fill="#7ee787">class</text>
+    <text x="55" y="100" font-family="monospace" font-size="12" fill="#79c0ff">MyState</text>
+    <text x="115" y="100" font-family="monospace" font-size="12" fill="#c9d1d9">(TypedDict):</text>
+    <text x="30" y="120" font-family="monospace" font-size="12" fill="#c9d1d9">messages: list</text>
+    <text x="30" y="140" font-family="monospace" font-size="12" fill="#c9d1d9">user_name: str</text>
+    <text x="30" y="160" font-family="monospace" font-size="12" fill="#c9d1d9">context: dict</text>
+    <rect x="20" y="175" width="100" height="20" rx="10" fill="rgba(0,217,255,0.2)"/>
+    <text x="70" y="189" text-anchor="middle" font-family="Arial" font-size="11" fill="#00d9ff">TypedDict</text>
+  </g>
+
+  <!-- Arrow 1-2 -->
+  <path d="M420 280 L480 280" stroke="url(#accent)" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <polygon id="arrowhead" points="480,280 470,275 470,285" fill="#00d9ff"/>
+
+  <!-- Step 2: Node -->
+  <g transform="translate(500, 180)" filter="url(#shadow)">
+    <rect width="280" height="200" rx="15" fill="#1e2d3d" stroke="#00d9ff" stroke-width="2"/>
+    <circle cx="140" cy="-20" r="25" fill="url(#accent)"/>
+    <text x="140" y="-12" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#1a1a2e">2</text>
+    <text x="140" y="45" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#00d9ff">Node</text>
+    <text x="140" y="70" text-anchor="middle" font-family="Arial" font-size="14" fill="#888">定义处理函数</text>
+    <text x="20" y="100" font-family="monospace" font-size="12" fill="#ff7b72">def</text>
+    <text x="45" y="100" font-family="monospace" font-size="12" fill="#d2a8ff">chatbot</text>
+    <text x="95" y="100" font-family="monospace" font-size="12" fill="#c9d1d9">(state):</text>
+    <text x="30" y="120" font-family="monospace" font-size="12" fill="#c9d1d9">response = llm(state)</text>
+    <text x="30" y="140" font-family="monospace" font-size="12" fill="#ff7b72">return</text>
+    <text x="70" y="140" font-family="monospace" font-size="12" fill="#c9d1d9">{"messages": [r]}</text>
+    <rect x="20" y="175" width="80" height="20" rx="10" fill="rgba(0,217,255,0.2)"/>
+    <text x="60" y="189" text-anchor="middle" font-family="Arial" font-size="11" fill="#00d9ff">Function</text>
+    <rect x="110" y="175" width="60" height="20" rx="10" fill="rgba(0,217,255,0.2)"/>
+    <text x="140" y="189" text-anchor="middle" font-family="Arial" font-size="11" fill="#00d9ff">LLM</text>
+  </g>
+
+  <!-- Arrow 2-3 -->
+  <path d="M800 280 L860 280" stroke="url(#accent)" stroke-width="3" fill="none"/>
+  <polygon points="860,280 850,275 850,285" fill="#00d9ff"/>
+
+  <!-- Step 3: Tools -->
+  <g transform="translate(880, 180)" filter="url(#shadow)">
+    <rect width="280" height="200" rx="15" fill="#1e2d3d" stroke="#ffa500" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="140" cy="-20" r="25" fill="#ffa500"/>
+    <text x="140" y="-12" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#1a1a2e">3</text>
+    <text x="140" y="45" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#ffa500">Tools</text>
+    <text x="140" y="70" text-anchor="middle" font-family="Arial" font-size="14" fill="#888">定义工具 (可选)</text>
+    <text x="20" y="100" font-family="monospace" font-size="12" fill="#d2a8ff">@tool</text>
+    <text x="20" y="120" font-family="monospace" font-size="12" fill="#ff7b72">def</text>
+    <text x="45" y="120" font-family="monospace" font-size="12" fill="#d2a8ff">search</text>
+    <text x="85" y="120" font-family="monospace" font-size="12" fill="#c9d1d9">(query: str):</text>
+    <text x="30" y="140" font-family="monospace" font-size="12" fill="#ff7b72">return</text>
+    <text x="70" y="140" font-family="monospace" font-size="12" fill="#a5d6ff">"result..."</text>
+    <text x="20" y="165" font-family="monospace" font-size="12" fill="#c9d1d9">llm.bind_tools([search])</text>
+    <rect x="20" y="175" width="70" height="20" rx="10" fill="rgba(255,165,0,0.2)"/>
+    <text x="55" y="189" text-anchor="middle" font-family="Arial" font-size="11" fill="#ffa500">@tool</text>
+    <rect x="100" y="175" width="90" height="20" rx="10" fill="rgba(255,165,0,0.2)"/>
+    <text x="145" y="189" text-anchor="middle" font-family="Arial" font-size="11" fill="#ffa500">bind_tools</text>
+  </g>
+
+  <!-- Arrow 3-4 -->
+  <path d="M1180 280 L1240 280" stroke="url(#accent)" stroke-width="3" fill="none"/>
+  <polygon points="1240,280 1230,275 1230,285" fill="#00d9ff"/>
+
+  <!-- Step 4: Graph -->
+  <g transform="translate(1260, 180)" filter="url(#shadow)">
+    <rect width="280" height="200" rx="15" fill="#1e2d3d" stroke="#00d9ff" stroke-width="2"/>
+    <circle cx="140" cy="-20" r="25" fill="url(#accent)"/>
+    <text x="140" y="-12" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#1a1a2e">4</text>
+    <text x="140" y="45" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#00d9ff">Graph</text>
+    <text x="140" y="70" text-anchor="middle" font-family="Arial" font-size="14" fill="#888">构建图结构</text>
+    <text x="20" y="100" font-family="monospace" font-size="12" fill="#c9d1d9">graph = StateGraph(State)</text>
+    <text x="20" y="120" font-family="monospace" font-size="12" fill="#c9d1d9">graph.add_node(...)</text>
+    <text x="20" y="140" font-family="monospace" font-size="12" fill="#c9d1d9">graph.add_edge(...)</text>
+    <text x="20" y="160" font-family="monospace" font-size="12" fill="#c9d1d9">graph.add_conditional_edges</text>
+    <rect x="20" y="175" width="90" height="20" rx="10" fill="rgba(0,217,255,0.2)"/>
+    <text x="65" y="189" text-anchor="middle" font-family="Arial" font-size="11" fill="#00d9ff">StateGraph</text>
+  </g>
+
+  <!-- Arrow 4 to row 2 -->
+  <path d="M1540 380 L1600 380 L1600 520 L120 520 L120 560" stroke="url(#accent)" stroke-width="3" fill="none"/>
+  <polygon points="120,560 115,550 125,550" fill="#00d9ff"/>
+
+  <!-- Step 5: Memory -->
+  <g transform="translate(120, 580)" filter="url(#shadow)">
+    <rect width="350" height="200" rx="15" fill="#1e2d3d" stroke="#ffa500" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="175" cy="-20" r="25" fill="#ffa500"/>
+    <text x="175" y="-12" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#1a1a2e">5</text>
+    <text x="175" y="45" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#ffa500">Memory</text>
+    <text x="175" y="70" text-anchor="middle" font-family="Arial" font-size="14" fill="#888">添加记忆/持久化 (可选)</text>
+    <text x="20" y="100" font-family="monospace" font-size="12" fill="#ff7b72">from</text>
+    <text x="50" y="100" font-family="monospace" font-size="12" fill="#c9d1d9">langgraph.checkpoint.memory</text>
+    <text x="20" y="120" font-family="monospace" font-size="12" fill="#c9d1d9">memory = MemorySaver()</text>
+    <text x="20" y="145" font-family="monospace" font-size="12" fill="#8b949e"># 或 SqliteSaver 持久化</text>
+    <text x="20" y="165" font-family="monospace" font-size="12" fill="#c9d1d9">app = graph.compile(</text>
+    <text x="40" y="180" font-family="monospace" font-size="12" fill="#c9d1d9">checkpointer=memory)</text>
+    <rect x="20" y="185" width="100" height="20" rx="10" fill="rgba(255,165,0,0.2)"/>
+    <text x="70" y="199" text-anchor="middle" font-family="Arial" font-size="11" fill="#ffa500">MemorySaver</text>
+  </g>
+
+  <!-- Arrow 5-6 -->
+  <path d="M490 680 L580 680" stroke="url(#accent)" stroke-width="3" fill="none"/>
+  <polygon points="580,680 570,675 570,685" fill="#00d9ff"/>
+
+  <!-- Step 6: Compile & Run -->
+  <g transform="translate(600, 580)" filter="url(#shadow)">
+    <rect width="350" height="200" rx="15" fill="#1e2d3d" stroke="#00ff88" stroke-width="3"/>
+    <circle cx="175" cy="-20" r="25" fill="#00ff88"/>
+    <text x="175" y="-12" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#1a1a2e">6</text>
+    <text x="175" y="45" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#00ff88">Compile &amp; Run</text>
+    <text x="175" y="70" text-anchor="middle" font-family="Arial" font-size="14" fill="#888">编译并执行</text>
+    <text x="20" y="100" font-family="monospace" font-size="12" fill="#c9d1d9">app = graph.compile()</text>
+    <text x="20" y="125" font-family="monospace" font-size="12" fill="#8b949e"># 同步执行</text>
+    <text x="20" y="145" font-family="monospace" font-size="12" fill="#c9d1d9">result = app.invoke(input)</text>
+    <text x="20" y="170" font-family="monospace" font-size="12" fill="#8b949e"># 流式执行</text>
+    <text x="20" y="190" font-family="monospace" font-size="12" fill="#ff7b72">for</text>
+    <text x="45" y="190" font-family="monospace" font-size="12" fill="#c9d1d9">chunk</text>
+    <text x="85" y="190" font-family="monospace" font-size="12" fill="#ff7b72">in</text>
+    <text x="105" y="190" font-family="monospace" font-size="12" fill="#c9d1d9">app.stream(...):</text>
+    <rect x="220" y="175" width="70" height="20" rx="10" fill="rgba(0,255,136,0.2)"/>
+    <text x="255" y="189" text-anchor="middle" font-family="Arial" font-size="11" fill="#00ff88">invoke</text>
+    <rect x="300" y="175" width="70" height="20" rx="10" fill="rgba(0,255,136,0.2)"/>
+    <text x="335" y="189" text-anchor="middle" font-family="Arial" font-size="11" fill="#00ff88">stream</text>
+  </g>
+
+  <!-- Graph Flow Diagram -->
+  <g transform="translate(1050, 560)">
+    <rect width="420" height="240" rx="15" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <text x="210" y="35" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#00ff88">ReAct Agent 流程图</text>
+
+    <!-- START -->
+    <rect x="30" y="70" width="80" height="40" rx="20" fill="#2d5a2d" stroke="#00ff88" stroke-width="2"/>
+    <text x="70" y="95" text-anchor="middle" font-family="Arial" font-size="14" fill="#fff">START</text>
+
+    <!-- Arrow -->
+    <path d="M110 90 L140 90" stroke="#00d9ff" stroke-width="2"/>
+    <polygon points="140,90 135,85 135,95" fill="#00d9ff"/>
+
+    <!-- Chatbot -->
+    <rect x="140" y="60" width="100" height="60" rx="10" fill="url(#nodeGrad)" stroke="#00d9ff" stroke-width="2"/>
+    <text x="190" y="85" text-anchor="middle" font-family="Arial" font-size="13" fill="#fff">Chatbot</text>
+    <text x="190" y="102" text-anchor="middle" font-family="Arial" font-size="10" fill="#888">(LLM)</text>
+
+    <!-- Conditional -->
+    <path d="M240 90 L270 90" stroke="#00d9ff" stroke-width="2"/>
+    <polygon points="300,90 270,70 270,110" fill="#1e3a5f" stroke="#ffa500" stroke-width="2"/>
+    <text x="300" y="95" text-anchor="middle" font-family="Arial" font-size="10" fill="#ffa500">?</text>
+
+    <!-- To Tools -->
+    <path d="M330 90 L360 90 L360 170 L280 170" stroke="#ffa500" stroke-width="2"/>
+    <polygon points="280,170 285,165 285,175" fill="#ffa500"/>
+    <text x="365" y="130" font-family="Arial" font-size="10" fill="#ffa500">tool_calls</text>
+
+    <!-- Tools -->
+    <rect x="180" y="150" width="100" height="50" rx="10" fill="url(#nodeGrad)" stroke="#ffa500" stroke-width="2"/>
+    <text x="230" y="175" text-anchor="middle" font-family="Arial" font-size="13" fill="#fff">Tools</text>
+    <text x="230" y="190" text-anchor="middle" font-family="Arial" font-size="10" fill="#888">(ToolNode)</text>
+
+    <!-- Back to Chatbot -->
+    <path d="M180 175 L140 175 L140 120" stroke="#00d9ff" stroke-width="2"/>
+    <polygon points="140,120 135,130 145,130" fill="#00d9ff"/>
+
+    <!-- To END -->
+    <path d="M330 90 L360 90 L360 50 L390 50" stroke="#00ff88" stroke-width="2"/>
+    <text x="365" y="45" font-family="Arial" font-size="10" fill="#00ff88">done</text>
+
+    <!-- END -->
+    <rect x="300" y="30" width="70" height="40" rx="20" fill="#5a2d2d" stroke="#ff6b6b" stroke-width="2"/>
+    <text x="335" y="55" text-anchor="middle" font-family="Arial" font-size="14" fill="#fff">END</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(1050, 830)">
+    <text x="0" y="0" font-family="Arial" font-size="14" font-weight="bold" fill="#888">图例:</text>
+    <rect x="0" y="15" width="20" height="20" rx="3" fill="#1e2d3d" stroke="#00d9ff" stroke-width="2"/>
+    <text x="30" y="30" font-family="Arial" font-size="12" fill="#aaa">必要步骤</text>
+    <rect x="120" y="15" width="20" height="20" rx="3" fill="#1e2d3d" stroke="#ffa500" stroke-width="2" stroke-dasharray="3,3"/>
+    <text x="150" y="30" font-family="Arial" font-size="12" fill="#aaa">可选步骤</text>
+    <rect x="240" y="15" width="20" height="20" rx="3" fill="#1e2d3d" stroke="#00ff88" stroke-width="3"/>
+    <text x="270" y="30" font-family="Arial" font-size="12" fill="#aaa">最终输出</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="960" y="1050" text-anchor="middle" font-family="Arial" font-size="14" fill="#555">LangGraph Framework | State → Node → Tools → Graph → Memory → Run</text>
+</svg>

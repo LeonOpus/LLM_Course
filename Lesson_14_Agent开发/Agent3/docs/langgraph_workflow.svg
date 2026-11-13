@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3498db"/>
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#27ae60"/>
+    </marker>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="700" fill="#f8f9fa"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="900" height="60" fill="url(#headerGrad)"/>
+  <text x="450" y="38" text-anchor="middle" fill="white" font-size="24" font-weight="bold" font-family="Arial">LangGraph Agent 工作流程</text>
+
+  <!-- User Input -->
+  <rect x="375" y="80" width="150" height="40" rx="20" fill="#3498db"/>
+  <text x="450" y="105" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">用户输入</text>
+
+  <!-- Arrow to Router -->
+  <line x1="450" y1="120" x2="450" y2="145" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- RouterNode -->
+  <rect x="350" y="150" width="200" height="60" rx="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+  <text x="450" y="175" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">RouterNode</text>
+  <text x="450" y="195" text-anchor="middle" fill="white" font-size="11" font-family="Arial">意图识别</text>
+
+  <!-- Intent branches -->
+  <line x1="350" y1="180" x2="150" y2="180" stroke="#666" stroke-width="1.5"/>
+  <line x1="150" y1="180" x2="150" y2="250" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="200" y="220" text-anchor="middle" fill="#666" font-size="10" font-family="Arial">data_query</text>
+
+  <line x1="450" y1="210" x2="450" y2="245" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="480" y="230" fill="#666" font-size="10" font-family="Arial">analysis</text>
+
+  <line x1="550" y1="180" x2="750" y2="180" stroke="#666" stroke-width="1.5"/>
+  <line x1="750" y1="180" x2="750" y2="250" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="680" y="220" text-anchor="middle" fill="#666" font-size="10" font-family="Arial">general</text>
+
+  <!-- Intent boxes -->
+  <rect x="80" y="255" width="140" height="35" rx="5" fill="#9b59b6" opacity="0.8"/>
+  <text x="150" y="278" text-anchor="middle" fill="white" font-size="11" font-family="Arial">数据查询</text>
+
+  <rect x="380" y="255" width="140" height="35" rx="5" fill="#9b59b6" opacity="0.8"/>
+  <text x="450" y="278" text-anchor="middle" fill="white" font-size="11" font-family="Arial">深度分析</text>
+
+  <rect x="680" y="255" width="140" height="35" rx="5" fill="#9b59b6" opacity="0.8"/>
+  <text x="750" y="278" text-anchor="middle" fill="white" font-size="11" font-family="Arial">普通问答</text>
+
+  <!-- Converge to Planner -->
+  <line x1="150" y1="290" x2="150" y2="320" stroke="#666" stroke-width="1.5"/>
+  <line x1="150" y1="320" x2="400" y2="320" stroke="#666" stroke-width="1.5"/>
+  <line x1="450" y1="290" x2="450" y2="320" stroke="#666" stroke-width="1.5"/>
+  <line x1="400" y1="320" x2="450" y2="345" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Skip to Critic for general -->
+  <line x1="750" y1="290" x2="750" y2="590" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <line x1="750" y1="590" x2="555" y2="590" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arrowhead-green)"/>
+  <text x="770" y="440" fill="#27ae60" font-size="10" font-family="Arial">跳过</text>
+
+  <!-- PlannerNode -->
+  <rect x="350" y="350" width="200" height="60" rx="10" fill="#f39c12" stroke="#d68910" stroke-width="2"/>
+  <text x="450" y="375" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">PlannerNode</text>
+  <text x="450" y="395" text-anchor="middle" fill="white" font-size="11" font-family="Arial">制定执行计划</text>
+
+  <!-- Arrow to Executor -->
+  <line x1="450" y1="410" x2="450" y2="435" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- ExecutorNode -->
+  <rect x="350" y="440" width="200" height="60" rx="10" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+  <text x="450" y="465" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">ExecutorNode</text>
+  <text x="450" y="485" text-anchor="middle" fill="white" font-size="11" font-family="Arial">执行工具调用</text>
+
+  <!-- Tools -->
+  <rect x="80" y="440" width="80" height="30" rx="5" fill="#34495e"/>
+  <text x="120" y="460" text-anchor="middle" fill="white" font-size="9" font-family="Arial">text2sql</text>
+
+  <rect x="80" y="475" width="80" height="30" rx="5" fill="#34495e"/>
+  <text x="120" y="495" text-anchor="middle" fill="white" font-size="9" font-family="Arial">code_exec</text>
+
+  <rect x="170" y="440" width="80" height="30" rx="5" fill="#34495e"/>
+  <text x="210" y="460" text-anchor="middle" fill="white" font-size="9" font-family="Arial">pdf_parser</text>
+
+  <rect x="170" y="475" width="80" height="30" rx="5" fill="#34495e"/>
+  <text x="210" y="495" text-anchor="middle" fill="white" font-size="9" font-family="Arial">web_search</text>
+
+  <rect x="260" y="457" width="80" height="30" rx="5" fill="#34495e"/>
+  <text x="300" y="477" text-anchor="middle" fill="white" font-size="9" font-family="Arial">rag_search</text>
+
+  <!-- Tool connection -->
+  <line x1="340" y1="470" x2="350" y2="470" stroke="#666" stroke-width="1.5"/>
+
+  <!-- Arrow to Reflector -->
+  <line x1="450" y1="500" x2="450" y2="525" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- ReflectorNode -->
+  <rect x="350" y="530" width="200" height="50" rx="10" fill="#8e44ad" stroke="#6c3483" stroke-width="2"/>
+  <text x="450" y="555" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">ReflectorNode</text>
+  <text x="450" y="572" text-anchor="middle" fill="white" font-size="10" font-family="Arial">ReAct反思</text>
+
+  <!-- Loop back arrow -->
+  <path d="M 350 555 L 280 555 L 280 470 L 350 470" fill="none" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+  <text x="260" y="515" text-anchor="middle" fill="#3498db" font-size="10" font-family="Arial" transform="rotate(-90, 260, 515)">继续执行</text>
+
+  <!-- Condition box -->
+  <rect x="600" y="535" width="120" height="40" rx="5" fill="#ecf0f1" stroke="#bdc3c7"/>
+  <text x="660" y="552" text-anchor="middle" fill="#333" font-size="9" font-family="Arial">置信度 &lt; 0.85?</text>
+  <text x="660" y="567" text-anchor="middle" fill="#333" font-size="9" font-family="Arial">迭代次数 &lt; max?</text>
+
+  <line x1="550" y1="555" x2="600" y2="555" stroke="#666" stroke-width="1.5"/>
+
+  <!-- Arrow to Critic -->
+  <line x1="450" y1="580" x2="450" y2="605" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="480" y="595" fill="#666" font-size="10" font-family="Arial">完成</text>
+
+  <!-- CriticNode -->
+  <rect x="350" y="610" width="200" height="50" rx="10" fill="#2c3e50" stroke="#1a252f" stroke-width="2"/>
+  <text x="450" y="635" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">CriticNode</text>
+  <text x="450" y="652" text-anchor="middle" fill="white" font-size="10" font-family="Arial">生成最终答案</text>
+
+  <!-- Final Output -->
+  <rect x="375" y="670" width="150" height="25" rx="12" fill="#27ae60"/>
+  <text x="450" y="688" text-anchor="middle" fill="white" font-size="12" font-weight="bold" font-family="Arial">最终回答</text>
+  <line x1="450" y1="660" x2="450" y2="668" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Legend -->
+  <rect x="620" y="80" width="260" height="130" rx="5" fill="white" stroke="#ddd"/>
+  <text x="750" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#333" font-family="Arial">图例</text>
+
+  <rect x="635" y="110" width="40" height="15" rx="3" fill="#e74c3c"/>
+  <text x="685" y="122" font-size="10" fill="#333" font-family="Arial">路由节点</text>
+
+  <rect x="635" y="130" width="40" height="15" rx="3" fill="#f39c12"/>
+  <text x="685" y="142" font-size="10" fill="#333" font-family="Arial">规划节点</text>
+
+  <rect x="635" y="150" width="40" height="15" rx="3" fill="#27ae60"/>
+  <text x="685" y="162" font-size="10" fill="#333" font-family="Arial">执行节点</text>
+
+  <rect x="635" y="170" width="40" height="15" rx="3" fill="#8e44ad"/>
+  <text x="685" y="182" font-size="10" fill="#333" font-family="Arial">反思节点</text>
+
+  <rect x="770" y="110" width="40" height="15" rx="3" fill="#2c3e50"/>
+  <text x="820" y="122" font-size="10" fill="#333" font-family="Arial">输出节点</text>
+
+  <rect x="770" y="130" width="40" height="15" rx="3" fill="#34495e"/>
+  <text x="820" y="142" font-size="10" fill="#333" font-family="Arial">工具</text>
+
+  <line x1="770" y1="157" x2="810" y2="157" stroke="#3498db" stroke-width="2"/>
+  <text x="820" y="162" font-size="10" fill="#333" font-family="Arial">循环</text>
+
+  <line x1="770" y1="177" x2="810" y2="177" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="820" y="182" font-size="10" fill="#333" font-family="Arial">跳过</text>
+</svg>

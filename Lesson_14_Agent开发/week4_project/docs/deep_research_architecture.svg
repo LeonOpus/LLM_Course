@@ -1,0 +1,284 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100">
+  <style>
+    .title { font: bold 24px 'SF Pro Display', -apple-system, sans-serif; fill: #1a1a1a; }
+    .subtitle { font: 14px 'SF Pro Display', -apple-system, sans-serif; fill: #666; }
+    .section-title { font: bold 14px 'SF Pro Display', -apple-system, sans-serif; fill: #1a1a1a; }
+    .agent-title { font: bold 16px 'SF Pro Display', -apple-system, sans-serif; fill: #fff; }
+    .agent-role { font: 11px 'SF Pro Display', -apple-system, sans-serif; fill: rgba(255,255,255,0.8); }
+    .box-title { font: bold 12px 'SF Mono', monospace; fill: #1a1a1a; }
+    .box-text { font: 11px 'SF Pro Display', -apple-system, sans-serif; fill: #444; }
+    .prompt-text { font: 9px 'SF Mono', monospace; fill: #666; }
+    .code-text { font: 9px 'SF Mono', monospace; fill: #2d5a27; }
+    .label { font: 10px 'SF Pro Display', -apple-system, sans-serif; fill: #888; }
+    .num { font: bold 11px 'SF Mono', monospace; fill: #fff; }
+    .arrow-label { font: 10px 'SF Pro Display', -apple-system, sans-serif; fill: #555; }
+    .status-pass { font: bold 10px 'SF Mono', monospace; fill: #2d7a2d; }
+    .status-fail { font: bold 10px 'SF Mono', monospace; fill: #a02020; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1400" height="1100" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="50" y="45" class="title">Deep Research: Multi-Agent Collaboration</text>
+  <text x="50" y="67" class="subtitle">CEO Orchestration | DAG Task Flow | Review Loop with Feedback Injection</text>
+
+  <!-- ==================== CEO AGENT (Top) ==================== -->
+  <g transform="translate(50, 95)">
+    <rect x="0" y="0" width="1300" height="160" rx="6" fill="#1a1a1a"/>
+    <text x="30" y="35" class="agent-title">CEO Agent</text>
+    <text x="30" y="52" class="agent-role">总控智能体 - 任务分解、SOP生成、DAG编排</text>
+
+    <!-- Task Input -->
+    <g transform="translate(30, 70)">
+      <rect x="0" y="0" width="250" height="70" rx="4" fill="#333"/>
+      <text x="15" y="20" class="label" style="fill:#aaa">Input Task</text>
+      <text x="15" y="40" class="prompt-text" style="fill:#eee">"分析2024年低空经济的</text>
+      <text x="15" y="55" class="prompt-text" style="fill:#eee"> 市场发展情况"</text>
+    </g>
+
+    <!-- SOP Generation -->
+    <g transform="translate(310, 70)">
+      <rect x="0" y="0" width="320" height="70" rx="4" fill="#333"/>
+      <text x="15" y="20" class="label" style="fill:#aaa">_generate_sop() / _get_default_sop()</text>
+      <text x="15" y="40" class="code-text" style="fill:#8fbc8f">SOPDefinition {</text>
+      <text x="15" y="55" class="code-text" style="fill:#8fbc8f">  nodes: [research, analysis, review]}</text>
+    </g>
+
+    <!-- DAG Executor -->
+    <g transform="translate(660, 70)">
+      <rect x="0" y="0" width="300" height="70" rx="4" fill="#333"/>
+      <text x="15" y="20" class="label" style="fill:#aaa">_execute_sop() - Topological Order</text>
+      <text x="15" y="40" class="code-text" style="fill:#8fbc8f">asyncio.gather(*ready_nodes)</text>
+      <text x="15" y="55" class="code-text" style="fill:#8fbc8f">// Parallel execution of independent nodes</text>
+    </g>
+
+    <!-- Output -->
+    <g transform="translate(990, 70)">
+      <rect x="0" y="0" width="280" height="70" rx="4" fill="#333"/>
+      <text x="15" y="20" class="label" style="fill:#aaa">Final Output</text>
+      <text x="15" y="40" class="code-text" style="fill:#8fbc8f">TaskResult {</text>
+      <text x="15" y="55" class="code-text" style="fill:#8fbc8f">  output, metadata, execution_logs}</text>
+    </g>
+
+    <!-- Arrows inside CEO -->
+    <line x1="280" y1="105" x2="305" y2="105" stroke="#666" stroke-width="1.5"/>
+    <polygon points="310,105 303,101 303,109" fill="#666"/>
+    <line x1="630" y1="105" x2="655" y2="105" stroke="#666" stroke-width="1.5"/>
+    <polygon points="660,105 653,101 653,109" fill="#666"/>
+    <line x1="960" y1="105" x2="985" y2="105" stroke="#666" stroke-width="1.5"/>
+    <polygon points="990,105 983,101 983,109" fill="#666"/>
+  </g>
+
+  <!-- ==================== DAG FLOW (Middle) ==================== -->
+  <g transform="translate(50, 280)">
+    <rect x="0" y="0" width="1300" height="520" rx="4" fill="#fff" stroke="#e0e0e0"/>
+    <text x="20" y="25" class="section-title">DAG Task Flow with Review Loop</text>
+    <line x1="20" y1="35" x2="1280" y2="35" stroke="#e8e8e8"/>
+
+    <!-- ========== Node 1: RESEARCHER ========== -->
+    <g transform="translate(40, 60)">
+      <!-- Agent Box -->
+      <rect x="0" y="0" width="380" height="200" rx="5" fill="#2c5282" stroke="#1a365d" stroke-width="2"/>
+      <text x="20" y="28" class="agent-title">Researcher Agent</text>
+      <text x="20" y="45" class="agent-role">研究员 - 迭代搜索、信源引用</text>
+
+      <!-- Execute -->
+      <rect x="15" y="60" width="350" height="55" rx="3" fill="rgba(255,255,255,0.1)"/>
+      <text x="25" y="78" class="code-text" style="fill:#bee3f8">execute(task, context)</text>
+      <text x="25" y="93" class="code-text" style="fill:#bee3f8">  → _iterative_research(query, max_iter=3)</text>
+      <text x="25" y="108" class="code-text" style="fill:#bee3f8">  → web_search.search() × N iterations</text>
+
+      <!-- Output -->
+      <rect x="15" y="125" width="350" height="60" rx="3" fill="rgba(255,255,255,0.15)"/>
+      <text x="25" y="143" class="label" style="fill:#90cdf4">Output: ResearchReport</text>
+      <text x="25" y="160" class="prompt-text" style="fill:#e2e8f0">summary, key_findings: ["发现1 [1]", ...]</text>
+      <text x="25" y="175" class="prompt-text" style="fill:#e2e8f0">sources: [{id, title, url}, ...]</text>
+    </g>
+
+    <!-- Arrow: Researcher → Critic Review -->
+    <g transform="translate(420, 140)">
+      <line x1="0" y1="0" x2="80" y2="0" stroke="#888" stroke-width="2"/>
+      <polygon points="80,0 73,-4 73,4" fill="#888"/>
+      <text x="40" y="-8" class="arrow-label" text-anchor="middle">output</text>
+    </g>
+
+    <!-- ========== CRITIC REVIEW 1 ========== -->
+    <g transform="translate(500, 100)">
+      <rect x="0" y="0" width="200" height="120" rx="5" fill="#744210" stroke="#5c3d0e" stroke-width="2"/>
+      <text x="15" y="25" class="agent-title" style="font-size:14px">Critic Review</text>
+      <text x="15" y="42" class="agent-role">审核 Researcher 输出</text>
+
+      <rect x="10" y="55" width="180" height="55" rx="3" fill="rgba(255,255,255,0.1)"/>
+      <text x="18" y="73" class="prompt-text" style="fill:#faf089">content_type: "research"</text>
+      <text x="18" y="88" class="prompt-text" style="fill:#faf089">评估: 准确性、完整性、引用质量</text>
+      <text x="18" y="103" class="prompt-text" style="fill:#faf089">→ ReviewResult (score, issues)</text>
+    </g>
+
+    <!-- Decision Diamond -->
+    <g transform="translate(580, 240)">
+      <polygon points="40,0 80,30 40,60 0,30" fill="#fff" stroke="#888" stroke-width="1.5"/>
+      <text x="40" y="35" class="label" text-anchor="middle">Pass?</text>
+    </g>
+
+    <!-- PASS Path -->
+    <g transform="translate(660, 270)">
+      <line x1="0" y1="0" x2="60" y2="0" stroke="#2d7a2d" stroke-width="2"/>
+      <polygon points="60,0 53,-4 53,4" fill="#2d7a2d"/>
+      <text x="30" y="-8" class="status-pass" text-anchor="middle">PASS</text>
+    </g>
+
+    <!-- REJECT Path (Loop Back) -->
+    <g transform="translate(540, 300)">
+      <path d="M40,0 L40,40 L-300,40 L-300,-80 L-120,-80" fill="none" stroke="#a02020" stroke-width="2"/>
+      <polygon points="-120,-80 -127,-84 -127,-76" fill="#a02020"/>
+      <text x="-130" y="55" class="status-fail">REJECT + Feedback</text>
+    </g>
+
+    <!-- Feedback Injection Box -->
+    <g transform="translate(100, 290)">
+      <rect x="0" y="0" width="300" height="70" rx="3" fill="#fff5f5" stroke="#feb2b2" stroke-dasharray="4,2"/>
+      <text x="10" y="18" class="label" style="fill:#c53030">Feedback Injection (retry)</text>
+      <text x="10" y="36" class="code-text">context["review_feedback"] = {</text>
+      <text x="10" y="51" class="code-text">  issues: [...], suggestions: [...]}</text>
+      <text x="10" y="66" class="code-text">→ _refine_query_from_feedback()</text>
+    </g>
+
+    <!-- ========== Node 2: ANALYST ========== -->
+    <g transform="translate(720, 200)">
+      <!-- Agent Box -->
+      <rect x="0" y="0" width="350" height="180" rx="5" fill="#276749" stroke="#1c4532" stroke-width="2"/>
+      <text x="20" y="28" class="agent-title">Analyst Agent</text>
+      <text x="20" y="45" class="agent-role">分析师 - 数据分析、可视化、代码执行</text>
+
+      <!-- Dependencies -->
+      <rect x="15" y="60" width="320" height="35" rx="3" fill="rgba(255,255,255,0.1)"/>
+      <text x="25" y="82" class="code-text" style="fill:#9ae6b4">dependencies: ["research"]</text>
+
+      <!-- Execute -->
+      <rect x="15" y="100" width="320" height="65" rx="3" fill="rgba(255,255,255,0.15)"/>
+      <text x="25" y="118" class="label" style="fill:#68d391">execute(task, context)</text>
+      <text x="25" y="135" class="prompt-text" style="fill:#c6f6d5">_generate_code() → _execute_with_retry()</text>
+      <text x="25" y="150" class="prompt-text" style="fill:#c6f6d5">Output: CodeExecutionResult {code, figures}</text>
+    </g>
+
+    <!-- Arrow: Analyst → Critic Review 2 -->
+    <g transform="translate(1070, 290)">
+      <line x1="0" y1="0" x2="60" y2="0" stroke="#888" stroke-width="2"/>
+      <polygon points="60,0 53,-4 53,4" fill="#888"/>
+      <text x="30" y="-8" class="arrow-label" text-anchor="middle">output</text>
+    </g>
+
+    <!-- ========== CRITIC REVIEW 2 ========== -->
+    <g transform="translate(1130, 230)">
+      <rect x="0" y="0" width="150" height="120" rx="5" fill="#744210" stroke="#5c3d0e" stroke-width="2"/>
+      <text x="12" y="25" class="agent-title" style="font-size:12px">Critic Review</text>
+      <text x="12" y="42" class="agent-role" style="font-size:9px">审核 Analyst 输出</text>
+
+      <rect x="8" y="55" width="134" height="55" rx="3" fill="rgba(255,255,255,0.1)"/>
+      <text x="14" y="73" class="prompt-text" style="fill:#faf089;font-size:8px">content_type: "code"</text>
+      <text x="14" y="88" class="prompt-text" style="fill:#faf089;font-size:8px">评估: 正确性、效率</text>
+      <text x="14" y="103" class="prompt-text" style="fill:#faf089;font-size:8px">→ ReviewResult</text>
+    </g>
+
+    <!-- Analyst Feedback Loop -->
+    <g transform="translate(1130, 360)">
+      <path d="M75,0 L75,30 L-335,30 L-335,-70" fill="none" stroke="#a02020" stroke-width="1.5" stroke-dasharray="4,2"/>
+      <polygon points="-335,-70 -339,-63 -331,-63" fill="#a02020"/>
+      <text x="-100" y="45" class="status-fail" style="font-size:9px">REJECT → feedback injection</text>
+    </g>
+
+    <!-- ========== Node 3: FINAL OUTPUT ========== -->
+    <g transform="translate(900, 420)">
+      <rect x="0" y="0" width="380" height="80" rx="5" fill="#1a1a1a"/>
+      <text x="20" y="28" class="agent-title" style="font-size:14px">Final Output (CEO)</text>
+
+      <rect x="15" y="40" width="350" height="30" rx="3" fill="#333"/>
+      <text x="25" y="60" class="code-text" style="fill:#8fbc8f">{final_output, all_results: {research, analysis}, sop_name}</text>
+    </g>
+
+    <!-- Arrow to Final -->
+    <g transform="translate(1130, 350)">
+      <line x1="75" y1="0" x2="75" y2="55" stroke="#2d7a2d" stroke-width="2"/>
+      <path d="M1205,405 L1130,405 L1130,420" fill="none" stroke="#2d7a2d" stroke-width="2" transform="translate(-925,-405)"/>
+      <text x="95" y="30" class="status-pass">PASS</text>
+    </g>
+  </g>
+
+  <!-- ==================== PROMPTS PANEL (Bottom) ==================== -->
+  <g transform="translate(50, 820)">
+    <rect x="0" y="0" width="1300" height="260" rx="4" fill="#fff" stroke="#e0e0e0"/>
+    <text x="20" y="25" class="section-title">Key Prompts (Excerpts)</text>
+    <line x1="20" y1="35" x2="1280" y2="35" stroke="#e8e8e8"/>
+
+    <!-- Researcher Prompts -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="400" height="190" rx="3" fill="#ebf8ff" stroke="#90cdf4"/>
+      <text x="10" y="20" class="box-title" style="fill:#2c5282">Researcher Prompts</text>
+
+      <text x="10" y="42" class="label">_refine_query_from_feedback():</text>
+      <text x="10" y="58" class="prompt-text">原始研究问题: {original_query}</text>
+      <text x="10" y="73" class="prompt-text">审核发现的问题: {issues}</text>
+      <text x="10" y="88" class="prompt-text">请生成一个更精准的搜索词...</text>
+
+      <text x="10" y="110" class="label">_evaluate_and_refine():</text>
+      <text x="10" y="126" class="prompt-text">作为研究员，评估搜索结果对于回答问题的充足度</text>
+      <text x="10" y="141" class="prompt-text">返回: {is_sufficient: bool, new_query: "..."}</text>
+
+      <text x="10" y="163" class="label">_generate_report():</text>
+      <text x="10" y="179" class="prompt-text">基于搜索结果生成结构化报告，必须包含来源引用[1][2]</text>
+    </g>
+
+    <!-- Analyst Prompts -->
+    <g transform="translate(450, 50)">
+      <rect x="0" y="0" width="400" height="190" rx="3" fill="#f0fff4" stroke="#9ae6b4"/>
+      <text x="10" y="20" class="box-title" style="fill:#276749">Analyst Prompts</text>
+
+      <text x="10" y="42" class="label">_generate_code() with feedback:</text>
+      <text x="10" y="58" class="prompt-text">请为以下任务生成Python代码</text>
+      <text x="10" y="73" class="prompt-text">任务: {task}</text>
+      <text x="10" y="88" class="prompt-text" style="fill:#c53030">⚠️ 上次提交被审核退回，请特别注意:</text>
+      <text x="10" y="103" class="prompt-text" style="fill:#c53030">- 问题: {issues}</text>
+      <text x="10" y="118" class="prompt-text" style="fill:#c53030">- 建议: {suggestions}</text>
+
+      <text x="10" y="145" class="label">_fix_code():</text>
+      <text x="10" y="161" class="prompt-text">你的Python代码执行出错了，请修复</text>
+      <text x="10" y="176" class="prompt-text">错误信息: {error}</text>
+    </g>
+
+    <!-- Critic Prompts -->
+    <g transform="translate(880, 50)">
+      <rect x="0" y="0" width="400" height="190" rx="3" fill="#fffff0" stroke="#ecc94b"/>
+      <text x="10" y="20" class="box-title" style="fill:#744210">Critic Prompts</text>
+
+      <text x="10" y="42" class="label">_review_content():</text>
+      <text x="10" y="58" class="prompt-text">请对以下内容进行全面审核</text>
+      <text x="10" y="73" class="prompt-text">原始任务: {original_task}</text>
+      <text x="10" y="88" class="prompt-text">评估维度: 准确性、完整性、相关性...</text>
+
+      <text x="10" y="110" class="prompt-text" style="fill:#c53030">重要要求 (NEW):</text>
+      <text x="10" y="125" class="prompt-text">- issues 必须具体指出问题所在</text>
+      <text x="10" y="140" class="prompt-text">  如"缺少XX方面的数据" 而非 "数据不完整"</text>
+      <text x="10" y="155" class="prompt-text">- suggestions 必须给出可执行的建议</text>
+      <text x="10" y="170" class="prompt-text">  如"补充搜索XX相关信息" 而非 "需要更多信息"</text>
+    </g>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(1180, 95)">
+    <rect x="0" y="0" width="160" height="130" rx="3" fill="#fff" stroke="#e0e0e0"/>
+    <text x="10" y="20" class="box-title">Legend</text>
+
+    <rect x="10" y="32" width="40" height="18" rx="3" fill="#2c5282"/>
+    <text x="58" y="46" class="label">Researcher</text>
+
+    <rect x="10" y="55" width="40" height="18" rx="3" fill="#276749"/>
+    <text x="58" y="69" class="label">Analyst</text>
+
+    <rect x="10" y="78" width="40" height="18" rx="3" fill="#744210"/>
+    <text x="58" y="92" class="label">Critic</text>
+
+    <rect x="10" y="101" width="40" height="18" rx="3" fill="#1a1a1a"/>
+    <text x="58" y="115" class="label">CEO</text>
+  </g>
+</svg>

@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" style="background: linear-gradient(180deg, #0d0d1a 0%, #1a1a2e 100%);">
+  <defs>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#2563eb"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#059669"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899"/>
+      <stop offset="100%" style="stop-color:#db2777"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="100%" style="stop-color:#0891b2"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4b5563"/>
+    </marker>
+  </defs>
+  
+  <text x="700" y="45" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="bold" font-family="Arial, sans-serif">Text-to-SQL 完整工作流程</text>
+  <text x="700" y="75" text-anchor="middle" fill="#9ca3af" font-size="14" font-family="Arial, sans-serif">从用户提问到返回结果的全链路</text>
+  
+  <!-- 步骤1: 用户输入 -->
+  <g transform="translate(50, 110)">
+    <rect x="0" y="0" width="220" height="130" rx="12" fill="#1e1e32" stroke="#8b5cf6" stroke-width="2" filter="url(#cardShadow)"/>
+    <circle cx="30" cy="25" r="16" fill="url(#purpleGrad)"/>
+    <text x="30" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">1</text>
+    <text x="60" y="30" fill="#8b5cf6" font-size="16" font-weight="bold" font-family="Arial">用户输入</text>
+    <text x="15" y="55" fill="#9ca3af" font-size="12">自然语言问题：</text>
+    <rect x="15" y="70" width="190" height="45" rx="6" fill="#252538"/>
+    <text x="25" y="90" fill="#a78bfa" font-size="11" font-family="monospace">"查询上个月销售额</text>
+    <text x="25" y="105" fill="#a78bfa" font-size="11" font-family="monospace">前10的产品"</text>
+  </g>
+  
+  <line x1="280" y1="175" x2="310" y2="175" stroke="#4b5563" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 步骤2: Schema检索 -->
+  <g transform="translate(320, 110)">
+    <rect x="0" y="0" width="220" height="130" rx="12" fill="#1e1e32" stroke="#3b82f6" stroke-width="2" filter="url(#cardShadow)"/>
+    <circle cx="30" cy="25" r="16" fill="url(#blueGrad)"/>
+    <text x="30" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">2</text>
+    <text x="60" y="30" fill="#3b82f6" font-size="16" font-weight="bold">Schema 检索</text>
+    <text x="15" y="55" fill="#9ca3af" font-size="12">获取相关表结构：</text>
+    <text x="20" y="80" fill="#60a5fa" font-size="11" font-family="monospace">stocks(code, name, cap)</text>
+    <text x="20" y="98" fill="#60a5fa" font-size="11" font-family="monospace">financials(code, roe)</text>
+    <text x="20" y="116" fill="#60a5fa" font-size="11" font-family="monospace">market_data(price, vol)</text>
+  </g>
+  
+  <line x1="550" y1="175" x2="580" y2="175" stroke="#4b5563" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 步骤3: 构建Prompt -->
+  <g transform="translate(590, 110)">
+    <rect x="0" y="0" width="220" height="130" rx="12" fill="#1e1e32" stroke="#10b981" stroke-width="2" filter="url(#cardShadow)"/>
+    <circle cx="30" cy="25" r="16" fill="url(#greenGrad)"/>
+    <text x="30" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">3</text>
+    <text x="60" y="30" fill="#10b981" font-size="16" font-weight="bold">构建 Prompt</text>
+    <text x="15" y="55" fill="#9ca3af" font-size="12">组装完整提示词：</text>
+    <rect x="15" y="70" width="190" height="45" rx="6" fill="#252538"/>
+    <text x="25" y="88" fill="#34d399" font-size="11">System + Schema +</text>
+    <text x="25" y="105" fill="#34d399" font-size="11">Few-shot + Question</text>
+  </g>
+  
+  <line x1="820" y1="175" x2="850" y2="175" stroke="#4b5563" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 步骤4: LLM生成SQL -->
+  <g transform="translate(860, 110)">
+    <rect x="0" y="0" width="220" height="130" rx="12" fill="#1e1e32" stroke="#f59e0b" stroke-width="2" filter="url(#cardShadow)"/>
+    <circle cx="30" cy="25" r="16" fill="url(#orangeGrad)"/>
+    <text x="30" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">4</text>
+    <text x="60" y="30" fill="#f59e0b" font-size="16" font-weight="bold">LLM 生成 SQL</text>
+    <text x="15" y="55" fill="#9ca3af" font-size="12">调用大模型生成：</text>
+    <rect x="15" y="70" width="190" height="45" rx="6" fill="#252538"/>
+    <text x="25" y="88" fill="#fbbf24" font-size="10" font-family="monospace">SELECT s.name, SUM(amount)</text>
+    <text x="25" y="103" fill="#fbbf24" font-size="10" font-family="monospace">FROM stocks s JOIN sales...</text>
+  </g>
+  
+  <line x1="1090" y1="175" x2="1120" y2="175" stroke="#4b5563" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 步骤5: SQL校验 -->
+  <g transform="translate(1130, 110)">
+    <rect x="0" y="0" width="220" height="130" rx="12" fill="#1e1e32" stroke="#ec4899" stroke-width="2" filter="url(#cardShadow)"/>
+    <circle cx="30" cy="25" r="16" fill="url(#pinkGrad)"/>
+    <text x="30" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">5</text>
+    <text x="60" y="30" fill="#ec4899" font-size="16" font-weight="bold">SQL 校验</text>
+    <text x="15" y="55" fill="#9ca3af" font-size="12">安全性检查：</text>
+    <text x="20" y="80" fill="#4ade80" font-size="11">✓ 语法正确    ✓ 表存在</text>
+    <text x="20" y="100" fill="#4ade80" font-size="11">✓ 只读查询    ✓ 有权限</text>
+    <text x="20" y="120" fill="#f87171" font-size="11">✗ 禁止 DROP/DELETE</text>
+  </g>
+  
+  <path d="M 1240 250 L 1240 280 L 1240 310" stroke="#4b5563" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- 步骤6: 执行查询 -->
+  <g transform="translate(1130, 320)">
+    <rect x="0" y="0" width="220" height="130" rx="12" fill="#1e1e32" stroke="#06b6d4" stroke-width="2" filter="url(#cardShadow)"/>
+    <circle cx="30" cy="25" r="16" fill="url(#cyanGrad)"/>
+    <text x="30" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">6</text>
+    <text x="60" y="30" fill="#06b6d4" font-size="16" font-weight="bold">执行查询</text>
+    <text x="15" y="55" fill="#9ca3af" font-size="12">数据库执行：</text>
+    <rect x="15" y="70" width="190" height="45" rx="6" fill="#252538"/>
+    <rect x="25" y="82" width="16" height="16" rx="3" fill="#06b6d4"/>
+    <text x="50" y="94" fill="#22d3ee" font-size="11">SQLite / PostgreSQL</text>
+    <text x="25" y="110" fill="#9ca3af" font-size="10">执行 SQL，返回结果集</text>
+  </g>
+  
+  <line x1="1120" y1="385" x2="1090" y2="385" stroke="#4b5563" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 步骤7: 结果格式化 -->
+  <g transform="translate(860, 320)">
+    <rect x="0" y="0" width="220" height="130" rx="12" fill="#1e1e32" stroke="#f59e0b" stroke-width="2" filter="url(#cardShadow)"/>
+    <circle cx="30" cy="25" r="16" fill="url(#orangeGrad)"/>
+    <text x="30" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">7</text>
+    <text x="60" y="30" fill="#f59e0b" font-size="16" font-weight="bold">结果格式化</text>
+    <text x="15" y="55" fill="#9ca3af" font-size="12">转换为易读格式：</text>
+    <rect x="15" y="70" width="190" height="45" rx="6" fill="#252538"/>
+    <text x="25" y="88" fill="#fbbf24" font-size="10" font-family="monospace">| 股票 | 市值 |</text>
+    <text x="25" y="103" fill="#fbbf24" font-size="10" font-family="monospace">| 茅台 | 2.2万亿 |</text>
+  </g>
+  
+  <line x1="850" y1="385" x2="820" y2="385" stroke="#4b5563" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 步骤8: 自然语言总结 -->
+  <g transform="translate(590, 320)">
+    <rect x="0" y="0" width="220" height="130" rx="12" fill="#1e1e32" stroke="#10b981" stroke-width="2" filter="url(#cardShadow)"/>
+    <circle cx="30" cy="25" r="16" fill="url(#greenGrad)"/>
+    <text x="30" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">8</text>
+    <text x="60" y="30" fill="#10b981" font-size="16" font-weight="bold">自然语言总结</text>
+    <text x="15" y="55" fill="#9ca3af" font-size="12">LLM 生成摘要：</text>
+    <rect x="15" y="70" width="190" height="45" rx="6" fill="#252538"/>
+    <text x="25" y="88" fill="#34d399" font-size="10">"市值最大的5只银行股是：</text>
+    <text x="25" y="103" fill="#34d399" font-size="10">工商银行、农业银行..."</text>
+  </g>
+  
+  <line x1="580" y1="385" x2="550" y2="385" stroke="#4b5563" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 步骤9: 返回用户 -->
+  <g transform="translate(320, 320)">
+    <rect x="0" y="0" width="220" height="130" rx="12" fill="#1e1e32" stroke="#8b5cf6" stroke-width="2" filter="url(#cardShadow)"/>
+    <circle cx="30" cy="25" r="16" fill="url(#purpleGrad)"/>
+    <text x="30" y="30" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">9</text>
+    <text x="60" y="30" fill="#8b5cf6" font-size="16" font-weight="bold">返回用户</text>
+    <text x="15" y="55" fill="#9ca3af" font-size="12">完整响应：</text>
+    <rect x="20" y="70" width="18" height="14" rx="2" fill="#3b82f6"/>
+    <text x="45" y="81" fill="#93c5fd" font-size="11">数据表格</text>
+    <rect x="20" y="90" width="18" height="14" rx="2" fill="#10b981"/>
+    <text x="45" y="101" fill="#6ee7b7" font-size="11">文字总结</text>
+    <rect x="20" y="110" width="18" height="14" rx="2" fill="#6b7280"/>
+    <text x="45" y="121" fill="#9ca3af" font-size="11">SQL 源码</text>
+  </g>
+  
+  <!-- 异常处理分支 -->
+  <g transform="translate(50, 490)">
+    <text x="0" y="0" fill="#f87171" font-size="18" font-weight="bold">✗ 异常处理分支</text>
+    
+    <rect x="0" y="20" width="300" height="100" rx="8" fill="#1e1e32" stroke="#374151" stroke-width="1"/>
+    <text x="15" y="45" fill="#f87171" font-size="14" font-weight="bold">校验失败</text>
+    <text x="15" y="68" fill="#9ca3af" font-size="11">• SQL 语法错误 → 重新生成</text>
+    <text x="15" y="85" fill="#9ca3af" font-size="11">• 表/字段不存在 → 提示用户</text>
+    <text x="15" y="102" fill="#9ca3af" font-size="11">• 危险操作 → 拒绝执行</text>
+    
+    <rect x="320" y="20" width="300" height="100" rx="8" fill="#1e1e32" stroke="#374151" stroke-width="1"/>
+    <text x="335" y="45" fill="#fbbf24" font-size="14" font-weight="bold">执行错误</text>
+    <text x="335" y="68" fill="#9ca3af" font-size="11">• 超时 → 优化 SQL 或限制范围</text>
+    <text x="335" y="85" fill="#9ca3af" font-size="11">• 权限不足 → 提示联系管理员</text>
+    <text x="335" y="102" fill="#9ca3af" font-size="11">• 数据库异常 → 重试或降级</text>
+    
+    <rect x="640" y="20" width="300" height="100" rx="8" fill="#1e1e32" stroke="#374151" stroke-width="1"/>
+    <text x="655" y="45" fill="#a78bfa" font-size="14" font-weight="bold">语义歧义</text>
+    <text x="655" y="68" fill="#9ca3af" font-size="11">• "上个月"不明确 → 追问用户</text>
+    <text x="655" y="85" fill="#9ca3af" font-size="11">• 多种理解 → 展示多个选项</text>
+    <text x="655" y="102" fill="#9ca3af" font-size="11">• 信息不足 → 引导补充</text>
+    
+    <rect x="960" y="20" width="300" height="100" rx="8" fill="#1e1e32" stroke="#374151" stroke-width="1"/>
+    <text x="975" y="45" fill="#34d399" font-size="14" font-weight="bold">自我纠错</text>
+    <text x="975" y="68" fill="#9ca3af" font-size="11">• 结果为空 → 放宽条件重试</text>
+    <text x="975" y="85" fill="#9ca3af" font-size="11">• 结果异常 → LLM 自检</text>
+    <text x="975" y="102" fill="#9ca3af" font-size="11">• 最多重试 N 次</text>
+  </g>
+  
+  <!-- Prompt 模板示例 -->
+  <g transform="translate(50, 630)">
+    <rect x="0" y="0" width="20" height="20" rx="3" fill="#fbbf24"/>
+    <text x="30" y="16" fill="#fbbf24" font-size="18" font-weight="bold">Prompt 模板示例</text>
+    
+    <rect x="0" y="35" width="1300" height="220" rx="10" fill="#12121f" stroke="#374151" stroke-width="1"/>
+    
+    <text x="20" y="60" fill="#f87171" font-size="13" font-weight="bold" font-family="monospace"># System Prompt</text>
+    <text x="20" y="80" fill="#d1d5db" font-size="11" font-family="monospace">你是一个 SQL 专家，根据用户问题和数据库 Schema，生成准确的 SQL 查询。</text>
+    <text x="20" y="95" fill="#d1d5db" font-size="11" font-family="monospace">只生成 SELECT 查询，不允许 INSERT/UPDATE/DELETE/DROP 等操作。</text>
+    
+    <text x="20" y="120" fill="#34d399" font-size="13" font-weight="bold" font-family="monospace"># Database Schema</text>
+    <text x="20" y="140" fill="#d1d5db" font-size="11" font-family="monospace">表 stocks: stock_code(VARCHAR, 主键), stock_name(VARCHAR), industry(VARCHAR), market_cap(FLOAT)</text>
+    <text x="20" y="155" fill="#d1d5db" font-size="11" font-family="monospace">表 financials: stock_code(VARCHAR, 外键), report_date(DATE), revenue(FLOAT), net_profit(FLOAT), roe(FLOAT)</text>
+    
+    <text x="20" y="180" fill="#60a5fa" font-size="13" font-weight="bold" font-family="monospace"># Few-shot Examples</text>
+    <text x="20" y="200" fill="#d1d5db" font-size="11" font-family="monospace">问题: "所有银行股" → SQL: SELECT * FROM stocks WHERE industry = '银行';</text>
+    <text x="20" y="215" fill="#d1d5db" font-size="11" font-family="monospace">问题: "ROE大于15%的股票" → SQL: SELECT s.stock_name, f.roe FROM stocks s JOIN financials f ON ...</text>
+    
+    <text x="20" y="240" fill="#a78bfa" font-size="13" font-weight="bold" font-family="monospace"># User Question</text>
+    <text x="20" y="258" fill="#c4b5fd" font-size="11" font-family="monospace">问题: "市值最大的5只银行股是哪些？"</text>
+    <text x="550" y="258" fill="#6b7280" font-size="11" font-family="monospace">→ 请生成 SQL:</text>
+  </g>
+</svg>
