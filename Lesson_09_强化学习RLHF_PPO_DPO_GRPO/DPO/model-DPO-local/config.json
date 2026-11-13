@@ -1,5 +1,5 @@
 {
-  "_name_or_path": "/home/leon/GitHub/LLM_Course/Lesson_9_\u5f3a\u5316\u5b66\u4e60RLHF_PPO_DPO_GRPO/DPO/src/Qwen2.5-0.5B-Instruct",
+  "_name_or_path": "/home/leon/GitHub/LLM_Course/Lesson_09_\u5f3a\u5316\u5b66\u4e60RLHF_PPO_DPO_GRPO/DPO/src/Qwen2.5-0.5B-Instruct",
   "architectures": [
     "Qwen2ForCausalLM"
   ],
