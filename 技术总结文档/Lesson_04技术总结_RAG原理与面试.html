@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lesson 4：RAG 原理与面试大白话总结</title>
+  <title>Lesson 4：RAG 原理与面试技术总结</title>
   <style>
     :root{--bg:#f6f8fb;--paper:#fff;--ink:#111827;--muted:#374151;--line:#cbd5e1;--blue:#075985;--bluebg:#e0f2fe;--green:#065f46;--greenbg:#d1fae5;--orange:#9a3412;--orangebg:#ffedd5;--red:#991b1b;--redbg:#fee2e2}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif;font-size:18px;line-height:1.8}
@@ -19,7 +19,7 @@
 </head>
 <body>
 <main><article class="paper">
-  <h1>Lesson 4：RAG 原理与面试大白话总结</h1>
+  <h1>Lesson 4：RAG 原理与面试技术总结</h1>
   <p class="subtitle">Retrieval-Augmented Generation：先找资料，再让大模型根据资料回答</p>
   <div class="plain"><strong>一句话理解：</strong>RAG 不是重新训练大模型，而是给大模型配了一个“会查资料的外接记忆库”。用户提问后，系统先从自己的文档库里找相关片段，再把片段放进 Prompt，最后让大模型回答。</div>
 
