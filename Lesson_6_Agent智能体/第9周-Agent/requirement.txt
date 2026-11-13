@@ -1,0 +1,17 @@
+# 基础依赖
+requests==2.32.2
+anyio==3.7.1
+beautifulsoup4==4.12.3
+lxml==5.3.0
+
+# 主要包
+openai==1.58.1
+httpx==0.27.2
+datasets==3.4.1
+langchain==0.0.340
+
+# llama-index相关包
+llama-index-llms-openai==0.3.26
+llama-index-readers-file==0.4.6
+llama-index-readers-web==0.3.8
+trafilatura==2.0.0

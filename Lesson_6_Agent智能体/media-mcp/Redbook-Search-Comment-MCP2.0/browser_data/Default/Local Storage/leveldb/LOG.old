@@ -1,0 +1,6 @@
+2025/06/29-19:31:06.018 2d953c Reusing MANIFEST /Users/mac/Desktop/media-mcp/Redbook-Search-Comment-MCP2.0/browser_data/Default/Local Storage/leveldb/MANIFEST-000001
+2025/06/29-19:31:06.021 2d953c Recovering log #8
+2025/06/29-19:31:06.022 2d953c Reusing old log /Users/mac/Desktop/media-mcp/Redbook-Search-Comment-MCP2.0/browser_data/Default/Local Storage/leveldb/000008.log 
+2025/06/29-19:40:07.433 2d953e Level-0 table #11: started
+2025/06/29-19:40:07.438 2d953e Level-0 table #11: 15847 bytes OK
+2025/06/29-19:40:07.441 2d953e Delete type=0 #8
