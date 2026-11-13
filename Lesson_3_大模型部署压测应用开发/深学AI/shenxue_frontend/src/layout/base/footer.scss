@@ -1,0 +1,30 @@
+.base-layout-footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 20px;
+  gap: 10px;
+  overflow: hidden;
+
+  .avatar {
+    flex-shrink: 0;
+    background-color: #fbf4e8;
+    border-color: #dbd5d3;
+    color: #9e9476;
+
+    .ant-avatar-string {
+      font-size: 28px;
+      font-weight: bold;
+    }
+  }
+
+  .username {
+    flex-grow: 1;
+  }
+
+  .settings {
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+}

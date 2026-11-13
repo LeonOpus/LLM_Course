@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  answer-service:
+    build: ./answer-service
+    ports:
+      - "8000:8000"  # 统一对外端口
+    environment:
+      - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY}
+      - REDIS_URL=redis://redis:6379
+      - VIZ_SERVICE_URL=http://viz-service:8001
+      - VIZ_SERVICE_BASE_URL=http://localhost:8000  # 修改为统一端口
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    depends_on:
+      - redis
+      - viz-service
+    networks:
+      - edu-ai-network
+    volumes:
+      - ./shared:/app/shared
+      - ./viz-service/static:/app/static  # 共享可视化静态文件目录
+    restart: unless-stopped
+
+  viz-service:
+    build: ./viz-service
+    # 移除端口暴露，内部访问即可
+    expose:
+      - "8001"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - MAX_EXECUTION_TIME=${MAX_EXECUTION_TIME:-30}
+      - MAX_MEMORY_MB=${MAX_MEMORY_MB:-512}
+      - STATIC_FILES_PATH=/app/static
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    depends_on:
+      - redis
+    networks:
+      - edu-ai-network
+    volumes:
+      - ./viz-service/static:/app/static
+      - ./shared:/app/shared
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    expose:
+      - "6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - edu-ai-network
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+
+volumes:
+  redis-data:
+
+networks:
+  edu-ai-network:
+    driver: bridge 

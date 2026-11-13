@@ -1,0 +1,74 @@
+.com-sender {
+  background-color: white;
+  border-radius: 15px;
+  border: 1px solid #89d8b9;
+  box-shadow: 0px 0px 4px 0px #6ec1a1;
+
+  .com-sender__file {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    margin: 10px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(40%, -30%);
+      color: #aaa;
+      font-size: 12px;
+    }
+  }
+
+  .ant-input {
+    background: transparent;
+    border: none;
+    padding: 14px 16px;
+    box-shadow: none;
+  }
+
+  .com-sender__actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 16px;
+    padding-top: 0;
+
+    .com-sender__action--send {
+      font-weight: bold;
+      font-size: 18px;
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
+
+.com-sender--mini {
+  .com-sender__textarea-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .com-sender__actions {
+    padding: 0;
+    padding-right: 16px;
+
+    .com-sender__action--send {
+      img {
+        filter: brightness(0.8)
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+.index-page {
+  min-height: 100%;
+  padding: 18px 40px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+
+  .earth-icon,
+  .student-icon {
+    position: absolute;
+    z-index: -1;
+  }
+  .earth-icon {
+    left: -22px;
+    top: 70%;
+  }
+
+  .student-icon {
+    right: -30px;
+    top: 30%;
+  }
+
+  .index-page__content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+
+    .logo {
+      width: 87px;
+      height: 93px;
+    }
+
+    .title {
+      font-size: 42px;
+      color: transparent;
+      background: linear-gradient(to left, #41b860, #1f70fe);
+      background-clip: text;
+    }
+  }
+
+  .sender {
+    margin-top: 38px;
+  }
+
+  .example-box {
+    margin-top: 14px;
+    display: flex;
+    gap: 14px;
+
+    .example-card {
+      flex: 1;
+      background-color: white;
+      border: 1px solid #d4e8e0;
+      padding: 16px;
+      border-radius: 15px;
+
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      overflow: hidden;
+
+      .send-icon {
+        flex-shrink: 0;
+        align-self: center;
+        filter: brightness(0.9);
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}

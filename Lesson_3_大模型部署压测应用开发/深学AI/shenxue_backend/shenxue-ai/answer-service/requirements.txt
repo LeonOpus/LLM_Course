@@ -1,0 +1,14 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+httpx==0.25.2
+redis[hiredis]==5.0.1
+python-multipart==0.0.6
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+aiofiles==23.2.1
+Pillow==10.1.0
+python-dotenv==1.0.0
+loguru==0.7.2
+pydantic-settings==2.1.0
+dashscope==1.14.1 
