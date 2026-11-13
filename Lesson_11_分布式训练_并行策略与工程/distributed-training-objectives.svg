@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320">
+  <!-- 标题 -->
+  <text x="320" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#1a365d">分布式训练学习目标</text>
+  
+  <!-- 分隔线 -->
+  <line x1="70" y1="60" x2="570" y2="60" stroke="#4a5568" stroke-width="1" />
+  
+  <!-- 学习目标列表 -->
+  <text x="70" y="110" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c5282">1. 回顾单机单卡的训练方法</text>
+  
+  <text x="70" y="160" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c5282">2. 熟练掌握显存占用、各种数据并行、模型并行的概念</text>
+  
+  <text x="70" y="210" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c5282">3. 能够根据手写accelerate+deepspeed的训练，知道不同场景下该改哪部分代码</text>
+  
+  <text x="70" y="260" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c5282">4. 结合单机单卡DeepSeek R1 Distilled Llama 8B微调实战的训练，</text>
+  <text x="90" y="290" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c5282">实现Accelerate+DeepSpeed多卡的分布式训练（作业）</text>
+</svg>

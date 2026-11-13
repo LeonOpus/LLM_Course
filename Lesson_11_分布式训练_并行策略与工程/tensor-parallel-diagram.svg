@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background Containers -->
+  <rect x="50" y="50" width="700" height="400" rx="20" ry="20" fill="#f0f0f0" stroke="#888" stroke-width="2" />
+  
+  <!-- GPU 1 Container -->
+  <rect x="80" y="100" width="280" height="300" rx="15" ry="15" fill="#e6e6e6" stroke="#666" stroke-width="2" />
+  <text x="220" y="125" font-family="Arial" font-size="18" text-anchor="middle" fill="#333">GPU 1</text>
+  
+  <!-- GPU 2 Container -->
+  <rect x="440" y="100" width="280" height="300" rx="15" ry="15" fill="#e6e6e6" stroke="#666" stroke-width="2" />
+  <text x="580" y="125" font-family="Arial" font-size="18" text-anchor="middle" fill="#333">GPU 2</text>
+  
+  <!-- Input Matrix X on top -->
+  <rect x="300" y="30" width="200" height="40" rx="5" ry="5" fill="#ffffcc" stroke="#888" stroke-width="2" />
+  <text x="400" y="55" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Input X</text>
+  
+  <!-- Splitting arrows -->
+  <line x1="350" y1="70" x2="220" y2="100" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="450" y1="70" x2="580" y2="100" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <text x="290" y="90" font-family="Arial" font-size="12" fill="#333">Split</text>
+  <text x="510" y="90" font-family="Arial" font-size="12" fill="#333">Split</text>
+  
+  <!-- Attention heads in GPU 1 -->
+  <rect x="100" y="150" width="80" height="60" rx="5" ry="5" fill="#a8d1ff" stroke="#666" stroke-width="2" />
+  <text x="140" y="185" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Head 1</text>
+  
+  <rect x="100" y="230" width="80" height="60" rx="5" ry="5" fill="#a8d1ff" stroke="#666" stroke-width="2" />
+  <text x="140" y="265" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Head 3</text>
+  
+  <rect x="100" y="310" width="80" height="60" rx="5" ry="5" fill="#a8d1ff" stroke="#666" stroke-width="2" />
+  <text x="140" y="345" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Head 5</text>
+  
+  <!-- Linear layers in GPU 1 -->
+  <rect x="210" y="150" width="130" height="60" rx="5" ry="5" fill="#b3e6b3" stroke="#666" stroke-width="2" />
+  <text x="275" y="185" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">W_Q, W_K, W_V</text>
+  
+  <rect x="210" y="230" width="130" height="60" rx="5" ry="5" fill="#b3e6b3" stroke="#666" stroke-width="2" />
+  <text x="275" y="265" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">W_Q, W_K, W_V</text>
+  
+  <rect x="210" y="310" width="130" height="60" rx="5" ry="5" fill="#b3e6b3" stroke="#666" stroke-width="2" />
+  <text x="275" y="345" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">W_Q, W_K, W_V</text>
+  
+  <!-- Attention heads in GPU 2 -->
+  <rect x="460" y="150" width="80" height="60" rx="5" ry="5" fill="#a8d1ff" stroke="#666" stroke-width="2" />
+  <text x="500" y="185" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Head 2</text>
+  
+  <rect x="460" y="230" width="80" height="60" rx="5" ry="5" fill="#a8d1ff" stroke="#666" stroke-width="2" />
+  <text x="500" y="265" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Head 4</text>
+  
+  <rect x="460" y="310" width="80" height="60" rx="5" ry="5" fill="#a8d1ff" stroke="#666" stroke-width="2" />
+  <text x="500" y="345" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Head 6</text>
+  
+  <!-- Linear layers in GPU 2 -->
+  <rect x="570" y="150" width="130" height="60" rx="5" ry="5" fill="#b3e6b3" stroke="#666" stroke-width="2" />
+  <text x="635" y="185" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">W_Q, W_K, W_V</text>
+  
+  <rect x="570" y="230" width="130" height="60" rx="5" ry="5" fill="#b3e6b3" stroke="#666" stroke-width="2" />
+  <text x="635" y="265" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">W_Q, W_K, W_V</text>
+  
+  <rect x="570" y="310" width="130" height="60" rx="5" ry="5" fill="#b3e6b3" stroke="#666" stroke-width="2" />
+  <text x="635" y="345" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">W_Q, W_K, W_V</text>
+  
+  <!-- Connections between heads and linear layers -->
+  <line x1="180" y1="180" x2="210" y2="180" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="180" y1="260" x2="210" y2="260" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="180" y1="340" x2="210" y2="340" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <line x1="540" y1="180" x2="570" y2="180" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="540" y1="260" x2="570" y2="260" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="540" y1="340" x2="570" y2="340" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Output from GPU 1 -->
+  <rect x="150" y="400" width="140" height="40" rx="5" ry="5" fill="#ffcc99" stroke="#888" stroke-width="2" />
+  <text x="220" y="425" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Output 1</text>
+  
+  <!-- Output from GPU 2 -->
+  <rect x="510" y="400" width="140" height="40" rx="5" ry="5" fill="#ffcc99" stroke="#888" stroke-width="2" />
+  <text x="580" y="425" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Output 2</text>
+  
+  <!-- Connectors from GPUs to outputs -->
+  <line x1="220" y1="400" x2="220" y2="380" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="580" y1="400" x2="580" y2="380" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Final merged output -->
+  <rect x="300" y="460" width="200" height="40" rx="5" ry="5" fill="#d9b3ff" stroke="#888" stroke-width="2" />
+  <text x="400" y="485" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Merged Output Y</text>
+  
+  <!-- Merging arrows -->
+  <line x1="220" y1="440" x2="350" y2="460" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="580" y1="440" x2="450" y2="460" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <text x="290" y="455" font-family="Arial" font-size="12" fill="#333">Merge</text>
+  <text x="510" y="455" font-family="Arial" font-size="12" fill="#333">Merge</text>
+  
+  <!-- All-Reduce Operation -->
+  <text x="400" y="445" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">All-Reduce</text>
+  <path d="M320,440 C360,420 440,420 480,440" stroke="#ff6666" stroke-width="3" fill="none" stroke-dasharray="5,3" />
+  
+  <!-- Arrowhead definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+</svg>

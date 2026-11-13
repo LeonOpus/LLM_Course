@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <!-- Background -->
+  <rect width="800" height="450" fill="#0A192F"/>
+  
+  <!-- Title -->
+  <text x="400" y="120" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">第十一周: 大模型分布式训练</text>
+  
+  <!-- Central diagram -->
+  <g transform="translate(400, 240)">
+    <!-- Main circle -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#4ECCA3" stroke-width="2"/>
+    
+    <!-- Crossed lines -->
+    <line x1="-80" y1="0" x2="80" y2="0" stroke="#4ECCA3" stroke-width="2"/>
+    <line x1="0" y1="-80" x2="0" y2="80" stroke="#4ECCA3" stroke-width="2"/>
+    
+    <!-- Center text -->
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">分布式</text>
+    
+    <!-- Distributed nodes -->
+    <circle cx="-55" cy="-55" r="12" fill="#4ECCA3" opacity="0.8"/>
+    <circle cx="55" cy="-55" r="12" fill="#4ECCA3" opacity="0.8"/>
+    <circle cx="-55" cy="55" r="12" fill="#4ECCA3" opacity="0.8"/>
+    <circle cx="55" cy="55" r="12" fill="#4ECCA3" opacity="0.8"/>
+    
+    <!-- Connection lines (removed grid pattern and just keeping the direct connections) -->
+    <line x1="0" y1="0" x2="-55" y2="-55" stroke="#4ECCA3" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <line x1="0" y1="0" x2="55" y2="-55" stroke="#4ECCA3" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <line x1="0" y1="0" x2="-55" y2="55" stroke="#4ECCA3" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <line x1="0" y1="0" x2="55" y2="55" stroke="#4ECCA3" stroke-width="1.5" stroke-dasharray="5,3"/>
+  </g>
+  
+  <!-- Slogan -->
+  <text x="400" y="380" font-family="Arial, sans-serif" font-size="28" fill="white" text-anchor="middle">大规模模型训练的基础</text>
+  
+  <!-- Underline for slogan -->
+  <line x1="200" y1="395" x2="600" y2="395" stroke="#4ECCA3" stroke-width="2"/>
+</svg>

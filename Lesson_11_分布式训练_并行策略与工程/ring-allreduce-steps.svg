@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 700">
+  <!-- 初始状态 - 第一行 -->
+  <g transform="translate(400, 100)">
+    <text x="0" y="-50" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold">初始状态：每个GPU拥有自己的梯度块</text>
+    
+    <!-- GPU 0 -->
+    <g transform="translate(0, 0)">
+      <text x="0" y="-25" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 0</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₀</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₀</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₀</text>
+    </g>
+    
+    <!-- GPU 1 -->
+    <g transform="translate(-200, 0)">
+      <text x="0" y="-25" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 1</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₁</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₁</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₁</text>
+    </g>
+    
+    <!-- GPU 2 -->
+    <g transform="translate(200, 0)">
+      <text x="0" y="-25" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 2</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₂</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₂</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₂</text>
+    </g>
+  </g>
+  
+  <!-- Scatter-Reduce 阶段1 - 第二行 -->
+  <g transform="translate(400, 250)">
+    <text x="0" y="-25" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold">Scatter-Reduce 阶段 (第1步)</text>
+    
+    <!-- GPU 0 -->
+    <g transform="translate(0, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 0</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₀</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₀ + b₂</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₀</text>
+    </g>
+    
+    <!-- GPU 1 -->
+    <g transform="translate(-200, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 1</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₁ + a₀</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₁</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₁</text>
+    </g>
+    
+    <!-- GPU 2 -->
+    <g transform="translate(200, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 2</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₂</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₂</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₂ + c₁</text>
+    </g>
+    
+    <!-- 箭头 -->
+    <path d="M-100 -70 L-160 -70 L-160 -20" stroke="#0066cc" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="-130" y="-75" text-anchor="middle" font-family="Arial" font-size="14" fill="#0066cc">a₀</text>
+    
+    <path d="M100 -70 L160 -70 L160 -20" stroke="#0066cc" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="130" y="-75" text-anchor="middle" font-family="Arial" font-size="14" fill="#0066cc">b₂</text>
+    
+    <path d="M120 50 L180 50" stroke="#0066cc" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="150" y="45" text-anchor="middle" font-family="Arial" font-size="14" fill="#0066cc">c₁</text>
+  </g>
+  
+  <!-- Scatter-Reduce 阶段2 - 第三行 -->
+  <g transform="translate(400, 400)">
+    <text x="0" y="-25" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold">Scatter-Reduce 阶段 (第2步)</text>
+    
+    <!-- GPU 0 -->
+    <g transform="translate(0, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 0</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₀ + a₂ + a₁</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₀ + b₂</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₀ + c₂</text>
+    </g>
+    
+    <!-- GPU 1 -->
+    <g transform="translate(-200, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 1</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₁ + a₀</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₁ + b₀ + b₂</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₁ + c₀</text>
+    </g>
+    
+    <!-- GPU 2 -->
+    <g transform="translate(200, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 2</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₂ + a₁ + a₀</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₂ + b₁</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₂ + c₁</text>
+    </g>
+    
+    <!-- 箭头 -->
+    <path d="M-100 -70 L-160 -70 L-160 -20" stroke="#0066cc" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="-130" y="-75" text-anchor="middle" font-family="Arial" font-size="14" fill="#0066cc">a₂</text>
+    
+    <path d="M100 -70 L160 -70 L160 -20" stroke="#0066cc" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="130" y="-75" text-anchor="middle" font-family="Arial" font-size="14" fill="#0066cc">a₁</text>
+    
+    <path d="M-120 50 L-180 50" stroke="#0066cc" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="-150" y="45" text-anchor="middle" font-family="Arial" font-size="14" fill="#0066cc">b₀ + b₂</text>
+    
+    <path d="M120 50 L180 50" stroke="#0066cc" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="150" y="45" text-anchor="middle" font-family="Arial" font-size="14" fill="#0066cc">c₂</text>
+  </g>
+  
+  <!-- AllGather 阶段1 - 第四行 -->
+  <g transform="translate(400, 550)">
+    <text x="0" y="-25" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold">AllGather 阶段 (第1步)</text>
+    
+    <!-- GPU 0 -->
+    <g transform="translate(0, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 0</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₀ + a₂ + a₁</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₀ + b₂ + b₁</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₀ + c₂</text>
+    </g>
+    
+    <!-- GPU 1 -->
+    <g transform="translate(-200, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 1</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₁ + a₀ + a₂</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₁ + b₀ + b₂</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₁ + c₀ + c₂</text>
+    </g>
+    
+    <!-- GPU 2 -->
+    <g transform="translate(200, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 2</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₂ + a₁ + a₀</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₂ + b₁ + b₀</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₂ + c₁</text>
+    </g>
+    
+    <!-- 箭头 -->
+    <path d="M-100 -70 L-160 -70 L-160 -20" stroke="#cc0000" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="-130" y="-75" text-anchor="middle" font-family="Arial" font-size="14" fill="#cc0000">c₁ + c₀</text>
+    
+    <path d="M-120 50 L-180 50" stroke="#cc0000" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="-150" y="45" text-anchor="middle" font-family="Arial" font-size="14" fill="#cc0000">c₂ + c₁</text>
+    
+    <path d="M100 -70 L160 -70 L160 -20" stroke="#cc0000" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="130" y="-75" text-anchor="middle" font-family="Arial" font-size="14" fill="#cc0000">b₁ + b₀ + b₂</text>
+  </g>
+  
+  <!-- AllGather 阶段2 - 第五行 -->
+  <g transform="translate(400, 700)">
+    <text x="0" y="-25" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold">AllGather 阶段 (第2步) - 最终结果</text>
+    
+    <!-- GPU 0 -->
+    <g transform="translate(0, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 0</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₀ + a₂ + a₁</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₀ + b₂ + b₁</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₀ + c₂ + c₁</text>
+    </g>
+    
+    <!-- GPU 1 -->
+    <g transform="translate(-200, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 1</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₁ + a₀ + a₂</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₁ + b₀ + b₂</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₁ + c₀ + c₂</text>
+    </g>
+    
+    <!-- GPU 2 -->
+    <g transform="translate(200, 0)">
+      <text x="0" y="-15" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">GPU: 2</text>
+      <rect x="-40" y="0" width="80" height="100" fill="none" stroke="#000" stroke-width="1.5"/>
+      <line x1="-40" y1="33" x2="40" y2="33" stroke="#000" stroke-width="1"/>
+      <line x1="-40" y1="66" x2="40" y2="66" stroke="#000" stroke-width="1"/>
+      <text x="0" y="21" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">a₂ + a₁ + a₀</text>
+      <text x="0" y="54" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">b₂ + b₁ + b₀</text>
+      <text x="0" y="87" text-anchor="middle" font-family="Arial" font-size="16" font-style="italic">c₂ + c₁ + c₀</text>
+    </g>
+    
+    <!-- 箭头 -->
+    <path d="M-100 -70 L-160 -70 L-160 -20" stroke="#cc0000" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="-130" y="-75" text-anchor="middle" font-family="Arial" font-size="14" fill="#cc0000">a₀ + a₂ + a₁</text>
+    
+    <path d="M100 -70 L160 -70 L160 -20" stroke="#cc0000" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="130" y="-75" text-anchor="middle" font-family="Arial" font-size="14" fill="#cc0000">c₀ + c₂ + c₁</text>
+  </g>
+  
+  <!-- 定义箭头 -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" 
+            refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+</svg>

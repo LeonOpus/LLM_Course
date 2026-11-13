@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- 定义箭头 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+            refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+    <marker id="gradient-arrow" markerWidth="10" markerHeight="7" 
+            refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0066cc" />
+    </marker>
+    <marker id="update-arrow" markerWidth="10" markerHeight="7" 
+            refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#cc0000" />
+    </marker>
+  </defs>
+  
+  <!-- 训练阶段标题 -->
+  <text x="400" y="30" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold">GPU训练与梯度同步流程</text>
+  
+  <!-- GPU1 (主GPU) -->
+  <g transform="translate(400, 180)">
+    <rect x="-40" y="-40" width="80" height="80" rx="5" fill="#ffdddd" stroke="#cc0000" stroke-width="3"/>
+    <rect x="-25" y="-25" width="50" height="35" rx="2" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="-10" cy="22" r="5" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="0" cy="22" r="5" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="10" cy="22" r="5" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <text x="0" y="50" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">主GPU</text>
+  </g>
+  
+  <!-- GPU2 -->
+  <g transform="translate(150, 180)">
+    <rect x="-35" y="-35" width="70" height="70" rx="5" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    <rect x="-20" y="-20" width="40" height="30" rx="2" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="-8" cy="18" r="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="0" cy="18" r="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="8" cy="18" r="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <text x="0" y="45" text-anchor="middle" font-family="Arial" font-size="14">GPU 2</text>
+  </g>
+  
+  <!-- GPU3 -->
+  <g transform="translate(650, 180)">
+    <rect x="-35" y="-35" width="70" height="70" rx="5" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    <rect x="-20" y="-20" width="40" height="30" rx="2" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="-8" cy="18" r="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="0" cy="18" r="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="8" cy="18" r="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <text x="0" y="45" text-anchor="middle" font-family="Arial" font-size="14">GPU 3</text>
+  </g>
+  
+  <!-- GPU4 -->
+  <g transform="translate(400, 350)">
+    <rect x="-35" y="-35" width="70" height="70" rx="5" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    <rect x="-20" y="-20" width="40" height="30" rx="2" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="-8" cy="18" r="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="0" cy="18" r="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <circle cx="8" cy="18" r="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <text x="0" y="45" text-anchor="middle" font-family="Arial" font-size="14">GPU 4</text>
+  </g>
+  
+  <!-- 阶段1: 梯度传递 -->
+  <text x="60" y="80" font-family="Arial" font-size="14" font-weight="bold" fill="#0066cc">阶段1: 梯度传递到主GPU</text>
+  
+  <!-- 梯度传递箭头 -->
+  <!-- GPU2到主GPU -->
+  <path d="M190 160 C250 130, 300 130, 360 160" stroke="#0066cc" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#gradient-arrow)" fill="none"/>
+  <text x="275" y="130" text-anchor="middle" font-family="Arial" font-size="12" fill="#0066cc">梯度传递</text>
+  
+  <!-- GPU3到主GPU -->
+  <path d="M610 160 C550 130, 500 130, 440 160" stroke="#0066cc" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#gradient-arrow)" fill="none"/>
+  <text x="525" y="130" text-anchor="middle" font-family="Arial" font-size="12" fill="#0066cc">梯度传递</text>
+  
+  <!-- GPU4到主GPU -->
+  <path d="M380 315 C360 290, 360 250, 380 220" stroke="#0066cc" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#gradient-arrow)" fill="none"/>
+  <text x="330" y="270" text-anchor="middle" font-family="Arial" font-size="12" fill="#0066cc">梯度传递</text>
+  
+  <!-- 阶段2: 参数更新和同步 -->
+  <text x="580" y="80" font-family="Arial" font-size="14" font-weight="bold" fill="#cc0000">阶段2: 参数更新并同步到所有GPU</text>
+  
+  <!-- 参数更新过程 -->
+  <g transform="translate(400, 180)">
+    <circle cx="0" cy="0" r="25" fill="none" stroke="#cc0000" stroke-width="2" stroke-dasharray="3,2">
+      <animate attributeName="r" from="25" to="30" dur="2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" from="1" to="0.3" dur="2s" repeatCount="indefinite" />
+    </circle>
+  </g>
+  
+  <!-- 参数同步箭头 -->
+  <!-- 主GPU到GPU2 -->
+  <path d="M360 190 C300 220, 250 220, 190 190" stroke="#cc0000" stroke-width="3" marker-end="url(#update-arrow)" fill="none"/>
+  <text x="275" y="230" text-anchor="middle" font-family="Arial" font-size="12" fill="#cc0000">参数同步</text>
+  
+  <!-- 主GPU到GPU3 -->
+  <path d="M440 190 C500 220, 550 220, 610 190" stroke="#cc0000" stroke-width="3" marker-end="url(#update-arrow)" fill="none"/>
+  <text x="525" y="230" text-anchor="middle" font-family="Arial" font-size="12" fill="#cc0000">参数同步</text>
+  
+  <!-- 主GPU到GPU4 -->
+  <path d="M420 220 C440 250, 440 290, 420 315" stroke="#cc0000" stroke-width="3" marker-end="url(#update-arrow)" fill="none"/>
+  <text x="460" y="270" text-anchor="middle" font-family="Arial" font-size="12" fill="#cc0000">参数同步</text>
+  
+  <!-- 主GPU内部处理说明 -->
+  <g transform="translate(400, 430)">
+    <rect x="-200" y="-15" width="400" height="70" rx="5" fill="#f0f0f0" stroke="#333" stroke-width="1"/>
+    <text x="0" y="0" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">主GPU工作流程:</text>
+    <text x="0" y="20" text-anchor="middle" font-family="Arial" font-size="12">1. 收集所有GPU的梯度</text>
+    <text x="0" y="40" text-anchor="middle" font-family="Arial" font-size="12">2. 聚合梯度并更新模型参数</text>
+    <text x="0" y="60" text-anchor="middle" font-family="Arial" font-size="12">3. 将更新后的参数同步到所有GPU</text>
+  </g>
+</svg>

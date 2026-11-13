@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="#f8f9fa" />
+  
+  <!-- 标题 -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" font-weight="bold">大模型张量并行（Tensor Parallelism）示意图</text>
+  
+  <!-- 传统模型 -->
+  <g transform="translate(150, 120)">
+    <rect x="0" y="0" width="200" height="150" rx="10" ry="10" fill="#e1f5fe" stroke="#0288d1" stroke-width="2" />
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold">传统单GPU计算</text>
+    
+    <!-- 矩阵表示 -->
+    <rect x="50" y="50" width="100" height="80" fill="#b3e5fc" stroke="#0288d1" stroke-width="1" />
+    <text x="100" y="95" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">完整权重矩阵</text>
+  </g>
+  
+  <!-- 张量并行模型 -->
+  <g transform="translate(450, 120)">
+    <rect x="0" y="0" width="200" height="150" rx="10" ry="10" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" />
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold">张量并行计算</text>
+    
+    <!-- 分片矩阵 -->
+    <rect x="20" y="50" width="45" height="80" fill="#c8e6c9" stroke="#388e3c" stroke-width="1" />
+    <rect x="70" y="50" width="45" height="80" fill="#a5d6a7" stroke="#388e3c" stroke-width="1" />
+    <rect x="135" y="50" width="45" height="80" fill="#81c784" stroke="#388e3c" stroke-width="1" />
+    
+    <text x="42" y="95" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">分片1</text>
+    <text x="93" y="95" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">分片2</text>
+    <text x="158" y="95" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">分片N</text>
+    
+    <!-- 省略号 -->
+    <text x="120" y="90" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">...</text>
+  </g>
+  
+  <!-- 设备分布 -->
+  <g transform="translate(100, 320)">
+    <rect x="0" y="0" width="600" height="200" rx="10" ry="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2" />
+    <text x="300" y="30" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold">张量并行实现方式</text>
+    
+    <!-- GPU设备 -->
+    <g transform="translate(50, 60)">
+      <rect x="0" y="0" width="100" height="100" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1" />
+      <text x="50" y="30" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">GPU 1</text>
+      <rect x="20" y="45" width="60" height="40" fill="#ffcc80" stroke="#e65100" stroke-width="1" />
+      <text x="50" y="70" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">权重分片1</text>
+    </g>
+    
+    <g transform="translate(180, 60)">
+      <rect x="0" y="0" width="100" height="100" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1" />
+      <text x="50" y="30" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">GPU 2</text>
+      <rect x="20" y="45" width="60" height="40" fill="#ffcc80" stroke="#e65100" stroke-width="1" />
+      <text x="50" y="70" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">权重分片2</text>
+    </g>
+    
+    <text x="310" y="110" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">...</text>
+    
+    <g transform="translate(450, 60)">
+      <rect x="0" y="0" width="100" height="100" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1" />
+      <text x="50" y="30" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">GPU N</text>
+      <rect x="20" y="45" width="60" height="40" fill="#ffcc80" stroke="#e65100" stroke-width="1" />
+      <text x="50" y="70" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">权重分片N</text>
+    </g>
+    
+    <!-- 通信箭头 -->
+    <line x1="150" y1="110" x2="180" y2="110" stroke="#f57c00" stroke-width="2" />
+    <polygon points="180,110 175,107 175,113" fill="#f57c00" />
+    
+    <line x1="280" y1="110" x2="320" y2="110" stroke="#f57c00" stroke-width="2" stroke-dasharray="5,3" />
+    <polygon points="320,110 315,107 315,113" fill="#f57c00" />
+    
+    <line x1="340" y1="110" x2="450" y2="110" stroke="#f57c00" stroke-width="2" stroke-dasharray="5,3" />
+    <polygon points="450,110 445,107 445,113" fill="#f57c00" />
+  </g>
+  
+  <!-- 箭头从传统到张量并行 -->
+  <line x1="350" y1="195" x2="450" y2="195" stroke="#616161" stroke-width="2" />
+  <polygon points="450,195 445,192 445,198" fill="#616161" />
+  
+  <!-- 说明文字 -->
+  <g transform="translate(50, 540)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" fill="#d32f2f">注意：</text>
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="14">1. 张量并行将权重矩阵沿特定维度切分，每个GPU负责部分计算</text>
+    <text x="0" y="40" font-family="Arial, sans-serif" font-size="14">2. GPU之间需要通信以同步结果（如All-reduce操作）</text>
+  </g>
+</svg>

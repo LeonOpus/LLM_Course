@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 350">
+  <!-- Background -->
+  <rect width="700" height="350" fill="#F0F2F5"/>
+  
+  <!-- Title bar -->
+  <rect x="67" y="30" width="566" height="2" fill="#1D3557"/>
+  <text x="350" y="25" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1D3557" text-anchor="middle">为什么要做分布式训练</text>
+  
+  <!-- Left quote mark -->
+  <text x="77" y="80" font-family="Arial, sans-serif" font-size="40" fill="#1D3557" text-anchor="middle">⁃</text>
+  
+  <!-- Main content box -->
+  <rect x="92" y="123" width="516" height="143" rx="10" ry="10" fill="#1D3557"/>
+  
+  <!-- Content text -->
+  <text x="350" y="155" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">当模型规模和数据集体量不断增长，</text>
+  <text x="350" y="190" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">单机训练无法满足计算和内存需求，</text>
+  <text x="350" y="225" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">分布式训练通过多设备协同计算，</text>
+  <text x="350" y="260" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">实现大规模模型训练的加速和可能性</text>
+  
+  <!-- Right quote mark -->
+  <text x="623" y="320" font-family="Arial, sans-serif" font-size="40" fill="#1D3557" text-anchor="middle">⁃</text>
+  
+  <!-- Bottom bar -->
+  <rect x="67" y="329" width="566" height="2" fill="#1D3557"/>
+</svg>
