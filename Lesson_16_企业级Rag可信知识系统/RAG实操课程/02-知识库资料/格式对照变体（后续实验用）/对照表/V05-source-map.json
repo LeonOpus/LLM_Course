@@ -1,0 +1,919 @@
+ 	  		   	  		 	 	   		   		   	        	 		  		 	  		   	 	     	  		 	 	   		   		   	  			 	  			  	  		  	 	 		 		    	 		 	 		 	 		  		   	  			 	  	  		   	 	      		  	   	 		 	 		  	    		 		   		  	   		 			  		     		  	 	 		  	    		 			  			  	  		 	    		   	  		   	 		   		 		   	   			  	 		   	   		 	    		  		 		  	 	 		   		 		  		   		  		  		  	   		 			 		  	 	  		 	    		  	  		  	 	  		  	  		  		   		 			  		  		  			 	   			    		    	  		   	  		 	 	  			    		  	    		  		  		   	  		   	 		  	    		 	   		  		   		  	  		  		   			     		      			  	 		    	  		 	    		 		   		 			 		  	    		   	 		    	 		  	 	  		 	    			  	 		   	   			  	 		   		  		 	    		  	   		 	 	  			    		  	 	  		 		  		  	 	  		  		  		      		  	   		     		  	    		   	  		  		  		 			  		 		   		 	 	  			    		  	 	  		  		 		  	 	  			  	  		 	   		   	   		 			  			     		   	 		   	   		 		  		   		  		      		 	    			  	 		   	   			 	  		    	 		  	    		      		  	   		     		  	    			     		 			 		    	 		    	 		  	   		  		  		   	  		  		  		  	    			     		     		  	    		  		  			  	  		 			 		  	 	  		 	 	  		 		   		      		  		  		 	 	  		 			  		  	   		 	   		  	   		  	 	  		     		  	    		   	 		  	 	  		   	  		   	 		  	 	 		  		   		  		  		 	 	  		 	    		      		 			  			  	  			  	  		  	   		 	   		    	 		  		   		 	    		  		 		    	  		      		 			  		 			  		      		     		   	   		 	 	  		 	    		 			 		  	 	{
+  "id": "V05",
+  "source_document_id": "D23",
+  "source_file": "materials/corpus/documents/D23-配件目录与报价算例工作簿.xlsx",
+  "variant_file": "materials/corpus/variants/V05-D23-原文档导出.pdf",
+  "scope": "整个原始工作簿",
+  "transformation": "LibreOffice headless导出PDF；D23仅副本设置A3横版/有效区域/每表一页，单元格与公式未改；原件均未修改",
+  "source_sha256": "d64442b75c01e8f31a3e75ab917518d51c309a92f6f553e886c915c0408dc9d3",
+  "variant_sha256": "96629079ce9cafd937cafb654faff2ce71b02538dd38754f5f5510f662e5c253",
+  "mapping": [
+    {
+      "sheet": "报价算例",
+      "cell": "A2",
+      "variant_page": 1,
+      "display_value": "WO 005服务报价算例"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A3",
+      "variant_page": 1,
+      "display_value": "本资料中的设备、参数、规则和案例均为课程虚构，不可用于真实设备操作。"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A5",
+      "variant_page": 1,
+      "display_value": "输入项"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B5",
+      "variant_page": 1,
+      "display_value": "输入值"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "C5",
+      "variant_page": 1,
+      "display_value": "单位"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "D5",
+      "variant_page": 1,
+      "display_value": "说明"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "F5",
+      "variant_page": 1,
+      "display_value": "规则"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "G5",
+      "variant_page": 1,
+      "display_value": "值"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "H5",
+      "variant_page": 1,
+      "display_value": "单位"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A6",
+      "variant_page": 1,
+      "display_value": "实际工时"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B6",
+      "variant_page": 1,
+      "display_value": 1.2
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "C6",
+      "variant_page": 1,
+      "display_value": "小时"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "D6",
+      "variant_page": 1,
+      "display_value": "WO-005原始输入"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "F6",
+      "variant_page": 1,
+      "display_value": "标准工时价"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "G6",
+      "variant_page": 1,
+      "display_value": 180
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "H6",
+      "variant_page": 1,
+      "display_value": "元/小时"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A7",
+      "variant_page": 1,
+      "display_value": "单程公路距离"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B7",
+      "variant_page": 1,
+      "display_value": 28
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "C7",
+      "variant_page": 1,
+      "display_value": "公里"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "D7",
+      "variant_page": 1,
+      "display_value": "服务点到客户"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "F7",
+      "variant_page": 1,
+      "display_value": "最低计费工时"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "G7",
+      "variant_page": 1,
+      "display_value": 1
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "H7",
+      "variant_page": 1,
+      "display_value": "小时"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A8",
+      "variant_page": 1,
+      "display_value": "部件编号"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B8",
+      "variant_page": 1,
+      "display_value": "F-10"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "C8",
+      "variant_page": 1,
+      "display_value": "编号"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "D8",
+      "variant_page": 1,
+      "display_value": "需与设备型号匹配"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "F8",
+      "variant_page": 1,
+      "display_value": "进位步长"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "G8",
+      "variant_page": 1,
+      "display_value": 0.5
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "H8",
+      "variant_page": 1,
+      "display_value": "小时"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A9",
+      "variant_page": 1,
+      "display_value": "更换数量"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B9",
+      "variant_page": 1,
+      "display_value": 1
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "C9",
+      "variant_page": 1,
+      "display_value": "件"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "D9",
+      "variant_page": 1,
+      "display_value": "明确教学假设"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "F9",
+      "variant_page": 1,
+      "display_value": "包含距离"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "G9",
+      "variant_page": 1,
+      "display_value": 20
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "H9",
+      "variant_page": 1,
+      "display_value": "公里"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A10",
+      "variant_page": 1,
+      "display_value": "已批准更换"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B10",
+      "variant_page": 1,
+      "display_value": "是"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "C10",
+      "variant_page": 1,
+      "display_value": "状态"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "D10",
+      "variant_page": 1,
+      "display_value": "明确教学假设"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "F10",
+      "variant_page": 1,
+      "display_value": "超出距离单价"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "G10",
+      "variant_page": 1,
+      "display_value": 3
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "H10",
+      "variant_page": 1,
+      "display_value": "元/公里"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A11",
+      "variant_page": 1,
+      "display_value": "报价性质"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B11",
+      "variant_page": 1,
+      "display_value": "计算练习"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "D11",
+      "variant_page": 1,
+      "display_value": "不代表免费维修已获批准"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A12",
+      "variant_page": 1,
+      "display_value": "设备型号"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B12",
+      "variant_page": 1,
+      "display_value": "X100"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A13",
+      "variant_page": 1,
+      "display_value": "项目"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B13",
+      "variant_page": 1,
+      "display_value": "结果"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A14",
+      "variant_page": 1,
+      "display_value": "输入检查"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B14",
+      "variant_page": 1,
+      "display_value": "可计算"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A15",
+      "variant_page": 1,
+      "display_value": "计费工时 h"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B15",
+      "variant_page": 1,
+      "display_value": 1.5
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A16",
+      "variant_page": 1,
+      "display_value": "工时费 元"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B16",
+      "variant_page": 1,
+      "display_value": 270
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A17",
+      "variant_page": 1,
+      "display_value": "超出包含距离 km"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B17",
+      "variant_page": 1,
+      "display_value": 8
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A18",
+      "variant_page": 1,
+      "display_value": "部件单价 元"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B18",
+      "variant_page": 1,
+      "display_value": 45
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A19",
+      "variant_page": 1,
+      "display_value": "部件费 元"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B19",
+      "variant_page": 1,
+      "display_value": 45
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A20",
+      "variant_page": 1,
+      "display_value": "上门费 元"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B20",
+      "variant_page": 1,
+      "display_value": 24
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A22",
+      "variant_page": 1,
+      "display_value": "报价合计 元"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "B22",
+      "variant_page": 1,
+      "display_value": 339
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A25",
+      "variant_page": 1,
+      "display_value": "黄色为算例输入。WO-005给出1.2小时、28公里与F-10；更换1件且已批准为本表明确假设。尚未批准时不输出可收费合计。"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A27",
+      "variant_page": 1,
+      "display_value": "工时不足1小时按1小时，超过后向上进位至0.5小时。距离只计超出20公里部分，不再乘往返系数。"
+    },
+    {
+      "sheet": "报价算例",
+      "cell": "A29",
+      "variant_page": 1,
+      "display_value": "数据源：课程工单WO-005、计价规则SR-02至SR-04及配件目录。保内免费维修需要另外判断故障原因与条款。"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A2",
+      "variant_page": 2,
+      "display_value": "配件价格与兼容型号"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A3",
+      "variant_page": 2,
+      "display_value": "本资料中的设备、参数、规则和案例均为课程虚构，不可用于真实设备操作。"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A5",
+      "variant_page": 2,
+      "display_value": "部件编号"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B5",
+      "variant_page": 2,
+      "display_value": "名称"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C5",
+      "variant_page": 2,
+      "display_value": "适用型号"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D5",
+      "variant_page": 2,
+      "display_value": "单价 元 含税"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E5",
+      "variant_page": 2,
+      "display_value": "标准数量"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F5",
+      "variant_page": 2,
+      "display_value": "未列型号兼容性"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A6",
+      "variant_page": 2,
+      "display_value": "F-10"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B6",
+      "variant_page": 2,
+      "display_value": "滤芯"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C6",
+      "variant_page": 2,
+      "display_value": "X100"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D6",
+      "variant_page": 2,
+      "display_value": 45
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E6",
+      "variant_page": 2,
+      "display_value": 1
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F6",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A7",
+      "variant_page": 2,
+      "display_value": "F-20"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B7",
+      "variant_page": 2,
+      "display_value": "滤芯"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C7",
+      "variant_page": 2,
+      "display_value": "X200"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D7",
+      "variant_page": 2,
+      "display_value": 65
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E7",
+      "variant_page": 2,
+      "display_value": 1
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F7",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A8",
+      "variant_page": 2,
+      "display_value": "F-20P"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B8",
+      "variant_page": 2,
+      "display_value": "滤芯"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C8",
+      "variant_page": 2,
+      "display_value": "X200-Pro"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D8",
+      "variant_page": 2,
+      "display_value": 85
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E8",
+      "variant_page": 2,
+      "display_value": 1
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F8",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A9",
+      "variant_page": 2,
+      "display_value": "F-30"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B9",
+      "variant_page": 2,
+      "display_value": "滤芯"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C9",
+      "variant_page": 2,
+      "display_value": "X300"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D9",
+      "variant_page": 2,
+      "display_value": 110
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E9",
+      "variant_page": 2,
+      "display_value": 1
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F9",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A10",
+      "variant_page": 2,
+      "display_value": "S-10"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B10",
+      "variant_page": 2,
+      "display_value": "密封组件"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C10",
+      "variant_page": 2,
+      "display_value": "X100"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D10",
+      "variant_page": 2,
+      "display_value": 90
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E10",
+      "variant_page": 2,
+      "display_value": 1
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F10",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A11",
+      "variant_page": 2,
+      "display_value": "S-20"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B11",
+      "variant_page": 2,
+      "display_value": "密封组件"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C11",
+      "variant_page": 2,
+      "display_value": "X200"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D11",
+      "variant_page": 2,
+      "display_value": 120
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E11",
+      "variant_page": 2,
+      "display_value": 1
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F11",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A12",
+      "variant_page": 2,
+      "display_value": "S-20P"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B12",
+      "variant_page": 2,
+      "display_value": "密封组件"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C12",
+      "variant_page": 2,
+      "display_value": "X200-Pro"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D12",
+      "variant_page": 2,
+      "display_value": 160
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E12",
+      "variant_page": 2,
+      "display_value": 1
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F12",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A13",
+      "variant_page": 2,
+      "display_value": "S-30"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B13",
+      "variant_page": 2,
+      "display_value": "密封组件"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C13",
+      "variant_page": 2,
+      "display_value": "X300"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D13",
+      "variant_page": 2,
+      "display_value": 220
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E13",
+      "variant_page": 2,
+      "display_value": 1
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F13",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A14",
+      "variant_page": 2,
+      "display_value": "TF-10"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B14",
+      "variant_page": 2,
+      "display_value": "进风滤网"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C14",
+      "variant_page": 2,
+      "display_value": "T100"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D14",
+      "variant_page": 2,
+      "display_value": 75
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E14",
+      "variant_page": 2,
+      "display_value": 1
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F14",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A15",
+      "variant_page": 2,
+      "display_value": "TF-20"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B15",
+      "variant_page": 2,
+      "display_value": "进风滤网"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C15",
+      "variant_page": 2,
+      "display_value": "T200"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D15",
+      "variant_page": 2,
+      "display_value": 95
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E15",
+      "variant_page": 2,
+      "display_value": 1
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F15",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A16",
+      "variant_page": 2,
+      "display_value": "CB-10"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B16",
+      "variant_page": 2,
+      "display_value": "信号线"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C16",
+      "variant_page": 2,
+      "display_value": "S10"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D16",
+      "variant_page": 2,
+      "display_value": 35
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E16",
+      "variant_page": 2,
+      "display_value": 2
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F16",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A17",
+      "variant_page": 2,
+      "display_value": "CB-20"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "B17",
+      "variant_page": 2,
+      "display_value": "信号线"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "C17",
+      "variant_page": 2,
+      "display_value": "S20"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "D17",
+      "variant_page": 2,
+      "display_value": 45
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "E17",
+      "variant_page": 2,
+      "display_value": 2
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "F17",
+      "variant_page": 2,
+      "display_value": "未列出的型号不承诺兼容"
+    },
+    {
+      "sheet": "配件目录",
+      "cell": "A20",
+      "variant_page": 2,
+      "display_value": "数据源：课程配件底稿。相近编号不代表互换，例如S-20是X200密封组件，S20是压力传感器型号。"
+    }
+  ],
+  "note": "原件范围对照，不是DocMind输出；不上传为知识库文档。"
+}

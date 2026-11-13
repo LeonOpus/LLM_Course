@@ -1,0 +1,169 @@
+ 	  		   	  		 	 	   		   		   	        	 		  		 	  		   	 	     	  		 	 	   		   		   	  			 	  			  	  		  	 	 		 		    	 		 	 		 	 		  		   	  			 	  	  		   	 	      		  	   	 		 	 		  	    		 		   		  	   		 			  		     		  	 	 		  	    		 			  			  	  		 	    		   	  		   	 		   		 		   	   			  	 		   	   		 	    		  		 		  	 	 		   		 		  		   		  		  		  	   		 			 		  	 	  		 	    		  	  		  	 	  		  	  		  		   		 			  		  		  			 	  		  	 	  		 			  			  	 		  	   		    	 		   	   		  		 		   	   		 	    		 	    		   	 		  	 	  		 			 		   		  		 			 		    	  		 		   		 	   		   	   		     		  	 	 		  	   		  	 	 		  	   		  	 	  		 	   		   		 		   	  		   		  		  	   			  	 		    	  		  		 		  	 	 		   		  		 		   		  	  		   	  		    	 		  		  		  		  		   	  		    	  		  	  		   	   		  		  		      		  		  		  		  		 		   		     		  		  		   	  		  		  		    	 		   		  		  	   			  	  		 			 		  	   		  	    		  	  		  		   		  		  			 	  		    	  			    		   	   		 	    		  	   		 		   		 	 	  		  	  		  	 	  		  	   		  	  		  	   		    	 		   	  		   		  		   	  		 			  		   	  		 	    		   	  		  		 		  	 	 		    	  			     		      		  	   		 		  		   	   		  	   		   	  		  	  		   		  		  		  		     		  		   		      		 	    		 	 	  		 			  		 			 		   		  		  	   		 		   			    		  	   		   	   		   	  		 	   		    	  		 	    		  		  		 			  		   	  		  		  			     		 	    		 	   		   		  		 	 	 		    	  		   	 		   	   		 			 		  	  {
+  "id": "V04",
+  "source_document_id": "D11",
+  "source_file": "materials/corpus/documents/D11-配件兼容与服务计费手册.pdf",
+  "variant_file": "materials/corpus/variants/V04-D11-配件表重新分页.pdf",
+  "scope": "12部件表，原8+4行改为4+4+4行",
+  "transformation": "重复双层表头、保留合并表头，改变分页位置",
+  "source_sha256": "116a6476338302595a3760da68ef6ce8b0e7955c083bad296b5871dbdf87d368",
+  "variant_sha256": "83c48fb8836d3433de3f614f12c43ac138830e0e13a1ad527bc1b64063140304",
+  "mapping": [
+    {
+      "source_page": 3,
+      "source_row_including_two_header_rows": 3,
+      "cells": [
+        "F-10",
+        "滤芯",
+        "X100",
+        "45",
+        "1",
+        "45"
+      ],
+      "variant_page": 1
+    },
+    {
+      "source_page": 3,
+      "source_row_including_two_header_rows": 4,
+      "cells": [
+        "F-20",
+        "滤芯",
+        "X200",
+        "65",
+        "1",
+        "65"
+      ],
+      "variant_page": 1
+    },
+    {
+      "source_page": 3,
+      "source_row_including_two_header_rows": 5,
+      "cells": [
+        "F-20P",
+        "滤芯",
+        "X200-Pro",
+        "85",
+        "1",
+        "85"
+      ],
+      "variant_page": 1
+    },
+    {
+      "source_page": 3,
+      "source_row_including_two_header_rows": 6,
+      "cells": [
+        "F-30",
+        "滤芯",
+        "X300",
+        "110",
+        "1",
+        "110"
+      ],
+      "variant_page": 1
+    },
+    {
+      "source_page": 3,
+      "source_row_including_two_header_rows": 7,
+      "cells": [
+        "S-10",
+        "密封组件",
+        "X100",
+        "90",
+        "1",
+        "90"
+      ],
+      "variant_page": 2
+    },
+    {
+      "source_page": 3,
+      "source_row_including_two_header_rows": 8,
+      "cells": [
+        "S-20",
+        "密封组件",
+        "X200",
+        "120",
+        "1",
+        "120"
+      ],
+      "variant_page": 2
+    },
+    {
+      "source_page": 3,
+      "source_row_including_two_header_rows": 9,
+      "cells": [
+        "S-20P",
+        "密封组件",
+        "X200-Pro",
+        "160",
+        "1",
+        "160"
+      ],
+      "variant_page": 2
+    },
+    {
+      "source_page": 3,
+      "source_row_including_two_header_rows": 10,
+      "cells": [
+        "S-30",
+        "密封组件",
+        "X300",
+        "220",
+        "1",
+        "220"
+      ],
+      "variant_page": 2
+    },
+    {
+      "source_page": 4,
+      "source_row_including_two_header_rows": 3,
+      "cells": [
+        "TF-10",
+        "进风滤网",
+        "T100",
+        "75",
+        "1",
+        "75"
+      ],
+      "variant_page": 3
+    },
+    {
+      "source_page": 4,
+      "source_row_including_two_header_rows": 4,
+      "cells": [
+        "TF-20",
+        "进风滤网",
+        "T200",
+        "95",
+        "1",
+        "95"
+      ],
+      "variant_page": 3
+    },
+    {
+      "source_page": 4,
+      "source_row_including_two_header_rows": 5,
+      "cells": [
+        "CB-10",
+        "信号线",
+        "S10",
+        "35",
+        "2",
+        "70"
+      ],
+      "variant_page": 3
+    },
+    {
+      "source_page": 4,
+      "source_row_including_two_header_rows": 6,
+      "cells": [
+        "CB-20",
+        "信号线",
+        "S20",
+        "45",
+        "2",
+        "90"
+      ],
+      "variant_page": 3
+    }
+  ],
+  "note": "原件范围对照，不是DocMind输出；不上传为知识库文档。"
+}

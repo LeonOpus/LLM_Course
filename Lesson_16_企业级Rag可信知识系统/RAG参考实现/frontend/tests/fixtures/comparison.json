@@ -1,0 +1,384 @@
+{
+  "schema_version": "rag-comparison-view/1",
+  "verification": "recomputed_from_frozen_records",
+  "comparison": {
+    "paired_n": 0,
+    "pending": 1,
+    "answer_accuracy_delta": null,
+    "changes": {
+      "pending": 1
+    },
+    "pairs": [
+      {
+        "case_id": "Q001",
+        "before": null,
+        "after": null,
+        "change": "pending"
+      }
+    ],
+    "config_before": {
+      "strategy": "baseline",
+      "top_k": 10,
+      "final_k": 5,
+      "execution_origin": "protocol_fixture"
+    },
+    "config_after": {
+      "strategy": "baseline",
+      "top_k": 10,
+      "final_k": 5,
+      "execution_origin": "protocol_fixture"
+    },
+    "review_status": "human_or_pending"
+  },
+  "runs": {
+    "before": {
+      "planned": 1,
+      "execution_counts": {
+        "ok": 1
+      },
+      "review_status": "pending_review",
+      "metrics": {
+        "answer_accuracy": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "behavior_accuracy": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "retrieval_recall": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "context_recall": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "citation_precision": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "citation_complete": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "rag_success": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        }
+      },
+      "latency_ms": {
+        "mean": 0.02062500000000328,
+        "n": 1,
+        "includes_failed_requests": true
+      },
+      "tokens": {
+        "known_total": 20,
+        "known_n": 1,
+        "unknown_n": 0
+      },
+      "cost": null,
+      "config": {
+        "strategy": "baseline",
+        "top_k": 10,
+        "final_k": 5,
+        "execution_origin": "protocol_fixture"
+      },
+      "observed_configurations": [
+        {
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        }
+      ],
+      "fingerprints": {
+        "cases_sha256": "2036a408bd79655e936e0a2b06327e298ae514dfeaf3363ccfd17d3efc0dd06b",
+        "corpus_sha256": "229f39cfb33113fc07bd9eee61ad7b7a49ddb34d53beb986ec1c9fe3f17e0f98",
+        "records_sha256": "38119cd3d4292057e69eeb59ed3843f6d054d655e0c81ad6ff560bd713d2b8a5",
+        "config_sha256": "e9bbf6582d06f2a1f298d10c0f00b8f03c6736675705346ab54a8ccd912d46bb",
+        "scoring_version": "m11-v1"
+      }
+    },
+    "after": {
+      "planned": 1,
+      "execution_counts": {
+        "ok": 1
+      },
+      "review_status": "pending_review",
+      "metrics": {
+        "answer_accuracy": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "behavior_accuracy": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "retrieval_recall": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "context_recall": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "citation_precision": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "citation_complete": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        },
+        "rag_success": {
+          "value": null,
+          "n": 0,
+          "pending": 1,
+          "total": 1,
+          "not_applicable": 0
+        }
+      },
+      "latency_ms": {
+        "mean": 0.029416999999996862,
+        "n": 1,
+        "includes_failed_requests": true
+      },
+      "tokens": {
+        "known_total": 20,
+        "known_n": 1,
+        "unknown_n": 0
+      },
+      "cost": null,
+      "config": {
+        "strategy": "baseline",
+        "top_k": 10,
+        "final_k": 5,
+        "execution_origin": "protocol_fixture"
+      },
+      "observed_configurations": [
+        {
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        }
+      ],
+      "fingerprints": {
+        "cases_sha256": "2036a408bd79655e936e0a2b06327e298ae514dfeaf3363ccfd17d3efc0dd06b",
+        "corpus_sha256": "229f39cfb33113fc07bd9eee61ad7b7a49ddb34d53beb986ec1c9fe3f17e0f98",
+        "records_sha256": "882fe121c091a2c7af41c436a7049870f2ba0193f9840ccba6c82cc0c7095acc",
+        "config_sha256": "e9bbf6582d06f2a1f298d10c0f00b8f03c6736675705346ab54a8ccd912d46bb",
+        "scoring_version": "m11-v1"
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "Q001",
+      "question": "X100功率？",
+      "primary_task": "T01",
+      "primary_source_format": "pdf",
+      "change": "pending",
+      "before": {
+        "execution": "ok",
+        "elapsed_ms": 0.02062500000000328,
+        "answer": "X100功率180W",
+        "status": "answered",
+        "citations": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "runtime-a",
+            "text": "X100功率180W",
+            "locator": {
+              "kind": "pdf",
+              "page": 3
+            }
+          }
+        ],
+        "trace": {
+          "candidates": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "context": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        },
+        "scores": {
+          "case_id": "Q001",
+          "reviewer_kind": null,
+          "answer_correct": null,
+          "behavior_correct": null,
+          "retrieval_recall": null,
+          "context_recall": null,
+          "citation_precision": null,
+          "citation_complete": null,
+          "rag_success": null,
+          "primary_task": "T01",
+          "primary_source_format": "pdf",
+          "execution": "ok",
+          "evidence_applicable": true,
+          "citation_applicable": true
+        }
+      },
+      "after": {
+        "execution": "ok",
+        "elapsed_ms": 0.029416999999996862,
+        "answer": "X100功率180W",
+        "status": "answered",
+        "citations": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "runtime-a",
+            "text": "X100功率180W",
+            "locator": {
+              "kind": "pdf",
+              "page": 3
+            }
+          }
+        ],
+        "trace": {
+          "candidates": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "context": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        },
+        "scores": {
+          "case_id": "Q001",
+          "reviewer_kind": null,
+          "answer_correct": null,
+          "behavior_correct": null,
+          "retrieval_recall": null,
+          "context_recall": null,
+          "citation_precision": null,
+          "citation_complete": null,
+          "rag_success": null,
+          "primary_task": "T01",
+          "primary_source_format": "pdf",
+          "execution": "ok",
+          "evidence_applicable": true,
+          "citation_applicable": true
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "浏览器导入不重新读取原始运行目录；应使用本工具生成，来源标记不是数字签名。",
+    "百分比与差值只针对已复核且适用的配对子集；未复核不等于错误。",
+    "固定响应演练不代表模型效果；模型辅助复核仍需人工核查。",
+    "Token仅包含响应已返回用量；未知成本不等于免费。"
+  ]
+}

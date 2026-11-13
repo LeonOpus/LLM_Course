@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readGenerationDebug} from '../src/generationPresentation.ts';
+import {consumeAnswer,reduceAnswer} from '../src/answer.ts';
+const ledger={applicability:{state:'supported',reason:'模型声明'},claims:[],calculations:[{label:'服务费',computed:'100',unit:'元'}]};
+const result={status:'answered',answer:'100 元',citations:[],run_id:'a'.repeat(32),timing:{total_ms:1},trace:{run_id:'a'.repeat(32),mode:'live',candidates:[],context:[],generation_profile:{mode:'evidence_ledger'}},ledger,validation:{semantic_support:'not_evaluated',arithmetic:'passed',formula_and_units:'not_evaluated'}};
+test('旧记录缺少生成配置和账本不补造',()=>assert.deepEqual(readGenerationDebug({},undefined),{profile:undefined,ledger:undefined,validation:undefined}));
+test('仅展示正式结果的账本并保留未复核状态',()=>assert.deepEqual(readGenerationDebug(result.trace,result),{profile:result.trace.generation_profile,ledger,validation:result.validation}));
+test('错误trace的原始模型账本不能变成正式结果',()=>{const trace={generation_profile:{mode:'evidence_ledger'},raw_model_output:JSON.stringify(ledger),ledger,result};assert.deepEqual(readGenerationDebug(trace,undefined),{profile:trace.generation_profile,ledger:undefined,validation:undefined});});
+test('新请求失败或取消不残留上一条账本',()=>{const start=reduceAnswer({status:'completed',result},{type:'start'});for(const type of ['error','cancel']){const next=reduceAnswer(start,{type,message:'bad'});assert.equal(readGenerationDebug(result.trace,next.result).ledger,undefined);}});
+test('实际SSE最终响应保留账本与核验字段',async()=>{const seen=[];await consumeAnswer('17分钟',[],e=>seen.push(e),undefined,async()=>new Response('data: '+JSON.stringify({type:'result',payload:result})+'\n\n',{headers:{'Content-Type':'text/event-stream'}}));assert.deepEqual(seen[0].payload.ledger,ledger);assert.equal(seen[0].payload.validation.formula_and_units,'not_evaluated');});

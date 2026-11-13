@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {consumeAnswer,reduceAnswer} from '../src/answer.ts';
+const result={type:'result',payload:{status:'answered',answer:'260W',citations:[],run_id:'a'.repeat(32),timing:{total_ms:1},trace:{run_id:'a'.repeat(32),mode:'live',candidates:[],context:[]}}};
+function stream(events,piece=7){const bytes=new TextEncoder().encode(events.map(e=>'data: '+JSON.stringify(e)+'\n\n').join(''));return new Response(new ReadableStream({start(controller){for(let i=0;i<bytes.length;i+=piece)controller.enqueue(bytes.slice(i,i+piece));controller.close();}}),{headers:{'Content-Type':'text/event-stream'}});}
+test('真实字节流跨UTF8边界仍还原JSON事件',async()=>{const events=[];await consumeAnswer('问题',[],e=>events.push(e),undefined,async(url,init)=>{assert.equal(url,'/api/ask/stream');assert.equal(JSON.parse(init.body).question,'问题');assert.equal(JSON.parse(init.body).top_k,30);assert.equal(JSON.parse(init.body).final_k,15);return stream([{type:'draft',run_id:'a'.repeat(32),text:'中文输出',verified:false},result],1);});assert.equal(events[0].text,'中文输出');assert.equal(events[1].type,'result');});
+test('没有最终结果的流中断必须失败',async()=>{await assert.rejects(consumeAnswer('q',[],()=>{},undefined,async()=>stream([{type:'phase',run_id:'a'.repeat(32),stage:'generate'}])),/中断|结果/);});
+test('服务端错误事件不能视作成功',async()=>{const seen=[];await assert.rejects(consumeAnswer('q',[],e=>seen.push(e),undefined,async()=>stream([{type:'error',run_id:'a'.repeat(32),message:'引用校验失败'}])),/引用/);assert.equal(seen[0].type,'error');});
+test('HTTP错误显示脱敏detail',async()=>{await assert.rejects(consumeAnswer('q',[],()=>{},undefined,async()=>Response.json({detail:'配置不匹配'},{status:409})),/配置不匹配/);});
+test('用户取消信号直接传给fetch',async()=>{const c=new AbortController();c.abort();await assert.rejects(consumeAnswer('q',[],()=>{},c.signal,async(url,init)=>{assert.equal(init.signal,c.signal);throw new DOMException('aborted','AbortError');}),e=>e.name==='AbortError');});
+test('新请求清空旧答案',()=>{const state=reduceAnswer({status:'completed',result:{answer:'旧答案'}},{type:'start'});assert.equal(state.status,'running');assert.equal(state.result,undefined);});
+test('取消后到达的旧结果不得覆盖状态',()=>{let state=reduceAnswer({status:'running'},{type:'cancel'});state=reduceAnswer(state,result);assert.equal(state.status,'cancelled');assert.equal(state.result,undefined);});
+test('草稿不构成已完成答案',()=>{const state=reduceAnswer({status:'running',draft:''},{type:'draft',run_id:'a'.repeat(32),text:'260W',verified:false});assert.equal(state.status,'running');assert.equal(state.draft,'260W');assert.equal(state.result,undefined);});

@@ -1,0 +1,69 @@
+{
+  "stage": "M19B",
+  "packages": [
+    {
+      "name": "M10-完成版.zip",
+      "sha256": "8d4b9a86bfd0f2ad644e43cf76648207d74a6f1d61a95c0cef0778c85fe774da"
+    },
+    {
+      "name": "M11-完成版-评估增量包.zip",
+      "sha256": "52bceb0ebb2859b3a8942f6854b2638e6b782b27f7093b506ceb3cc77282748d"
+    },
+    {
+      "name": "M11B-评估对比面板增量.zip",
+      "sha256": "fe98f2acbb778a425974980bbf5b5661f3b784e32e3e3c45d1aaf63a79352683"
+    },
+    {
+      "name": "M12B-独立索引参考增量.zip",
+      "sha256": "39058f1bdad60e73ed8bca7c7fec44a99b4ed0573abb413c6b557a9fe793fe96"
+    },
+    {
+      "name": "M13A-混合召回参考增量.zip",
+      "sha256": "828062eee291d78b92d777461c60842d2bbe8fe5935712a54016b06a935ad7ed"
+    },
+    {
+      "name": "M13B-查询改写参考增量.zip",
+      "sha256": "0d7322b431d47e0077810566d3ac2b66f51572ba4a85e26d2580cfb529f4b883"
+    },
+    {
+      "name": "M14-可靠生成参考增量.zip",
+      "sha256": "357f2f70a89f84d8f66d3c0825d0bbb1a142a3c5013b596736efbd8d67bd2682"
+    },
+    {
+      "name": "M15A-完整前端参考.zip",
+      "sha256": "b194ade0b84660b10368104332b1752bd0dfd7fea3cd143a7173da70eebd1c07"
+    },
+    {
+      "name": "M12D-跨页策略索引参考增量.zip",
+      "sha256": "62a97dace5d3aa628d079525d60a1e483b69f5eda181931f9e161a8f5667c63a"
+    },
+    {
+      "name": "M16A-调用用量账本参考增量.zip",
+      "sha256": "f418810df921920e958c1b55624837b0521e938e471798e71d1ba50b49905c56"
+    },
+    {
+      "name": "M16B-标价估算参考增量.zip",
+      "sha256": "33f20fdf6421b432a0402521fbc5d179e855e5353ed9fc986a742735a8fe1fd0"
+    },
+    {
+      "name": "M17A-冻结与保留集参考增量.zip",
+      "sha256": "28aaffdd77745edc6ee8e4a76263fcccd3f8649b2a1d9c558e277735a4ed422c"
+    },
+    {
+      "name": "M17B-百炼辅助评分参考增量.zip",
+      "sha256": "5e999b580dd5b3d91609bb0fc1e7b9d4533418c076d112b81c310f02503c1759"
+    },
+    {
+      "name": "M18A-原文上下文参考增量.zip",
+      "sha256": "a4d2eb6b56ce768fb2a325460eec0ada4e61a3cd74914fb773dbc7363285ba1e"
+    },
+    {
+      "name": "M19A-视觉补充参考增量.zip",
+      "sha256": "2f51ec87e443dd86b5e3ee959a6b870830c68fa25f3f9e581121701894d267fc"
+    },
+    {
+      "name": "M19B-PPT视觉来源参考增量.zip",
+      "sha256": "6e8d243150c772552b6774307741df07ad5902867aace1ffc080ceecc3c9a6cf"
+    }
+  ]
+}

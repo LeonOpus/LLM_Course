@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {scoreLabel,readRetrievalDebug} from '../src/retrievalPresentation.ts';
+import {consumeAnswer} from '../src/answer.ts';
+test('三种检索分数使用不同名称',()=>{assert.equal(scoreLabel('cosine'),'余弦相似度');assert.equal(scoreLabel('bm25'),'BM25分');assert.equal(scoreLabel('rrf'),'RRF融合分');});
+test('旧分数类型未知时不猜成余弦或准确率',()=>{assert.equal(scoreLabel(undefined),'未标记类型的分数');assert.equal(scoreLabel('new'),'未标记类型的分数');});
+test('旧运行缺配置保留未知',()=>assert.deepEqual(readRetrievalDebug({candidates:[]}),{profile:undefined,routes:undefined}));
+test('实际profile与routes来自本次trace',()=>{const t={retrieval_profile:{mode:'bm25'},retrieval_routes:{dense:[],bm25:[]}};assert.deepEqual(readRetrievalDebug(t),{profile:t.retrieval_profile,routes:t.retrieval_routes});});
+test('损坏配置不冒充对象',()=>assert.deepEqual(readRetrievalDebug({retrieval_profile:[],retrieval_routes:null}),{profile:undefined,routes:undefined}));
+const end=()=>new Response('data: '+JSON.stringify({type:'result',payload:{status:'refused',answer:'无证据',citations:[],run_id:'a'.repeat(32),timing:{total_ms:1},trace:{run_id:'a'.repeat(32),mode:'live',candidates:[],context:[]}}})+'\n\n',{headers:{'Content-Type':'text/event-stream'}});
+test('选择重排后发送rerank且不添加检索模式',async()=>{await consumeAnswer('q',[],()=>{},undefined,async(url,init)=>{const b=JSON.parse(init.body);assert.equal(b.strategy,'rerank');assert.equal('retrieval_mode' in b,false);return end();},'rerank');});
+test('不支持的策略在请求前拒绝',async()=>{let called=false;await assert.rejects(consumeAnswer('q',[],()=>{},undefined,async()=>{called=true;return end();},'fake'),/策略/);assert.equal(called,false);});

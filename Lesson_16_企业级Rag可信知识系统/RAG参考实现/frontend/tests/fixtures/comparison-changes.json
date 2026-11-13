@@ -1,0 +1,844 @@
+{
+  "schema_version": "rag-comparison-view/1",
+  "verification": "recomputed_from_frozen_records",
+  "comparison": {
+    "paired_n": 3,
+    "pending": 1,
+    "answer_accuracy_delta": 0.0,
+    "changes": {
+      "gain": 1,
+      "regression": 1,
+      "unchanged": 1,
+      "pending": 1
+    },
+    "pairs": [
+      {
+        "case_id": "DEMO001",
+        "before": false,
+        "after": true,
+        "change": "gain"
+      },
+      {
+        "case_id": "DEMO002",
+        "before": true,
+        "after": false,
+        "change": "regression"
+      },
+      {
+        "case_id": "DEMO003",
+        "before": true,
+        "after": true,
+        "change": "unchanged"
+      },
+      {
+        "case_id": "DEMO004",
+        "before": null,
+        "after": null,
+        "change": "pending"
+      }
+    ],
+    "config_before": {
+      "strategy": "baseline",
+      "top_k": 10,
+      "final_k": 5,
+      "execution_origin": "protocol_fixture",
+      "run_label": "人工固定响应演练 / before"
+    },
+    "config_after": {
+      "strategy": "rerank",
+      "top_k": 10,
+      "final_k": 5,
+      "execution_origin": "protocol_fixture",
+      "run_label": "人工固定响应演练 / after"
+    },
+    "review_status": "human_or_pending"
+  },
+  "runs": {
+    "before": {
+      "planned": 4,
+      "execution_counts": {
+        "ok": 4
+      },
+      "review_status": "pending_review",
+      "metrics": {
+        "answer_accuracy": {
+          "value": 0.6666666666666666,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "behavior_accuracy": {
+          "value": 1.0,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "retrieval_recall": {
+          "value": 1.0,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "context_recall": {
+          "value": 1.0,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "citation_precision": {
+          "value": 0.6666666666666666,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "citation_complete": {
+          "value": 1.0,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "rag_success": {
+          "value": 0.6666666666666666,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        }
+      },
+      "latency_ms": {
+        "mean": 0.018729250000001918,
+        "n": 4,
+        "includes_failed_requests": true
+      },
+      "tokens": {
+        "known_total": 80,
+        "known_n": 4,
+        "unknown_n": 0
+      },
+      "cost": null,
+      "config": {
+        "strategy": "baseline",
+        "top_k": 10,
+        "final_k": 5,
+        "execution_origin": "protocol_fixture",
+        "run_label": "人工固定响应演练 / before"
+      },
+      "observed_configurations": [
+        {
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "fixture-v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        }
+      ],
+      "fingerprints": {
+        "cases_sha256": "1fa14656a9c9bb19e8010bc813b9e293e83676ff2c94bf161e4d5af91d5f20b1",
+        "corpus_sha256": "229f39cfb33113fc07bd9eee61ad7b7a49ddb34d53beb986ec1c9fe3f17e0f98",
+        "records_sha256": "11881f5fd10aad322586006effa0ce85d0b3cf62f1ab048377fa1b3e4007b4f7",
+        "config_sha256": "2b20b121b9a6d37811c5c5cde4c6713d84f55b6674598dfb99b676c3cafb17bf",
+        "scoring_version": "m11-v1"
+      }
+    },
+    "after": {
+      "planned": 4,
+      "execution_counts": {
+        "ok": 4
+      },
+      "review_status": "pending_review",
+      "metrics": {
+        "answer_accuracy": {
+          "value": 0.6666666666666666,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "behavior_accuracy": {
+          "value": 1.0,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "retrieval_recall": {
+          "value": 1.0,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "context_recall": {
+          "value": 1.0,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "citation_precision": {
+          "value": 0.6666666666666666,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "citation_complete": {
+          "value": 1.0,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        },
+        "rag_success": {
+          "value": 0.6666666666666666,
+          "n": 3,
+          "pending": 1,
+          "total": 4,
+          "not_applicable": 0
+        }
+      },
+      "latency_ms": {
+        "mean": 0.016250249999998773,
+        "n": 4,
+        "includes_failed_requests": true
+      },
+      "tokens": {
+        "known_total": 80,
+        "known_n": 4,
+        "unknown_n": 0
+      },
+      "cost": null,
+      "config": {
+        "strategy": "rerank",
+        "top_k": 10,
+        "final_k": 5,
+        "execution_origin": "protocol_fixture",
+        "run_label": "人工固定响应演练 / after"
+      },
+      "observed_configurations": [
+        {
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "fixture-v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        }
+      ],
+      "fingerprints": {
+        "cases_sha256": "1fa14656a9c9bb19e8010bc813b9e293e83676ff2c94bf161e4d5af91d5f20b1",
+        "corpus_sha256": "229f39cfb33113fc07bd9eee61ad7b7a49ddb34d53beb986ec1c9fe3f17e0f98",
+        "records_sha256": "608dfe6647bb59533007e3b593a6cbe35ae57f0ecd5c9fe5f03c16526079af7f",
+        "config_sha256": "98dfd219a047092e0ccc62f23591010465b60b13ee350758700af3dd4b57c3bc",
+        "scoring_version": "m11-v1"
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "DEMO001",
+      "question": "固定响应演练 1：X100功率？",
+      "primary_task": "T01",
+      "primary_source_format": "pdf",
+      "change": "gain",
+      "before": {
+        "execution": "ok",
+        "elapsed_ms": 0.026500000000005686,
+        "answer": "X100功率999W",
+        "status": "answered",
+        "citations": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "runtime-a",
+            "text": "X100功率180W",
+            "locator": {
+              "kind": "pdf",
+              "page": 3
+            }
+          }
+        ],
+        "trace": {
+          "candidates": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "context": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "fixture-v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        },
+        "scores": {
+          "case_id": "DEMO001",
+          "reviewer_kind": "human",
+          "answer_correct": false,
+          "behavior_correct": true,
+          "retrieval_recall": 1.0,
+          "context_recall": 1.0,
+          "citation_precision": 0.0,
+          "citation_complete": true,
+          "rag_success": false,
+          "primary_task": "T01",
+          "primary_source_format": "pdf",
+          "execution": "ok",
+          "evidence_applicable": true,
+          "citation_applicable": true
+        }
+      },
+      "after": {
+        "execution": "ok",
+        "elapsed_ms": 0.01987499999999559,
+        "answer": "X100功率180W",
+        "status": "answered",
+        "citations": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "runtime-a",
+            "text": "X100功率180W",
+            "locator": {
+              "kind": "pdf",
+              "page": 3
+            }
+          }
+        ],
+        "trace": {
+          "candidates": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "context": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "fixture-v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        },
+        "scores": {
+          "case_id": "DEMO001",
+          "reviewer_kind": "human",
+          "answer_correct": true,
+          "behavior_correct": true,
+          "retrieval_recall": 1.0,
+          "context_recall": 1.0,
+          "citation_precision": 1.0,
+          "citation_complete": true,
+          "rag_success": true,
+          "primary_task": "T01",
+          "primary_source_format": "pdf",
+          "execution": "ok",
+          "evidence_applicable": true,
+          "citation_applicable": true
+        }
+      }
+    },
+    {
+      "case_id": "DEMO002",
+      "question": "固定响应演练 2：X100功率？",
+      "primary_task": "T01",
+      "primary_source_format": "pdf",
+      "change": "regression",
+      "before": {
+        "execution": "ok",
+        "elapsed_ms": 0.018041999999995895,
+        "answer": "X100功率180W",
+        "status": "answered",
+        "citations": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "runtime-a",
+            "text": "X100功率180W",
+            "locator": {
+              "kind": "pdf",
+              "page": 3
+            }
+          }
+        ],
+        "trace": {
+          "candidates": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "context": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "fixture-v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        },
+        "scores": {
+          "case_id": "DEMO002",
+          "reviewer_kind": "human",
+          "answer_correct": true,
+          "behavior_correct": true,
+          "retrieval_recall": 1.0,
+          "context_recall": 1.0,
+          "citation_precision": 1.0,
+          "citation_complete": true,
+          "rag_success": true,
+          "primary_task": "T01",
+          "primary_source_format": "pdf",
+          "execution": "ok",
+          "evidence_applicable": true,
+          "citation_applicable": true
+        }
+      },
+      "after": {
+        "execution": "ok",
+        "elapsed_ms": 0.015792000000000583,
+        "answer": "X100功率999W",
+        "status": "answered",
+        "citations": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "runtime-a",
+            "text": "X100功率180W",
+            "locator": {
+              "kind": "pdf",
+              "page": 3
+            }
+          }
+        ],
+        "trace": {
+          "candidates": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "context": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "fixture-v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        },
+        "scores": {
+          "case_id": "DEMO002",
+          "reviewer_kind": "human",
+          "answer_correct": false,
+          "behavior_correct": true,
+          "retrieval_recall": 1.0,
+          "context_recall": 1.0,
+          "citation_precision": 0.0,
+          "citation_complete": true,
+          "rag_success": false,
+          "primary_task": "T01",
+          "primary_source_format": "pdf",
+          "execution": "ok",
+          "evidence_applicable": true,
+          "citation_applicable": true
+        }
+      }
+    },
+    {
+      "case_id": "DEMO003",
+      "question": "固定响应演练 3：X100功率？",
+      "primary_task": "T01",
+      "primary_source_format": "pdf",
+      "change": "unchanged",
+      "before": {
+        "execution": "ok",
+        "elapsed_ms": 0.015417000000003678,
+        "answer": "X100功率180W",
+        "status": "answered",
+        "citations": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "runtime-a",
+            "text": "X100功率180W",
+            "locator": {
+              "kind": "pdf",
+              "page": 3
+            }
+          }
+        ],
+        "trace": {
+          "candidates": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "context": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "fixture-v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        },
+        "scores": {
+          "case_id": "DEMO003",
+          "reviewer_kind": "human",
+          "answer_correct": true,
+          "behavior_correct": true,
+          "retrieval_recall": 1.0,
+          "context_recall": 1.0,
+          "citation_precision": 1.0,
+          "citation_complete": true,
+          "rag_success": true,
+          "primary_task": "T01",
+          "primary_source_format": "pdf",
+          "execution": "ok",
+          "evidence_applicable": true,
+          "citation_applicable": true
+        }
+      },
+      "after": {
+        "execution": "ok",
+        "elapsed_ms": 0.014833999999998293,
+        "answer": "X100功率180W",
+        "status": "answered",
+        "citations": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "runtime-a",
+            "text": "X100功率180W",
+            "locator": {
+              "kind": "pdf",
+              "page": 3
+            }
+          }
+        ],
+        "trace": {
+          "candidates": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "context": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "fixture-v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        },
+        "scores": {
+          "case_id": "DEMO003",
+          "reviewer_kind": "human",
+          "answer_correct": true,
+          "behavior_correct": true,
+          "retrieval_recall": 1.0,
+          "context_recall": 1.0,
+          "citation_precision": 1.0,
+          "citation_complete": true,
+          "rag_success": true,
+          "primary_task": "T01",
+          "primary_source_format": "pdf",
+          "execution": "ok",
+          "evidence_applicable": true,
+          "citation_applicable": true
+        }
+      }
+    },
+    {
+      "case_id": "DEMO004",
+      "question": "固定响应演练 4：X100功率？",
+      "primary_task": "T01",
+      "primary_source_format": "pdf",
+      "change": "pending",
+      "before": {
+        "execution": "ok",
+        "elapsed_ms": 0.014958000000002414,
+        "answer": "X100功率180W",
+        "status": "answered",
+        "citations": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "runtime-a",
+            "text": "X100功率180W",
+            "locator": {
+              "kind": "pdf",
+              "page": 3
+            }
+          }
+        ],
+        "trace": {
+          "candidates": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "context": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "fixture-v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        },
+        "scores": {
+          "case_id": "DEMO004",
+          "reviewer_kind": null,
+          "answer_correct": null,
+          "behavior_correct": null,
+          "retrieval_recall": null,
+          "context_recall": null,
+          "citation_precision": null,
+          "citation_complete": null,
+          "rag_success": null,
+          "primary_task": "T01",
+          "primary_source_format": "pdf",
+          "execution": "ok",
+          "evidence_applicable": true,
+          "citation_applicable": true
+        }
+      },
+      "after": {
+        "execution": "ok",
+        "elapsed_ms": 0.014500000000000624,
+        "answer": "X100功率180W",
+        "status": "answered",
+        "citations": [
+          {
+            "chunk_id": "c1",
+            "doc_id": "runtime-a",
+            "text": "X100功率180W",
+            "locator": {
+              "kind": "pdf",
+              "page": 3
+            }
+          }
+        ],
+        "trace": {
+          "candidates": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "context": [
+            {
+              "chunk_id": "c1",
+              "doc_id": "runtime-a",
+              "text": "X100功率180W",
+              "locator": {
+                "kind": "pdf",
+                "page": 3
+              }
+            }
+          ],
+          "models": {
+            "chat": "fixed-fixture"
+          },
+          "prompt_version": "fixture-v1",
+          "generation": {
+            "temperature": 0
+          },
+          "context_max_chars": 6000,
+          "embedding": {
+            "model": "fixture",
+            "dimensions": 1024
+          }
+        },
+        "scores": {
+          "case_id": "DEMO004",
+          "reviewer_kind": null,
+          "answer_correct": null,
+          "behavior_correct": null,
+          "retrieval_recall": null,
+          "context_recall": null,
+          "citation_precision": null,
+          "citation_complete": null,
+          "rag_success": null,
+          "primary_task": "T01",
+          "primary_source_format": "pdf",
+          "execution": "ok",
+          "evidence_applicable": true,
+          "citation_applicable": true
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "浏览器导入不重新读取原始运行目录；应使用本工具生成，来源标记不是数字签名。",
+    "百分比与差值只针对已复核且适用的配对子集；未复核不等于错误。",
+    "固定响应演练不代表模型效果；模型辅助复核仍需人工核查。",
+    "Token仅包含响应已返回用量；未知成本不等于免费。"
+  ]
+}

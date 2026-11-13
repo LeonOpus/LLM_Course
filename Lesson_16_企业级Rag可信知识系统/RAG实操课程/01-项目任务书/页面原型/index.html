@@ -1,0 +1,391 @@
+<!-- LPV2:cmFnL1JBRy0wNi3lrp7mk43mnZDmlpnljIUuemlw:85bf3b33842e3e4dcaee427c1cea2d267cb18e95876431e62f92d07f4e3744ed:rel-k1:HCDNHSA5DLULKGU5EW3JQEHRGE:47d39c5dee6a91a17bd0be019be3a935 -->
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>设备知识库 · 页面原型</title>
+<style>
+:root{--bg:#EFFBFD;--blue:#1F70FE;--ink:#1c2a44;--ink2:#34425a;--muted:#7587a0;--line:#e1e9f5;--panel:#ffffffcc;--ok:#1f9d6a;--warn:#d98a1f;--bad:#d8453c;--wash:#eaf2ff}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font:14px/1.7 -apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;color:var(--ink2);background:var(--bg) url('assets/s2/layout/bg.jpg') center/cover fixed}
+a{color:var(--blue);text-decoration:none}
+button{font:inherit;cursor:pointer}
+.app{display:grid;grid-template-columns:206px 1fr;min-height:100vh}
+/* ---------- sidebar ---------- */
+.side{background:#ffffff99;backdrop-filter:blur(14px);border-right:1px solid #ffffff;padding:18px 14px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:10px;align-items:center;padding:4px 6px 16px}
+.brand img{width:36px;height:36px}
+.brand b{display:block;font-size:15px;color:var(--ink)}
+.brand small{color:var(--muted);letter-spacing:.06em;font-size:11px}
+.newchat{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--blue);font-weight:600;margin-bottom:18px}
+.newchat span:last-child{font-size:20px;line-height:1}
+.side .cap{font-size:11px;color:var(--muted);padding:0 10px 6px;letter-spacing:.08em}
+.nav a{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;color:var(--ink2);margin-bottom:4px}
+.nav a.on{background:#dfeaff;color:var(--blue);font-weight:600}
+.nav a i{width:18px;height:18px;display:inline-block;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat;opacity:.85}
+.nav a .tag{margin-left:auto;font-size:10px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:999px;padding:0 7px}
+.side .foot{margin-top:auto;border-top:1px solid #ffffff;padding-top:14px;font-size:12px;color:var(--muted)}
+.side .foot b{display:block;color:var(--ink2);font-weight:600}
+.slogan{padding:0 8px 18px;font-size:12px;color:var(--muted);line-height:1.6}
+.slogan b{display:block;color:var(--ink2);font-size:13px}
+/* ---------- main ---------- */
+.main{display:flex;flex-direction:column;min-width:0}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 32px 0}
+.crumb{color:var(--muted)}.crumb b{color:var(--ink);font-weight:600;margin-left:8px}
+.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:12px;color:var(--ink2)}
+.view{display:none;flex:1;padding:22px 32px 40px}
+.view.on{display:block}
+.eyebrow{font-size:11px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+h1{font-size:30px;margin:6px 0 4px;color:var(--ink);letter-spacing:-.01em}
+h2{font-size:17px;margin:26px 0 12px;color:var(--ink)}
+.lead{color:var(--muted);margin:0 0 20px}
+.panel{background:var(--panel);border:1px solid #fff;border-radius:16px;padding:20px 22px;margin-bottom:16px;backdrop-filter:blur(8px)}
+.row{display:flex;gap:16px;flex-wrap:wrap}
+.row>*{flex:1 1 240px}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink2);border-radius:10px;padding:8px 14px}
+.btn.p{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn.s{background:#dfeaff;color:var(--blue);border-color:#dfeaff}
+.btn.ghost{background:transparent}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+input,select,textarea{font:inherit;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff;color:var(--ink)}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;font-size:13px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600;background:#f7faff}
+tr:last-child td{border-bottom:0}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:12px;border-radius:999px;padding:2px 10px;background:#f1f4f9;color:var(--ink2)}
+.st::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--muted)}
+.st.ok{background:#e6f6ee;color:var(--ok)}.st.ok::before{background:var(--ok)}
+.st.run{background:#fff4e3;color:var(--warn)}.st.run::before{background:var(--warn)}
+.st.bad{background:#fdecea;color:var(--bad)}.st.bad::before{background:var(--bad)}
+.st.idle{background:#eef1f6;color:var(--muted)}
+.note{background:#fff7e8;border-left:3px solid #e2a54a;padding:10px 14px;border-radius:0 10px 10px 0;font-size:12.5px;color:#6b4d16;margin:12px 0}
+.pm{margin-top:28px;background:#ffffffaa;border:1px dashed #b9c8e6;border-radius:14px;padding:14px 18px;font-size:12.5px;color:var(--ink2)}
+.pm b{display:block;color:var(--blue);margin-bottom:6px;font-size:12px;letter-spacing:.1em}
+.pm li{margin:3px 0}
+.demo{display:inline-block;font-size:10px;letter-spacing:.1em;color:#9a6a12;background:#fff1d6;border-radius:4px;padding:1px 6px;vertical-align:middle;margin-left:6px}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+pre{background:#f4f7fc;border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow:auto;white-space:pre-wrap;word-break:break-all;margin:8px 0}
+details summary{cursor:pointer;color:var(--ink2);font-weight:600;font-size:13px}
+details{margin:10px 0}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:6px 14px;font-size:13px}
+.kv dt{color:var(--muted)}.kv dd{margin:0}
+.cite{display:inline-block;background:#dfeaff;color:var(--blue);border-radius:6px;padding:0 6px;font-size:11px;font-weight:600;margin:0 2px;cursor:pointer}
+.cite.bad{background:#fdecea;color:var(--bad)}
+/* ---------- chat ---------- */
+.chat{display:grid;grid-template-columns:1fr 320px;gap:0;height:calc(100vh - 62px);margin:-22px -32px -40px}
+.chat .mid{display:flex;flex-direction:column;padding:34px 42px 22px;min-width:0}
+.chat .aside{background:#ffffffe6;border-left:1px solid #fff;padding:26px 24px;display:flex;flex-direction:column;overflow:auto}
+.aside h3{margin:0;font-size:15px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.aside h3 .cnt{margin-left:auto;font-size:11px;background:#eef1f6;border-radius:999px;padding:0 8px;color:var(--muted)}
+.aside .sub{font-size:12px;color:var(--muted);margin:6px 0 20px}
+.aside .empty{margin:auto;text-align:center;color:var(--muted);font-size:12.5px;padding:0 10px}
+.aside .empty .ball{width:44px;height:44px;border-radius:50%;border:4px solid #bcd6ff;border-top-color:var(--blue);margin:0 auto 14px}
+.aside .empty b{display:block;color:var(--ink2);font-size:14px;margin-bottom:6px}
+.aside .fine{margin-top:auto;font-size:11px;color:var(--muted);text-align:center}
+.src{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;font-size:12.5px;cursor:pointer}
+.src:hover{border-color:var(--blue)}
+.src .h{display:flex;gap:8px;align-items:center;font-weight:600;color:var(--ink)}
+.src .h .n{background:var(--blue);color:#fff;border-radius:6px;padding:0 6px;font-size:11px}
+.src .loc{color:var(--muted);font-size:11.5px;margin:2px 0 6px}
+.src .tx{color:var(--ink2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.hero{margin:auto 0;max-width:820px}
+.hero img{width:64px;margin-bottom:22px}
+.hero .eyebrow{margin-bottom:12px}
+.hero h1{font-size:34px}
+.hero p{color:var(--ink2);margin:14px 0 30px;font-size:15px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.card{background:#ffffffd9;border:1px solid #fff;border-radius:14px;padding:18px 18px 16px;cursor:pointer;position:relative;transition:.15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px #1f70fe14}
+.card::after{content:"↗";position:absolute;right:14px;top:10px;color:var(--muted);font-size:12px}
+.card i{display:block;width:20px;height:20px;background:var(--muted);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat;margin-bottom:22px}
+.card b{display:block;color:var(--ink);font-size:14px;margin-bottom:4px}
+.card span{color:var(--muted);font-size:12.5px}
+.msgs{flex:1;overflow:auto;padding-right:6px}
+.msg{max-width:820px;margin:0 0 18px}
+.msg.user{margin-left:auto;background:#dfeaff;border-radius:14px 14px 4px 14px;padding:12px 16px;width:fit-content;color:var(--ink)}
+.msg.bot{background:#ffffffd9;border:1px solid #fff;border-radius:14px;padding:16px 18px}
+.msg.bot p{margin:0 0 10px}
+.msg .meta{font-size:11.5px;color:var(--muted);margin-top:10px;display:flex;gap:14px;flex-wrap:wrap}
+.composer{margin-top:16px;max-width:820px}
+.composer .set{font-size:12px;color:var(--muted);margin-bottom:8px}
+.composer .set b{color:var(--ink2);font-weight:600;margin-right:10px}
+.box{background:#ffffffe6;border:1px solid #fff;border-radius:14px;padding:12px 14px 10px;box-shadow:0 6px 24px #1f70fe0f}
+.box textarea{width:100%;border:0;resize:vertical;min-height:70px;background:transparent;padding:4px 2px;outline:0}
+.box .bar{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--muted)}
+.box .bar .kb{display:flex;align-items:center;gap:6px;color:var(--ink2)}
+.box .bar .kb i{width:16px;height:16px;border-radius:50%;border:3px solid #bcd6ff;border-top-color:var(--blue);display:inline-block}
+.box .bar .send{margin-left:auto;display:flex;align-items:center;gap:10px}
+.box .bar .send .btn{padding:8px 18px}
+.foot-tip{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
+/* ---------- kb ---------- */
+.drop{border:1.5px dashed #b9c8e6;border-radius:14px;padding:22px;text-align:center;color:var(--muted);background:#ffffff80}
+.drop b{display:block;color:var(--ink);font-size:14px;margin-bottom:4px}
+.fmt{display:inline-block;font-size:11px;background:#eef1f6;border-radius:4px;padding:0 6px;margin:2px}
+.act a{margin-right:10px;font-size:12.5px}
+.step{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 4px}
+.step div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12.5px}
+.step div b{display:block;color:var(--blue);font-size:11px;letter-spacing:.1em;margin-bottom:2px}
+/* ---------- eval ---------- */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.stat small{color:var(--muted);display:block}
+.stat b{font-size:26px;color:var(--ink)}
+.stat i{display:block;font-style:normal;font-size:11px;color:var(--muted)}
+.bar2{height:4px;background:#eef1f6;border-radius:2px;margin-top:6px;overflow:hidden}.bar2 i{display:block;height:100%;background:var(--blue)}
+.q{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;font-size:13px}
+.q .h{display:flex;gap:10px;align-items:center}
+.q .h .d{font-size:11px;border-radius:999px;padding:1px 8px}
+.d.up{background:#e6f6ee;color:var(--ok)}.d.dn{background:#fdecea;color:var(--bad)}.d.eq{background:#eef1f6;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+.two>div{background:#f7faff;border-radius:10px;padding:12px}
+.two h4{margin:0 0 6px;font-size:12.5px}
+/* ---------- env ---------- */
+.env{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.env .c{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.env .c b{display:block;color:var(--ink);margin-bottom:8px}
+.env .c .l{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;border-top:1px dashed var(--line)}
+/* ---------- proto banner ---------- */
+.proto{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);background:#1c2a44;color:#fff;border-radius:999px;padding:8px 16px;font-size:12px;box-shadow:0 8px 24px #0003;z-index:9;display:flex;gap:14px;align-items:center}
+.proto a{color:#9cc2ff}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.chat{grid-template-columns:1fr;height:auto}.chat .aside{border-left:0;border-top:1px solid #fff}.cards,.env,.stats{grid-template-columns:1fr}.step{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><img src="assets/s2/logo.png" alt=""><div><b>设备知识库</b><small>RAG 学习工作台</small></div></div>
+    <a class="newchat" href="#/chat" onclick="resetChat()"><span>＋ 新对话</span><span>+</span></a>
+    <div class="cap">工作空间</div>
+    <nav class="nav">
+      <a href="#/chat" data-v="chat"><i style="--ic:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTYuNDU0NTUgMTlMMiAyMi41VjRDMiAzLjQ0NzcyIDIuNDQ3NzIgMyAzIDNIMjFDMjEuNTUyMyAzIDIyIDMuNDQ3NzIgMjIgNFYxOEMyMiAxOC41NTIzIDIxLjU1MjMgMTkgMjEgMTlINi40NTQ1NVpNMTEgMTBIOFYxMkgxMVYxNUgxM1YxMkgxNlYxMEgxM1Y3SDExVjEwWiIgZmlsbD0iIzA3NjFGRSIvPgo8L3N2Zz4K)"></i>知识问答</a>
+      <a href="#/kb" data-v="kb"><i style="--ic:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE5Ljg2NjcgMEgxNy40NjY3VjE5LjczMzNIMTkuODY2N0MyMC45MzMzIDE5LjczMzMgMjEuNzMzMyAxOS4wNjY3IDIxLjczMzMgMTguMTMzM1YxLjZDMjEuNzMzMyAwLjY2NjY2NyAyMC45MzMzIDAgMTkuODY2NyAwWiIgZmlsbD0iIzA3NjFGRSIvPgo8cGF0aCBkPSJNMjAuOTMzMyAyMi40SDQuOEM0LjUzMzMzIDIyLjQgNC4yNjY2NyAyMi4yNjY3IDQgMjIuMTMzM0MzLjczMzMzIDIxLjg2NjcgMy43MzMzMyAyMS42IDMuNzMzMzMgMjEuMzMzM0MzLjczMzMzIDIwLjY2NjcgNC4yNjY2NyAyMC4yNjY3IDQuOCAyMC4yNjY3SDE2LjI2NjdWMEgzLjZDMi44IDAgMiAwLjggMiAxLjZWMjEuMkMyIDIxLjg2NjcgMi4yNjY2NyAyMi42NjY3IDIuOCAyMy4wNjY3QzMuMzMzMzMgMjMuNzMzMyA0IDI0IDQuOCAyNEgyMC45MzMzQzIxLjIgMjQgMjEuMzMzMyAyMy44NjY3IDIxLjQ2NjcgMjMuNzMzM0MyMS42IDIzLjYgMjEuNzMzMyAyMy4zMzMzIDIxLjczMzMgMjMuMkMyMS43MzMzIDIyLjkzMzMgMjEuNiAyMi44IDIxLjQ2NjcgMjIuNjY2N0MyMS4zMzMzIDIyLjQgMjEuMDY2NyAyMi40IDIwLjkzMzMgMjIuNFoiIGZpbGw9IiMwNzYxRkUiLz4KPC9zdmc+Cg==)"></i>知识库</a>
+      <a href="#/debug" data-v="debug"><i style="--ic:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxNSAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjI2MiA3QzEzLjI2MiA4Ljg0NDk4IDEyLjQxMTEgMTAuNDk1NSAxMS4wNzI0IDExLjU5NjFDMTAuMDA2NiAxMi40NzIzIDguNjMxOCAxMyA3LjEzMSAxM0MzLjc0NDk0IDEzIDEgMTAuMzEzNyAxIDdDMSAzLjY4NjI5IDMuNzQ0OTQgMSA3LjEzMSAxQzEwLjUxNzEgMSAxMy4yNjIgMy42ODYyOSAxMy4yNjIgN1oiIHN0cm9rZT0iIzk5OTk5OSIvPgo8cGF0aCBkPSJNMTEuMjE4MyAxMkwxMy43NzI4IDE0LjUiIHN0cm9rZT0iIzk5OTk5OSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=)"></i>检索调试<span class="tag">后续</span></a>
+      <a href="#/eval" data-v="eval"><i style="--ic:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1Ljc1IDlDMTUuNzUgMTIuNzI3OSAxMi43Mjc5IDE1Ljc1IDkgMTUuNzVDNS4yNzIwOCAxNS43NSAyLjI1IDEyLjcyNzkgMi4yNSA5QzIuMjUgNS4yNzIwOCA1LjI3MjA4IDIuMjUgOSAyLjI1QzEwLjA1OSAyLjI1IDExLjA2MTEgMi40OTM4OSAxMS45NTMxIDIuOTI4NTdNMTQuNDg0NCA0Ljc4MTI1TDguNTc4MTIgMTAuNjg3NUw2Ljg5MDYyIDkiIHN0cm9rZT0iIzA3NjFGRSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K)"></i>质量评估<span class="tag">后续</span></a>
+      <a href="#/env" data-v="env"><i style="--ic:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjI2NjYgOC40Mzk5N0MxMy4xNTk4IDguMzE4MzEgMTMuMTAwOCA4LjE2MTkxIDEzLjEwMDggNy45OTk5N0MxMy4xMDA4IDcuODM4MDMgMTMuMTU5OCA3LjY4MTYzIDEzLjI2NjYgNy41NTk5N0wxNC4xMiA2LjU5OTk3QzE0LjIxNCA2LjQ5NTA4IDE0LjI3MjQgNi4zNjMxMSAxNC4yODY4IDYuMjIyOThDMTQuMzAxMSA2LjA4Mjg0IDE0LjI3MDggNS45NDE3NiAxNC4yIDUuODE5OTdMMTIuODY2NiAzLjUxMzNDMTIuNzk2NiAzLjM5MTY1IDEyLjY4OTkgMy4yOTUyMiAxMi41NjE4IDMuMjM3NzZDMTIuNDMzNyAzLjE4MDMgMTIuMjkwOCAzLjE2NDc0IDEyLjE1MzMgMy4xOTMzTDEwLjkgMy40NDY2NEMxMC43NDA1IDMuNDc5NTkgMTAuNTc0NSAzLjQ1MzAzIDEwLjQzMzIgMy4zNzE5N0MxMC4yOTIgMy4yOTA5MSAxMC4xODUzIDMuMTYwOTYgMTAuMTMzMyAzLjAwNjY0TDkuNzI2NjQgMS43ODY2NEM5LjY4MTkxIDEuNjU0MjIgOS41OTY3MSAxLjUzOTIxIDkuNDgzMDYgMS40NTc4N0M5LjM2OTQxIDEuMzc2NTIgOS4yMzMwNyAxLjMzMjk0IDkuMDkzMzEgMS4zMzMzSDYuNDI2NjRDNi4yODEyNiAxLjMyNTcyIDYuMTM3MzkgMS4zNjU5MiA2LjAxNzAxIDEuNDQ3NzhDNS44OTY2NCAxLjUyOTY0IDUuODA2MzYgMS42NDg2NSA1Ljc1OTk3IDEuNzg2NjRMNS4zODY2NCAzLjAwNjY0QzUuMzM0NjQgMy4xNjA5NiA1LjIyNzk1IDMuMjkwOTEgNS4wODY3MSAzLjM3MTk3QzQuOTQ1NDcgMy40NTMwMyA0Ljc3OTQ1IDMuNDc5NTkgNC42MTk5NyAzLjQ0NjY0TDMuMzMzMyAzLjE5MzNDMy4yMDMwMSAzLjE3NDg5IDMuMDcwMTcgMy4xOTU0NSAyLjk1MTU0IDMuMjUyNEMyLjgzMjkgMy4zMDkzNCAyLjczMzc3IDMuNDAwMTIgMi42NjY2NCAzLjUxMzNMMS4zMzMzIDUuODE5OTdDMS4yNjA3NCA1Ljk0MDQgMS4yMjgxMiA2LjA4MDY5IDEuMjQwMDkgNi4yMjA3OUMxLjI1MjA3IDYuMzYwODggMS4zMDgwMyA2LjQ5MzYgMS4zOTk5NyA2LjU5OTk3TDIuMjQ2NjQgNy41NTk5N0MyLjM1MzUyIDcuNjgxNjMgMi40MTI0NiA3LjgzODAzIDIuNDEyNDYgNy45OTk5N0MyLjQxMjQ2IDguMTYxOTEgMi4zNTM1MiA4LjMxODMxIDIuMjQ2NjQgOC40Mzk5N0wxLjM5OTk3IDkuMzk5OTdDMS4zMDgwMyA5LjUwNjM0IDEuMjUyMDcgOS42MzkwNiAxLjI0MDA5IDkuNzc5MTVDMS4yMjgxMiA5LjkxOTI1IDEuMjYwNzQgMTAuMDU5NSAxLjMzMzMgMTAuMThMMi42NjY2NCAxMi40ODY2QzIuNzM2NyAxMi42MDgzIDIuODQzMzggMTIuNzA0NyAyLjk3MTQ3IDEyLjc2MjJDMy4wOTk1NiAxMi44MTk2IDMuMjQyNTIgMTIuODM1MiAzLjM3OTk3IDEyLjgwNjZMNC42MzMzIDEyLjU1MzNDNC43OTI3OCAxMi41MjA0IDQuOTU4ODEgMTIuNTQ2OSA1LjEwMDA1IDEyLjYyOEM1LjI0MTI5IDEyLjcwOSA1LjM0Nzk3IDEyLjgzOSA1LjM5OTk3IDEyLjk5MzNMNS44MDY2NCAxNC4yMTMzQzUuODUzMDIgMTQuMzUxMyA1Ljk0MzMgMTQuNDcwMyA2LjA2MzY4IDE0LjU1MjJDNi4xODQwNiAxNC42MzQgNi4zMjc5MyAxNC42NzQyIDYuNDczMyAxNC42NjY2SDkuMTM5OTdDOS4yNzk3MyAxNC42NjcgOS40MTYwOCAxNC42MjM0IDkuNTI5NzIgMTQuNTQyMUM5LjY0MzM3IDE0LjQ2MDcgOS43Mjg1OCAxNC4zNDU3IDkuNzczMyAxNC4yMTMzTDEwLjE4IDEyLjk5MzNDMTAuMjMyIDEyLjgzOSAxMC4zMzg3IDEyLjcwOSAxMC40Nzk5IDEyLjYyOEMxMC42MjExIDEyLjU0NjkgMTAuNzg3MiAxMi41MjA0IDEwLjk0NjYgMTIuNTUzM0wxMi4yIDEyLjgwNjZDMTIuMzM3NCAxMi44MzUyIDEyLjQ4MDQgMTIuODE5NiAxMi42MDg1IDEyLjc2MjJDMTIuNzM2NiAxMi43MDQ3IDEyLjg0MzIgMTIuNjA4MyAxMi45MTMzIDEyLjQ4NjZMMTQuMjQ2NiAxMC4xOEMxNC4zMTc0IDEwLjA1ODIgMTQuMzQ3OCA5LjkxNzEgMTQuMzMzNCA5Ljc3Njk3QzE0LjMxOTEgOS42MzY4NCAxNC4yNjA3IDkuNTA0ODYgMTQuMTY2NiA5LjM5OTk3TDEzLjI2NjYgOC40Mzk5N1pNMTIuMjczMyA5LjMzMzNMMTIuODA2NiA5LjkzMzNMMTEuOTUzMyAxMS40MTMzTDExLjE2NjYgMTEuMjUzM0MxMC42ODY1IDExLjE1NTIgMTAuMTg3IDExLjIzNjcgOS43NjMwMyAxMS40ODI1QzkuMzM5MDUgMTEuNzI4MyA5LjAyMDA3IDEyLjEyMTIgOC44NjY2NCAxMi41ODY2TDguNjEzMzEgMTMuMzMzM0g2LjkwNjY0TDYuNjY2NjQgMTIuNTczM0M2LjUxMzIxIDEyLjEwNzkgNi4xOTQyMyAxMS43MTUgNS43NzAyNCAxMS40NjkyQzUuMzQ2MjYgMTEuMjIzNCA0Ljg0Njc5IDExLjE0MTggNC4zNjY2NCAxMS4yNEwzLjU3OTk3IDExLjRMMi43MTMzIDkuOTI2NjRMMy4yNDY2NCA5LjMyNjY0QzMuNTc0NjEgOC45NTk5NiAzLjc1NTkzIDguNDg1MjYgMy43NTU5MyA3Ljk5MzNDMy43NTU5MyA3LjUwMTM1IDMuNTc0NjEgNy4wMjY2NSAzLjI0NjY0IDYuNjU5OTdMMi43MTMzIDYuMDU5OTdMMy41NjY2NCA0LjU5MzNMNC4zNTMzIDQuNzUzM0M0LjgzMzQ1IDQuODUxNDUgNS4zMzI5MiA0Ljc2OTg5IDUuNzU2OTEgNC41MjQxQzYuMTgwODkgNC4yNzgzMiA2LjQ5OTg3IDMuODg1NDEgNi42NTMzIDMuNDE5OTdMNi45MDY2NCAyLjY2NjY0SDguNjEzMzFMOC44NjY2NCAzLjQyNjY0QzkuMDIwMDcgMy44OTIwOCA5LjMzOTA1IDQuMjg0OTggOS43NjMwMyA0LjUzMDc3QzEwLjE4NyA0Ljc3NjU2IDEwLjY4NjUgNC44NTgxMiAxMS4xNjY2IDQuNzU5OTdMMTEuOTUzMyA0LjU5OTk3TDEyLjgwNjYgNi4wNzk5N0wxMi4yNzMzIDYuNjc5OTdDMTEuOTQ5IDcuMDQ1ODEgMTEuNzcgNy41MTc3NiAxMS43NyA4LjAwNjY0QzExLjc3IDguNDk1NTIgMTEuOTQ5IDguOTY3NDYgMTIuMjczMyA5LjMzMzNaTTcuNzU5OTcgNS4zMzMzQzcuMjMyNTUgNS4zMzMzIDYuNzE2OTggNS40ODk3IDYuMjc4NDUgNS43ODI3MkM1LjgzOTkyIDYuMDc1NzQgNS40OTgxMyA2LjQ5MjIxIDUuMjk2MjkgNi45Nzk0OEM1LjA5NDQ2IDcuNDY2NzUgNS4wNDE2NSA4LjAwMjkzIDUuMTQ0NTQgOC41MjAyMUM1LjI0NzQ0IDkuMDM3NDkgNS41MDE0MSA5LjUxMjY1IDUuODc0MzUgOS44ODU1OUM2LjI0NzI5IDEwLjI1ODUgNi43MjI0NSAxMC41MTI1IDcuMjM5NzMgMTAuNjE1NEM3Ljc1NzAxIDEwLjcxODMgOC4yOTMxOSAxMC42NjU1IDguNzgwNDYgMTAuNDYzNkM5LjI2NzczIDEwLjI2MTggOS42ODQyMSA5LjkyMDAyIDkuOTc3MjIgOS40ODE0OUMxMC4yNzAyIDkuMDQyOTYgMTAuNDI2NiA4LjUyNzM5IDEwLjQyNjYgNy45OTk5N0MxMC40MjY2IDcuMjkyNzMgMTAuMTQ1NyA2LjYxNDQ1IDkuNjQ1NTkgNi4xMTQzNUM5LjE0NTQ5IDUuNjE0MjYgOC40NjcyMiA1LjMzMzMgNy43NTk5NyA1LjMzMzNaTTcuNzU5OTcgOS4zMzMzQzcuNDk2MjYgOS4zMzMzIDcuMjM4NDggOS4yNTUxMSA3LjAxOTIxIDkuMTA4NkM2Ljc5OTk1IDguOTYyMDkgNi42MjkwNSA4Ljc1Mzg1IDYuNTI4MTMgOC41MTAyMUM2LjQyNzIyIDguMjY2NTggNi40MDA4MSA3Ljk5ODQ5IDYuNDUyMjYgNy43Mzk4NUM2LjUwMzcxIDcuNDgxMjEgNi42MzA2OSA3LjI0MzYzIDYuODE3MTYgNy4wNTcxNkM3LjAwMzYzIDYuODcwNjkgNy4yNDEyMSA2Ljc0MzcgNy40OTk4NSA2LjY5MjI2QzcuNzU4NDkgNi42NDA4MSA4LjAyNjU4IDYuNjY3MjEgOC4yNzAyMiA2Ljc2ODEzQzguNTEzODUgNi44NjkwNSA4LjcyMjA5IDcuMDM5OTQgOC44Njg2IDcuMjU5MjFDOS4wMTUxMSA3LjQ3ODQ4IDkuMDkzMzEgNy43MzYyNiA5LjA5MzMxIDcuOTk5OTdDOS4wOTMzMSA4LjM1MzU5IDguOTUyODMgOC42OTI3MyA4LjcwMjc4IDguOTQyNzhDOC40NTI3MyA5LjE5MjgzIDguMTEzNTkgOS4zMzMzIDcuNzU5OTcgOS4zMzMzWiIgZmlsbD0iIzM0MzQzNCIvPgo8L3N2Zz4K)"></i>环境检查<span class="tag">后续</span></a>
+    </nav>
+    <div class="foot">
+      <div class="slogan"><span style="color:var(--blue);font-size:18px">↗</span><b>从资料到可信答案</b>核对来源 · 对比策略<br>让每一次优化都有证据</div>
+      <b>课程实操工作区</b>设备产品与售后
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="top"><div class="crumb">工作空间 / <b id="crumb">知识问答</b></div><div class="pill">RAG · 实操项目</div></div>
+
+    <!-- ============ 知识问答 ============ -->
+    <section class="view" id="v-chat">
+      <div class="chat">
+        <div class="mid">
+          <div id="chat-empty" class="hero">
+            <img src="assets/s2/logo.png" alt="">
+            <div class="eyebrow">Your knowledge, connected</div>
+            <h1>你好，有什么可以帮你?</h1>
+            <p>从设备资料中查参数、找步骤、核对售后政策。<br>答案与引用一起呈现，方便你回到原文确认。</p>
+            <div class="cards">
+              <div class="card" onclick="ask('X200 的功率是多少？')"><i style="--ic:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAxOSAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF82OV8yNzYpIj4KPHBhdGggZD0iTTE0LjU0MjUgMTcuMzY4NFY0LjYzMTU4QzE0LjU0MjUgNC4yODI3NyAxNC4yNTk3IDQgMTMuOTEwOSA0SDguOTMxMTdMNCA4LjkzMTE3VjE3LjM2ODRDNCAxNy43MTcyIDQuMjgyNzcgMTggNC42MzE1OCAxOEgxMy45MTA5QzE0LjI1OTcgMTggMTQuNTQyNSAxNy43MTcyIDE0LjU0MjUgMTcuMzY4NFoiIGZpbGw9IndoaXRlIi8+CjxnIGZpbHRlcj0idXJsKCNmaWx0ZXIxX2RfNjlfMjc2KSI+CjxwYXRoIGQ9Ik05LjEwMTIxIDguNDY5NjRWNC4xODg5M1Y0TDQgOS4xMDEyMUg4LjQ2OTY0QzguODE4NDUgOS4xMDEyMSA5LjEwMTIxIDguODE4NDUgOS4xMDEyMSA4LjQ2OTY0WiIgZmlsbD0id2hpdGUiLz4KPC9nPgo8L2c+CjxkZWZzPgo8ZmlsdGVyIGlkPSJmaWx0ZXIwX2RfNjlfMjc2IiB4PSIwIiB5PSIwIiB3aWR0aD0iMTguNTQyNSIgaGVpZ2h0PSIyMiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiPgo8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwIiByZXN1bHQ9IkJhY2tncm91bmRJbWFnZUZpeCIvPgo8ZmVDb2xvck1hdHJpeCBpbj0iU291cmNlQWxwaGEiIHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAxMjcgMCIgcmVzdWx0PSJoYXJkQWxwaGEiLz4KPGZlT2Zmc2V0Lz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMiIvPgo8ZmVDb21wb3NpdGUgaW4yPSJoYXJkQWxwaGEiIG9wZXJhdG9yPSJvdXQiLz4KPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMC41ODY5NDcgMCAwIDAgMCAwLjU4Njk0NyAwIDAgMCAwIDAuNTg2OTQ3IDAgMCAwIDAuNiAwIi8+CjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0iZWZmZWN0MV9kcm9wU2hhZG93XzY5XzI3NiIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluPSJTb3VyY2VHcmFwaGljIiBpbjI9ImVmZmVjdDFfZHJvcFNoYWRvd182OV8yNzYiIHJlc3VsdD0ic2hhcGUiLz4KPC9maWx0ZXI+CjxmaWx0ZXIgaWQ9ImZpbHRlcjFfZF82OV8yNzYiIHg9IjMuMDUyNjMiIHk9IjMuNjg0MjEiIHdpZHRoPSI2Ljk5NjA2IiBoZWlnaHQ9IjYuOTk1OTMiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQ29sb3JNYXRyaXggaW49IlNvdXJjZUFscGhhIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMTI3IDAiIHJlc3VsdD0iaGFyZEFscGhhIi8+CjxmZU9mZnNldCBkeT0iMC42MzE1NzkiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMC40NzM2ODQiLz4KPGZlQ29tcG9zaXRlIGluMj0iaGFyZEFscGhhIiBvcGVyYXRvcj0ib3V0Ii8+CjxmZUNvbG9yTWF0cml4IHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIwIDAgMCAwIDAuNDc4ODQxIDAgMCAwIDAgMC40Nzg4NDEgMCAwIDAgMCAwLjQ3ODg0MSAwIDAgMCAwLjQgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvd182OV8yNzYiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJlZmZlY3QxX2Ryb3BTaGFkb3dfNjlfMjc2IiByZXN1bHQ9InNoYXBlIi8+CjwvZmlsdGVyPgo8L2RlZnM+Cjwvc3ZnPgo=)"></i><b>查设备参数</b><span>X200 的功率是多少？</span></div>
+              <div class="card" onclick="ask('设备出现 E102 告警，应该先检查什么？')"><i style="--ic:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxNSAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjI2MiA3QzEzLjI2MiA4Ljg0NDk4IDEyLjQxMTEgMTAuNDk1NSAxMS4wNzI0IDExLjU5NjFDMTAuMDA2NiAxMi40NzIzIDguNjMxOCAxMyA3LjEzMSAxM0MzLjc0NDk0IDEzIDEgMTAuMzEzNyAxIDdDMSAzLjY4NjI5IDMuNzQ0OTQgMSA3LjEzMSAxQzEwLjUxNzEgMSAxMy4yNjIgMy42ODYyOSAxMy4yNjIgN1oiIHN0cm9rZT0iIzk5OTk5OSIvPgo8cGF0aCBkPSJNMTEuMjE4MyAxMkwxMy43NzI4IDE0LjUiIHN0cm9rZT0iIzk5OTk5OSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=)"></i><b>查处理步骤</b><span>设备出现故障后，应该先检查什么？</span></div>
+              <div class="card" onclick="ask('2025年12月下单、2026年1月签收的X200，保修多久？')"><i style="--ic:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTciIHZpZXdCb3g9IjAgMCAxNSAxNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE0LjMyMzggNS4wMzc2NkMxNC4yODkzIDQuOTY2ODQgMTQuMjQxMSA0LjkwMzUyIDE0LjE4MjEgNC44NTEzMUMxNC4xMjMgNC43OTkxMSAxNC4wNTQzIDQuNzU5MDUgMTMuOTc5OCA0LjczMzQyQzEzLjkwNTIgNC43MDc3OSAxMy44MjY0IDQuNjk3MSAxMy43NDc3IDQuNzAxOTRDMTMuNjY5MSA0LjcwNjc4IDEzLjU5MjIgNC43MjcwOCAxMy41MjEzIDQuNzYxNjZMNy4zMzc2IDcuNzc3NDFDNy4yNjU0IDcuODExMDggNy4yMDA2NCA3Ljg1ODc5IDcuMTQ3MDggNy45MTc3NkM3LjA5MzUyIDcuOTc2NzIgNy4wNTIyMyA4LjA0NTc2IDcuMDI1NjQgOC4xMjA4NUM2Ljk5OTA0IDguMTk1OTQgNi45ODc2NyA4LjI3NTU4IDYuOTkyMTcgOC4zNTUxMUM2Ljk5NjY4IDguNDM0NjQgNy4wMTY5NyA4LjUxMjQ4IDcuMDUxODggOC41ODQwOUM3LjA4Njc5IDguNjU1NjkgNy4xMzU2IDguNzE5NjMgNy4xOTU0OCA4Ljc3MjE3QzcuMjU1MzYgOC44MjQ3MSA3LjMyNTEgOC44NjQ4IDcuNDAwNjMgOC44OTAxQzcuNDc2MTcgOC45MTU0IDcuNTU1OTkgOC45MjU0MSA3LjYzNTQzIDguOTE5NTRDNy43MTQ4NyA4LjkxMzY3IDcuNzkyMzUgOC44OTIwNCA3Ljg2MzM1IDguODU1OTFMMTQuMDQ3OCA1Ljg0MDE2QzE0LjExODcgNS44MDU1OSAxNC4xODIgNS43NTc0MiAxNC4yMzQyIDUuNjk4MzhDMTQuMjg2NCA1LjYzOTM0IDE0LjMyNjUgNS41NzA2IDE0LjM1MjEgNS40OTYwOEMxNC4zNzc3IDUuNDIxNTYgMTQuMzg4NCA1LjM0MjcyIDE0LjM4MzYgNS4yNjQwNkMxNC4zNzg3IDUuMTg1NCAxNC4zNTg0IDUuMTA4NDcgMTQuMzIzOCA1LjAzNzY2WiIgZmlsbD0iIzA3NjFGRSIvPgo8cGF0aCBkPSJNOC4yMiAwLjIwMDk2MkwxNC4xODkzIDMuNjQ3MjFDMTQuNDE3MyAzLjc3ODg2IDE0LjYwNjYgMy45NjgyMSAxNC43MzgzIDQuMTk2MjNDMTQuODY5OSA0LjQyNDI1IDE0LjkzOTIgNC42ODI5MSAxNC45MzkzIDQuOTQ2MjFWMTEuODM4N0MxNC45Mzk0IDEyLjEwMjEgMTQuODcwMSAxMi4zNjEgMTQuNzM4NSAxMi41ODkxQzE0LjYwNjggMTIuODE3MyAxNC40MTc0IDEzLjAwNjcgMTQuMTg5MyAxMy4xMzg1TDguMjE5MjUgMTYuNTg0N0M3Ljk5MTIyIDE2LjcxNjQgNy43MzI1NSAxNi43ODU3IDcuNDY5MjUgMTYuNzg1N0M3LjIwNTk0IDE2Ljc4NTcgNi45NDcyOCAxNi43MTY0IDYuNzE5MjUgMTYuNTg0N0wwLjc1IDEzLjEzODVDMC41MjE5NzcgMTMuMDA2OCAwLjMzMjYyNCAxMi44MTc1IDAuMjAwOTcyIDEyLjU4OTRDMC4wNjkzMTk1IDEyLjM2MTQgNi44NTc3NmUtMDYgMTIuMTAyOCAxLjY4OTM0ZS0wNyAxMS44Mzk1VjQuOTQ2OTZDLTAuMDAwMTI0ODM1IDQuNjgzNTQgMC4wNjkxMjUyIDQuNDI0NzIgMC4yMDA3ODQgNC4xOTY1NkMwLjMzMjQ0MyAzLjk2ODM5IDAuNTIxODY3IDMuNzc4OTIgMC43NSAzLjY0NzIxTDYuNzIgMC4yMDA5NjJDNi45NDgwMyAwLjA2OTMwOTMgNy4yMDY3IDAgNy40NyAwQzcuNzMzMzEgMCA3Ljk5MTk3IDAuMDY5MzA5MyA4LjIyIDAuMjAwOTYyWk03LjYyIDEuMjQwNDZDNy41NzQzOSAxLjIxNDEzIDcuNTIyNjYgMS4yMDAyNyA3LjQ3IDEuMjAwMjdDNy40MTczNCAxLjIwMDI3IDcuMzY1NjEgMS4yMTQxMyA3LjMyIDEuMjQwNDZMMS4zNSA0LjY4NjcxQzEuMzA0NDQgNC43MTMwMiAxLjI2NjYgNC43NTA4NCAxLjI0MDI3IDQuNzk2MzlDMS4yMTM5NCA0Ljg0MTkzIDEuMjAwMDUgNC44OTM2IDEuMiA0Ljk0NjIxVjExLjgzODdDMS4xOTk5MiAxMS44OTE0IDEuMjEzNzUgMTEuOTQzMyAxLjI0MDA4IDExLjk4OUMxLjI2NjQyIDEyLjAzNDcgMS4zMDQzMyAxMi4wNzI2IDEuMzUgMTIuMDk5TDcuMzIgMTUuNTQ2QzcuMzY1NjEgMTUuNTcyMyA3LjQxNzM0IDE1LjU4NjIgNy40NyAxNS41ODYyQzcuNTIyNjYgMTUuNTg2MiA3LjU3NDM5IDE1LjU3MjMgNy42MiAxNS41NDZMMTMuNTg5MyAxMi4wOTlDMTMuNjM0OCAxMi4wNzI3IDEzLjY3MjcgMTIuMDM0OCAxMy42OTkgMTEuOTg5M0MxMy43MjUzIDExLjk0MzcgMTMuNzM5MiAxMS44OTIxIDEzLjczOTMgMTEuODM5NVY0Ljk0Njk2QzEzLjczOTMgNC44OTQyMyAxMy43MjU1IDQuODQyNCAxMy42OTkyIDQuNzk2NzFDMTMuNjcyOCA0Ljc1MTAyIDEzLjYzNDkgNC43MTMwOCAxMy41ODkzIDQuNjg2NzFMNy42MTkyNSAxLjI0MDQ2SDcuNjJaIiBmaWxsPSIjMTcyQjNEIi8+CjxwYXRoIGQ9Ik0xLjA5ODk2IDQuNjkzNDdDMS4xMzgzNSA0LjYyNTIgMS4xOTA4IDQuNTY1MzcgMS4yNTMzMSA0LjUxNzM4QzEuMzE1ODMgNC40NjkzOCAxLjM4NzE5IDQuNDM0MTggMS40NjMzMSA0LjQxMzc3QzEuNTM5NDQgNC4zOTMzNyAxLjYxODg0IDQuMzg4MTYgMS42OTY5OCA0LjM5ODQ0QzEuNzc1MTIgNC40MDg3MyAxLjg1MDQ2IDQuNDM0MzEgMS45MTg3MSA0LjQ3MzcyTDcuNDg4OTYgNy42ODk3MkM3LjU1NzIyIDcuNzI5MTIgNy42MTcwNSA3Ljc4MTU3IDcuNjY1MDMgNy44NDQwOUM3LjcxMzAxIDcuOTA2NjEgNy43NDgyMSA3Ljk3Nzk2IDcuNzY4NjEgOC4wNTQwOEM3Ljc4OTAyIDguMTMwMiA3Ljc5NDIzIDguMjA5NiA3Ljc4Mzk2IDguMjg3NzNDNy43NzM2OCA4LjM2NTg3IDcuNzQ4MTEgOC40NDEyMiA3LjcwODcxIDguNTA5NDdDNy42NjkzMiA4LjU3NzcyIDcuNjE2ODYgOC42Mzc1NSA3LjU1NDM1IDguNjg1NTNDNy40OTE4MyA4LjczMzUyIDcuNDIwNDcgOC43Njg3MiA3LjM0NDM1IDguNzg5MTJDNy4yNjgyMyA4LjgwOTUzIDcuMTg4ODQgOC44MTQ3NCA3LjExMDcgOC44MDQ0NkM3LjAzMjU2IDguNzk0MTggNi45NTcyMiA4Ljc2ODYyIDYuODg4OTYgOC43MjkyMkwxLjMxODcxIDUuNTEyNDdDMS4yNTA0NSA1LjQ3MzA4IDEuMTkwNjEgNS40MjA2NCAxLjE0MjYyIDUuMzU4MTJDMS4wOTQ2MyA1LjI5NTYgMS4wNTk0MiA1LjIyNDI0IDEuMDM5MDIgNS4xNDgxMkMxLjAxODYxIDUuMDcxOTkgMS4wMTM0IDQuOTkyNTkgMS4wMjM2OSA0LjkxNDQ2QzEuMDMzOTcgNC44MzYzMiAxLjA1OTU1IDQuNzYwOTcgMS4wOTg5NiA0LjY5MjcyVjQuNjkzNDdaIiBmaWxsPSIjMTcyQjNEIi8+CjxwYXRoIGQ9Ik03LjM1MDk4IDcuNjczOTVDNy43NTA5OCA3LjY3Mzk1IDcuOTUwOTggNy44NzM5NSA3Ljk1MDk4IDguMjczOTVWMTUuNjk5QzcuOTUwOTggMTYuMDk5IDcuNzUwOTggMTYuMjk5IDcuMzUwOTggMTYuMjk5QzYuOTUwOTggMTYuMjk5IDYuNzUwOTggMTYuMDk5IDYuNzUwOTggMTUuNjk5VjguMjczOTVDNi43NTA5OCA3Ljg3Mzk1IDYuOTUwOTggNy42NzM5NSA3LjM1MDk4IDcuNjczOTVaIiBmaWxsPSIjMTcyQjNEIi8+Cjwvc3ZnPgo=)"></i><b>查售后政策</b><span>不同型号的保修条件有什么区别？</span></div>
+            </div>
+            <a href="#/kb">还没有资料？先去知识库上传 →</a>
+          </div>
+          <div id="chat-msgs" class="msgs" style="display:none"></div>
+          <div class="composer">
+            <div class="set">▸ <b>对话设置</b> 单轮问答 · 原始排序 <span class="demo">点击展开：单轮/带历史 · 原始/重排</span></div>
+            <div class="box">
+              <textarea id="q" placeholder="向知识库提问，答案可以回到原文核对..."></textarea>
+              <div class="bar"><span class="kb"><i></i>知识库资料</span><span class="send"><span>Ctrl / ⌘ + Enter 发送</span><button class="btn s" onclick="ask()">⚡ 发送</button></span></div>
+            </div>
+            <div class="foot-tip">回答基于已入库资料生成，请核对型号、数值和适用条件。</div>
+          </div>
+        </div>
+        <div class="aside">
+          <h3><span style="display:inline-block;width:14px;height:16px;border:1.5px solid var(--muted);border-radius:2px"></span>参考来源<span class="cnt" id="src-cnt">0</span></h3>
+          <div class="sub">让每个答案都有迹可循</div>
+          <div id="src-empty" class="empty"><div class="ball"></div><b>来源会出现在这里</b>提问后，在这里查看引用片段，并打开原文件交叉核对。</div>
+          <div id="src-list" style="display:none"></div>
+          <div class="fine">引用编号有效，不代表语义一定正确。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 知识库 ============ -->
+    <section class="view" id="v-kb">
+      <div class="eyebrow">Documents in, evidence out</div>
+      <h1>知识库</h1>
+      <p class="lead">上传资料、查看解析与入库状态。解析走 DocMind（CSV 本地读取），入库前先预览切块。</p>
+      <div class="panel">
+        <div class="row">
+          <div class="drop"><b>选择文件或拖到这里</b>支持 <span class="fmt">pdf</span><span class="fmt">docx</span><span class="fmt">xlsx</span><span class="fmt">pptx</span><span class="fmt">png / jpg</span><span class="fmt">html</span><span class="fmt">md</span><span class="fmt">txt</span><span class="fmt">csv</span><br><small>空文件或不支持的类型会被拒绝并给出原因</small></div>
+          <div style="flex:0 0 240px;display:flex;flex-direction:column;gap:8px;justify-content:center">
+            <button class="btn p">上传文件</button>
+            <button class="btn">上传后自动解析</button>
+            <div class="note" style="margin:4px 0 0">上传成功 ≠ 解析完成 ≠ 已入库。三个状态分开显示。</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2 style="margin-top:0">资料列表 <span class="demo">示例数据</span></h2>
+        <table>
+          <thead><tr><th>文件</th><th>格式</th><th>解析</th><th>入库</th><th>块 / 片段</th><th>操作</th></tr></thead>
+          <tbody>
+            <tr><td>D01-X100产品与运行手册.pdf</td><td>pdf · 12 页</td><td><span class="st ok">已解析</span></td><td><span class="st ok">已入库</span></td><td>96 / 118</td><td class="act"><a>查看解析</a><a>核对原文件</a><a>删除</a></td></tr>
+            <tr><td>D22-设备规格对照工作簿.xlsx</td><td>xlsx · 3 表</td><td><span class="st ok">已解析</span></td><td><span class="st idle">未入库</span></td><td>41 / —</td><td class="act"><a>查看解析</a><a>预览切块</a><a>删除</a></td></tr>
+            <tr><td>D26-产品与选型入门培训.pptx</td><td>pptx · 18 页</td><td><span class="st run">解析中 · 任务 docmind-2f8…</span></td><td><span class="st idle">—</span></td><td>— / —</td><td class="act"><a>刷新状态</a></td></tr>
+            <tr><td>D14-现场服务案例复盘集.pdf</td><td>pdf · 8 页</td><td><span class="st bad">失败 · DocMind NoPermission</span></td><td><span class="st idle">—</span></td><td>— / —</td><td class="act"><a>查看错误</a><a>重试</a><a>删除</a></td></tr>
+            <tr><td>D34-售后工单记录.csv</td><td>csv · 8 行</td><td><span class="st ok">已解析（本地）</span></td><td><span class="st ok">已入库</span></td><td>8 / 8</td><td class="act"><a>查看解析</a><a>核对原文件</a><a>删除</a></td></tr>
+          </tbody>
+        </table>
+        <details><summary>查看解析：D22 第 2 块（示例）</summary>
+<pre>{
+  "block_id": "D22-s01-r04",
+  "doc_id": "D22",
+  "locator": { "kind": "xlsx", "sheet": "规格对照", "cell_range": "A4:F4" },
+  "text": "型号 | X200 | 额定功率 260 W | 最大流量 4.0 L/min | 最大压力 2.0 bar | 备注: 最大流量与最大压力不在同一运行点",
+  "source_sha256": "0f3a…",
+  "raw_ref": "runtime/docmind/D22/result-part-0.json#layouts[17]"
+}</pre>
+        <div class="note">Word 没有页码就不给页码；Excel 给工作表和单元格；PPT 给幻灯片序号。定位方式随格式变化，不能编。</div>
+        </details>
+      </div>
+      <div class="panel">
+        <h2 style="margin-top:0">下一步：预览切块、入库与检索</h2>
+        <div class="step"><div><b>01 选择</b>已解析的文件</div><div><b>02 预览切块</b>本地，不调用云</div><div><b>03 开始入库</b>百炼向量化 → Milvus</div><div><b>04 仅检索</b>看候选，不生成答案</div></div>
+        <div class="row" style="margin-top:10px"><select><option>D22-设备规格对照工作簿.xlsx · parsed</option></select><button class="btn">预览切块</button><button class="btn p">开始入库</button></div>
+        <p style="font-size:12.5px;color:var(--muted);margin:10px 0 0">切块预览显示窗口 / 重叠参数和每个片段的来源；入库完成后显示片段数和向量维度 1024。</p>
+      </div>
+      <div class="pm"><b>PM 备注 · 对应需求</b><ul><li>KB-1 支持九种格式，错误要明确（空文件、不支持的类型）。</li><li>KB-2 解析是异步的：提交后"解析中"，完成后才"已解析"，失败显示原因。</li><li>KB-3 原始解析结果落盘可回看。KB-4 每块带格式对应的定位。KB-5 入库状态和解析状态分开。KB-6 列表可查看、下载原件、删除。</li></ul></div>
+    </section>
+
+    <!-- ============ 检索调试 ============ -->
+    <section class="view" id="v-debug">
+      <div class="eyebrow">Retrieve first, answer later</div>
+      <h1>检索调试</h1>
+      <p class="lead">只检索，不回答。看候选是什么、分数多少、来自哪里；开了重排看顺序怎么变。</p>
+      <div class="panel">
+        <div class="row">
+          <input value="X200 在 42°C 环境能连续运行多久？" style="flex:3 1 360px">
+          <label style="flex:0 0 120px;display:flex;align-items:center;gap:6px;font-size:12.5px">top_k <input type="number" value="10" style="width:64px"></label>
+          <select style="flex:0 0 170px"><option>原始排序</option><option>重排 gte-rerank-v2</option></select>
+          <button class="btn p" style="flex:0 0 auto">仅检索候选</button>
+        </div>
+        <div style="margin-top:10px;font-size:12.5px;color:var(--muted)">限定文档：<span class="fmt">全部</span> <span class="fmt">D02</span> <span class="fmt">D03</span> <span class="fmt">+</span> &nbsp; 耗时 embed 142 ms · retrieve 38 ms <span class="demo">示例数据</span></div>
+      </div>
+      <div class="panel">
+        <table>
+          <thead><tr><th>#</th><th>分数</th><th>来源</th><th>片段</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>0.78</td><td>D02 · p9 · 表 3-2</td><td>环境温度 35～40°C：连续运行不超过 6 小时；40～45°C：不超过 2 小时，且需……</td></tr>
+            <tr><td>2</td><td>0.74</td><td>D03 · p7 · 高温框图</td><td>X200-Pro 在 45°C 以下可连续运行 8 小时（与 X200 不同）……</td></tr>
+            <tr><td>3</td><td>0.71</td><td>D22 · 规格对照 · A4:F4</td><td>型号 X200 额定功率 260 W 最大流量 4.0 L/min……</td></tr>
+            <tr><td>4</td><td>0.63</td><td>D10 · p5</td><td>E103：超过该型号高温持续运行限制。处理：停机降温……</td></tr>
+            <tr><td colspan="4" style="color:var(--muted);font-size:12px">… 共 10 条。第 2 条是 X200-Pro，不是 X200：型号近似是常见失败原因，看候选时要核对型号。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pm"><b>PM 备注 · 对应需求</b><ul><li>DBG-1 只检索不生成。DBG-2 显示分数、来源、正文；重排时显示前后顺序。DBG-3 可限定文档范围。</li><li>top_k 是上限：库里只有 1 条时 top_k=10 也只返回 1 条。</li></ul></div>
+    </section>
+
+    <!-- ============ 质量评估 ============ -->
+    <section class="view" id="v-eval">
+      <div class="eyebrow">Measure before you optimize</div>
+      <h1>质量评估</h1>
+      <p class="lead">先看配对样本，再看差值。展开一题，追到它的回答和证据。</p>
+      <div class="panel">
+        <div class="row" style="align-items:center">
+          <div><b style="color:var(--ink)">导入一次策略对比</b><div style="font-size:12.5px;color:var(--muted)">选择比较工具导出的 JSON。文件只在当前浏览器读取，不上传，也不调用云模型。</div></div>
+          <div style="flex:0 0 300px"><label style="font-size:12px;color:var(--muted)">选择比较文件</label><div style="display:flex;gap:8px;margin-top:4px"><button class="btn">选择文件</button><span style="font-size:12.5px;color:var(--muted);align-self:center">comparison-baseline-vs-P1.json</span></div></div>
+        </div>
+        <div class="note">导入运行记录 · 20 题冒烟 · 含模型辅助评分，仍待人工核查 <span class="demo">示例数据</span></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><small>两侧均已复核</small><b>19 / 20</b></div>
+        <div class="stat"><small>尚不能配对</small><b>1</b><i>一侧接口错误</i></div>
+        <div class="stat"><small>已配对子集回答正确率差值</small><b>+2 题</b><i>pp = 百分点；先看题数，再看百分比</i></div>
+      </div>
+      <div class="panel">
+        <div style="font-size:12.5px;color:var(--muted);margin-bottom:8px">两次运行指标 · 每格同时显示有效分母</div>
+        <table>
+          <thead><tr><th>指标</th><th>基线 baseline-01</th><th>对照 P1 表格表头修复</th></tr></thead>
+          <tbody>
+            <tr><td>回答正确率</td><td>45.0% <small>9/20</small><div class="bar2"><i style="width:45%"></i></div></td><td>55.0% <small>11/20</small><div class="bar2"><i style="width:55%"></i></div></td></tr>
+            <tr><td>行为正确率</td><td>80.0% <small>16/20</small><div class="bar2"><i style="width:80%"></i></div></td><td>85.0% <small>17/20</small><div class="bar2"><i style="width:85%"></i></div></td></tr>
+            <tr><td>候选证据组召回</td><td>52.6% <small>宏平均 · 19 题适用</small><div class="bar2"><i style="width:52%"></i></div></td><td>63.2% <small>19 题适用</small><div class="bar2"><i style="width:63%"></i></div></td></tr>
+            <tr><td>上下文证据组召回</td><td>42.1%<div class="bar2"><i style="width:42%"></i></div></td><td>57.9%<div class="bar2"><i style="width:58%"></i></div></td></tr>
+            <tr><td>引用支持率</td><td>70.0% <small>14/20</small><div class="bar2"><i style="width:70%"></i></div></td><td>80.0% <small>16/20</small><div class="bar2"><i style="width:80%"></i></div></td></tr>
+            <tr><td>引用完整率</td><td>60.0% <small>12/20</small><div class="bar2"><i style="width:60%"></i></div></td><td>65.0% <small>13/20</small><div class="bar2"><i style="width:65%"></i></div></td></tr>
+            <tr><td><b>完整 RAG 成功率</b></td><td>30.0% <small>6/20</small><div class="bar2"><i style="width:30%"></i></div></td><td>40.0% <small>8/20</small><div class="bar2"><i style="width:40%"></i></div></td></tr>
+          </tbody>
+        </table>
+        <details><summary>两侧配置、执行状态、耗时与用量</summary><pre>baseline-01 : top_k 10 · final_k 5 · 6000 字符 · chunk 600/100 · qwen-plus · text-embedding-v4
+P1-header   : 同上，仅切块策略改为 table_header（表格行携带表头）
+用量：两侧 embedding 20 次 / 生成 20 次；本页不显示金额，成本另查账本</pre></details>
+      </div>
+      <div class="panel">
+        <h2 style="margin-top:0">逐题追踪</h2>
+        <div class="row" style="margin-bottom:8px"><select style="flex:0 0 120px"><option>变化：全部</option><option>改善</option><option>退步</option><option>不变</option></select><select style="flex:0 0 140px"><option>主任务：全部</option><option>T03 表格</option></select><input placeholder="查找问题 Q0.." style="flex:1"></div>
+        <div class="q"><div class="h"><span class="d up">改善</span><b>Q058</b> X200 在 42°C 环境能连续运行多久？<span style="margin-left:auto;color:var(--muted);font-size:12px">T03 · pdf · 未通过 → 正确</span></div>
+          <div class="two"><div><h4>基线 · 未通过</h4>资料中未提供 42°C 下的具体时长限制……（表格行丢了"40～45°C"这个表头，模型看不到条件）</div><div><h4>对照 · 正确</h4>X200 在 40～45°C 环境下连续运行不超过 2 小时 <span class="cite">1</span>；超过会触发 E103 <span class="cite">2</span>。</div></div>
+          <details><summary>实际引用 · 检索与上下文轨迹 · 本题各项评分</summary><pre>基线：候选含 D02-p09-b03（有），上下文未含（被更长的片段挤出预算）→ 上下文召回 0/1
+对照：候选含，上下文含 → 1/1；引用 [1] 支持、[2] 支持；行为 answer 正确</pre></details></div>
+        <div class="q"><div class="h"><span class="d dn">退步</span><b>Q031</b> 单独购买的 S10 登记后保修多久？<span style="margin-left:auto;color:var(--muted);font-size:12px">T02 · pdf · 正确 → 未通过</span></div>
+          <div class="two"><div><h4>基线 · 正确</h4>单独销售的传感器保修 12 个月，不适用整机登记延保 <span class="cite">1</span>。</div><div><h4>对照 · 未通过</h4>登记后保修 18+6=24 个月 <span class="cite bad">1</span>。（对照把整机条款切成了独立行，例外条款和主条款分开了）</div></div></div>
+        <div class="q"><div class="h"><span class="d eq">不变</span><b>Q007</b> 新加坡的 X200 保修多久？<span style="margin-left:auto;color:var(--muted);font-size:12px">T09 · txt · 拒答正确 → 拒答正确</span></div></div>
+      </div>
+      <div class="pm"><b>PM 备注 · 对应需求</b><ul><li>EV-1 导入 JSON 本地读取。EV-2 每个指标带分母。EV-3 逐题筛选 + 两侧回答/引用/轨迹/评分。EV-4 两侧配置、耗时、用量。</li><li>七个指标的定义见 <code>验收标准.md</code>。"改善"和"退步"都要能看到，不只展示进步。</li></ul></div>
+    </section>
+
+    <!-- ============ 环境检查 ============ -->
+    <section class="view" id="v-env">
+      <div class="eyebrow">Config present ≠ service reachable</div>
+      <h1>环境检查</h1>
+      <p class="lead">四项分开看：配置存在、连得上、调用成功是三件事。</p>
+      <div class="env">
+        <div class="c"><b>后端进程</b><span class="st ok">运行中</span><div class="l"><span>/api/health</span><span>200 · status ok</span></div><div class="l"><span>端口</span><span>127.0.0.1:8000</span></div></div>
+        <div class="c"><b>Milvus</b><span class="st ok">可连接</span><div class="l"><span>地址</span><span>127.0.0.1:19530</span></div><div class="l"><span>集合</span><span>rag_course_chunks_v1 · 1,284 条</span></div><div class="l"><span>持久化</span><span>重启后仍可查 ✓</span></div></div>
+        <div class="c"><b>百炼</b><span class="st run">配置存在 · 未验证调用</span><div class="l"><span>DASHSCOPE_API_KEY</span><span>已设置（sk-****）</span></div><div class="l"><span>Embedding</span><span>text-embedding-v4 · 1024</span></div><div class="l"><span>最小调用</span><span><a>发一次测试请求</a></span></div></div>
+        <div class="c"><b>DocMind</b><span class="st bad">调用失败 · NoPermission</span><div class="l"><span>AccessKey</span><span>已设置（LTAI****）</span></div><div class="l"><span>Endpoint</span><span>cn-hangzhou</span></div><div class="l"><span>处理</span><span>给 RAM 用户加 DocMind 权限</span></div></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <h2 style="margin-top:0">当前生效配置 <span class="demo">示例数据</span></h2>
+        <dl class="kv"><dt>生成模型</dt><dd>qwen-plus · temperature 0 · thinking off</dd><dt>向量模型</dt><dd>text-embedding-v4 · 1024 维</dd><dt>重排</dt><dd>未启用（RERANK_URL 为空）</dd><dt>检索参数</dt><dd>top_k 10 · final_k 5 · 正文预算 6000 字符</dd><dt>切块</dt><dd>baseline · 600 字符窗口 / 100 重叠</dd><dt>已入库文档</dt><dd>36 / 36（原件），变体 0</dd></dl>
+        <div class="note">页面不显示任何完整密钥。HTTP 200 不等于业务成功，DocMind 返回 200 但业务码 NoPermission 也算失败。</div>
+      </div>
+      <div class="pm"><b>PM 备注 · 对应需求</b><ul><li>ENV-1 四项分开；"配置存在"与"调用成功"分开显示。ENV-2 显示模型、维度、参数，不显示密钥。</li></ul></div>
+    </section>
+  </main>
+</div>
+
+<div class="proto">页面原型 · 静态示例，未连接任何服务 <a href="#/chat">问答</a><a href="#/kb">知识库</a><a href="#/debug">调试</a><a href="#/eval">评估</a><a href="#/env">环境</a></div>
+
+<script>
+const names={chat:'知识问答',kb:'知识库',debug:'检索调试',eval:'质量评估',env:'环境检查'};
+function route(){const v=(location.hash.replace('#/','')||'chat');const key=names[v]?v:'chat';
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+key));
+  document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('on',a.dataset.v===key));
+  document.getElementById('crumb').textContent=names[key];window.scrollTo(0,0);}
+addEventListener('hashchange',route);route();
+
+const demo={
+ 'X200 的功率是多少？':{a:'X200 的额定功率是 260 W <b class="cite">1</b>。注意最大流量 4.0 L/min 与最大压力 2.0 bar 不在同一运行点，不能同时按最大值使用 <b class="cite">2</b>。',
+   s:[{n:1,t:'D22 设备规格对照工作簿 · 规格对照 · A4:F4',x:'型号 X200 | 额定功率 260 W | 最大流量 4.0 L/min | 最大压力 2.0 bar'},{n:2,t:'D02 X200产品与维护手册 · 第 5 页',x:'最大流量与最大压力为不同测量条件下的极值，不构成同一运行点……'}]},
+ '设备出现 E102 告警，应该先检查什么？':{a:'E102 表示进口压力异常告警。先按以下顺序检查：① 进口过滤器是否堵塞 ② 进口阀门是否全开 ③ 介质温度是否在允许范围 <b class="cite">1</b>。告警码只表示状态，不等于已确认根因，检查后需记录到工单 <b class="cite">2</b>。',
+   s:[{n:1,t:'D10 八类告警与故障诊断手册 · 第 4 页 · E1xx 分支',x:'E102 进口压力异常：依次检查过滤器、进口阀、介质温度……'},{n:2,t:'D31 技术支持问题记录规范 · 第二节',x:'告警码记录后仍需继续诊断，不将告警等同于根因……'}]},
+ '2025年12月下单、2026年1月签收的X200，保修多久？':{a:'按订单日期选政策版本：2025 年 12 月下单适用 2025 订单售后政策（历史版）<b class="cite">1</b>；保修期自签收日 2026 年 1 月起算 <b class="cite">2</b>。2025 版整机标准保修期请以该版条款为准，不能套用 2026 版的 18+6 个月。',
+   s:[{n:1,t:'D19 版本与订单日期判断作业指导 · 第 2 节',x:'订单日期决定适用版本；签收日期决定起算……'},{n:2,t:'D12 2025订单售后政策历史版 · 第 2 页',x:'保修自签收日按日历月计算……'}]}
+};
+function ask(text){const q=text||document.getElementById('q').value.trim();if(!q)return;document.getElementById('q').value='';
+  document.getElementById('chat-empty').style.display='none';const m=document.getElementById('chat-msgs');m.style.display='block';
+  m.insertAdjacentHTML('beforeend',`<div class="msg user">${q}</div>`);
+  const d=demo[q];const ans=d?d.a:'现有资料不足以确认。知识库里没有与这个问题直接相关的证据，请补充型号、订单日期或对应资料。';
+  m.insertAdjacentHTML('beforeend',`<div class="msg bot"><p>${ans}</p><div class="meta"><span>qwen-plus · 1.8 s</span><span>候选 10 · 上下文 ${d?d.s.length:0}</span><span class="demo">示例回答</span></div><details><summary>查看检索过程与上下文预算</summary><pre>{"top_k":10,"final_k":5,"context_max_chars":6000,"candidates":${d?d.s.length+8:0},"context":${d?d.s.length:0},"excluded":[{"reason":"char_budget","count":1}]}</pre></details></div>`);
+  const list=document.getElementById('src-list'),empty=document.getElementById('src-empty');
+  if(d){empty.style.display='none';list.style.display='block';list.innerHTML=d.s.map(s=>`<div class="src" onclick="alert('原型：这里打开完整原文、定位信息，并提供下载原件')"><div class="h"><span class="n">${s.n}</span>${s.t}</div><div class="loc">点击查看完整原文与定位 · 下载原件</div><div class="tx">${s.x}</div></div>`).join('');document.getElementById('src-cnt').textContent=d.s.length;}
+  else{list.style.display='none';empty.style.display='block';document.getElementById('src-cnt').textContent='0';}
+  m.scrollTop=m.scrollHeight;}
+function resetChat(){document.getElementById('chat-msgs').innerHTML='';document.getElementById('chat-msgs').style.display='none';document.getElementById('chat-empty').style.display='block';document.getElementById('src-list').style.display='none';document.getElementById('src-empty').style.display='block';document.getElementById('src-cnt').textContent='0';}
+document.getElementById('q').addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='Enter')ask();});
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+ 	  		   	  		 	 	   		   		   	        	 		  		 	  		   	 	     	  		 	 	   		   		   	  			 	  			  	  		  	 	 		 		    	 		 	 		 	 		  		   	  			 	  	  		   	 	      		  	   	 		 	 		  	    		 		   		  	   		 			  		     		  	 	 		  	    		 			  			  	  		 	    		   	  		   	 		   		 		   	   			  	 		   	   		 	    		  		 		  	 	 		   		 		  		   		  		  		  	   		 			 		  	 	  		 	    		  	  		  	 	  		  	  		  		   		 			  		  		  			 	  		   	   		 			  			  	  			  	  		  	   			     		  		  		 	   		    	 		   		  		   	  		  		  		  		  			  	  			  	  		 	 	 		   	   		 			  		 	 	 		  		   		 	 	  		   	  		 	    		     		  	    		  		 		  	    			     		 	    		 			  		   	  		  	   		 			  			  	  			  	  		 	   		  		  		    	 		   		 		   	  		    	  			     		 	 	  		 			 		  	   		    	 		   	  		   		  		 		  		  	 	  			     		  	   		 	   		   		  			  	 		  		  		  	 	 		  	   		  	 	 		    	  		  		  		 	    		 			 		   	   			 	  		   		  		 		  		   	   		 	   		   		  		     		    	 		  	    		   	  		 	    		 		  		  		   			    		  	   		   		  		  	   		  	   		 	 	 		   	   		  		  		   	 		  	 	 		  	   		   		  		 	   		  	    		 	 	 		  	 	  		 			  		  		 		  		  		    	 		   		 		   	   		 			  			     		 	 	 		   	  		    	  		  	  		  		  		  	   		    	  		     		    	  			  	 		   	   		 			  		  	  		   	   		 	 	  		  		  		 	    		 	   		  		  		   		  		   	 		  	    		     		    	  			  	 		  	    			     		    {
+  "doc_id": "D34",
+  "encoding": "UTF-8 with BOM",
+  "delimiter": ",",
+  "quote": "\"",
+  "line_ending": "CRLF",
+  "header": true,
+  "record_count": 8,
+  "fictional": true,
+  "missing_value": "empty field; never coerce to zero, false or []",
+  "booleans": "literal true or false; empty means unknown",
+  "dates": "YYYY-MM-DD; original dates are strings",
+  "parts": "JSON array in one CSV field, missing is empty (not an empty array)",
+  "quantity_and_approval": "All original cases omit quantity/approval. D23 assumes approved one piece for a quotation exercise; these assumptions are NOT written into historical cases.",
+  "registration": "A blank date means no date was supplied; it is not proof that no registration ever occurred.",
+  "columns": [
+    {
+      "key": "id",
+      "label": "工单编号",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "key": "model",
+      "label": "设备型号",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "key": "order_date",
+      "label": "订单日期",
+      "type": "date",
+      "nullable": true
+    },
+    {
+      "key": "receipt_date",
+      "label": "签收日期",
+      "type": "date",
+      "nullable": true
+    },
+    {
+      "key": "registered_date",
+      "label": "登记日期",
+      "type": "date",
+      "nullable": true
+    },
+    {
+      "key": "registration_record_status",
+      "label": "登记日期记录状态",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "key": "fault",
+      "label": "告警代码",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "key": "region",
+      "label": "服务地区",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "key": "known_cause",
+      "label": "已确认原因",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "key": "cause_record_status",
+      "label": "原因记录状态",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "key": "ambient_c",
+      "label": "环境温度 °C",
+      "type": "number",
+      "nullable": true
+    },
+    {
+      "key": "running_hours",
+      "label": "持续运行 小时",
+      "type": "number",
+      "nullable": true
+    },
+    {
+      "key": "labor_hours",
+      "label": "实际工时 小时",
+      "type": "number",
+      "nullable": true
+    },
+    {
+      "key": "parts",
+      "label": "部件编号 JSON数组",
+      "type": "json_array",
+      "nullable": true
+    },
+    {
+      "key": "part_quantity",
+      "label": "更换数量 件",
+      "type": "integer",
+      "nullable": true
+    },
+    {
+      "key": "replacement_approved",
+      "label": "更换是否已批准",
+      "type": "boolean",
+      "nullable": true
+    },
+    {
+      "key": "distance_km",
+      "label": "单程公路距离 公里",
+      "type": "number",
+      "nullable": true
+    },
+    {
+      "key": "sold_separately",
+      "label": "是否单独销售",
+      "type": "boolean",
+      "nullable": true
+    },
+    {
+      "key": "receiver_full_scale_bar",
+      "label": "接收端满量程 bar",
+      "type": "number",
+      "nullable": true
+    },
+    {
+      "key": "lesson",
+      "label": "案例解读",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "key": "notice",
+      "label": "资料性质",
+      "type": "string",
+      "nullable": false
+    }
+  ]
+}

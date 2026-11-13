@@ -1,0 +1,356 @@
+{
+  "schema_version": "1.0",
+  "status": "case_quotas_and_source_checks_complete_not_model_evaluated",
+  "title": "设备产品与售后知识库评估分类体系",
+  "total_cases": 200,
+  "splits": {
+    "development": 140,
+    "holdout": 60,
+    "smoke_subset_of_development": 20
+  },
+  "rules": [
+    "每题只有一个 primary_task；多标签维度不得重复计入主任务总数",
+    "primary_source_format 表示主证据载体；source_formats 同时记录所有实际来源",
+    "跨文档问题标注每一条必需证据，不能命中任意一个片段就算找齐",
+    "保留集按事实族分组隔离，不用保留集调参或修改评分规则",
+    "证据锚定原始文档与版本，不只锚定可变化的 chunk ID",
+    "difficulty 根据证据跨度与推理要求确定，不根据模型是否答错确定",
+    "failure_stages 是运行后的诊断字段，可为 unknown，不预设某阶段一定失败",
+    "不存在的格式/版式组合标记 not_applicable；尚未测试的有效组合标记 uncovered",
+    "coverage_report 显示实际覆盖，不能用配额计划冒充已完成的题目统计",
+    "对无答案题记录缺失信息与核查范围；不能虚构 gold evidence"
+  ],
+  "primary_tasks": [
+    {
+      "id": "T01",
+      "label": "单事实查询",
+      "target": 30,
+      "development": 21,
+      "holdout": 9,
+      "definition": "主要求为定位并复述一个明确事实"
+    },
+    {
+      "id": "T02",
+      "label": "条件与适用范围判断",
+      "target": 25,
+      "development": 18,
+      "holdout": 7,
+      "definition": "主要求为判断已给条件是否满足条款或适用范围"
+    },
+    {
+      "id": "T03",
+      "label": "表格查找与比较",
+      "target": 30,
+      "development": 21,
+      "holdout": 9,
+      "definition": "主要求为按表头、行列、单位、脚注读取或比较结构化记录"
+    },
+    {
+      "id": "T04",
+      "label": "图片图表与流程图理解",
+      "target": 20,
+      "development": 14,
+      "holdout": 6,
+      "definition": "回答必须依赖视觉内容；仅有装饰图不算此类"
+    },
+    {
+      "id": "T05",
+      "label": "操作步骤与故障排查",
+      "target": 20,
+      "development": 14,
+      "holdout": 6,
+      "definition": "主要求为恢复有顺序或分支条件的操作流程"
+    },
+    {
+      "id": "T06",
+      "label": "数值计算与单位处理",
+      "target": 20,
+      "development": 14,
+      "holdout": 6,
+      "definition": "主要求为基于证据进行显式计算或单位转换"
+    },
+    {
+      "id": "T07",
+      "label": "多证据整合",
+      "target": 20,
+      "development": 14,
+      "holdout": 6,
+      "definition": "主要求为组合多条独立证据，且不以计算或时间判定为主要考点"
+    },
+    {
+      "id": "T08",
+      "label": "时间版本与有效性",
+      "target": 15,
+      "development": 10,
+      "holdout": 5,
+      "definition": "主要求为根据版本、生效时间与适用对象选择证据"
+    },
+    {
+      "id": "T09",
+      "label": "无依据时拒答",
+      "target": 12,
+      "development": 8,
+      "holdout": 4,
+      "definition": "指定知识范围没有足够依据，不应生成确定答案"
+    },
+    {
+      "id": "T10",
+      "label": "信息不足时澄清",
+      "target": 8,
+      "development": 6,
+      "holdout": 2,
+      "definition": "存在多个可能答案，需要用户补充型号、日期或条件"
+    }
+  ],
+  "primary_source_format_targets": [
+    {
+      "id": "pdf",
+      "count": 90
+    },
+    {
+      "id": "docx",
+      "count": 30
+    },
+    {
+      "id": "xlsx",
+      "count": 25
+    },
+    {
+      "id": "pptx",
+      "count": 20
+    },
+    {
+      "id": "html",
+      "count": 10
+    },
+    {
+      "id": "markdown",
+      "count": 10
+    },
+    {
+      "id": "txt",
+      "count": 5
+    },
+    {
+      "id": "csv",
+      "count": 5
+    },
+    {
+      "id": "image",
+      "count": 5
+    }
+  ],
+  "dimensions": {
+    "source_formats": {
+      "cardinality": "one_or_more",
+      "values": [
+        "pdf",
+        "docx",
+        "xlsx",
+        "pptx",
+        "html",
+        "markdown",
+        "txt",
+        "csv",
+        "image"
+      ]
+    },
+    "layout_challenges": {
+      "cardinality": "one_or_more",
+      "values": [
+        "plain",
+        "multi_column",
+        "long_paragraph",
+        "nested_list",
+        "cross_page_text",
+        "merged_table_header",
+        "cross_page_table",
+        "footnote_unit",
+        "landscape_page",
+        "scan",
+        "rotated_scan",
+        "header_footer_noise",
+        "chart",
+        "flowchart",
+        "technical_diagram",
+        "image_text_relation",
+        "mixed_language",
+        "formula",
+        "multiple_sheets"
+      ]
+    },
+    "evidence_span": {
+      "cardinality": "one",
+      "values": [
+        "single_block",
+        "cross_block",
+        "cross_page",
+        "cross_table",
+        "cross_document",
+        "no_sufficient_evidence"
+      ]
+    },
+    "query_styles": {
+      "cardinality": "one_or_more",
+      "values": [
+        "direct",
+        "paraphrase",
+        "colloquial",
+        "abbreviation",
+        "typo",
+        "implicit_condition",
+        "conversation_reference"
+      ]
+    },
+    "expected_behavior": {
+      "cardinality": "one",
+      "values": [
+        "answer",
+        "calculate_with_evidence",
+        "refuse_insufficient_evidence",
+        "ask_clarification"
+      ]
+    },
+    "difficulty": {
+      "cardinality": "one",
+      "values": [
+        "basic",
+        "intermediate",
+        "hard"
+      ]
+    },
+    "business_metadata": {
+      "fields": [
+        "product_family",
+        "model",
+        "document_version",
+        "effective_date",
+        "service_region"
+      ]
+    },
+    "failure_stages": {
+      "cardinality": "zero_or_more_post_run",
+      "values": [
+        "source_gap",
+        "parse",
+        "normalize",
+        "chunk",
+        "metadata_filter",
+        "retrieve",
+        "rerank",
+        "context_assembly",
+        "generate",
+        "calculate",
+        "citation",
+        "frontend",
+        "evaluation_label",
+        "unknown"
+      ]
+    }
+  },
+  "difficulty_definitions": {
+    "basic": "主要证据位于一个可直接读取的块，条件明确，无额外计算",
+    "intermediate": "需要跨块关联、理解表头脚注、同义匹配或一步推理",
+    "hard": "需要跨文档或复杂版式、多步骤计算、版本消歧或多个能力组合"
+  },
+  "per_case_required_fields": [
+    "case_id",
+    "question",
+    "conversation_history",
+    "primary_task",
+    "primary_source_format",
+    "source_formats",
+    "layout_challenges",
+    "evidence_span",
+    "query_styles",
+    "expected_behavior",
+    "difficulty",
+    "fact_family_id",
+    "split",
+    "gold_answer_points",
+    "gold_evidence",
+    "missing_information",
+    "scoring_method",
+    "review_status"
+  ],
+  "evidence_locator_fields": {
+    "common": [
+      "document_id",
+      "document_version",
+      "source_hash",
+      "evidence_text_or_fact",
+      "required_for_answer"
+    ],
+    "pdf": [
+      "page_number",
+      "bbox_if_available",
+      "block_id"
+    ],
+    "docx": [
+      "heading_path",
+      "paragraph_or_table_id"
+    ],
+    "xlsx": [
+      "sheet_name",
+      "cell_range_or_record_key",
+      "locator_precision"
+    ],
+    "pptx": [
+      "slide_number",
+      "region_if_available"
+    ],
+    "image": [
+      "image_name",
+      "bbox_if_available"
+    ],
+    "html": [
+      "heading_path",
+      "element_or_block_id"
+    ],
+    "markdown": [
+      "heading_path",
+      "line_range"
+    ],
+    "txt": [
+      "line_range"
+    ],
+    "csv": [
+      "row_range",
+      "column_names",
+      "record_key"
+    ]
+  },
+  "coverage_matrices": [
+    [
+      "primary_task",
+      "primary_source_format"
+    ],
+    [
+      "primary_task",
+      "evidence_span"
+    ],
+    [
+      "source_formats",
+      "layout_challenges"
+    ],
+    [
+      "primary_task",
+      "expected_behavior"
+    ]
+  ],
+  "validation_requirements": [
+    "200 个唯一 case_id，主任务与 split 配额和为 200",
+    "20 条 smoke 全部属于 development",
+    "所有标签属于 taxonomy 允许值；业务元数据允许明确 null",
+    "同一 fact_family_id 不跨 development 与 holdout",
+    "可回答题的必需证据全部可以定位并由人工核查",
+    "图片理解题确实依赖图片信息",
+    "各格式至少有真实材料与对应端到端案例",
+    "拒答和澄清题有缺失信息说明及核查范围",
+    "数值题含单位、计算规则与容差",
+    "报告单元格显示实际 n；小样本类别避免夸大百分比",
+    "运行日志保存模型、配置、语料版本、时间和成本；不记录密钥"
+  ],
+  "current_case_count": 200,
+  "current_case_status": "200题已通过作者来源核查及数量/分类完整检查；尚未独立复审和真实模型评估。多维交叉覆盖仍按实际矩阵披露，不声称全组合覆盖。"
+}

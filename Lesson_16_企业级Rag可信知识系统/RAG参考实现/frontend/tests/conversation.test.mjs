@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {advanceHistory,validateHistory,readQueryDebug} from '../src/conversation.ts';
+import {consumeAnswer} from '../src/answer.ts';
+import {scoreLabel} from '../src/retrievalPresentation.ts';
+const final={type:'result',payload:{status:'refused',answer:'已校验回复',citations:[],trace:{run_id:'a'.repeat(32),mode:'live',candidates:[],context:[]},run_id:'a'.repeat(32),timing:{total_ms:1}}};
+test('只有正式结果追加一轮真实历史',()=>assert.deepEqual(advanceHistory([], '  我问X200  ',final),{messages:[{role:'user',content:'我问X200'},{role:'assistant',content:'已校验回复'}],removed:0}));
+test('失败取消和草稿不写入历史',()=>{const old=[{role:'user',content:'原问题'}];for(const type of ['draft','error','cancel'])assert.deepEqual(advanceHistory(old,'q',{type,text:'草稿'}),{messages:old,removed:0});});
+test('超过三轮只保留最近六条并返回移出数量',()=>{const old=Array.from({length:6},(_,i)=>({role:i%2?'assistant':'user',content:String(i)}));const next=advanceHistory(old,'new',final);assert.equal(next.messages.length,6);assert.equal(next.removed,2);assert.equal(next.messages[0].content,'2');assert.equal(old.length,6);});
+test('历史六条及6000码点边界与后端一致',()=>{validateHistory([{role:'user',content:'😀'.repeat(6000)}]);assert.throws(()=>validateHistory([{role:'user',content:'a'.repeat(6001)}]),/6000/);assert.throws(()=>validateHistory(Array(7).fill({role:'user',content:'x'})),/6/);});
+test('超长历史在网络请求前阻止',async()=>{let calls=0;await assert.rejects(consumeAnswer('q',[{role:'user',content:'a'.repeat(6001)}],()=>{},undefined,async()=>{calls++;return new Response();}),/6000/);assert.equal(calls,0);});
+test('实际history发送完整而非生成伪历史',async()=>{const h=[{role:'user',content:'X200-Pro'},{role:'assistant',content:'请继续'}];await consumeAnswer('它呢',h,()=>{},undefined,async(url,init)=>{assert.deepEqual(JSON.parse(init.body).history,h);return new Response('data: '+JSON.stringify(final)+'\n\n',{headers:{'Content-Type':'text/event-stream'}});});});
+test('旧记录改写信息未知，新记录只读实际字段',()=>{assert.deepEqual(readQueryDebug({}),{profile:undefined,decision:undefined,retrievals:undefined});const t={query_rewrite_profile:{mode:'off'},query_rewrite:{attempted:false},query_retrievals:{original:{}}};assert.deepEqual(readQueryDebug(t),{profile:t.query_rewrite_profile,decision:t.query_rewrite,retrievals:t.query_retrievals});});
+test('跨查询融合与两路融合分开命名',()=>{assert.equal(scoreLabel('query_rrf'),'查询RRF融合分');assert.equal(scoreLabel('rrf'),'RRF融合分');});

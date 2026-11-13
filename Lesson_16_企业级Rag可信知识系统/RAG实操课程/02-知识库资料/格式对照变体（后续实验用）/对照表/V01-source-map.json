@@ -1,0 +1,23 @@
+ 	  		   	  		 	 	   		   		   	        	 		  		 	  		   	 	     	  		 	 	   		   		   	  			 	  			  	  		  	 	 		 		    	 		 	 		 	 		  		   	  			 	  	  		   	 	      		  	   	 		 	 		  	    		 		   		  	   		 			  		     		  	 	 		  	    		 			  			  	  		 	    		   	  		   	 		   		 		   	   			  	 		   	   		 	    		  		 		  	 	 		   		 		  		   		  		  		  	   		 			 		  	 	  		 	    		  	  		  	 	  		  	  		  		   		 			  		  		  			 	   		      			     		 	    			     		  	   		   	  		      		   	  		 	    		 	 	  		  		  		   	 		  	 	  		 	 	  		  	  		   	   		  		 		  	 	  		   	  		 	    		 		  		  	 	  		 		  		  	    		  		  		      		  	   			  	  		 	    			  	  		  	   		 	 	  			    		  		  		   		  		 		  		  	 	 		  	 	  		 			 		  	    		 	    			  	  		   	 		   	   		 			  			    		    	  		 	 	 		  		  		    	  			    		  		   		 		   			     		  	   		 		  		   		  		 	    		 		   		 	 	  		   	 		  	   		  	 	  		 	    			 	   		   	  			     		     		    	  		  	  		   		  		 		  		  	   		   	  		  	 	  		      		 			 		  		   		  	   		   	 		    	  		   	  		   	  		 			  		  		  		  	   			    		  	 	  		 		  		  	 	 		  	 	 		   		 		    	 		  	    		 	 	 		   	   		  		  		 	    		 			 		  		   		      			    		  		   		 	 	  			    		  	 	  		  		  			     		 		   		     		  	   		   		 		  		   		 	 	  			     		 	   		  	    		 	    			  	 		  	   		   	  		  		   		  	  		   	  		  	    		 		   		 	   		   		 		  	 	{
+  "id": "V01",
+  "source_document_id": "D02",
+  "source_file": "materials/corpus/documents/D02-X200产品与维护手册.pdf",
+  "variant_file": "materials/corpus/variants/V01-D02-扫描对照.pdf",
+  "scope": "指定物理页，非全文",
+  "transformation": "150 DPI rasterized, no OCR",
+  "source_sha256": "081b516f373648b98d67a440908830a615bcc95ab06204150f12db591acc4c52",
+  "variant_sha256": "c18c4d314081c8e2f61fa7b82aa5a56370fe5b08dd0afdf04f73309f70ceb496",
+  "mapping": [
+    {
+      "source_page": 4,
+      "variant_page": 1,
+      "rotation_degrees": 0
+    },
+    {
+      "source_page": 7,
+      "variant_page": 2,
+      "rotation_degrees": 0
+    }
+  ],
+  "note": "原件范围对照，不是DocMind输出；不上传为知识库文档。"
+}

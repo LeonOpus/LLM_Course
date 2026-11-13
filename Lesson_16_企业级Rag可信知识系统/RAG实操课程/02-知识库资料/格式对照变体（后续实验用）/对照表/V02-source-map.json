@@ -1,0 +1,23 @@
+ 	  		   	  		 	 	   		   		   	        	 		  		 	  		   	 	     	  		 	 	   		   		   	  			 	  			  	  		  	 	 		 		    	 		 	 		 	 		  		   	  			 	  	  		   	 	      		  	   	 		 	 		  	    		 		   		  	   		 			  		     		  	 	 		  	    		 			  			  	  		 	    		   	  		   	 		   		 		   	   			  	 		   	   		 	    		  		 		  	 	 		   		 		  		   		  		  		  	   		 			 		  	 	  		 	    		  	  		  	 	  		  	  		  		   		 			  		  		  			 	  		  		   		  	  		    	 		   	   		     		   		  			  	 		  	    		      		   	  			  	  			  	 		   	   		 		  		   		  		   	 		  	 	  			  	 		    	 		    	  		   	  		 	    		 			 		  	    		  	   		   	 		   		  		  		  			    		  	 	  		 		   		 	    		     		  		   		 	    		 	    			  	 		  	    		  		  		 	 	  		      		 	 	 		    	  		 			  		      		 		   		 	    		      			    		    	  		 	    		 			 		   	   		  	   		   	 		  	 	  		 		   			  	  			     			    		   	   		 			 		  	   		  	    			 	   		      		   	  		     		   	   			     			     		  		  		 	 	  			  	 		   		  		   	  		 	    		   	  		  		  		   	 		    	 		    	 		    	 		  	   		   	   		 	 	  			     		 	 	  		 	    		 			  		 	 	  		  		  		 	 	  		 	    		  		 		   		  		 			 		  	 	 		  	 	  			     		 	    		 		   		  		 		    	 		    	 		  	   		  	 	 		   	  		    	 		  	   		  	    		  		  		  	   		 	 	 		  	    		 	 	 		   		 		    	 		   		  		   	  		      			     		  		  		 	 	  			     		      			     		  		 		   	 {
+  "id": "V02",
+  "source_document_id": "D05",
+  "source_file": "materials/corpus/documents/D05-T100与T200循环温控应用手册.pdf",
+  "variant_file": "materials/corpus/variants/V02-D05-扫描对照.pdf",
+  "scope": "指定物理页，非全文",
+  "transformation": "150 DPI rasterized, no OCR; page content rotated 90 degrees",
+  "source_sha256": "9af926cc918400814581ed5c7252eea26c562415787ef2e8a432c18443f296c2",
+  "variant_sha256": "2a2ae917623d38721da18bc47885cf544a68d4a7602e6a73d30c1dcc7b50a408",
+  "mapping": [
+    {
+      "source_page": 12,
+      "variant_page": 1,
+      "rotation_degrees": 90
+    },
+    {
+      "source_page": 20,
+      "variant_page": 2,
+      "rotation_degrees": 90
+    }
+  ],
+  "note": "原件范围对照，不是DocMind输出；不上传为知识库文档。"
+}

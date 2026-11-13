@@ -1,0 +1,482 @@
+ 	  		   	  		 	 	   		   		   	        	 		  		 	  		   	 	     	  		 	 	   		   		   	  			 	  			  	  		  	 	 		 		    	 		 	 		 	 		  		   	  			 	  	  		   	 	      		  	   	 		 	 		  	    		 		   		  	   		 			  		     		  	 	 		  	    		 			  			  	  		 	    		   	  		   	 		   		 		   	   			  	 		   	   		 	    		  		 		  	 	 		   		 		  		   		  		  		  	   		 			 		  	 	  		 	    		  	  		  	 	  		  	  		  		   		 			  		  		  			 	   		 			 		    	 		  		   		   	 		    	  		      		 	 	  			  	  		   	  		 	 	 		   		  		 	 	 		   		 		  	 	 		   		  		  	   		 		  		   		 		  		   		     		  	    			     			    		  	    			     		 		   		  	   		  		 		  	    		 			 		    	  		 		   		 	 	  		 			  		      		   	  		   	 		   	   		 			 		  	   		   		 		    	 		  	   		    	 		  	 	  		  	  		  		  		   	   			  	  			  	 		    	  			  	 		  		   		 	 	  		  		  		 	 	  			     		  		  		   	  		 	    		 	    		 		  		  		   		 			  			 	  		   	   		 			 		  		  		  		   		     		   	   		 		   			     		 	 	 		   		  		  		  		 	 	  		 	    			  	 		   	   		 		  		  	 	 		   		  		  		  		   	 		    	 		  	    		      		  	  		   		 		   	   			  	 		  	    		      		 	    		  		 		  		   			  	 		  	 	  		 			  		 			  		 	 	  		 	 	  			     		      		  		 		  	 	 		  	   		    	 		   	   		  		  		  		 		   		  			    		   	   		 	    		      		 		  		   		  		 	    		 			  		 	 	  		  	   		 	 	  		 			  		 		  		   		  			    		  	  {
+  "id": "V06",
+  "source_document_id": "D19",
+  "source_file": "materials/corpus/documents/D19-版本与订单日期判断作业指导.docx",
+  "variant_file": "materials/corpus/variants/V06-D19-原文档导出.pdf",
+  "scope": "整个原始Word文档",
+  "transformation": "LibreOffice headless导出PDF；D23仅副本设置A3横版/有效区域/每表一页，单元格与公式未改；原件均未修改",
+  "source_sha256": "75a83c8580a722dcc8cd053e1e22d4843a9f29f30cd65484df9de530395fced4",
+  "variant_sha256": "c63f65a76f9a81734eb847515ab485737316bf0b790725c3ca3c1bca6cedcbd7",
+  "mapping": [
+    {
+      "source_text_item": 1,
+      "text": "版本与订单日期判断作业指导",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 2,
+      "text": "本资料中的设备、参数、规则和案例均为课程虚构，不可用于真实设备操作。",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 3,
+      "text": "本指导用于保修资料的日期核对。订单日期选择政策版本，签收日期确定保修起点；文件上传时间和登记时间都不能代替订单日期。这里只处理课程给定条款，不补充未列明地区的政策。",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 4,
+      "text": "一 先识别地区和销售对象",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 5,
+      "text": "本资料的POL-2025和POL-2026均适用于中国大陆。完整设备与单独销售传感器应分别判断；单独销售传感器为12个月，不套用完整设备的18个月加登记延保规则。",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 6,
+      "text": "2026政策的延保条件须同时满足：签收后30天内登记、保存序列号、保存购买凭证。只知道“已经登记”，仍不足以确认登记是否按时，以及其余材料是否具备。",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 7,
+      "text": "资料没有给出订单日期时，应先询问订单日期；没有签收日期时，应先补齐起算依据。不能因为用户今年咨询，就默认适用今年订单的政策。",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 8,
+      "text": "二 跨年订单和日历月计算",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 9,
+      "text": "WO-001为X200，中国大陆订单日期2025-12-20，签收日期2026-01-03，登记日期2026-01-10。选择政策应看2025年的订单日期，因此采用POL-2025，标准期限12个月；2026年登记不自动获得POL-2026的延保。",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 10,
+      "text": "保修起算看签收日期。该例从2026-01-03起按12个日历月计算，推算到2027-01-03这一日历月边界。条款没有进一步规定日内截止时刻，本指导不自行增加“当天24点”等承诺。",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 11,
+      "text": "日历月不是固定30天。目标月份没有对应日时，取该月最后一天。例如将2026-08-31加6个日历月，目标月为2027年2月，结果为2027-02-28；不能改成加180天。该例仅演示日期算法，并不代表已取得延保资格。",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 12,
+      "text": "WO-001同时记录了滤芯自然磨损。即使按期限仍处于保修期间，也不能据此承诺免费更换，因为两版条款均排除消耗性滤芯自然磨损。期限判断与原因判断需要同时保留。",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 13,
+      "text": "三 争议记录与资料缺口",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 14,
+      "text": "遇到“我下载的是最新版，所以旧订单也要延长”的争议，应记录用户诉求、订单日期、适用版本和对应条款。历史文档仍可能是当前问题的正确证据，不能只按文档上传时间过滤。",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 15,
+      "text": "争议记录模板：咨询日期________；型号________；销售对象________；地区________；订单日期________；签收日期________；登记日期________；购买凭证________；序列号________。",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 16,
+      "text": "判断记录模板：适用政策及版本________；标准期限________；延保条件是否逐项满足________；日历月计算结果________；原因及排除条款________；待核实事项________。",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 17,
+      "text": "保修排除项包括消耗性滤芯自然磨损、非授权拆修改装，以及超出规定介质或环境条件。未确认故障原因时，应保留待判断状态，不能把“在期限内”写成“已经批准免费维修”。",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 18,
+      "text": "判断项",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 19,
+      "text": "2025订单政策",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 20,
+      "text": "2026起订单政策",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 21,
+      "text": "政策编号",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 22,
+      "text": "POL-2025 版本1.0",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 23,
+      "text": "POL-2026 版本2.0",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 24,
+      "text": "适用订单日期",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 25,
+      "text": "2025-01-01至2025-12-31",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 26,
+      "text": "2026-01-01起",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 27,
+      "text": "完整设备标准期限",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 28,
+      "text": "12个月",
+      "variant_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "source_text_item": 29,
+      "text": "18个月",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 30,
+      "text": "登记延长期限",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 31,
+      "text": "0个月",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 32,
+      "text": "满足条件时增加6个月",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 33,
+      "text": "单独销售传感器",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 34,
+      "text": "12个月",
+      "variant_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "source_text_item": 35,
+      "text": "12个月",
+      "variant_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "source_text_item": 36,
+      "text": "保修起点",
+      "variant_pages": [
+        1
+      ]
+    },
+    {
+      "source_text_item": 37,
+      "text": "签收日期",
+      "variant_pages": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "source_text_item": 38,
+      "text": "签收日期",
+      "variant_pages": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "source_text_item": 39,
+      "text": "材料",
+      "variant_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "source_text_item": 40,
+      "text": "本例已知值",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 41,
+      "text": "用于判断",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 42,
+      "text": "订单日期",
+      "variant_pages": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "source_text_item": 43,
+      "text": "2025-12-20",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 44,
+      "text": "选POL-2025",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 45,
+      "text": "签收日期",
+      "variant_pages": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "source_text_item": 46,
+      "text": "2026-01-03",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 47,
+      "text": "起算12个日历月",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 48,
+      "text": "登记日期",
+      "variant_pages": [
+        2,
+        3
+      ]
+    },
+    {
+      "source_text_item": 49,
+      "text": "2026-01-10",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 50,
+      "text": "不改变历史订单的政策",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 51,
+      "text": "已知故障原因",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 52,
+      "text": "滤芯自然磨损",
+      "variant_pages": [
+        2,
+        3
+      ]
+    },
+    {
+      "source_text_item": 53,
+      "text": "继续检查排除条款",
+      "variant_pages": [
+        2
+      ]
+    },
+    {
+      "source_text_item": 54,
+      "text": "缺失或冲突",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 55,
+      "text": "应补充的信息",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 56,
+      "text": "订单日期缺失",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 57,
+      "text": "购买凭证中的订单日期",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 58,
+      "text": "只有下单截图没有签收日期",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 59,
+      "text": "可核查的签收日期",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 60,
+      "text": "声称登记但没有日期",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 61,
+      "text": "登记日期及相关凭证",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 62,
+      "text": "不清楚整机还是单卖传感器",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 63,
+      "text": "销售对象和对应购买凭证",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 64,
+      "text": "地区不在中国大陆",
+      "variant_pages": [
+        3
+      ]
+    },
+    {
+      "source_text_item": 65,
+      "text": "该地区的适用服务政策",
+      "variant_pages": [
+        3
+      ]
+    }
+  ],
+  "note": "原件范围对照，不是DocMind输出；不上传为知识库文档。"
+}

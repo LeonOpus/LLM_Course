@@ -1,0 +1,82 @@
+<!-- LPV2:cmFnL1JBRy0wNi3lrp7mk43mnZDmlpnljIUuemlw:85bf3b33842e3e4dcaee427c1cea2d267cb18e95876431e62f92d07f4e3744ed:rel-k1:HCDNHSA5DLULKGU5EW3JQEHRGE:47d39c5dee6a91a17bd0be019be3a935 -->
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>产品选型帮助索引</title>
+<style>body{margin:0;background:#f2efea;color:#2c2824;font:17px/1.8 system-ui,sans-serif}main{max-width:960px;margin:32px auto;padding:32px 44px;background:white;border:1px solid #ddd5ca}h1{font-size:32px;line-height:1.4}h2{margin-top:32px;font-size:23px}h3{font-size:19px}a{color:#70502e}nav{padding:12px 0;border-bottom:1px solid #ddd}table{width:100%;border-collapse:collapse;margin:18px 0}th,td{border:1px solid #cfc8bd;padding:10px 14px;text-align:left;vertical-align:top}th{background:#eee7dc}small{color:#635a50}.notice{font-size:14px;color:#635a50}code{background:#f4f1eb;padding:2px 5px}footer{margin-top:32px;border-top:1px solid #ddd;padding-top:16px}@media(max-width:700px){main{margin:0;padding:20px}h1{font-size:27px}table{font-size:14px}th,td{padding:7px}}</style>
+</head>
+<body>
+<main>
+<h1 id="title">产品选型帮助索引</h1>
+
+<p class="notice">本资料中的设备、参数、规则和案例均为课程虚构，不可用于真实设备操作。</p>
+
+<p id="D30-b003">选型前先确认应用条件，再读参数及其测量条件。最大数值不能脱离工况单独比较。本索引列出提问顺序和三类设备的代表参数，并指出现有资料不能回答的内容。</p>
+
+<nav aria-label="本页目录"><a href="#inputs">需要哪些条件</a> · <a href="#conditions">参数与工况</a> · <a href="#gaps">缺失信息</a> · <a href="#index">资料索引</a></nav>
+
+<h2 id="inputs">一 先说明需要设备完成什么工作</h2>
+
+<table id="D30-b006">
+<thead>
+<tr><th scope="col">设备类型</th><th scope="col">应先说明的条件</th><th scope="col">只给一句需求时还缺什么</th></tr>
+</thead>
+<tbody>
+<tr><td>输送泵</td><td>介质、目标流量、目标压差、环境温度、持续运行时间</td><td>只说出水量大：缺压力和介质工况</td></tr>
+<tr><td>温控单元</td><td>介质、热负荷、环境温度、循环液温度、目标设定值</td><td>只说降温快：缺热负荷和工况</td></tr>
+<tr><td>压力传感器</td><td>压力范围、允许误差、供电、接收端单位与接口</td><td>只说精度高：缺量程和误差定义</td></tr>
+</tbody>
+</table>
+
+<p id="D30-b007">用户说“每分钟5升，还要2 bar”，应把两个要求当作同一工况核对。X200的最大流量5 L/min是在20°C纯水、进出口压差接近0 bar时的条件值，不能与2 bar最大压力同时成立。</p>
+
+<h2 id="conditions">二 参数与测量条件一起读</h2>
+
+<table id="D30-b009">
+<thead>
+<tr><th colspan="1">设备</th><th colspan="2">参数</th><th colspan="1">解释</th></tr>
+<tr><th scope="col">型号</th><th scope="col">指标</th><th scope="col">数值</th><th scope="col">条件或含义</th></tr>
+</thead>
+<tbody>
+<tr><td>X200</td><td>最大流量</td><td>5 L/min</td><td>20°C纯水，进出口压差接近0 bar</td></tr>
+<tr><td>X200</td><td>最大压力</td><td>2 bar</td><td>关闭出口的极限测试值，不作为持续运行建议</td></tr>
+<tr><td>T200</td><td>制冷量</td><td>1100 W</td><td>环境25°C，循环液20°C</td></tr>
+<tr><td>T200</td><td>额定功率</td><td>1400 W</td><td>不能与制冷量混为同一个指标</td></tr>
+<tr><td>S20</td><td>满量程精度</td><td>0.25% FS</td><td>完整10 bar量程，对应0.025 bar</td></tr>
+</tbody>
+</table>
+
+<p id="D30-b010">T200的设定范围是5°C至40°C，但设定范围不表示在任何环境下都能达到设定值。应同时核对允许环境10°C至35°C、热负荷及制冷量的测试条件。</p>
+
+<p id="D30-b011">S20的0.25% FS按完整量程计算，不按当前读数计算。若接收端以kPa显示，要先核对单位；1 bar = 100 kPa，因此0.025 bar对应2.5 kPa。</p>
+
+<h2 id="gaps">三 信息不足时怎样继续提问</h2>
+
+<p id="D30-b013">例一：“X200在35度能开多久？”先确认35度指环境温度还是液体温度，以及设备型号是否确为X200。假如明确为环境35°C，属于正常环境5°C至35°C这一档，连续运行上限8小时；环境超过35°C且不超过45°C时才进入4小时档。</p>
+
+<p id="D30-b014">例二：“我的冷水机能不能调到5度？”先确认型号和工况。T200的5°C是设定范围下限，不能仅靠设定范围承诺当前环境和热负荷下能够达到。</p>
+
+<p id="D30-b015">例三：“能接触某种化学药液吗？”现有泵资料只给出非腐蚀性清水及禁止介质范围，对未列明化学介质没有兼容性依据，应说明资料不足，不能根据设备外观或功率推断。</p>
+
+<h2 id="index">四 相关资料索引</h2>
+
+<table id="D30-b017">
+<thead>
+<tr><th scope="col">主题</th><th scope="col">资料编号</th><th scope="col">查找内容</th></tr>
+</thead>
+<tbody>
+<tr><td>X200运行与维护</td><td>D02</td><td>参数条件、温度分档、维护与曲线</td></tr>
+<tr><td>温控单元</td><td>D05</td><td>T100与T200规格及工况</td></tr>
+<tr><td>传感器</td><td>D06 / D21</td><td>量程、FS含义、核查和记录</td></tr>
+<tr><td>跨年订单售后</td><td>D19</td><td>订单日期与签收日期分别的用途</td></tr>
+</tbody>
+</table>
+
+<p id="D30-b018">上述编号是课程语料索引，制作状态以随附文档清单为准。标题索引本身不补充任何规格或售后承诺。</p>
+
+<footer>资料编号 D30 · 2026年9月教学版 · 本页不收集用户信息</footer>
+</main>
+</body>
+</html>

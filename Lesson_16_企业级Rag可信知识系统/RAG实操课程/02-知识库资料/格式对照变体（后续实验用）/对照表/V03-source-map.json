@@ -1,0 +1,167 @@
+ 	  		   	  		 	 	   		   		   	        	 		  		 	  		   	 	     	  		 	 	   		   		   	  			 	  			  	  		  	 	 		 		    	 		 	 		 	 		  		   	  			 	  	  		   	 	      		  	   	 		 	 		  	    		 		   		  	   		 			  		     		  	 	 		  	    		 			  			  	  		 	    		   	  		   	 		   		 		   	   			  	 		   	   		 	    		  		 		  	 	 		   		 		  		   		  		  		  	   		 			 		  	 	  		 	    		  	  		  	 	  		  	  		  		   		 			  		  		  			 	  		    	 		    	  		      		      		 		   		  		 		  	   		    	  		 			  		  	  		  	    		 		  		  	    		  		 		  	    		 		  		  		   			    		   	  		   	   		      		  		  		   	  		  		  		  	   		  		  		   	 		  		  		  		   			     		   	  		 			  			  	  		     		   	   		 			  		 	    		 	 	  		  	  		    	  		      			  	  		 			 		   	  		   	   		     		  		   		  		 		    	  		 		  		   	  		   		  			  	  		   	  		      		 	    		 		   			  	 		   	  		  	 	 		    	  		 	    		 	   		    	  			 	   		     		    	 		  	 	  		 	 	 		  	 	  		 		   		 			 		    	  		 	 	  			    		    	 		   		  		   	 		  	 	 		  	 	 		  	    		   	  		   	 		  	    			    		  	    		 		   		  	   		 	    		  		  		  	  		   		  		 	 	  		     		  	 	  		  	   			  	  			  	  		  	   		   	 		  	    			  	 		   		  			  	 		  	    		  		  		  	   		 	    		 	 	  		  	   		   	  		 	   		   		  		      		 	    		 	   		  	    		 			 		   	   		 			 		   	   			     		   	 		  		   			     		  		 		  	 	 		   	  		  	  {
+  "id": "V03",
+  "source_document_id": "D07",
+  "source_file": "materials/corpus/documents/D07-设备型号与应用条件选型指南.pdf",
+  "variant_file": "materials/corpus/variants/V03-D07-双栏重排节选.pdf",
+  "scope": "11个正文/注释片段；不是整本指南",
+  "transformation": "同字逐段重排为先左后右两栏，段落顺序不变",
+  "source_sha256": "c6f8d328b04ed83976ced70264b60bb3161457101a6015fb253587d065686622",
+  "variant_sha256": "d7f2047eaa2a35e505c3ba8279f567f5513f65d47f3e17a620a41a58b6364aab",
+  "mapping": [
+    {
+      "source_page": 12,
+      "source_block": "D07-p12-b02",
+      "source_subpart": 0,
+      "text": "“待确认”不是负面评价，也不等于设备不可能实现。它表示当前证据不能决定。没有Pro目标工作点曲线时，系统应指出缺曲线，而不是断言Pro一定达不到；同样也不能根据最大流量宣称一定能达到。",
+      "variant_page": 1,
+      "column": 1,
+      "bbox_pdf_points": [
+        42,
+        662,
+        282,
+        730
+      ]
+    },
+    {
+      "source_page": 12,
+      "source_block": "D07-p12-b03",
+      "source_subpart": 0,
+      "text": "如果要求必须全部满足，应逐项检查，并保留每项状态。一个明确不满足可以阻止按当前要求确认，但不应省略其他检查记录；若需求后来改变，例如缩短连续时长，原来排除的原因需要重新计算。",
+      "variant_page": 1,
+      "column": 1,
+      "bbox_pdf_points": [
+        42,
+        577,
+        282,
+        645
+      ]
+    },
+    {
+      "source_page": 12,
+      "source_block": "D07-p12-b05",
+      "source_subpart": 0,
+      "text": "记录修改前后的需求版本。只保存最终推荐型号，会丢失以后复盘时最重要的判断依据。",
+      "variant_page": 1,
+      "column": 1,
+      "bbox_pdf_points": [
+        42,
+        526,
+        282,
+        560
+      ]
+    },
+    {
+      "source_page": 13,
+      "source_block": "D07-p13-b02",
+      "source_subpart": 0,
+      "text": "有些请求不是多问一个数字就能解决。例如食品接触认证、防爆认证、未列化学介质兼容性，需要正式文件。若知识库没有相应认证，应该说明资料不足并指出需要的文件，不能把参数表当作认证证明。",
+      "variant_page": 1,
+      "column": 1,
+      "bbox_pdf_points": [
+        42,
+        441,
+        282,
+        509
+      ]
+    },
+    {
+      "source_page": 13,
+      "source_block": "D07-p13-b03",
+      "source_subpart": 0,
+      "text": "相反，用户已经给出明确型号、温度和时长时，不要重复追问相同信息。先使用已知条件做能做的检查，再说明真正缺少哪项；这能减少无意义的对话，并让每次澄清都对应一个判断分支。",
+      "variant_page": 1,
+      "column": 1,
+      "bbox_pdf_points": [
+        42,
+        356,
+        282,
+        424
+      ]
+    },
+    {
+      "source_page": 13,
+      "source_block": "D07-p13-b04",
+      "source_subpart": 0,
+      "text": "信息不足：问题本身缺字段，可请求用户补充。",
+      "variant_page": 1,
+      "column": 1,
+      "bbox_pdf_points": [
+        42,
+        322,
+        282,
+        339
+      ]
+    },
+    {
+      "source_page": 13,
+      "source_block": "D07-p13-b04",
+      "source_subpart": 1,
+      "text": "资料缺失：用户条件已给，但知识库没有相应曲线或证明，需要补正式资料。二者的补救手段不同。",
+      "variant_page": 1,
+      "column": 1,
+      "bbox_pdf_points": [
+        42,
+        271,
+        282,
+        305
+      ]
+    },
+    {
+      "source_page": 13,
+      "source_block": "D07-p13-b05",
+      "source_subpart": 0,
+      "text": "不要为了总能输出一个型号而改写用户要求。若用户确实同意调整需求，应将新的条件作为另一版记录。",
+      "variant_page": 1,
+      "column": 1,
+      "bbox_pdf_points": [
+        42,
+        203,
+        282,
+        254
+      ]
+    },
+    {
+      "source_page": 16,
+      "source_block": "D07-p16-b02",
+      "source_subpart": 0,
+      "text": "复核时先检查是否把最大值拼成工作点，再检查是否漏掉温区、单位或误差分母，最后检查推荐结论是否超出了证据。找到一个真实文件引用并不代表它支持整段答复；不同结论可能需要不同来源。",
+      "variant_page": 1,
+      "column": 2,
+      "bbox_pdf_points": [
+        313,
+        662,
+        553,
+        730
+      ]
+    },
+    {
+      "source_page": 16,
+      "source_block": "D07-p16-b04",
+      "source_subpart": 0,
+      "text": "本指南没有给出完整真实系统设计、未列型号参数、认证或化学兼容证明。能够做到的是把资料支持的部分说清楚，把未确认部分标出来，并帮助下一步补充真正需要的信息。",
+      "variant_page": 1,
+      "column": 2,
+      "bbox_pdf_points": [
+        313,
+        577,
+        553,
+        645
+      ]
+    },
+    {
+      "source_page": 16,
+      "source_block": "D07-p16-b05",
+      "source_subpart": 0,
+      "text": "资料结束 / 任务、条件、证据、计算与结论一起交付，后续变更才可以重新核查。",
+      "variant_page": 1,
+      "column": 2,
+      "bbox_pdf_points": [
+        313,
+        526,
+        553,
+        560
+      ]
+    }
+  ],
+  "note": "原件范围对照，不是DocMind输出；不上传为知识库文档。"
+}
