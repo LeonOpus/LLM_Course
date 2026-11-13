@@ -1,0 +1,32 @@
+{
+  "columns": [
+    "ability",
+    "data_source",
+    "extra_info",
+    "prompt",
+    "reward_model"
+  ],
+  "count": 2274,
+  "dataset_id": "stage5",
+  "jsonl": {
+    "all": "data/rl/stage5/all.jsonl",
+    "train": "data/rl/stage5/train.jsonl",
+    "val": "data/rl/stage5/val.jsonl"
+  },
+  "parquet": {
+    "train": "data/rl/stage5/train.parquet",
+    "val": "data/rl/stage5/val.parquet"
+  },
+  "rollout_root": "data/rollouts_verl",
+  "source_batch": "data/batches/rl",
+  "source_manifest_id": "batch_full_v2",
+  "train_count": 2273,
+  "type": "verl_grpo_agent_loop",
+  "val_count": 1,
+  "val_every": 2274,
+  "verl_dataset": {
+    "class": "verl.utils.dataset.rl_dataset.RLHFDataset",
+    "prompt_key": "prompt",
+    "return_raw_chat": true
+  }
+}

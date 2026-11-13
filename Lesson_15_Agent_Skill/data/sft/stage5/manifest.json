@@ -1,0 +1,44 @@
+{
+  "columns": [
+    "case_id",
+    "composition",
+    "data_source",
+    "difficulty",
+    "enable_thinking",
+    "gold_reward",
+    "id",
+    "index",
+    "messages",
+    "primary_intent",
+    "prompt_trace_hash",
+    "routing_bucket",
+    "secondary_intent",
+    "source_files",
+    "split",
+    "tools",
+    "topic"
+  ],
+  "count": 135,
+  "dataset_id": "stage5",
+  "jsonl": {
+    "all": "data/sft/stage5/all.jsonl",
+    "train": "data/sft/stage5/train.jsonl",
+    "val": "data/sft/stage5/val.jsonl"
+  },
+  "parquet": {
+    "train": "data/sft/stage5/train.parquet",
+    "val": "data/sft/stage5/val.parquet"
+  },
+  "source_batch": "data/batches/sft",
+  "source_manifest_id": "batch_full_v2",
+  "train_count": 121,
+  "type": "verl_multiturn_sft",
+  "val_count": 14,
+  "val_every": 10,
+  "verl_dataset": {
+    "class": "verl.utils.dataset.multiturn_sft_dataset.MultiTurnSFTDataset",
+    "enable_thinking_key": "enable_thinking",
+    "messages_key": "messages",
+    "tools_key": "tools"
+  }
+}

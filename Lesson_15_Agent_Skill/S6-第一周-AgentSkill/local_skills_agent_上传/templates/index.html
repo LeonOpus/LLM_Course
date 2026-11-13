@@ -1,0 +1,674 @@
+<!--
+  ============================================================================
+  Copyright (c) 2026 深维大模型（DeepDimension AI）
+  All Rights Reserved. 版权所有，盗版必究。
+
+  本软件及其相关文档受版权法保护。未经深维大模型书面授权，
+  任何单位和个人不得擅自复制、修改、分发或以其他方式使用本软件
+  的全部或部分内容。违者将依法追究法律责任。
+  ============================================================================
+-->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Agent Skills</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0d1117;
+            --bg-card: #161b22;
+            --bg-code: #1c2333;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #8b949e;
+            --accent: #58a6ff;
+            --green: #3fb950;
+            --orange: #d29922;
+            --red: #f85149;
+            --purple: #bc8cff;
+            --cyan: #79c0ff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header h1::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 8px var(--green);
+        }
+
+        .model-select {
+            background: var(--bg-code);
+            color: var(--cyan);
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            border: 1px solid var(--border);
+            outline: none;
+            cursor: pointer;
+            font-family: inherit;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2379c0ff' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 30px;
+        }
+
+        .model-select:hover { border-color: var(--accent); }
+        .model-select option { background: var(--bg-card); color: var(--text); }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Skills bar */
+        .skills-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .skill-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-chip .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--purple);
+        }
+
+        .skill-chip .name { color: var(--text); font-weight: 500; }
+        .skill-chip .desc { color: var(--text-dim); }
+
+        /* Input area */
+        .input-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .input-area input {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 20px;
+            color: var(--text);
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-area input:focus { border-color: var(--accent); }
+        .input-area input::placeholder { color: var(--text-dim); }
+
+        .btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn:hover { opacity: 0.85; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* Timeline */
+        .timeline { position: relative; }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .event {
+            position: relative;
+            margin-bottom: 16px;
+            padding-left: 48px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .event .dot {
+            position: absolute;
+            left: 12px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            background: var(--bg);
+        }
+
+        .event.system .dot { background: var(--purple); border-color: var(--purple); }
+        .event.user .dot { background: var(--accent); border-color: var(--accent); }
+        .event.round .dot { background: var(--orange); border-color: var(--orange); }
+        .event.text .dot { background: var(--green); border-color: var(--green); }
+        .event.tool .dot { background: var(--cyan); border-color: var(--cyan); }
+        .event.result .dot { background: var(--text-dim); border-color: var(--text-dim); }
+        .event.error .dot { background: var(--red); border-color: var(--red); }
+        .event.done .dot { background: var(--green); border-color: var(--green); box-shadow: 0 0 10px var(--green); }
+        .event.files .dot { background: var(--purple); border-color: var(--purple); }
+
+        .event-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            overflow: hidden;
+        }
+
+        .event-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .event.system .event-label { color: var(--purple); }
+        .event.user .event-label { color: var(--accent); }
+        .event.round .event-label { color: var(--orange); }
+        .event.text .event-label { color: var(--green); }
+        .event.tool .event-label { color: var(--cyan); }
+        .event.result .event-label { color: var(--text-dim); }
+        .event.error .event-label { color: var(--red); }
+        .event.done .event-label { color: var(--green); }
+        .event.files .event-label { color: var(--purple); }
+
+        .event-body {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Code block inside event */
+        .code-block {
+            background: var(--bg-code);
+            border-radius: 6px;
+            padding: 12px 14px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+            color: var(--text-dim);
+        }
+
+        /* Collapsible */
+        .collapsible-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 12px;
+            cursor: pointer;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .collapsible-toggle:hover { color: var(--text); }
+        .collapsible-content { display: none; margin-top: 8px; }
+        .collapsible-content.open { display: block; }
+
+        /* File cards */
+        /* Image grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 8px;
+        }
+
+        .image-preview-card {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .image-preview-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .image-preview-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+
+        .image-info {
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .image-name {
+            font-size: 11px;
+            color: var(--text);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 160px;
+        }
+
+        .file-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 14px;
+            margin: 4px;
+            font-size: 13px;
+            text-decoration: none;
+            color: var(--text);
+            transition: border-color 0.2s;
+        }
+
+        .file-card:hover { border-color: var(--accent); }
+        .file-card .file-size { color: var(--text-dim); font-size: 11px; }
+
+        /* Spinner */
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Messages input summary */
+        .msg-summary {
+            font-size: 12px;
+            color: var(--text-dim);
+            padding: 6px 10px;
+            background: var(--bg);
+            border-radius: 4px;
+            margin-top: 6px;
+        }
+
+        /* Markdown-ish rendering */
+        .event-body h2 { font-size: 16px; margin: 12px 0 6px; color: var(--accent); }
+        .event-body h3 { font-size: 14px; margin: 10px 0 4px; color: var(--cyan); }
+        .event-body strong { color: var(--text); }
+        .event-body table { border-collapse: collapse; margin: 8px 0; width: 100%; }
+        .event-body th, .event-body td {
+            border: 1px solid var(--border);
+            padding: 6px 10px;
+            text-align: left;
+            font-size: 12px;
+        }
+        .event-body th { background: var(--bg-code); color: var(--text-dim); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Local Agent Skills</h1>
+        <select id="modelSelect" class="model-select">
+            {% for m in models %}
+            <option value="{{ m.id }}" {% if m.id == default_model %}selected{% endif %}>
+                {{ m.name }} ({{ m.provider }})
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="container">
+        <!-- Skills bar -->
+        <div class="skills-bar">
+            {% for skill in skills %}
+            <div class="skill-chip">
+                <span class="dot"></span>
+                <span class="name">{{ skill.name }}</span>
+                <span class="desc">{{ skill.description[:60] }}{% if skill.description|length > 60 %}...{% endif %}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Input -->
+        <div class="input-area">
+            <input type="text" id="promptInput"
+                   placeholder="输入你的请求... 例如：分析销售数据 Q1=120万, Q2=150万, Q3=98万, Q4=200万"
+                   value="分析2026年W奶茶店销售数据：Q1=120万, Q2=150万, Q3=198万, Q4=200万，给出趋势分析和图表" />
+            <button class="btn" id="runBtn" onclick="runAgent()">Run</button>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        const timeline = document.getElementById('timeline');
+        const runBtn = document.getElementById('runBtn');
+        const promptInput = document.getElementById('promptInput');
+        let eventSource = null;
+
+        function runAgent() {
+            const prompt = promptInput.value.trim();
+            if (!prompt) return;
+            const model = document.getElementById('modelSelect').value;
+
+            // Reset
+            timeline.innerHTML = '';
+            runBtn.disabled = true;
+            runBtn.textContent = `Running (${model})...`;
+
+            fetch('/run', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt, model }),
+            }).then(response => {
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+
+                function read() {
+                    reader.read().then(({ done, value }) => {
+                        if (done) {
+                            runBtn.disabled = false;
+                            runBtn.textContent = 'Run';
+                            return;
+                        }
+                        buffer += decoder.decode(value, { stream: true });
+                        const lines = buffer.split('\n');
+                        buffer = lines.pop();
+
+                        for (const line of lines) {
+                            if (line.startsWith('data: ')) {
+                                try {
+                                    const event = JSON.parse(line.slice(6));
+                                    handleEvent(event);
+                                } catch (e) {}
+                            }
+                        }
+                        read();
+                    });
+                }
+                read();
+            });
+        }
+
+        function handleEvent(event) {
+            switch (event.type) {
+                case 'system_prompt':
+                    addEvent('system', 'System Prompt', makeCollapsible('查看完整 System Prompt', `<div class="code-block">${formatPlainText(event.content)}</div>`));
+                    break;
+
+                case 'user_input':
+                    addEvent('user', 'User Input', `<div class="event-body">${esc(event.content)}</div>`);
+                    break;
+
+                case 'round_start':
+                    addEvent('round', `Round ${event.round}`, `<div class="event-body" style="color:var(--text-dim)">调用模型中... <span class="spinner"></span></div>`);
+                    break;
+
+                case 'round_input':
+                    // Update the last round event with input details
+                    const lastRound = timeline.querySelector('.event.round:last-of-type .event-body');
+                    if (lastRound) {
+                        let html = '<div class="msg-summary">';
+                        for (const msg of event.messages) {
+                            const roleColor = msg.role === 'user' ? 'var(--accent)' : 'var(--green)';
+                            html += `<div><span style="color:${roleColor};font-weight:600">[${msg.index}] ${msg.role}</span>: ${esc(msg.preview.substring(0, 120))}${msg.preview.length > 120 ? '...' : ''}</div>`;
+                        }
+                        html += '</div>';
+                        lastRound.innerHTML = `Messages: ${event.messages.length} 条 ${html}`;
+                    }
+                    break;
+
+                case 'model_text':
+                    addEvent('text', `Model Response (Round ${event.round})`, `<div class="event-body">${renderMarkdown(event.content)}</div>`);
+                    break;
+
+                case 'tool_call':
+                    addEvent('tool', `Tool Call: ${event.tool_name}`, makeCollapsible(
+                        `${event.tool_name}(...)`,
+                        `<div class="code-block">${formatCodeContent(event.tool_input)}</div>`
+                    , true));
+                    break;
+
+                case 'tool_result':
+                    addEvent('result', `Tool Result: ${event.tool_name}`, makeCollapsible(
+                        '查看执行结果',
+                        `<div class="code-block">${formatCodeContent(event.result)}</div>`
+                    , true));
+                    break;
+
+                case 'files':
+                    if (event.files.length > 0) {
+                        // 分为图片和其他文件
+                        const images = event.files.filter(f => f.is_image);
+                        const others = event.files.filter(f => !f.is_image);
+
+                        let html = '';
+
+                        // 图片网格预览
+                        if (images.length > 0) {
+                            html += `<div class="image-grid">`;
+                            for (const f of images) {
+                                const sizeStr = f.size > 1024*1024
+                                    ? `${(f.size/1024/1024).toFixed(1)}MB`
+                                    : `${(f.size/1024).toFixed(1)}KB`;
+                                html += `<div class="image-preview-card">
+                                    <a href="/files/${f.name}" target="_blank">
+                                        <img src="/files/${f.name}" alt="${f.name}" loading="lazy" />
+                                    </a>
+                                    <div class="image-info">
+                                        <span class="image-name">${f.name}</span>
+                                        <span class="file-size">${sizeStr}</span>
+                                    </div>
+                                </div>`;
+                            }
+                            html += '</div>';
+                        }
+
+                        // 其他文件（PDF、CSV等）
+                        if (others.length > 0) {
+                            html += '<div style="margin-top:12px">';
+                            for (const f of others) {
+                                const sizeStr = f.size > 1024 ? `${(f.size / 1024).toFixed(1)}KB` : `${f.size}B`;
+                                html += `<a class="file-card" href="/files/${f.name}" target="_blank">
+                                    <span>${f.name}</span>
+                                    <span class="file-size">${sizeStr}</span>
+                                </a>`;
+                            }
+                            html += '</div>';
+                        }
+
+                        addEvent('files', `Generated Files (${event.files.length})`, html);
+                    }
+                    break;
+
+                case 'done':
+                    addEvent('done', 'Done', '<div class="event-body" style="color:var(--green)">Agent 任务完成</div>');
+                    runBtn.disabled = false;
+                    runBtn.textContent = 'Run';
+                    break;
+
+                case 'error':
+                    addEvent('error', 'Error', `<div class="event-body">${esc(event.content)}</div>`);
+                    break;
+            }
+
+            // Auto scroll
+            timeline.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+
+        function addEvent(type, label, bodyHtml) {
+            const div = document.createElement('div');
+            div.className = `event ${type}`;
+            div.innerHTML = `
+                <span class="dot"></span>
+                <div class="event-card">
+                    <div class="event-label">${label}</div>
+                    ${bodyHtml}
+                </div>
+            `;
+            timeline.appendChild(div);
+        }
+
+        function makeCollapsible(title, contentHtml, openByDefault = false) {
+            const id = 'c_' + Math.random().toString(36).substr(2, 9);
+            return `
+                <button class="collapsible-toggle" onclick="document.getElementById('${id}').classList.toggle('open'); this.querySelector('.arrow').textContent = document.getElementById('${id}').classList.contains('open') ? '▼' : '▶'">
+                    <span class="arrow">${openByDefault ? '▼' : '▶'}</span> ${title}
+                </button>
+                <div id="${id}" class="collapsible-content ${openByDefault ? 'open' : ''}">${contentHtml}</div>
+            `;
+        }
+
+        function esc(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // 纯文本格式化：保留换行（用于 system prompt 等）
+        function formatPlainText(text) {
+            return esc(text).replace(/\n/g, '<br>');
+        }
+
+        // 代码/JSON 格式化：智能处理各种内容
+        function formatCodeContent(text) {
+            try {
+                const parsed = JSON.parse(text);
+                // 如果是对象，对每个值做特殊处理
+                if (typeof parsed === 'object' && parsed !== null) {
+                    return formatJsonObject(parsed);
+                }
+                return esc(JSON.stringify(parsed, null, 2));
+            } catch (e) {
+                // 不是 JSON，处理转义换行
+                return esc(text).replace(/\\n/g, '\n');
+            }
+        }
+
+        // 将 JSON 对象格式化为好看的多段展示
+        function formatJsonObject(obj) {
+            let parts = [];
+            for (const [key, value] of Object.entries(obj)) {
+                if (value === null || value === undefined || value === '') continue;
+                const strVal = String(value);
+                if (key === 'code') {
+                    // Python 代码：语法高亮风格展示
+                    parts.push(`<div style="margin:8px 0"><span style="color:var(--cyan);font-weight:600">${esc(key)}:</span></div>`);
+                    parts.push(`<div style="background:var(--bg);border-radius:6px;padding:12px;margin:4px 0;white-space:pre;overflow-x:auto;line-height:1.6">${esc(strVal)}</div>`);
+                } else if (key === 'stdout' && strVal.length > 50) {
+                    // 标准输出：保留换行
+                    parts.push(`<div style="margin:8px 0"><span style="color:var(--green);font-weight:600">${esc(key)}:</span></div>`);
+                    parts.push(`<div style="background:var(--bg);border-radius:6px;padding:12px;margin:4px 0;white-space:pre-wrap;line-height:1.5">${esc(strVal)}</div>`);
+                } else if (key === 'stderr' && strVal.length > 0) {
+                    // 错误输出
+                    parts.push(`<div style="margin:8px 0"><span style="color:var(--red);font-weight:600">${esc(key)}:</span></div>`);
+                    parts.push(`<div style="background:rgba(248,81,73,0.08);border-radius:6px;padding:12px;margin:4px 0;white-space:pre-wrap;line-height:1.5;color:var(--red)">${esc(strVal)}</div>`);
+                } else if (key === 'content' && strVal.length > 100) {
+                    // 文件内容：保留换行
+                    parts.push(`<div style="margin:8px 0"><span style="color:var(--purple);font-weight:600">${esc(key)}:</span></div>`);
+                    parts.push(`<div style="background:var(--bg);border-radius:6px;padding:12px;margin:4px 0;white-space:pre-wrap;line-height:1.5;max-height:300px;overflow-y:auto">${esc(strVal)}</div>`);
+                } else {
+                    // 其他字段：单行
+                    const color = key === 'return_code' ? (value === 0 ? 'var(--green)' : 'var(--red)') : 'var(--text-dim)';
+                    parts.push(`<div style="margin:4px 0"><span style="color:var(--cyan);font-weight:600">${esc(key)}:</span> <span style="color:${color}">${esc(strVal)}</span></div>`);
+                }
+            }
+            return parts.join('');
+        }
+
+        function renderMarkdown(text) {
+            // Simple markdown rendering
+            let html = esc(text);
+            // Headers
+            html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+            // Bold
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            // Lists
+            html = html.replace(/^- (.+)$/gm, '  &bull; $1');
+            // Line breaks
+            html = html.replace(/\n/g, '<br>');
+            return html;
+        }
+
+        // Enter to run
+        promptInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !runBtn.disabled) runAgent();
+        });
+    </script>
+</body>
+</html>
