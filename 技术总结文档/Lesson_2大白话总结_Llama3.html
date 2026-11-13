@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 2：Llama 3 大白话总结</title>
+  <style>
+    :root { --ink:#0b1220; --muted:#334155; --line:#cbd5e1; --blue:#1d4ed8; --soft:#f1f5f9; --green:#047857; --orange:#9a3412; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#e8eef5; color:var(--ink); font:17px/1.9 system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; }
+    main { max-width:1100px; margin:30px auto; padding:0 20px 64px; }
+    article { background:#fff; padding:42px 54px; border-radius:16px; box-shadow:0 8px 28px #17203318; }
+    h1 { margin:0 0 8px; font-size:36px; line-height:1.25; }
+    h2 { margin:40px 0 14px; padding-bottom:7px; border-bottom:2px solid var(--line); font-size:26px; }
+    h3 { margin:25px 0 8px; color:#123b83; font-size:21px; }
+    p { margin:10px 0; }
+    .subtitle { color:#0f172a; margin:0 0 24px; }
+    .hero { background:#eff6ff; border-left:5px solid var(--blue); border-radius:10px; padding:23px 27px; }
+    .green { color:var(--green); font-weight:700; }
+    .orange { color:var(--orange); font-weight:700; }
+    .card { background:var(--soft); border:1px solid var(--line); border-radius:10px; padding:17px 20px; margin:14px 0; }
+    .big { font-size:20px; }
+    table { width:100%; border-collapse:collapse; margin:13px 0 20px; }
+    th,td { border:1px solid var(--line); padding:10px 12px; text-align:left; vertical-align:top; }
+    th { background:#e8eef5; color:#0f172a; }
+    code { color:#111827; background:#e2e8f0; padding:1px 5px; border-radius:4px; font-weight:600; }
+    pre { overflow:auto; background:#0f172a; color:#f8fafc; padding:16px; border-radius:9px; line-height:1.55; }
+    li { margin:6px 0; }
+    .small { color:var(--muted); font-size:15px; }
+    @media (max-width:720px) { article { padding:28px 20px; } h1 { font-size:29px; } }
+  
+.study-map{overflow-x:auto;background:#f8fbfd;border:1px solid #afc6d6;border-radius:10px;margin:16px 0}.study-map svg{display:block;width:100%;min-width:900px;height:auto}.study-map text{font-family:system-ui,"Microsoft YaHei",sans-serif;font-size:15px;fill:#112d47}.study-map .mt{font-size:19px;font-weight:700;fill:#073b69}.study-map .bh{font-size:17px;font-weight:700;fill:#073b69}.study-map .lab{font-size:14px;font-weight:600;fill:#244e6a}
+  </style>
+</head>
+<body>
+<main><article>
+  <h1>Lesson 2：Llama 3 大白话总结</h1>
+  <p class="subtitle">先建立直觉，再慢慢补公式｜面向 Transformer 和 LLM 面试</p>
+
+  <div class="hero big">
+    <strong>一句话：</strong> Llama 3 就像一个“读过很多资料、会根据上下文接着写话”的超级自动补全系统。它每次只预测下一个 token，但内部会反复查阅前文、整理重点、加工信息，最后选出下一个最可能的 token。
+  </div>
+<h2>知识关系图：Llama 3 的一层与生成过程</h2>
+<p>上半图看每层模型，下半图看生成时如何复用历史 K/V。</p>
+<div class="study-map"><svg viewBox="0 0 1160 410" role="img" aria-label="Llama 3 的一层与生成过程"><title>Llama 3 的一层与生成过程</title><desc>模型层中的 RMSNorm、GQA、RoPE、SwiGLU 和 Prefill、Decode、KV Cache 的关系。</desc><defs><marker id="study-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#315e7b"/></marker></defs><text class="mt" x="20" y="27">① 每层如何加工一个序列</text><rect x="20" y="55" width="185" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="32" y="80">token IDs</text><text x="32" y="103">Embedding</text><text x="32" y="124">得到 hidden state</text><rect x="240" y="55" width="210" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="252" y="80">RMSNorm</text><text x="252" y="103">规范数值尺度</text><text x="252" y="124">进入注意力模块</text><rect x="485" y="55" width="225" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="497" y="80">GQA + RoPE</text><text x="497" y="103">32 个 Q 头 / 8 个 KV 头</text><text x="497" y="124">RoPE 作用于 Q、K</text><rect x="745" y="55" width="180" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="757" y="80">残差 + FFN</text><text x="757" y="103">RMSNorm → SwiGLU</text><text x="757" y="124">再做残差连接</text><rect x="960" y="55" width="180" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="972" y="80">输出预测</text><text x="972" y="103">重复 32 个 Block</text><text x="972" y="124">最终 logits 采样</text><path d="M205 100 L240 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M450 100 L485 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M710 100 L745 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M925 100 L960 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><text class="mt" x="20" y="208">② 生成阶段：KV Cache 保存各层历史 K / V</text><rect x="20" y="240" width="260" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="32" y="265">Prefill：先读完整输入</text><text x="32" y="288">计算输入 token 的 Q/K/V</text><text x="32" y="309">历史 K/V 写入缓存</text><rect x="340" y="240" width="300" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="352" y="265">Decode：每步生成新 token</text><text x="352" y="288">新 token 计算 Q/K/V</text><text x="352" y="309">新 Q 读取历史 K/V</text><rect x="700" y="240" width="235" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="712" y="265">更新缓存</text><text x="712" y="288">追加新 token 的 K/V</text><text x="712" y="309">供下一步继续使用</text><rect x="985" y="240" width="155" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="997" y="265">影响</text><text x="997" y="288">少算历史 K/V</text><text x="997" y="309">上下文越长</text><text x="997" y="330">缓存越占显存</text><path d="M280 290 L340 290" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M640 290 L700 290" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M935 290 L985 290" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><text x="20" y="385" class="lab">以 Llama 3 8B 为例：32Q / 8KV；缓存的是中间 K/V，不是问题与答案。</text></svg></div>
+
+
+  <h2>一、这节课到底学了什么？</h2>
+  <p>第一课我们学习了 Transformer 的骨架。这一课把骨架换成更接近真实大模型的版本，并且直接读取了真正的 Llama 3 8B 权重。</p>
+  <div class="card">
+    <strong>第一课：</strong> Transformer 的基础结构是什么？<br>
+    <strong>第二课：</strong> 现在的大模型怎样把 Transformer 做得更适合长文本和快速生成？
+  </div>
+  <p>本课代码已经跑通：</p>
+  <ul>
+    <li>GQA 和 RoPE Notebook：运行通过。</li>
+    <li>KV Cache Notebook：运行通过。</li>
+    <li>真实 Llama 3 8B Notebook：运行通过，成功加载 291 个权重张量。</li>
+    <li>完整前向过程最后预测出了 token <code>42</code>。</li>
+  </ul>
+
+  <h2>二、先把大模型想象成一个“读题和答题的人”</h2>
+  <p>假设模型正在读这句话：</p>
+  <div class="card big">“小明把书放在桌子上，因为它太重了。”</div>
+  <p>模型需要判断“它”更可能指书，还是指桌子。它不能只看当前这个词，而要回头看前面的词，并判断哪些词和当前问题最相关。</p>
+  <p>Transformer 的 Attention 就像模型的“快速查资料能力”：</p>
+  <ul>
+    <li>当前词提出问题：我应该关注前面的哪些词？</li>
+    <li>前面的词告诉模型：我能提供什么信息？</li>
+    <li>模型给重要信息更高权重，给不重要信息更低权重。</li>
+  </ul>
+
+  <h2>三、Token 是什么？</h2>
+  <p>模型不直接读汉字、英文单词或句子。Tokenizer 会先把文本切成一小段一小段的 token。</p>
+  <div class="card">
+    <strong>人类看到：</strong> Transformer 很强<br>
+    <strong>模型看到：</strong> 一串数字，例如 <code>[128, 9345, 276, ...]</code>
+  </div>
+  <p>Token 不一定等于一个字，也不一定等于一个单词。英文中的一个长单词可能被拆成几段，中文也可能按字、词或子词切分。</p>
+  <p><strong>面试说法：</strong> Tokenizer 负责把离散文本映射成 token ID；Embedding 再把 token ID 映射成模型可以计算的连续向量。</p>
+
+  <h2>四、Embedding：把数字变成“有含义的坐标”</h2>
+  <p>Token ID 只是一个编号。比如 token 123 和 token 456，并不是 456 比 123“更大”或“更重要”。模型需要把它们变成一串向量。</p>
+  <p>Embedding 可以理解为一张巨大的通讯录：</p>
+  <div class="card">
+    <code>token ID</code> → 查表 → <code>这个 token 的向量</code>
+  </div>
+  <p>向量中的每个数字不是人类直接能读懂的含义，但经过训练后，语义、语法和上下文关系会分布在这些数字中。</p>
+
+  <h2>五、Attention：每个词都在“问问题、找资料、拿答案”</h2>
+  <p>Attention 中有三个名字很容易让人头晕，可以把它们想成图书馆：</p>
+  <table>
+    <tr><th>术语</th><th>大白话</th><th>作用</th></tr>
+    <tr><td>Query，Q</td><td>当前读者的问题</td><td>我现在想找什么信息？</td></tr>
+    <tr><td>Key，K</td><td>每本资料的标签</td><td>这份资料和我的问题匹不匹配？</td></tr>
+    <tr><td>Value，V</td><td>资料的实际内容</td><td>匹配后，真正拿来使用的内容是什么？</td></tr>
+  </table>
+  <p>计算过程可以先不要背公式，只记住：</p>
+  <ol>
+    <li>用 Q 和 K 比较相关性。</li>
+    <li>把相关性变成权重。</li>
+    <li>按照权重从 V 中取信息。</li>
+  </ol>
+  <p>如果一句话有 10 个 token，模型会形成一个“10×10 的关注关系表”：每个 token 都可以查看其他 token，但 Decoder 模型不能查看未来 token。</p>
+
+  <h2>六、RoPE：让模型知道“谁在前、谁在后”</h2>
+  <p>Attention 本身只擅长看“哪些词相关”，但不天然知道词语的顺序。</p>
+  <div class="card">
+    <strong>没有位置信息：</strong> “猫吃鱼”和“鱼吃猫”可能只被看成同一堆词。<br>
+    <strong>有位置信息：</strong> 模型知道谁先出现、谁后出现。
+  </div>
+  <p>第一课的做法是：把一个位置向量加到 token 向量上。</p>
+  <p>RoPE 的做法更像是：根据 token 所在的位置，把 Attention 中的 Q 和 K 旋转一个不同角度。</p>
+  <p>可以把每个 token 想成一根小指南针：</p>
+  <ul>
+    <li>第 1 个位置旋转一个角度；</li>
+    <li>第 2 个位置旋转另一个角度；</li>
+    <li>两个 token 的 Q 和 K 做匹配时，旋转角度差会影响匹配结果。</li>
+  </ul>
+  <p><strong>为什么不旋转 V？</strong> 因为 Q 和 K 负责判断“看谁”，V 负责提供“看到了什么”。位置信息主要需要影响前面的匹配过程。</p>
+  <p><strong>面试说法：</strong> RoPE 通过旋转 Q/K 把位置信息注入 Attention，使注意力分数能够自然体现 token 的相对位置关系。</p>
+
+  <h2>七、GQA：很多人提问，少数资料柜共享</h2>
+  <p>普通多头 Attention 中，每个 Query 头都有自己的一套 K/V。这样表达能力强，但推理时需要缓存很多 K/V。</p>
+  <p>Llama 3 8B 使用 GQA：</p>
+  <div class="card big">
+    32 个 Query 头<br>
+    8 个 Key/Value 头<br>
+    每 4 个 Query 头共享一套 K/V
+  </div>
+  <p>生活类比：</p>
+  <ul>
+    <li>MHA：32 个学生，每个人都有一间资料室。</li>
+    <li>MQA：32 个学生，共用 1 间资料室。</li>
+    <li>GQA：32 个学生分成 8 组，每组共用 1 间资料室。</li>
+  </ul>
+  <p>GQA 的好处是：模型仍然有很多 Query 角度，但需要保存的 K/V 资料少了，生成速度和显存占用更友好。</p>
+  <p>面试时记住：</p>
+  <div class="card"><strong>GQA 减少的是 K/V 头，不是 Query 头。</strong> Llama 3 8B 的比例是 32 个 Q 头对应 8 个 KV 头。</div>
+
+  <h2>八、RMSNorm：先把数值音量调到合适大小</h2>
+  <p>神经网络层数很多时，数字可能越来越大或越来越小，训练会不稳定。</p>
+  <p>Norm 可以理解成“自动调音器”：不改变信息的主要方向，只把数值大小调整到合适范围。</p>
+  <p>LayerNorm 会做比较完整的标准化：先减平均值，再根据波动范围缩放。</p>
+  <p>RMSNorm 更简单：主要看这组数字整体有多大，然后进行缩放，不专门减平均值。</p>
+  <table>
+    <tr><th>名称</th><th>大白话</th><th>Llama 3</th></tr>
+    <tr><td>LayerNorm</td><td>减平均值，再按波动范围调整</td><td>课程第一课常见</td></tr>
+    <tr><td>RMSNorm</td><td>只根据整体能量调整大小</td><td>Llama 3 使用</td></tr>
+  </table>
+
+  <h2>九、SwiGLU：让 FFN 学会“有选择地加工信息”</h2>
+  <p>Attention 负责不同 token 之间交流；FFN 负责每个 token 自己加工信息。</p>
+  <p>普通 FFN 像一个加工厂：</p>
+  <div class="card">输入 → 放大维度 → 激活函数 → 压回原维度</div>
+  <p>SwiGLU 像两个加工通道：</p>
+  <ul>
+    <li>通道 A 判断哪些信息应该被放大；</li>
+    <li>通道 B 提供具体的信息；</li>
+    <li>两者相乘，相当于一个门控；</li>
+    <li>最后再压回原来的 hidden size。</li>
+  </ul>
+  <p>所以可以简单理解为：</p>
+  <div class="card big">Attention 负责“和别人交流”，SwiGLU 负责“自己思考和加工”。</div>
+
+  <h2>十、KV Cache：把已经查过的资料保存起来</h2>
+  <p>模型生成文字时，是一个 token 一个 token 生成的。</p>
+  <p>例如生成：</p>
+  <div class="card">今天 → 天气 → 很 → 不错 → ……</div>
+  <p>如果每生成一个新 token，都把前面所有 token 重新计算一遍，会非常浪费。</p>
+  <p>KV Cache 的思路是：</p>
+  <div class="card big">
+    已经计算过的历史 K/V 先存起来。<br>
+    下一次只计算新 token，再让新 token 查询历史资料。
+  </div>
+  <h3>Prefill 是什么？</h3>
+  <p>Prefill 就是模型第一次读完整个 prompt。</p>
+  <p>比如用户一次输入 100 个 token，模型可以并行处理这 100 个 token，并把它们的 K/V 存进 Cache。</p>
+  <h3>Decode 是什么？</h3>
+  <p>Decode 就是后面一个一个生成新 token。每次只处理最新的 token，历史 K/V 直接从 Cache 取。</p>
+  <table>
+    <tr><th>阶段</th><th>像什么</th><th>主要特点</th></tr>
+    <tr><td>Prefill</td><td>先把整道题读完并做笔记</td><td>可以并行，影响首 token 延迟</td></tr>
+    <tr><td>Decode</td><td>根据笔记逐字写答案</td><td>自回归，KV Cache 影响生成速度</td></tr>
+  </table>
+  <p class="orange">KV Cache 不是让模型一次生成整段话，而是避免重复阅读已经读过的内容。</p>
+
+  <h2>十一、为什么上下文越长，模型越慢、越占显存？</h2>
+  <p>因为每个词都可能需要查看其他词。</p>
+  <p>如果有 100 个 token，关注关系大约是 100×100；如果变成 1000 个 token，就大约是 1000×1000。</p>
+  <p>序列长度增加一倍，完整 Attention 的关系数量大约增加四倍。</p>
+  <p>另外，生成时历史 K/V 也会不断累积，所以长上下文会带来：</p>
+  <ul>
+    <li>Attention 计算量增加；</li>
+    <li>KV Cache 变大；</li>
+    <li>显存读写变多；</li>
+    <li>同一张 GPU 能同时服务的请求变少；</li>
+    <li>长文本位置编码和模型能力可能出现外推问题。</li>
+  </ul>
+
+  <h2>十二、三个推理优化技术，用大白话区分</h2>
+  <table>
+    <tr><th>技术</th><th>大白话</th><th>解决什么问题</th></tr>
+    <tr><td>GQA</td><td>让更多人共享资料柜</td><td>减少 KV Cache 的体积</td></tr>
+    <tr><td>FlashAttention</td><td>分批处理资料，不把整张大表摊在桌上</td><td>减少 Attention 中间结果的显存读写</td></tr>
+    <tr><td>量化</td><td>用更少的位数保存数字</td><td>减少模型权重和 Cache 的内存</td></tr>
+    <tr><td>PagedAttention</td><td>把显存切成可灵活分配的小格子</td><td>减少碎片，提高多请求服务效率</td></tr>
+  </table>
+  <p>它们不是互相替代的关系，而是可以一起使用：</p>
+  <div class="card">GQA 减少缓存数量，量化减少每个数字的大小，PagedAttention 管理缓存位置，FlashAttention 优化注意力计算过程。</div>
+
+  <h2>十三、代码和结构图怎么对应？</h2>
+  <pre>tokenizer.encode(prompt)
+        ↓
+embedding_layer(tokens)
+        ↓
+rms_norm(...)
+        ↓
+wq / wk / wv       # 得到 Q、K、V
+        ↓
+RoPE                # 旋转 Q、K
+        ↓
+Q @ K.T             # 判断应该关注谁
+        ↓
+softmax + mask      # 禁止偷看未来
+        ↓
+attention @ V       # 取回资料
+        ↓
+拼接多个 head + Wo
+        ↓
+残差连接
+        ↓
+RMSNorm + SwiGLU
+        ↓
+重复很多层
+        ↓
+output.weight       # 映射到整个词表
+        ↓
+选择下一个 token</pre>
+  <p>看到代码时不要先被变量名吓到，先问三个问题：</p>
+  <ol>
+    <li>这段代码属于 Embedding、Attention、FFN 还是输出层？</li>
+    <li>它输入的 tensor 有几维，每一维代表什么？</li>
+    <li>它是在混合 token 之间的信息，还是在加工单个 token 的信息？</li>
+  </ol>
+
+  <h2>十四、面试时的最简回答</h2>
+  <div class="card">
+    <p><strong>问：Llama 3 做了什么优化？</strong><br>答：Llama 3 仍然是 Decoder-only Transformer，但使用 RMSNorm、SwiGLU、RoPE 和 GQA。RoPE 负责位置信息，GQA 减少 K/V 头从而降低 KV Cache，RMSNorm 稳定数值，SwiGLU 增强 FFN 的非线性表达。</p>
+    <p><strong>问：KV Cache 是什么？</strong><br>答：生成每个新 token 时，历史 token 的 K/V 不会改变，因此把它们缓存起来。Prefill 负责处理完整 prompt，Decode 阶段只计算新 token，并复用历史 K/V。</p>
+    <p><strong>问：长上下文为什么慢？</strong><br>答：Attention 要建立 token 两两之间的关系，关系数量随序列长度平方增长；生成阶段 KV Cache 又会随上下文线性变大，因此计算、显存和带宽压力都会上升。</p>
+  </div>
+
+  <h2>十五、现在只需要先记住这 8 句话</h2>
+  <ol>
+    <li>Attention：当前 token 去查找相关的历史 token。</li>
+    <li>Q：我想找什么；K：我有什么标签；V：我实际提供什么内容。</li>
+    <li>RoPE：通过旋转 Q/K，让模型感知位置和相对距离。</li>
+    <li>GQA：32 个 Query 头共享 8 个 K/V 头，减少缓存。</li>
+    <li>RMSNorm：把数值大小调稳定，Llama 3 不使用普通 LayerNorm。</li>
+    <li>SwiGLU：两个 FFN 分支，一个负责门控，一个负责提供信息。</li>
+    <li>Prefill：读完整个 prompt 并建立缓存；Decode：利用缓存逐个生成。</li>
+    <li>FlashAttention、量化、PagedAttention 分别优化计算 IO、数字精度和缓存管理。</li>
+  </ol>
+
+  <p class="small">建议学习顺序：先把这份大白话总结读顺，再回到正式版总结看 shape 和公式；最后打开 Notebook 对照代码。不要一开始就试图把所有公式一次性背下来。</p>
+</article></main>
+</body>
+</html>

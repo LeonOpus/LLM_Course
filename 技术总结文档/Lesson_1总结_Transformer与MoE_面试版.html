@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 1：Transformer 与 MoE 面试版总结</title>
+  <style>
+    :root { --ink:#0b1220; --muted:#334155; --line:#cbd5e1; --blue:#1d4ed8; --soft:#f1f5f9; --green:#047857; --orange:#9a3412; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#eef2f7; color:var(--ink); font:16px/1.75 system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; }
+    main { max-width:1120px; margin:32px auto; padding:0 22px 64px; }
+    article { background:white; padding:42px 54px; border-radius:18px; box-shadow:0 8px 30px #17203312; }
+    h1 { margin:0 0 8px; font-size:34px; line-height:1.25; }
+    h2 { margin:42px 0 14px; padding-bottom:7px; border-bottom:2px solid var(--line); font-size:25px; }
+    h3 { margin:26px 0 8px; font-size:20px; color:#1e3a8a; }
+    p { margin:10px 0; }
+    .subtitle { color:var(--muted); margin:0 0 24px; }
+    .hero { background:linear-gradient(135deg,#eff6ff,#f8fafc); padding:22px 26px; border-left:5px solid var(--blue); border-radius:10px; }
+    .tag { display:inline-block; padding:2px 9px; margin:3px 5px 3px 0; border-radius:999px; background:#e8f0ff; color:#1d4ed8; font-size:13px; }
+    .ok { color:var(--green); font-weight:650; }
+    .warn { color:var(--orange); font-weight:650; }
+    table { width:100%; border-collapse:collapse; margin:13px 0 20px; }
+    th,td { border:1px solid var(--line); padding:9px 11px; text-align:left; vertical-align:top; }
+    th { background:var(--soft); }
+    code, pre { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+    code { color:#111827; background:#e2e8f0; padding:1px 5px; border-radius:4px; font-weight:600; }
+    pre { overflow:auto; background:#111827; color:#e5edf8; padding:16px; border-radius:9px; line-height:1.55; }
+    .formula { background:#f8fafc; border:1px solid var(--line); border-radius:8px; padding:12px 16px; margin:12px 0; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; white-space:pre-wrap; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .card { background:var(--soft); border:1px solid var(--line); border-radius:10px; padding:15px 17px; }
+    .qa q { font-weight:700; color:#1e3a8a; }
+    li { margin:5px 0; }
+    .small { color:var(--muted); font-size:14px; }
+    th, .subtitle { color:#0f172a; }
+    @media (max-width:720px) { article { padding:28px 20px; } h1{font-size:28px} .grid{grid-template-columns:1fr} }
+  
+.study-map{overflow-x:auto;background:#f8fbfd;border:1px solid #afc6d6;border-radius:10px;margin:16px 0}.study-map svg{display:block;width:100%;min-width:900px;height:auto}.study-map text{font-family:system-ui,"Microsoft YaHei",sans-serif;font-size:15px;fill:#112d47}.study-map .mt{font-size:19px;font-weight:700;fill:#073b69}.study-map .bh{font-size:17px;font-weight:700;fill:#073b69}.study-map .lab{font-size:14px;font-weight:600;fill:#244e6a}
+  </style>
+</head>
+<body>
+<main><article>
+  <h1>Lesson 1：Transformer 与 MoE</h1>
+  <p class="subtitle">大白话理解 + 代码验证 + LLM 面试复习版｜面向有计算机硕士基础的学习者</p>
+
+  <div class="hero">
+    <strong>先记住一句话：</strong> Transformer 本质上是一个“对序列做上下文建模”的神经网络。它把 token 变成向量，用 Attention 计算“当前 token 应该参考哪些 token”，再通过 FFN 做非线性变换；重复很多层后，用输出头预测下一个 token。MoE 则把 FFN 换成多个专家，并让路由器为每个 token 只挑少数专家工作。
+  </div>
+<h2>知识关系图：Transformer 与 MoE 怎么串起来</h2>
+<p>先沿上方看正常数据流，再看 MoE 如何替换其中的 FFN。</p>
+<div class="study-map"><svg viewBox="0 0 1160 450" role="img" aria-label="Transformer 与 MoE 怎么串起来"><title>Transformer 与 MoE 怎么串起来</title><desc>上方是输入到输出，下面是 MoE 路由到选中专家并合并的关系。</desc><defs><marker id="study-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#315e7b"/></marker></defs><text class="mt" x="20" y="27">① Transformer：从输入序列到预测</text><rect x="20" y="55" width="205" height="92" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="32" y="80">输入</text><text x="32" y="103">文本 → Token ID</text><text x="32" y="124">[B, S]</text><rect x="260" y="55" width="205" height="92" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="272" y="80">Embedding + 位置</text><text x="272" y="103">每个 token 变成向量</text><text x="272" y="124">[B, S, D]</text><rect x="500" y="55" width="210" height="92" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="512" y="80">Self-Attention</text><text x="512" y="103">Q 和 K 匹配 → 权重</text><text x="512" y="124">用权重汇总 V</text><rect x="745" y="55" width="190" height="92" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="757" y="80">FFN + 残差</text><text x="757" y="103">逐 token 特征加工</text><text x="757" y="124">输出仍为 [B,S,D]</text><rect x="970" y="55" width="170" height="92" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="982" y="80">输出头</text><text x="982" y="103">logits → 预测</text><text x="982" y="124">下一个 token</text><path d="M225 101 L260 101" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M465 101 L500 101" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M710 101 L745 101" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M935 101 L970 101" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><text class="mt" x="20" y="205">② MoE：替换 FFN 的计算方式</text><rect x="20" y="230" width="210" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="32" y="255">输入 hidden state</text><text x="32" y="278">一个 token 的向量</text><text x="32" y="299">也会送去被选中的专家</text><rect x="270" y="230" width="220" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="282" y="255">Router</text><text x="282" y="278">根据 token 算分</text><text x="282" y="299">选择 Top-K 专家</text><rect x="530" y="215" width="225" height="80" rx="10" fill="#e7f4eb" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="542" y="240">被选专家</text><text x="542" y="263">每个专家是独立 FFN</text><rect x="530" y="320" width="225" height="70" rx="10" fill="#f1f4f6" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="542" y="345">未选专家</text><text x="542" y="368">该 token 不运行它们</text><rect x="800" y="230" width="340" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="812" y="255">加权合并</text><text x="812" y="278">选择的专家结果 × 路由权重</text><text x="812" y="299">合成该 token 的输出</text><path d="M230 280 L270 280" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M490 260 L530 255" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><text class="lab" text-anchor="middle" x="510" y="239">Top-K</text><path d="M490 305 L530 350" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><text class="lab" text-anchor="middle" x="510" y="332">其余</text><path d="M755 255 L800 270" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><text x="20" y="422" class="lab">B：批大小　S：序列长度　D：隐藏维度；MoE 参数总量和每个 token 激活的参数量是两回事。</text></svg></div>
+
+
+  <h2>一、本次代码运行结论</h2>
+  <table>
+    <tr><th>项目</th><th>结果</th><th>说明</th></tr>
+    <tr><td>Python</td><td class="ok">3.12.16</td><td><code>llm-course</code> 虚拟环境</td></tr>
+    <tr><td>PyTorch</td><td class="ok">2.5.1+cu121</td><td>CUDA 可用，识别到 NVIDIA GeForce RTX 3090</td></tr>
+    <tr><td>基础包</td><td class="ok">NumPy 2.5.4、Matplotlib 3.11.2</td><td>已在 <code>llm-course</code> 中安装</td></tr>
+    <tr><td>深度学习与 NLP 包</td><td class="ok">torchtext 0.6.0、spaCy 3.8.18、rouge 1.0.1、jiwer 4.0.0、nltk 3.10.4</td><td>另已安装 spaCy 的中英文无关模型依赖：<code>de_core_news_sm</code>、<code>en_core_web_sm</code></td></tr>
+    <tr><td>Notebook 工具</td><td class="ok">ipykernel 7.4.0、nbconvert 7.17.2</td><td>用于 VS Code 内核与自动执行验证</td></tr>
+    <tr><td>基础 Notebook</td><td class="ok">4 个核心 Notebook 通过</td><td>包括手写 Transformer、Attention、MoE</td></tr>
+    <tr><td>完整翻译项目</td><td class="ok">原始 checkpoint Notebook 直接执行通过，无错误单元</td><td>数据、前向、loss、反向传播和一次参数更新均通过；默认 smoke test，原始 100 epoch 训练循环保留在原文件中</td></tr>
+  </table>
+  <p>其中 <code>Transformer &amp; MOE.ipynb</code> 有 3 个单元把讲义中的数学/文字误标成了 Python 代码，例如 <code>[0,1,0,0]=国王=1</code>，原样运行必然是语法错误。我没有修改原 Notebook，只在验证时跳过了这 3 个讲义单元；MoE 模型单元均正常通过。另一个 Notebook 的依赖单元有 <code>pip install matp</code> 拼写问题，也没有重复执行，因为依赖已在环境中正确安装。</p>
+
+  <h2>补充：完整翻译项目的实际运行结果</h2>
+  <p>之前容易被忽略的是隐藏目录中的 <code>.ipynb_checkpoints/手撕Transformer-checkpoint.ipynb</code>。它不是简单的 Attention 演示，而是一个完整的 Encoder-Decoder Transformer 翻译项目。我已直接修复这个原文件中的数据路径、缓存、设备和训练兼容性问题；该原始 Notebook 已从文件本身完整执行，52 个代码单元执行成功，0 个错误。</p>
+  <table>
+    <tr><th>验证项</th><th>实际结果</th><th>说明</th></tr>
+    <tr><td>数据集</td><td class="ok">Multi30k 已加载</td><td>训练集 29,000 对，验证集 1,014 对，测试集 1,000 对</td></tr>
+    <tr><td>词表</td><td class="ok">源语言 5,893；目标语言 7,853</td><td>由训练集建立 Field vocabulary</td></tr>
+    <tr><td>Batch 与 mask</td><td class="ok"><code>[128,30]</code>；mask <code>[128,1,30,30]</code></td><td>padding mask 和 subsequent mask 均能生成</td></tr>
+    <tr><td>模型前向</td><td class="ok">输出 <code>[128,29,7853]</code></td><td>Decoder 预测目标序列的下一个 token</td></tr>
+    <tr><td>训练链路</td><td class="ok">loss、backward、optimizer.step() 通过</td><td>已完成一次真实 batch 的参数更新</td></tr>
+  </table>
+  <p>这里要区分两个概念：我已经验证了完整训练链路能跑通，但没有为了“看起来跑过”而盲目执行原 Notebook 的 100 个 epoch。100 epoch 是正式训练任务，会占用较长时间和显存；原文件通过 <code>RUN_FULL_TRAINING = False</code> 控制默认行为。确认 GPU/时间后改成 <code>True</code> 即可正式训练。一次 batch 的 loss 和反向传播只能证明工程链路正确，不能代表翻译质量已经达到可用水平。本次 smoke test 的权重和 loss 已写入原项目下的 <code>result/</code> 目录。</p>
+
+  <h2>二、Transformer 的全局心智模型</h2>
+  <div class="formula">文本 → tokenizer → token IDs → Embedding + Position
+      → Attention（跨 token 交换信息）
+      → FFN（逐 token 做非线性特征变换）
+      → 残差连接 + LayerNorm
+      → 重复 N 层 → Linear 输出 logits → Softmax / 采样下一个 token</div>
+  <p>面试时不要只背“Transformer 没有 RNN”。更完整的表述是：它用 Attention 直接建立任意两个位置之间的依赖，训练时可以对整个序列并行计算；代价是标准自注意力在序列长度为 <code>S</code> 时，注意力矩阵的时间和显存复杂度大致为 <code>O(S²)</code>。</p>
+
+  <h2>三、从 token 到向量</h2>
+  <h3>1. Tokenizer、ID 与 BPE</h3>
+  <p>模型不能直接理解字符串。Tokenizer 先把文本切成 token，再把 token 映射成整数 ID。课程代码里的 BPE 是教学版：从字符开始，反复统计最常见的相邻 token 对并合并。真实 LLM 使用更成熟的 BPE、Unigram 或 SentencePiece 变体，通常还会处理字节、未知字符、特殊 token 和词表边界。</p>
+  <p><strong>面试重点：</strong>ID 只是查表的索引，不具有大小关系；真正进入网络的是 embedding 向量。中文不一定“一字一个 token”，英文也不一定“一词一个 token”。</p>
+
+  <h3>2. Embedding</h3>
+  <p>Embedding 可以看作一个形状为 <code>[vocab_size, d_model]</code> 的可训练查找表。输入 ID 是整数，输出是对应行的向量。课程实现还乘了 <code>sqrt(d_model)</code>，这是原始 Transformer 中常见的缩放方式，用于让 embedding 的数值尺度与后续网络更匹配。</p>
+  <div class="card"><strong>常见追问：为什么不用 one-hot？</strong><br>one-hot 维度等于词表大小且极度稀疏；Embedding 通过查表得到低维稠密向量，参数和计算都更实用，并且能通过训练表达词之间的语义关系。</div>
+
+  <h3>3. 位置编码</h3>
+  <p>Attention 本身对输入排列具有置换等变倾向：如果没有额外信息，模型不知道第一个 token 和第五个 token 的区别。因此需要把位置信息加到 token 表示中。课程代码实现的是经典正弦/余弦位置编码：</p>
+  <div class="formula">PE(pos, 2i)   = sin(pos / 10000^(2i/d_model))
+PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))</div>
+  <p>现代 LLM 常见的是 RoPE、ALiBi 等相对位置方法。面试回答时可以补一句：绝对位置编码直接把位置向量加到 hidden state；RoPE 则通过旋转 Q/K，使注意力内积带上相对位置信息。</p>
+
+  <h2>四、Self-Attention：让 token 互相“查资料”</h2>
+  <p>对每个 token，模型通过三个线性投影得到 Query、Key、Value：</p>
+  <div class="formula">Q = XWQ，K = XWK，V = XWV
+Attention(Q,K,V) = softmax(QKᵀ / √d_k) V</div>
+  <ul>
+    <li><strong>Query：</strong>当前 token 想找什么信息。</li>
+    <li><strong>Key：</strong>每个 token 能提供什么信息，用来和 Query 匹配。</li>
+    <li><strong>Value：</strong>真正被加权汇总的内容。</li>
+    <li><strong>缩放 √d_k：</strong>防止 QKᵀ 数值随维度变大，导致 softmax 过度尖锐、梯度变差。</li>
+    <li><strong>softmax：</strong>把匹配分数变成权重；每个 Query 对所有 Key 的权重和为 1。</li>
+  </ul>
+  <p>若输入 <code>X</code> 形状为 <code>[B,S,D]</code>，单头注意力的核心分数矩阵形状是 <code>[B,S,S]</code>。第 <code>i</code> 行第 <code>j</code> 列，表示位置 <code>i</code> 的 Query 对位置 <code>j</code> 的 Key 的关注程度。</p>
+
+  <h3>Multi-Head Attention</h3>
+  <p>多头不是简单重复同一个 Attention，而是把 <code>D</code> 维 hidden state 切成多个子空间，每个头学习不同关系，例如指代、语法、局部搭配或长距离依赖。课程代码中典型配置是 <code>D=512</code>、<code>heads=8</code>，则每个头的维度是 <code>d_k=64</code>。</p>
+  <div class="formula">[B,S,D] → [B,heads,S,D/heads]
+每个头独立计算 Attention → 拼接回 [B,S,D] → Wo 投影</div>
+  <p><strong>工程提醒：</strong>实现多头时最容易出错的是 <code>view/reshape</code> 和 <code>transpose</code> 的维度顺序。建议每次都写清楚张量形状，而不是只看代码能不能跑。</p>
+
+  <h2>五、FFN、残差和 LayerNorm</h2>
+  <h3>1. FFN 为什么重要</h3>
+  <p>Attention 主要负责 token 之间的信息混合；FFN 主要负责对每个 token 的表示做更深的特征变换。典型形式是：</p>
+  <div class="formula">FFN(x) = W₂ · σ(W₁x + b₁) + b₂</div>
+  <p>中间维度通常比 hidden size 大，激活函数提供非线性，否则多层线性层可以合并成一层线性变换。现代 LLM 常把 ReLU 换成 GELU、SwiGLU 等。</p>
+
+  <h3>2. 残差连接与 LayerNorm</h3>
+  <p>残差连接给信息和梯度提供一条更短的通路：<code>y = x + F(x)</code>。LayerNorm 则在特征维度上标准化每个 token 的表示，减轻数值漂移，让深层训练更稳定。</p>
+  <table>
+    <tr><th>形式</th><th>公式</th><th>理解</th></tr>
+    <tr><td>Post-LN</td><td><code>y = LN(x + F(x))</code></td><td>原始 Transformer 常见；Add 后 Norm</td></tr>
+    <tr><td>Pre-LN</td><td><code>y = x + F(LN(x))</code></td><td>现代大模型更常见；残差通路更直接，深层通常更易训练</td></tr>
+  </table>
+
+  <h2>六、Encoder、Decoder 与 LLM 架构</h2>
+  <div class="grid">
+    <div class="card"><strong>Encoder-only：BERT</strong><br>双向看上下文，适合理解任务：分类、检索向量、序列标注。通常使用特殊的 <code>[CLS]</code> 表示汇总信息。</div>
+    <div class="card"><strong>Decoder-only：GPT、Qwen、Llama</strong><br>使用 causal mask，当前位置不能看到未来 token；训练时可并行计算 mask 后的序列，推理时按 token 自回归生成。</div>
+    <div class="card"><strong>Encoder-Decoder：T5</strong><br>Encoder 双向理解输入，Decoder 用 masked self-attention 生成输出，并通过 cross-attention 读取 Encoder 的 K/V。</div>
+    <div class="card"><strong>为什么 LLM 多用 Decoder-only</strong><br>训练目标统一为 next-token prediction，规模化简单；同一套模型既能续写，也能通过提示词完成问答、摘要、代码生成等任务。</div>
+  </div>
+
+  <h2>七、MoE：把一个大 FFN 拆成多个专家</h2>
+  <h3>1. 直观理解</h3>
+  <p>普通 Transformer 的每个 token 都经过同一个 FFN。MoE 准备多个 FFN 专家，再用 Router 根据 token 的 hidden state 计算路由分数，选择 Top-K 个专家，最后按权重加权合并结果。</p>
+  <div class="formula">hidden states → Router → Top-K experts → 加权求和 → 输出 hidden states</div>
+  <h3>2. 课程代码实现了什么</h3>
+  <ul>
+    <li><strong>BasicMOE：</strong>演示多个 Expert 和 Gate 的基本结构。它会计算所有专家，再加权合并，更偏教学示例，不是严格的稀疏实现。</li>
+    <li><strong>SparseMOE：</strong>对每个 token 选择 Top-K 专家；通过 <code>expert_mask</code> 找到每个专家负责的 token，再用 <code>index_add_</code> 把结果写回原 token 位置。</li>
+    <li><strong>ShareExpertMOE：</strong>在稀疏专家之外增加共享专家。共享路径让所有 token 都获得一部分通用能力，稀疏路径负责更专业的模式。</li>
+  </ul>
+  <h3>3. 面试中最容易说错的点</h3>
+  <p>MoE 不是“参数量和计算量都变小”。更准确地说：总参数量可以变大，但每个 token 激活的专家数量有限，因此单 token 的计算量可以控制在较低水平。实际系统还要付出 token dispatch、跨 GPU 通信、负载不均衡和显存占用的代价。</p>
+  <p>真实 MoE 通常还需要负载均衡机制，例如 router auxiliary loss、capacity limit 或更复杂的路由策略；本课程代码重点是理解前向传播和 token dispatch，没有完整实现工业级训练稳定性方案。</p>
+
+  <h2>八、代码运行中值得你记住的工程细节</h2>
+  <table>
+    <tr><th>现象</th><th>原因/改进</th></tr>
+    <tr><td>Notebook 里直接 <code>!pip install</code></td><td>安装目标取决于当前内核，容易装错环境。更稳妥的是先选对内核，再用 <code>python -m pip</code> 或 Conda 安装。</td></tr>
+    <tr><td><code>matp</code> 安装失败</td><td>这是 <code>matplotlib</code> 的拼写错误；本次环境已正确安装 matplotlib。</td></tr>
+    <tr><td>讲义数学文本报 SyntaxError</td><td>文本单元被错误标成 code。它不是模型实现错误，修复方式是改成 Markdown 或注释。</td></tr>
+    <tr><td>随机模型输出概率</td><td>代码只验证前向传播和张量形状，没有训练；随机权重输出不能代表模型效果。</td></tr>
+    <tr><td>Attention 显存随长度增长很快</td><td>标准注意力生成 <code>S×S</code> 矩阵，长上下文通常需要 FlashAttention、滑动窗口、GQA/MQA、稀疏注意力等优化。</td></tr>
+  </table>
+
+  <h2>九、面试高频问答</h2>
+  <div class="qa">
+    <p><q>Q1：为什么 Transformer 比 RNN 更适合大规模训练？</q><br>A：RNN 按时间步串行，难以充分利用 GPU；Transformer 在训练阶段可对整个序列并行计算，并通过 Attention 直接建立长距离依赖。代价是标准 Attention 的 <code>O(S²)</code> 复杂度。</p>
+    <p><q>Q2：Q、K、V 分别是什么？</q><br>A：Q 表示当前查询需求，K 表示每个位置可被匹配的索引，V 表示被聚合的内容。<code>QKᵀ</code> 产生相关性，softmax 后对 V 加权。</p>
+    <p><q>Q3：为什么要除以 <code>sqrt(d_k)</code>？</q><br>A：维度增大时点积方差增大，softmax 容易饱和，梯度变小；缩放可以把分数控制在更合适的范围。</p>
+    <p><q>Q4：为什么要多头？</q><br>A：不同头可以在不同表示子空间关注不同关系；多个头拼接后提高表达能力，而不是单个头承担所有关系。</p>
+    <p><q>Q5：为什么需要位置编码？</q><br>A：Attention 单独看 token 集合时缺少顺序信息，位置编码/位置机制让模型区分先后顺序，并建模相对距离。</p>
+    <p><q>Q6：Pre-LN 和 Post-LN 怎么选？</q><br>A：Post-LN 是原始 Transformer 形式；Pre-LN 让残差通路更直接，通常更利于深层大模型训练。具体还要结合模型结构和训练配置。</p>
+    <p><q>Q7：MoE 为什么能扩大参数规模又控制计算量？</q><br>A：专家总数增加了总参数，但 Router 对每个 token 只激活 Top-K 个专家，所以 active parameters 和计算量不必随总专家数同比增加；实际还要考虑通信和负载均衡。</p>
+    <p><q>Q8：训练时为什么 Decoder-only 可以并行，生成时却是串行？</q><br>A：训练阶段整段真实序列已知，可以用 causal mask 一次算出每个位置的 next-token loss；推理阶段下一个 token 依赖上一步生成结果，因此天然自回归。</p>
+    <p><q>Q9：KV Cache 解决什么问题？</q><br>A：生成第 t 个 token 时，历史 token 的 K/V 不变，可以缓存并复用，避免每一步重复计算历史部分；代价是显存占用随 batch、层数、序列长度增长。</p>
+    <p><q>Q10：如何定位 Transformer 实现的 shape bug？</q><br>A：从 <code>[B,S,D]</code> 开始逐层记录形状，重点检查 head 拆分、transpose、mask 广播、contiguous/reshape，以及输出重新合并是否回到 <code>[B,S,D]</code>。</p>
+  </div>
+
+  <h2>十、适合求职的复习路线</h2>
+  <ol>
+    <li>能不看资料写出 scaled dot-product attention，并在每一步标注张量形状。</li>
+    <li>把课程实现改成 decoder-only：加入 causal mask、token shift 和 next-token cross entropy。</li>
+    <li>实现 RoPE，并对比绝对位置编码；记录长序列下的显存和速度。</li>
+    <li>给 SparseMoE 加上 router auxiliary loss，统计每个 expert 接收的 token 数，观察负载是否均衡。</li>
+    <li>用 profiler 或简单计时比较普通 Attention、KV Cache、GQA 的 decode 速度和显存。</li>
+    <li>整理一个小项目 README：问题定义、模型结构、关键公式、复杂度、实验结果、失败排查。这比只提交 Notebook 更像真实工程项目。</li>
+  </ol>
+
+  <h2>十一、本次复现涉及的文件</h2>
+  <ul>
+    <li><code>手搓transformer（修复版本）.ipynb</code>：BPE、Embedding、位置编码、多头注意力、FFN、Encoder Layer。</li>
+    <li><code>手搓transformer.ipynb</code>：同一套 Transformer 基础实现的另一份版本。</li>
+    <li><code>手撕Attention.ipynb</code>：从张量形状出发实现多头注意力和 LayerNorm。</li>
+    <li><code>学透Transformer &amp; MOE/Transformer &amp; MOE.ipynb</code>：神经网络基础、Transformer 架构、Encoder/Decoder、BasicMoE、SparseMoE、Shared Expert MoE。</li>
+    <li><code>第1课-Transformer/第1课-Transformer/.ipynb_checkpoints/手撕Transformer-checkpoint.ipynb</code>：已直接补齐 Multi30k 本地数据路径、依赖和张量缓存后的完整 Encoder-Decoder 翻译项目。</li>
+  </ul>
+
+  <p class="small">结论：Lesson 1 的基础模块和完整翻译项目都已经在 <code>llm-course</code> 环境中完成验证。当前结果证明“代码能运行”和“模型训练有效”是两件事；下一步面试准备的重点，是能解释每个模块的输入输出、复杂度、训练/推理差异，以及工程上的显存和通信代价。</p>
+</article></main>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 2：Llama 3、GQA、RoPE 与 KV Cache</title>
+  <style>
+    :root { --ink:#0b1220; --muted:#334155; --line:#cbd5e1; --blue:#1d4ed8; --soft:#f1f5f9; --green:#047857; --orange:#9a3412; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#e8eef5; color:var(--ink); font:16px/1.78 system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; }
+    main { max-width:1160px; margin:30px auto; padding:0 20px 64px; }
+    article { background:#fff; padding:42px 54px; border-radius:16px; box-shadow:0 8px 28px #17203318; }
+    h1 { margin:0 0 8px; font-size:35px; line-height:1.25; }
+    h2 { margin:42px 0 14px; padding-bottom:7px; border-bottom:2px solid var(--line); font-size:25px; }
+    h3 { margin:26px 0 8px; color:#123b83; font-size:20px; }
+    p { margin:10px 0; }
+    .subtitle { color:#0f172a; margin:0 0 24px; }
+    .hero { background:#eff6ff; padding:22px 26px; border-left:5px solid var(--blue); border-radius:10px; }
+    .ok { color:var(--green); font-weight:700; }
+    .warn { color:var(--orange); font-weight:700; }
+    table { width:100%; border-collapse:collapse; margin:13px 0 20px; }
+    th,td { border:1px solid var(--line); padding:9px 11px; text-align:left; vertical-align:top; }
+    th { background:#e8eef5; color:#0f172a; }
+    code { color:#111827; background:#e2e8f0; padding:1px 5px; border-radius:4px; font-weight:600; }
+    pre { overflow:auto; background:#0f172a; color:#f8fafc; padding:16px; border-radius:9px; line-height:1.55; }
+    .formula { background:#f8fafc; border:1px solid var(--line); border-radius:8px; padding:12px 16px; margin:12px 0; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#111827; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .card { background:var(--soft); border:1px solid var(--line); border-radius:10px; padding:15px 17px; }
+    .qa q { font-weight:700; color:#123b83; }
+    li { margin:5px 0; }
+    .small { color:var(--muted); font-size:14px; }
+    @media (max-width:720px) { article { padding:28px 20px; } h1 { font-size:28px; } .grid { grid-template-columns:1fr; } }
+  
+.study-map{overflow-x:auto;background:#f8fbfd;border:1px solid #afc6d6;border-radius:10px;margin:16px 0}.study-map svg{display:block;width:100%;min-width:900px;height:auto}.study-map text{font-family:system-ui,"Microsoft YaHei",sans-serif;font-size:15px;fill:#112d47}.study-map .mt{font-size:19px;font-weight:700;fill:#073b69}.study-map .bh{font-size:17px;font-weight:700;fill:#073b69}.study-map .lab{font-size:14px;font-weight:600;fill:#244e6a}
+  </style>
+</head>
+<body>
+<main><article>
+  <h1>Lesson 2：Llama 3、GQA、RoPE 与 KV Cache</h1>
+  <p class="subtitle">从真实 Llama 3 8B 权重出发的代码理解 + 面试复习版</p>
+  <div class="hero"><strong>先记住主线：</strong> Llama 3 仍然是 Decoder-only Transformer。它用 tokenizer 把文本变成 token，用 Embedding 得到向量；每一层通过 RMSNorm、带 RoPE 的 GQA、残差连接和 SwiGLU 逐步更新 hidden state；最后经过 RMSNorm 和输出投影预测下一个 token。推理时用 KV Cache 避免重复计算历史 token 的 Key/Value。</div>
+<h2>知识关系图：Llama 3 的一层与生成过程</h2>
+<p>上半图看每层模型，下半图看生成时如何复用历史 K/V。</p>
+<div class="study-map"><svg viewBox="0 0 1160 410" role="img" aria-label="Llama 3 的一层与生成过程"><title>Llama 3 的一层与生成过程</title><desc>模型层中的 RMSNorm、GQA、RoPE、SwiGLU 和 Prefill、Decode、KV Cache 的关系。</desc><defs><marker id="study-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#315e7b"/></marker></defs><text class="mt" x="20" y="27">① 每层如何加工一个序列</text><rect x="20" y="55" width="185" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="32" y="80">token IDs</text><text x="32" y="103">Embedding</text><text x="32" y="124">得到 hidden state</text><rect x="240" y="55" width="210" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="252" y="80">RMSNorm</text><text x="252" y="103">规范数值尺度</text><text x="252" y="124">进入注意力模块</text><rect x="485" y="55" width="225" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="497" y="80">GQA + RoPE</text><text x="497" y="103">32 个 Q 头 / 8 个 KV 头</text><text x="497" y="124">RoPE 作用于 Q、K</text><rect x="745" y="55" width="180" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="757" y="80">残差 + FFN</text><text x="757" y="103">RMSNorm → SwiGLU</text><text x="757" y="124">再做残差连接</text><rect x="960" y="55" width="180" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="972" y="80">输出预测</text><text x="972" y="103">重复 32 个 Block</text><text x="972" y="124">最终 logits 采样</text><path d="M205 100 L240 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M450 100 L485 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M710 100 L745 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M925 100 L960 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><text class="mt" x="20" y="208">② 生成阶段：KV Cache 保存各层历史 K / V</text><rect x="20" y="240" width="260" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="32" y="265">Prefill：先读完整输入</text><text x="32" y="288">计算输入 token 的 Q/K/V</text><text x="32" y="309">历史 K/V 写入缓存</text><rect x="340" y="240" width="300" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="352" y="265">Decode：每步生成新 token</text><text x="352" y="288">新 token 计算 Q/K/V</text><text x="352" y="309">新 Q 读取历史 K/V</text><rect x="700" y="240" width="235" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="712" y="265">更新缓存</text><text x="712" y="288">追加新 token 的 K/V</text><text x="712" y="309">供下一步继续使用</text><rect x="985" y="240" width="155" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="997" y="265">影响</text><text x="997" y="288">少算历史 K/V</text><text x="997" y="309">上下文越长</text><text x="997" y="330">缓存越占显存</text><path d="M280 290 L340 290" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M640 290 L700 290" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M935 290 L985 290" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><text x="20" y="385" class="lab">以 Llama 3 8B 为例：32Q / 8KV；缓存的是中间 K/V，不是问题与答案。</text></svg></div>
+
+
+  <h2>一、本次项目运行结论</h2>
+  <table>
+    <tr><th>项目</th><th>结果</th><th>说明</th></tr>
+    <tr><td>Python / PyTorch</td><td class="ok">Python 3.12.16；PyTorch 2.5.1+cu121</td><td>使用 <code>llm-course</code> 环境，CUDA 可用</td></tr>
+    <tr><td>额外依赖</td><td class="ok"><code>tiktoken 0.14.0</code>、ModelScope</td><td>Tokenizer 和模型权重下载使用</td></tr>
+    <tr><td>手撕 GQA &amp; RoPE</td><td class="ok">5 个代码单元执行，0 个错误</td><td>包含 RoPE 单元测试、GQA/MQA 风格注意力测试</td></tr>
+    <tr><td>带 KV Cache 的 Transformer</td><td class="ok">1 个代码单元执行，0 个错误</td><td>完成带缓存/不带缓存的生成性能对比</td></tr>
+    <tr><td>Llama 3 from scratch</td><td class="ok">50 个代码单元执行，0 个错误</td><td>加载真实 Llama 3 8B 权重，最后预测 token 为 <code>42</code></td></tr>
+    <tr><td>模型权重</td><td class="ok">291 个张量加载成功</td><td><code>consolidated.00.pth</code> 约 15 GB，位于原模型目录</td></tr>
+  </table>
+  <p>课程压缩包本身只提供代码、配置和 tokenizer；真实权重已从 ModelScope 下载到 <code>第2课-Meta-Llama-3-8B/</code>。本次没有新建“可运行版”Notebook，修复直接写回原始 Notebook。</p>
+
+  <h2>二、Llama 3 8B 的架构参数</h2>
+  <table>
+    <tr><th>参数</th><th>值</th><th>面试理解</th></tr>
+    <tr><td>Layers</td><td><code>32</code></td><td>32 个 Transformer Block 串联</td></tr>
+    <tr><td>Model dimension</td><td><code>4096</code></td><td>每个 token 的 hidden state 维度</td></tr>
+    <tr><td>Attention heads</td><td><code>32</code></td><td>Query 有 32 个头</td></tr>
+    <tr><td>KV heads</td><td><code>8</code></td><td>使用 GQA；每 4 个 Query 头共享 1 个 K/V 头</td></tr>
+    <tr><td>Head dimension</td><td><code>4096 / 32 = 128</code></td><td>每个注意力头的 Q/K/V 子空间维度</td></tr>
+    <tr><td>FFN hidden dimension</td><td><code>14336</code></td><td>SwiGLU 中间层，远大于 4096</td></tr>
+    <tr><td>Vocabulary</td><td><code>128256</code></td><td>课程权重配置中的词表大小</td></tr>
+    <tr><td>Position</td><td><code>RoPE, θ=500000</code></td><td>通过旋转 Q/K 注入位置信息</td></tr>
+  </table>
+  <p><strong>一句面试回答：</strong> Llama 3 8B 是 32 层、hidden size 4096 的 dense Decoder-only Transformer，采用 RMSNorm、SwiGLU、RoPE 和 32Q/8KV 的 GQA，以降低推理阶段 KV Cache 的显存和通信压力。</p>
+
+  <h2>三、从文本到下一个 token</h2>
+  <div class="formula">文本 → tiktoken/BPE → token IDs → Token Embedding → 32 层 Transformer Block<br>每层：RMSNorm → GQA + RoPE → 残差 → RMSNorm → SwiGLU FFN → 残差<br>→ Final RMSNorm → Output Projection → logits → argmax / sampling → 下一个 token</div>
+  <h3>1. Tokenizer</h3>
+  <p>Notebook 使用 Llama 3 的 tokenizer.model，通过 <code>tiktoken.Encoding</code> 加载 mergeable ranks 和 special tokens。Tokenizer 把字符串转换为整数 ID；ID 本身没有大小关系，真正进入模型的是对应的 embedding 行向量。</p>
+  <p>不要把 tokenizer 和 embedding 混为一谈：tokenizer 是离散的文本压缩/切分规则，embedding 是模型里可训练的向量查找表。</p>
+  <h3>2. Embedding</h3>
+  <p>输入 token 序列形状为 <code>[S]</code>，经过 Embedding 后变成 <code>[S,4096]</code>。课程示例的 prompt 有 17 个 token，因此得到：</p>
+  <div class="formula">tokens: [17] → token_embeddings_unnormalized: [17, 4096]</div>
+
+  <h2>四、RMSNorm：Llama 选择的归一化</h2>
+  <div class="formula">RMSNorm(x) = x / sqrt(mean(x²) + ε) ⊙ g</div>
+  <p>其中 <code>g</code> 是可训练的缩放参数。RMSNorm 不像 LayerNorm 那样先减均值，因此少了均值计算，结构更简单，适合大模型训练和推理。</p>
+  <table>
+    <tr><th>对比</th><th>LayerNorm</th><th>RMSNorm</th></tr>
+    <tr><td>是否减均值</td><td>是</td><td>否</td></tr>
+    <tr><td>归一化方式</td><td>基于均值和方差</td><td>基于均方根</td></tr>
+    <tr><td>工程特点</td><td>表达完整但计算略复杂</td><td>计算更简单，Llama 系列常用</td></tr>
+  </table>
+
+  <h2>五、RoPE：把位置信息放进 Q/K 的旋转</h2>
+  <p>Self-Attention 如果只看到一组 token 向量，无法天然知道 token 的顺序。RoPE 不直接把一个位置向量加到 embedding 上，而是对 Q 和 K 的二维分量对进行位置相关的旋转。</p>
+  <div class="formula">对每一对 (x₂ᵢ, x₂ᵢ₊₁)：<br>[x'₂ᵢ, x'₂ᵢ₊₁] = [x₂ᵢ cos(mθᵢ) - x₂ᵢ₊₁ sin(mθᵢ), x₂ᵢ sin(mθᵢ) + x₂ᵢ₊₁ cos(mθᵢ)]<br>θᵢ = θ_base^(-2i / d)</div>
+  <p>代码把相邻两个维度视为一个复数，用复数乘法完成旋转，再还原成实数张量。旋转同时作用于 Q、K，最终点积中会自然携带相对位置信息。</p>
+  <h3>面试怎么解释 RoPE</h3>
+  <ul>
+    <li>它是对 Q/K 的位置相关旋转，而不是简单拼接一个 position embedding。</li>
+    <li>旋转不改变向量范数，位置影响主要体现在 QKᵀ 的相对相位上。</li>
+    <li>RoPE 让注意力分数能够表达相对距离；Llama 3 把 base frequency 提高到 500000，以支持更长上下文的训练/扩展。</li>
+    <li>长上下文并不是只改一个 θ 就完成，还涉及训练长度、频率缩放、显存和注意力计算成本。</li>
+  </ul>
+
+  <h2>六、GQA：32 个 Q 头，8 个 K/V 头</h2>
+  <table>
+    <tr><th>机制</th><th>Q 头</th><th>K/V 头</th><th>特点</th></tr>
+    <tr><td>MHA</td><td>H</td><td>H</td><td>表达能力充分，但 KV Cache 最大</td></tr>
+    <tr><td>MQA</td><td>H</td><td>1</td><td>KV Cache 最小，但可能损失质量</td></tr>
+    <tr><td>GQA</td><td>H</td><td>G</td><td>在质量和推理效率之间折中</td></tr>
+  </table>
+  <p>Llama 3 8B 使用 <code>n_heads=32</code>、<code>n_kv_heads=8</code>，所以每 4 个 Query 头共享一组 Key/Value：</p>
+  <div class="formula">Q: [S, 32, 128]<br>K: [S, 8, 128] → 按组重复到 32 个头<br>V: [S, 8, 128] → 按组重复到 32 个头<br>每个头的 attention score: [S, S]</div>
+  <p>GQA 不是把 Q 也减少成 8 个头，而是只减少 K/V 的头数。这样可以明显减少自回归生成时缓存的 K/V，同时保留较多 Query 子空间。</p>
+  <h3>显存收益</h3>
+  <div class="formula">KV memory ∝ 2 × layers × batch × seq_len × n_kv_heads × head_dim × bytes_per_element</div>
+  <p>从 MHA 的 32 个 KV 头降到 8 个，相同 dtype、层数、序列长度下，K/V 缓存部分大约降为四分之一。这也是 GQA 对长上下文和大 batch 推理很有价值的原因。</p>
+
+  <h2>七、Scaled Dot-Product Attention 与 causal mask</h2>
+  <div class="formula">Q = XW_Q，K = XW_K，V = XW_V<br>Attention(Q,K,V) = softmax(QKᵀ / √d_head + mask)V</div>
+  <p>课程代码先计算 QKᵀ，再除以 <code>sqrt(128)</code>。Decoder-only 模型不能偷看未来 token，因此使用上三角 causal mask，把未来位置的分数设为负无穷，softmax 后对应概率接近 0。</p>
+  <p>常见 mask 形状包括 <code>[1,1,S,S]</code>、<code>[B,1,S,S]</code>；增量解码时常见 <code>[B,1,1,S]</code>。排查问题时必须确认 mask 能正确广播到 attention scores。</p>
+
+  <h2>八、SwiGLU：Llama 的 FFN</h2>
+  <div class="formula">SwiGLU(x) = W₂( SiLU(W₁x) ⊙ W₃x )</div>
+  <p>普通 FFN 可以理解为“升维 → 激活 → 降维”。SwiGLU 使用两个投影分支：一个经过 SiLU 产生门控，另一个提供被门控的特征，逐元素相乘后再由 <code>W₂</code> 投影回 hidden size。</p>
+  <ul>
+    <li><code>W1</code> 和 <code>W3</code> 把 4096 维表示升到 FFN hidden dimension。</li>
+    <li><code>SiLU(W1x)</code> 提供平滑的门控信号。</li>
+    <li><code>W2</code> 把结果投影回 4096 维，并通过残差连接加入原表示。</li>
+  </ul>
+  <p>面试时可以强调：Attention 负责 token 间的信息混合，FFN/SwiGLU 负责每个 token 内部的非线性特征变换；两者职责不同。</p>
+
+  <h2>九、完整 Llama 3 Block 的数据流</h2>
+  <div class="formula">h₀ = Embedding(tokens)<br><br>每一层：<br>    x = RMSNorm(h)<br>    q, k, v = Linear(x)<br>    q, k = RoPE(q, k)<br>    a = CausalGQA(q, k, v)<br>    h = h + Wo(a)                 # attention residual<br><br>    x = RMSNorm(h)<br>    h = h + SwiGLU(x)              # FFN residual<br><br>final = RMSNorm(h)<br>logits = final[-1] @ W_outputᵀ<br>next_token = argmax(logits)</div>
+  <p>课程 Notebook 把这条链路拆开：先手工算第一层第一个 head，再循环完成多头注意力，再完成 FFN，最后把同样的逻辑放进 32 层循环。它的价值不在于替代工业推理框架，而在于让每个矩阵的形状和作用都可见。</p>
+
+  <h2>十、KV Cache：推理加速的核心</h2>
+  <p>自回归生成第 <code>t</code> 个 token 时，历史 token 的 K/V 已经计算过，并且不会因为新 token 出现而改变。没有 KV Cache 时，每一步都重新处理完整前缀；有缓存时，只计算新 token 的 Q/K/V，把新的 K/V 追加到缓存中。</p>
+  <div class="formula">Prefill：一次处理 prompt，建立每层 K/V cache<br>Decode step t：只处理新 token 的 Q/K/V<br>            Q_new 与 [K_history, K_new] 做注意力<br>            将 K_new、V_new 追加回 cache</div>
+  <pre>kv_cache[i]['k']  # [batch, heads, cached_seq_len, head_dim]
+kv_cache[i]['v']  # [batch, heads, cached_seq_len, head_dim]</pre>
+  <p>简化版 Notebook 第一次完整输入时建立 cache；之后只取 <code>input_ids[:, -1:]</code>，并把新 K/V 与历史缓存沿序列维拼接。真实 Llama 3 会进一步结合 GQA，让缓存的头数是 8 而不是 32。</p>
+  <p>对于生成长度为 <code>T</code> 的序列，不使用 Cache 时，每一步都对不断增长的完整序列重复计算，累计代价明显更高；使用 Cache 后，每一步只对一个新 Query 与历史 K 做匹配，单步约为 <code>O(t)</code>。Cache 不会把每一步变成常数时间，但会消除历史 Q/K/V 的重复投影和重复计算。</p>
+  <p class="warn">重要：KV Cache 主要优化推理 decode，不会直接减少模型参数，也不会让训练阶段天然变快。</p>
+
+  <h2>十一、三个 Notebook 应该怎么理解</h2>
+  <div class="grid">
+    <div class="card"><strong>手撕GQA &amp; RoPE.ipynb</strong><br>重点是 RoPE 的复数旋转、GQA 的 Q/K/V 头组织、mask 和 attention shape。适合逐行调试公式与张量维度。</div>
+    <div class="card"><strong>带kv cache的Transformer.ipynb</strong><br>重点是自回归生成、历史 K/V 缓存、带缓存与不带缓存的时间对比。它使用简化的 LayerNorm/ReLU Decoder，目的是隔离 KV Cache 原理，不是完整复刻 Llama 3。</div>
+    <div class="card"><strong>llama3-from-scratch-Copy1.ipynb</strong><br>重点是加载真实权重后，从 tokenizer、embedding、RMSNorm、GQA、RoPE、causal attention、SwiGLU 到最终 logits 的完整前向。</div>
+    <div class="card"><strong>两个 PDF</strong><br>技术报告用于核对 Llama 3 的架构与训练背景；课件用于快速复习 RMSNorm、RoPE、GQA 和训练过程。</div>
+  </div>
+
+  <h2>十二、实际运行中暴露的工程问题</h2>
+  <table>
+    <tr><th>问题</th><th>原因</th><th>处理</th></tr>
+    <tr><td>找不到 tokenizer.model</td><td>Notebook 写的是 <code>Meta-Llama-3-8B</code>，解压目录实际是中文目录名</td><td>已直接修改原 Notebook 的路径</td></tr>
+    <tr><td>缺少 consolidated.00.pth</td><td>课程压缩包只含轻量配置和 tokenizer，没有 8B 权重</td><td>已从 ModelScope 下载并放入原模型目录</td></tr>
+    <tr><td><code>v_per_token = 2</code></td><td>原 Notebook 中的明显笔误，整数没有 <code>.shape</code></td><td>已改成使用 <code>torch.matmul</code> 计算 V</td></tr>
+    <tr><td>GQA 的 K/V 头索引</td><td>Q 头数和 KV 头数不同，不能直接用同一个 head 下标</td><td>32Q/8KV 时按每 4 个 Q 头共享一个 KV 头</td></tr>
+    <tr><td>CPU/GPU 与 dtype</td><td>权重是大体积 bfloat16/float16 张量，设备不一致会报错</td><td>运算前统一检查 tensor 的 device 和 dtype</td></tr>
+    <tr><td>KV Cache mask</td><td>增量解码的 Query 长度是 1，Key 长度是历史长度+1</td><td>增量阶段使用能广播到 <code>[B,heads,1,S]</code> 的 mask</td></tr>
+  </table>
+
+  <h2>十三、面试高频问答</h2>
+  <div class="qa">
+    <p><q>Q1：Llama 3 为什么使用 GQA？</q><br>因为生成时 K/V 会缓存，KV 头数越多，缓存显存和读写压力越大。Llama 3 8B 使用 32 个 Query 头和 8 个 KV 头，在保留多头 Query 表达能力的同时，把 K/V Cache 规模降到 MHA 的约四分之一。</p>
+    <p><q>Q2：GQA 和 MQA 的区别是什么？</q><br>MQA 让所有 Query 头共享一组 K/V；GQA 让若干 Query 头分组共享一组 K/V，是 MHA 和 MQA 之间的折中。</p>
+    <p><q>Q3：RoPE 为什么同时作用于 Q 和 K？</q><br>Attention 分数来自 QKᵀ。对 Q、K 施加与位置有关的旋转后，它们的内积会带上相对位置信息。</p>
+    <p><q>Q4：RMSNorm 和 LayerNorm 有什么区别？</q><br>LayerNorm 会减均值并除标准差；RMSNorm 不减均值，只按均方根缩放，计算更简单。Llama 3 使用 RMSNorm。</p>
+    <p><q>Q5：SwiGLU 比 ReLU FFN 多了什么？</q><br>它有两个上投影分支，一个经 SiLU 后作为门控，与另一分支逐元素相乘，再通过下投影。</p>
+    <p><q>Q6：KV Cache 缓存的是什么？</q><br>缓存每一层历史 token 的 Key 和 Value，不缓存 Query。当前步骤只产生新 token 的 Query。</p>
+    <p><q>Q7：KV Cache 能把每一步变成常数时间吗？</q><br>不能。新 Query 仍然要和全部历史 K 做匹配，所以单步仍随上下文长度线性增长；Cache 消除的是历史投影和历史 K/V 的重复计算。</p>
+    <p><q>Q8：训练时为什么通常不用同样的 KV Cache？</q><br>训练阶段整段序列已知，可以通过 causal mask 并行计算所有位置；KV Cache 主要服务于自回归推理。</p>
+    <p><q>Q9：如何排查 Transformer 的 shape bug？</q><br>固定记录 <code>[B,S,D]</code>、<code>[B,H,S,d]</code>、<code>[B,H,S,S]</code>，重点检查 head 拆分、transpose、mask 广播、GQA 的 KV repeat 和最终 concat。</p>
+    <p><q>Q10：8B 指什么？</q><br>指模型参数量约 8 billion，不是上下文长度，也不是显存需求。BF16/FP16 下仅权重就大约需要 16 GB。</p>
+  </div>
+
+  <h2>十四、适合求职的复习路线</h2>
+  <ol>
+    <li>不看 Notebook，手写 scaled dot-product attention，并标出每个张量的形状。</li>
+    <li>手写 RoPE：先实现二维旋转，再用复数形式实现，验证旋转前后范数基本不变。</li>
+    <li>手写 GQA，分别测试 MHA、MQA 和 GQA，比较 KV Cache 的大小。</li>
+    <li>给 KV Cache 实现增加计时、显存统计和输出一致性检查；两种模型必须共享同一组权重。</li>
+    <li>把简化 Decoder 的 LayerNorm/ReLU 换成 RMSNorm/SwiGLU/RoPE，逐步对齐 Llama 3。</li>
+    <li>整理一个可展示项目：输入输出、架构图、shape 表、缓存前后速度、显存占用和失败排查记录。</li>
+  </ol>
+
+  <h2>十五、本课文件与资料</h2>
+  <ul>
+    <li><code>手撕GQA &amp; RoPE.ipynb</code>：GQA、RoPE 和 attention shape 实现。</li>
+    <li><code>带kv cache的Transformer.ipynb</code>：简化 Decoder 的 KV Cache 生成与性能对比。</li>
+    <li><code>llama3-from-scratch-Copy1.ipynb</code>：真实 Llama 3 8B 权重逐步前向。</li>
+    <li><code>第2课-Meta-Llama-3-8B/params.json</code>：模型结构配置。</li>
+    <li><code>第2课-Meta-Llama-3-8B/tokenizer.model</code>：Llama 3 tokenizer 文件。</li>
+    <li><code>第2课-Meta-Llama-3-8B/consolidated.00.pth</code>：真实模型权重。</li>
+    <li><code>第2课-llama3技术报告.pdf</code>、<code>第2课-llama3课件.pdf</code>：论文与课程讲义。</li>
+  </ul>
+  <p class="small">最终结论：Lesson 2 的核心不是背 Llama 3 参数，而是能把一次 decode 讲清楚：token 如何变成 hidden state，Q/K/V 如何经过 RoPE 和 GQA，mask 如何阻止偷看未来，SwiGLU 如何更新 token 表示，以及 KV Cache 如何避免重复计算。能同时讲清公式、shape、显存和工程取舍，才是面试中有说服力的回答。</p>
+</article></main>
+</body>
+</html>

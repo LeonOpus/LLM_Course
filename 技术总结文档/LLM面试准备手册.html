@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM 面试追问大白话准备手册</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --paper: #ffffff;
+      --ink: #111827;
+      --muted: #374151;
+      --line: #cbd5e1;
+      --blue: #075985;
+      --blue-bg: #e0f2fe;
+      --green: #065f46;
+      --green-bg: #d1fae5;
+      --orange: #9a3412;
+      --orange-bg: #ffedd5;
+      --red: #991b1b;
+      --red-bg: #fee2e2;
+      --code: #111827;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "Noto Sans CJK SC", "Microsoft YaHei", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.78;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 42px 28px 80px; }
+    h1, h2, h3 { line-height: 1.3; color: #0b1f3a; }
+    h1 { font-size: 42px; margin: 0 0 14px; }
+    h2 { font-size: 30px; border-left: 8px solid var(--blue); padding-left: 14px; margin-top: 54px; }
+    h3 { font-size: 22px; margin-top: 30px; }
+    p { margin: 14px 0; }
+    .subtitle { color: #1f2937; font-size: 21px; }
+    .paper { background: var(--paper); padding: 34px 42px; border: 1px solid var(--line); box-shadow: 0 4px 18px rgba(15, 23, 42, .06); }
+    .toc { background: #eef6ff; border: 1px solid #9ec5e8; padding: 20px 26px; margin: 28px 0; }
+    .toc a { color: #064e78; font-weight: 700; text-decoration: none; }
+    .answer { background: var(--blue-bg); border-left: 6px solid var(--blue); padding: 15px 20px; margin: 16px 0; }
+    .plain { background: var(--green-bg); border-left: 6px solid var(--green); padding: 15px 20px; margin: 16px 0; }
+    .warning { background: var(--orange-bg); border-left: 6px solid var(--orange); padding: 15px 20px; margin: 16px 0; }
+    .danger { background: var(--red-bg); border-left: 6px solid var(--red); padding: 15px 20px; margin: 16px 0; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .card { border: 1px solid var(--line); padding: 18px 20px; background: #fff; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0 24px; background: #fff; }
+    th, td { border: 1px solid var(--line); padding: 13px 15px; vertical-align: top; text-align: left; }
+    th { background: #e8f0f8; color: #0b1f3a; }
+    code { color: #0f3c62; background: #edf2f7; padding: 2px 6px; border-radius: 4px; }
+    pre { color: #f8fafc; background: var(--code); padding: 18px 20px; border-radius: 7px; overflow-x: auto; line-height: 1.55; font-size: 16px; }
+    .tag { display: inline-block; background: #dbeafe; color: #1e3a8a; border: 1px solid #93c5fd; border-radius: 999px; padding: 2px 10px; margin: 2px 4px 2px 0; font-size: 15px; }
+    ul, ol { padding-left: 28px; }
+    li { margin: 6px 0; }
+    .small { color: var(--muted); font-size: 16px; }
+    .must { color: #9f1239; font-weight: 800; }
+    footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; }
+    @media (max-width: 760px) { body { font-size: 16px; } main { padding: 20px 12px 50px; } .paper { padding: 24px 18px; } h1 { font-size: 31px; } h2 { font-size: 25px; } .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <article class="paper">
+    <h1>LLM 面试追问大白话准备手册</h1>
+    <p class="subtitle">面向：大模型推理工程师、AI Infra、vLLM/vLLM-Ascend、RAG 后端岗位</p>
+    <div class="warning">
+      <strong>先说结论：</strong>你不需要把整个大模型领域都背下来。面试官真正想确认的是：你是否知道系统怎么工作、指标怎么测、问题怎么定位，以及简历上的结果是不是你真的参与过。
+    </div>
+
+    <div class="toc">
+      <strong>本手册内容：</strong>
+      <p>
+        <a href="#map">一张总图</a> ·
+        <a href="#schedule">vLLM 调度</a> ·
+        <a href="#paged">PagedAttention</a> ·
+        <a href="#batch">Continuous Batching</a> ·
+        <a href="#kv">KV Cache 显存</a> ·
+        <a href="#latency">TTFT / TPOT</a> ·
+        <a href="#prefill">Prefill / Decode</a> ·
+        <a href="#tp">Tensor Parallel</a> ·
+        <a href="#ascend">vLLM-Ascend</a> ·
+        <a href="#bench">大模型压测</a> ·
+        <a href="#rag">RAG 评测</a> ·
+        <a href="#beam">Beam Search 排障</a>
+      </p>
+    </div>
+
+    <h2 id="map">一、先建立一张总图</h2>
+    <p>把一次大模型请求想象成一家餐厅：</p>
+    <table>
+      <thead><tr><th>大模型组件</th><th>大白话</th><th>面试时要讲清楚</th></tr></thead>
+      <tbody>
+        <tr><td>Prefill</td><td>厨师先把用户整段需求读完，准备好上下文。</td><td>输入很长时，主要影响首字出来的速度。</td></tr>
+        <tr><td>Decode</td><td>厨师一个字一个字地把答案写出来。</td><td>生成很长时，主要影响每个字的生成速度。</td></tr>
+        <tr><td>KV Cache</td><td>把已经读过的内容做成临时笔记，不必每次重读。</td><td>省计算，但会占显存，并且随上下文长度增长。</td></tr>
+        <tr><td>Continuous Batching</td><td>新客不断加入，做完的客人随时离开，不必等整桌人一起结束。</td><td>提高 GPU 利用率和整体吞吐。</td></tr>
+        <tr><td>PagedAttention</td><td>把临时笔记切成小页，需要多少拿多少。</td><td>减少 KV Cache 的内存浪费和碎片。</td></tr>
+        <tr><td>Tensor Parallel</td><td>一份大菜由多名厨师分工完成。</td><td>把模型权重或计算切到多张卡，需要通信同步。</td></tr>
+      </tbody>
+    </table>
+    <div class="answer"><strong>面试总回答：</strong>我会从请求生命周期、显存管理、批处理调度和多卡通信四个角度分析推理系统：先区分 Prefill 与 Decode，再看 KV Cache 如何分配，之后看请求如何动态组 batch，最后判断多卡通信和算子执行是否成为瓶颈。</div>
+
+    <h2 id="schedule">二、vLLM 的调度到底在调度什么</h2>
+    <p>vLLM 的调度器主要决定：<strong>哪些请求现在执行、每个请求这一步生成多少 token、GPU 显存还够不够放 KV Cache</strong>。</p>
+    <p>请求通常会经历：</p>
+    <ol>
+      <li>等待：请求进入队列。</li>
+      <li>Prefill：一次处理输入 Prompt，建立初始 KV Cache。</li>
+      <li>Decode：每一轮生成一个或多个新 token，并追加 KV Cache。</li>
+      <li>完成：遇到 EOS、达到最大长度或被取消，释放资源。</li>
+    </ol>
+    <div class="plain"><strong>大白话：</strong>调度器像网约车派单系统。它不能只看“来了多少乘客”，还要看每个乘客的行李有多大——这里的行李就是 KV Cache。显存不够时，不能盲目接新请求。</div>
+    <div class="answer"><strong>可直接回答：</strong>vLLM 调度器会根据等待请求、运行中请求、最大序列长度和可用 KV Cache block 安排每一轮执行。它的目标不是简单地一次处理一批固定请求，而是在请求不断到来和结束的情况下动态分配计算与显存资源。</div>
+    <p class="small">追问方向：调度策略会受到最大 batch token 数、最大并发数、GPU 显存利用率、KV Cache block 数量以及请求输入输出长度的影响。具体参数要以实际启动命令和 vLLM 版本为准。</p>
+
+    <h2 id="paged">三、PagedAttention 是什么</h2>
+    <p>普通做法可能给每条请求预留一大片连续的 KV Cache 空间，但用户的真实输出长度通常未知：</p>
+    <ul>
+      <li>预留太多：浪费显存。</li>
+      <li>预留太少：生成到后面可能不够。</li>
+      <li>不同请求长度不同：容易出现显存碎片。</li>
+    </ul>
+    <p>PagedAttention 把 KV Cache 切成固定大小的小块，类似操作系统把内存切成页面：</p>
+    <pre>逻辑上：请求 A 的 KV Cache = [A0][A1][A2][A3]
+物理上：这些 block 不一定连续，可以放在显存不同位置
+
+请求结束后：释放它占用的 block，供其他请求复用</pre>
+    <div class="answer"><strong>可直接回答：</strong>PagedAttention 的核心不是改变 Attention 数学公式，而是改变 KV Cache 的存储和访问方式。它通过 block 化管理，让 KV Cache 不需要为每个请求预留大段连续空间，从而降低碎片和预分配浪费，提高并发能力。</div>
+    <div class="warning"><strong>不要说错：</strong>PagedAttention 不是“把模型参数分页”，它主要解决的是推理过程中 KV Cache 的显存管理问题。</div>
+
+    <h2 id="batch">四、Continuous Batching 为什么有用</h2>
+    <p>传统静态 batching 像等一整车人到齐后再发车：最慢的请求不结束，其他请求也可能被拖住。</p>
+    <p>Continuous Batching 是动态批处理：</p>
+    <pre>时刻 T1：请求 A、B 在 Decode
+时刻 T2：A 完成，释放资源；请求 C 加入
+时刻 T3：B、C、D 一起执行下一轮 Decode</pre>
+    <p>它提高的是<strong>整体 GPU 利用率和吞吐量</strong>，不一定让单个请求的延迟变低。并发太高时，单请求延迟仍可能上升。</p>
+    <div class="answer"><strong>面试回答：</strong>Continuous Batching 允许请求在不同时间进入和退出 batch。它把正在生成的请求和新到达的请求动态组合，减少 GPU 空转，特别适合在线推理场景。但它需要调度器同时考虑请求状态、token 预算和 KV Cache 显存。</div>
+
+    <h2 id="kv">五、KV Cache 如何占显存</h2>
+    <p>每个 Transformer 层都会为已经处理过的 token 保存 Key 和 Value。它不是只缓存一句话的字符串，而是缓存每一层计算出来的浮点张量。</p>
+    <p>粗略显存公式：</p>
+    <pre>KV Cache 字节数 ≈
+层数 × 2（K 和 V）× token 数 × KV 头数 × 每个头的维度 × 每个元素字节数</pre>
+    <p>例如假设：</p>
+    <ul>
+      <li>32 层 Transformer</li>
+      <li>8 个 KV heads（GQA）</li>
+      <li>每个 head 维度 128</li>
+      <li>上下文 8192 tokens</li>
+      <li>BF16，每个元素 2 字节</li>
+    </ul>
+    <pre>32 × 2 × 8192 × 8 × 128 × 2 bytes
+≈ 1 GiB / 每条请求</pre>
+    <p>这只是示例，实际还要考虑 batch、层数、KV head 数、数据类型、block 管理和其他运行时开销。</p>
+    <div class="plain"><strong>大白话：</strong>模型参数像厨师的固定工具，KV Cache 像每个顾客自己的草稿纸。顾客越多、对话越长，草稿纸越多。GQA 的作用之一，就是让 K/V 的头更少，从而减少这类草稿纸的大小。</div>
+    <div class="answer"><strong>可直接回答：</strong>KV Cache 主要按层数、序列长度、KV head 数和 head dimension 线性增长。GQA 通过减少 KV head 数降低缓存占用，所以在长上下文和高并发下尤其重要。估算时我会先用公式计算理论值，再结合实际可用显存、权重、激活和运行时预留判断最大并发。</div>
+
+    <h2 id="latency">六、TTFT、TPOT、E2E 到底分别是什么</h2>
+    <table>
+      <thead><tr><th>指标</th><th>意思</th><th>用户感受</th><th>主要受什么影响</th></tr></thead>
+      <tbody>
+        <tr><td>TTFT</td><td>Time To First Token，首 token 延迟。</td><td>按下发送后，多久看到第一个字。</td><td>Prompt 长度、Prefill 计算、排队、网络。</td></tr>
+        <tr><td>TPOT</td><td>Time Per Output Token，平均每个输出 token 的时间。</td><td>第一个字出来后，后续输出是否流畅。</td><td>Decode、并发、显存带宽、采样和调度。</td></tr>
+        <tr><td>E2E</td><td>End-to-End，总请求耗时。</td><td>从发送到完整答案结束。</td><td>排队 + Prefill + Decode + 网络。</td></tr>
+      </tbody>
+    </table>
+    <div class="warning"><strong>注意口径：</strong>不同压测工具对 TPOT 是否包含第一个 token、是否去掉排队时间可能有差异。面试时要说清楚“本次测试的指标定义和统计口径”，不要只报一个数字。</div>
+    <div class="answer"><strong>面试回答：</strong>TTFT 主要反映用户等第一个字的时间，通常与 Prefill 和排队有关；TPOT 主要反映生成阶段的速度，通常与 Decode、显存带宽和并发有关；E2E 是完整请求耗时。性能优化前，我会先确认指标口径，再区分是排队、Prefill、Decode 还是网络造成的。</div>
+
+    <h2 id="prefill">七、Prefill 和 Decode 的性能瓶颈</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Prefill：一次读完整个输入</h3>
+        <ul>
+          <li>输入 token 多时，计算量明显增加。</li>
+          <li>更容易利用矩阵乘法并行计算。</li>
+          <li>常见表现：TTFT 变长。</li>
+          <li>常见优化：批量合并、FlashAttention、输入截断、Prefix Cache。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Decode：一个 token 一个 token 生成</h3>
+        <ul>
+          <li>每一轮新生成的 token 很少。</li>
+          <li>经常受显存读写和 KV Cache 访问影响。</li>
+          <li>并发高时，KV Cache 和调度压力明显。</li>
+          <li>常见优化：GQA、Continuous Batching、量化、PagedAttention。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="plain"><strong>一句话：</strong>Prefill 更像“快速读完一篇文章”，Decode 更像“边想边一个字一个字写答案”。前者容易受输入长度影响，后者容易受生成长度、并发和显存带宽影响。</div>
+
+    <h2 id="tp">八、Tensor Parallel 如何切分模型</h2>
+    <p>Tensor Parallel，简称 TP，就是把同一层的大矩阵拆给多张卡同时计算，而不是每张卡都放一份完整模型。</p>
+    <p>以线性层 <code>Y = XW</code> 为例：</p>
+    <ul>
+      <li><strong>列切分：</strong>把 W 按列切开，每张卡算一部分输出，最后拼接。</li>
+      <li><strong>行切分：</strong>把 W 按行切开，每张卡算一部分结果，最后做 All-Reduce 或求和。</li>
+    </ul>
+    <pre>卡 0：W 的一部分 → 局部结果
+卡 1：W 的另一部分 → 局部结果
+                         ↓
+                 通信集合结果</pre>
+    <div class="answer"><strong>可直接回答：</strong>TP 通过切分线性层、Attention 头或 MLP 的权重，让多张卡共同完成一层计算。它可以降低单卡权重和激活压力，但会引入 All-Reduce、All-Gather 等通信。卡间带宽和拓扑会直接影响扩展效率，所以不是 TP 越大越快。</div>
+    <p class="small">实际模型的切分方式由框架实现决定，不能只凭模型名字猜。面试时可以结合具体模型的 attention heads、hidden size、TP size 和通信拓扑回答。</p>
+
+    <h2 id="ascend">九、vLLM 与 vLLM-Ascend 的差异</h2>
+    <p>可以把 vLLM 理解为推理引擎主体，把 vLLM-Ascend 理解为让这个主体适配昇腾 NPU 的后端和插件体系。</p>
+    <table>
+      <thead><tr><th>层次</th><th>作用</th><th>常见排障问题</th></tr></thead>
+      <tbody>
+        <tr><td>vLLM</td><td>请求服务、调度、KV Cache、模型执行流程。</td><td>请求调度、结果拼接、采样、版本行为。</td></tr>
+        <tr><td>PyTorch</td><td>模型代码和张量计算抽象。</td><td>算子支持、dtype、shape、设备迁移。</td></tr>
+        <tr><td>torch-npu</td><td>把 PyTorch 张量和算子接到昇腾设备。</td><td>设备初始化、算子缺失、类型和布局问题。</td></tr>
+        <tr><td>CANN</td><td>昇腾的软件栈，包括编译、运行时、算子和工具链。</td><td>版本兼容、算子实现、编译或运行时错误。</td></tr>
+        <tr><td>HCCL</td><td>昇腾多卡通信，类似多卡集合通信基础设施。</td><td>All-Reduce、Rank、拓扑、通信超时。</td></tr>
+      </tbody>
+    </table>
+    <div class="answer"><strong>面试回答：</strong>vLLM-Ascend 不是简单把 CUDA 改成 NPU。上层要保持 vLLM 的服务和调度行为，同时在设备抽象、算子实现、内存管理、多卡通信和模型兼容性方面适配 CANN、torch-npu 和 HCCL。遇到问题时，我会先判断是模型逻辑、PyTorch 设备层、算子、运行时还是通信链路的问题，再做最小复现。</div>
+
+    <h2 id="bench">十、27B、35B、122B 的硬件和压测怎么回答</h2>
+    <div class="danger"><strong>最重要：</strong>不要凭模型参数量直接编造 GPU 数量、并发量或吞吐量。模型大小只决定一部分权重显存，KV Cache、量化、上下文长度、TP、硬件和版本都会改变结果。</div>
+    <p>面试官问“你怎么部署 122B”，可以按这个顺序回答：</p>
+    <ol>
+      <li>确认模型版本、参数精度和量化方式。</li>
+      <li>估算权重显存：参数量 × 每参数字节数，再加运行时开销。</li>
+      <li>估算 KV Cache：层数 × KV heads × head dimension × 上下文长度 × 并发。</li>
+      <li>根据单卡显存、卡数和互联拓扑选择 TP 或其他并行方式。</li>
+      <li>先做单请求正确性，再做短输入、长输入、短输出、长输出的分组压测。</li>
+      <li>记录模型版本、驱动、CANN、torch-npu、vLLM、启动参数和数据集。</li>
+    </ol>
+    <table>
+      <thead><tr><th>压测维度</th><th>为什么要单独测</th></tr></thead>
+      <tbody>
+        <tr><td>输入长度</td><td>影响 Prefill 和 TTFT。</td></tr>
+        <tr><td>输出长度</td><td>影响 Decode 和 E2E。</td></tr>
+        <tr><td>并发数</td><td>影响调度、KV Cache 和排队。</td></tr>
+        <tr><td>精度 / 量化</td><td>影响显存、算力、精度和算子支持。</td></tr>
+        <tr><td>TP size</td><td>影响单卡压力和多卡通信。</td></tr>
+      </tbody>
+    </table>
+    <div class="answer"><strong>安全回答模板：</strong>我不会只根据 27B 或 122B 判断部署规模。我会先确认精度、上下文和目标并发，再分别估算权重和 KV Cache，结合单卡显存与卡间互联选择 TP。压测时固定模型、数据集、版本和启动参数，分别记录 TTFT、TPOT、E2E、吞吐和显存使用，再做对照实验。</div>
+
+    <h2 id="rag">十一、Recall@5 从 60% 到 92% 怎么测</h2>
+    <p>Recall@5 不是“模型回答准确率”，而是：<strong>正确资料是否出现在检索返回的前 5 条里</strong>。</p>
+    <p>准备一组带标准答案的查询：</p>
+    <pre>问题 q1 → 标准相关文档集合 G1
+检索 q1 → 返回前 5 条文档 R1
+
+如果 R1 与 G1 有交集，则 q1 命中
+Recall@5 = 命中的问题数 / 总问题数</pre>
+    <p>举例：100 个测试问题中，有 92 个问题的正确制度出现在前 5 条结果里，那么 Recall@5 = 92%。</p>
+    <div class="warning"><strong>必须说清楚：</strong>是“问题级命中”还是“文档块级命中”？标准相关文档是 1 个还是多个？是否区分现行制度和废止制度？这些口径不同，数字不能直接比较。</div>
+    <div class="answer"><strong>面试回答：</strong>我们先建立带标准文档或条款的评测集，固定查询集和切分版本。对每个问题取 Top 5，检查标准文档或标准条款是否命中，最后统计命中问题数占总问题数的比例。优化前后保持同一评测集和指标口径，才可以说明 Recall@5 的提升来自检索链路改进。</div>
+
+    <h2 id="rag-system">十二、RAG 数据集、评测集和基线是什么</h2>
+    <p>RAG 项目最好分成三套东西，不要混在一起：</p>
+    <table>
+      <thead><tr><th>对象</th><th>它是什么</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td>知识库文档</td><td>真实制度文件、版本、元数据和权限。</td><td>被切分、索引和检索。</td></tr>
+        <tr><td>评测集</td><td>问题、标准文档、标准条款、参考答案和权限标签。</td><td>衡量检索和回答质量。</td></tr>
+        <tr><td>基线系统</td><td>最简单但可运行的初始方案。</td><td>和优化后的方案进行公平对比。</td></tr>
+      </tbody>
+    </table>
+    <p>一个合理的基线可以是：</p>
+    <pre>原始文档 → 固定长度切块 → 向量检索 Top-k → LLM 直接回答</pre>
+    <p>优化方案再逐步加入：</p>
+    <ul>
+      <li>标题、机构、日期、制度状态等元数据。</li>
+      <li>BM25 + 向量检索的混合召回。</li>
+      <li>RRF 融合和重排模型。</li>
+      <li>查询改写、同义词和实体识别。</li>
+      <li>现行制度过滤、权限过滤、引用校验和拒答。</li>
+    </ul>
+    <div class="answer"><strong>面试回答：</strong>我会把 RAG 评测拆成检索质量、生成质量和安全性三部分。检索看 Recall@k、MRR 或命中率；生成看答案正确性、引用完整性和无依据内容比例；安全性看越权返回、废止制度误引用和敏感信息泄露。所有优化都要和固定基线及固定评测集对比。</div>
+
+    <h2 id="beam">十三、Beam Search token 问题怎么定位</h2>
+    <p>这类问题不要一上来就改代码。先把“模型生成了什么”和“框架最终返回了什么”分开。</p>
+    <ol>
+      <li><strong>固定输入：</strong>固定模型、Prompt、tokenizer、dtype、seed 和生成参数。</li>
+      <li><strong>对照运行：</strong>比较 greedy、sampling、beam search，以及离线和服务模式。</li>
+      <li><strong>打印 token id：</strong>记录 Prompt token、生成 token、EOS、长度和 beam 数。</li>
+      <li><strong>定位阶段：</strong>判断异常发生在模型输出、beam 重排、结果拼接、停止条件还是 decode。</li>
+      <li><strong>检查重复拼接：</strong>有些结果对象已经包含 Prompt，有些只包含新生成 token，不能盲目再次拼接。</li>
+      <li><strong>写最小测试：</strong>覆盖普通生成、beam search、EOS、达到 max tokens 和空输出。</li>
+    </ol>
+    <pre>输入 Prompt tokens:       [101, 2054, ...]
+模型新生成 tokens:         [2023, 2003, ...]
+框架最终 returned tokens:   [101, 2054, ..., 2023, 2003, ...]
+
+如果最终结果已经包含 Prompt，不能再做：
+Prompt + returned_tokens
+否则会出现 Prompt 重复或 token 长度异常。</pre>
+    <div class="answer"><strong>可直接回答：</strong>我会先用固定输入复现，再在 tokenizer、模型输出、beam 重排、停止条件和结果封装边界分别打印 token id。重点确认返回对象表示的是完整序列还是仅新生成序列。修复时只调整结果处理边界，并用普通生成、beam search、EOS 和 max token 等回归用例验证，避免只修复一个样例。</div>
+
+    <h2>十四、面试时如何诚实地回答“你到底做了多少”</h2>
+    <p>你目前正在通过课程补齐基础，不需要假装自己已经把所有实现细节都独立完成。推荐使用四段式：</p>
+    <ol>
+      <li><strong>背景：</strong>这个项目解决什么问题。</li>
+      <li><strong>职责：</strong>你亲自负责哪一部分。</li>
+      <li><strong>方法：</strong>你怎么验证、怎么定位、怎么做对照。</li>
+      <li><strong>结果与边界：</strong>指标变化是什么，还有哪些部分不是你独立负责的。</li>
+    </ol>
+    <div class="plain"><strong>示例：</strong>“我主要负责推理链路测试和问题定位，不是从零实现整个 vLLM。遇到 Beam Search 结果异常时，我先固定输入并比较 token id，确认问题发生在结果处理阶段，再修改只提取 Decode 阶段新 token 的逻辑，最后补了普通生成和 Beam Search 的回归用例。”</div>
+    <div class="danger"><strong>不要这样回答：</strong>“vLLM 我都懂”“RAG 准确率就是 91%”“122B 我负责完整部署”。这些说法很容易被一个细节问题击穿。</div>
+
+    <h2>十五、你现在最值得优先掌握的顺序</h2>
+    <table>
+      <thead><tr><th>优先级</th><th>学习内容</th><th>达到什么程度</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Attention、KV Cache、Prefill、Decode</td><td>能画流程图，能说清 shape 和显存变化。</td></tr>
+        <tr><td>2</td><td>TTFT、TPOT、吞吐、并发、P95/P99</td><td>能设计一次压测并解释结果。</td></tr>
+        <tr><td>3</td><td>Continuous Batching、PagedAttention</td><td>能说清它们解决的实际问题。</td></tr>
+        <tr><td>4</td><td>TP、显存估算、NPU 软件栈</td><td>能进行部署前估算和分层排障。</td></tr>
+        <tr><td>5</td><td>RAG 评测与 Beam Search 排障</td><td>能说明实验口径、基线和定位过程。</td></tr>
+      </tbody>
+    </table>
+    <div class="answer"><strong>最后记住：</strong>面试不是考你能不能背完整个 vLLM 源码，而是考你能不能把“现象 → 指标 → 假设 → 实验 → 定位 → 修复 → 回归”这条工程链路讲完整。</div>
+
+    <footer>
+      本文根据当前 LLM 课程学习进度和简历中的推理部署、昇腾适配、RAG 项目方向整理。具体参数、版本和指标应以你的实际项目记录、启动命令和测试日志为准。
+    </footer>
+  </article>
+</main>
+</body>
+</html>

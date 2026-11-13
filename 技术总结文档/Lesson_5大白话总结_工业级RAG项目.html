@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 5：工业级 RAG 项目大白话总结</title>
+  <style>
+    :root { --ink:#10233f; --muted:#334e68; --blue:#0057b8; --blue2:#eaf3ff; --green:#087f5b; --yellow:#fff4cc; --line:#b8c7d9; --code:#f2f6fa; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:#fff; font-family:"Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif; font-size:19px; line-height:1.85; }
+    main { max-width:1180px; margin:0 auto; padding:44px 34px 80px; }
+    h1 { font-size:42px; line-height:1.25; margin:0 0 12px; color:#071a35; }
+    h2 { margin:46px 0 14px; padding-bottom:8px; border-bottom:3px solid var(--blue); color:#071a35; font-size:30px; }
+    h3 { margin:28px 0 8px; color:#083b72; font-size:23px; }
+    p { margin:12px 0; }
+    .lead { font-size:22px; color:#1b385c; }
+    .tag { display:inline-block; margin:5px 8px 5px 0; padding:3px 12px; border-radius:999px; color:#fff; background:var(--blue); font-size:16px; font-weight:700; }
+    .box { margin:18px 0; padding:18px 22px; border:2px solid var(--line); border-left:7px solid var(--blue); border-radius:8px; background:var(--blue2); }
+    .warn { border-left-color:#b45309; background:var(--yellow); }
+    .ok { border-left-color:var(--green); background:#e8f7f1; }
+    .flow { display:flex; flex-wrap:wrap; align-items:center; gap:9px; margin:20px 0; }
+    .step { min-width:150px; padding:12px 15px; text-align:center; border:2px solid #6d8fb5; border-radius:8px; background:#f5f9ff; font-weight:700; }
+    .arrow { color:var(--blue); font-size:27px; font-weight:700; }
+    table { width:100%; border-collapse:collapse; margin:17px 0 24px; background:#fff; }
+    th, td { border:2px solid var(--line); padding:12px 14px; text-align:left; vertical-align:top; }
+    th { background:#dcecff; color:#071a35; }
+    code { padding:2px 6px; border-radius:4px; background:var(--code); color:#0b3d6e; font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:.9em; }
+    pre { overflow:auto; padding:15px 18px; border-radius:8px; background:#10233f; color:#f7fbff; font-size:15px; line-height:1.55; }
+    ul, ol { padding-left:1.5em; }
+    li { margin:5px 0; }
+    .small { color:var(--muted); font-size:16px; }
+    .qa { margin:14px 0; padding:14px 18px; border:2px solid #c3d1df; border-radius:8px; }
+    .q { color:#073b73; font-weight:800; }
+    a { color:#0057b8; font-weight:700; }
+    @media (max-width:700px) { body { font-size:17px; } main { padding:26px 16px 55px; } h1 { font-size:31px; } h2 { font-size:25px; } .lead { font-size:19px; } .arrow { display:none; } .step { width:100%; } }
+  
+.study-map{overflow-x:auto;background:#f8fbfd;border:1px solid #afc6d6;border-radius:10px;margin:16px 0}.study-map svg{display:block;width:100%;min-width:900px;height:auto}.study-map text{font-family:system-ui,"Microsoft YaHei",sans-serif;font-size:15px;fill:#112d47}.study-map .mt{font-size:19px;font-weight:700;fill:#073b69}.study-map .bh{font-size:17px;font-weight:700;fill:#073b69}.study-map .lab{font-size:14px;font-weight:600;fill:#244e6a}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Lesson 5：工业级 RAG 项目——大白话学习与面试总结</h1>
+  <p class="lead">这一课不是再写一个“能检索的 Notebook”，而是把 RAG 做成一个用户可以登录、上传文件、追问、看到流式回答和引用来源的完整小系统。</p>
+  <p><span class="tag">Lesson 4：理解 RAG 算法</span><span class="tag">Lesson 5：把 RAG 做成产品</span><span class="tag">核心：数据、服务、存储、权限、部署</span></p>
+<h2>知识关系图：上传、检索与回答的关系</h2>
+<p>图里将项目结构和实际验证边界分开，便于追踪一次请求。</p>
+<div class="study-map"><svg viewBox="0 0 1160 585" role="img" aria-label="上传、检索与回答的关系"><title>上传、检索与回答的关系</title><desc>上传文件进入解析与存储；用户提问后结合知识检索、缓存和模型生成；基础设施各司其职。</desc><defs><marker id="study-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#315e7b"/></marker></defs><text class="mt" x="20" y="27">① 上传文档：从文件到系统可用的内容</text><rect x="20" y="55" width="210" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="32" y="80">前端上传</text><text x="32" y="103">携带会话与文件</text><text x="32" y="124">后端校验身份</text><rect x="265" y="55" width="220" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="277" y="80">文档解析 / 切块</text><text x="277" y="103">file_parse.py</text><text x="277" y="124">提取文本和片段</text><rect x="520" y="55" width="250" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="532" y="80">两类内容去向</text><text x="532" y="103">快速解析内容 → Redis</text><text x="532" y="124">入库处理 → 索引</text><rect x="805" y="55" width="335" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="817" y="80">Elasticsearch</text><text x="817" y="103">保存和检索片段</text><text x="817" y="124">入库向量化依赖模型服务</text><path d="M230 100 L265 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M485 100 L520 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M770 100 L805 100" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><text class="mt" x="20" y="207">② 提问：检索资料 + 快速解析内容 → 生成回答</text><rect x="20" y="235" width="210" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="32" y="260">用户提问</text><text x="32" y="283">/chat_on_docs</text><text x="32" y="304">识别用户和会话</text><rect x="265" y="235" width="245" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="277" y="260">检索知识库</text><text x="277" y="283">retrieval.py / Dealer</text><text x="277" y="304">异常时允许无资料继续</text><rect x="545" y="235" width="265" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="557" y="260">准备参考内容</text><text x="557" y="283">检索片段 + Redis 内容</text><text x="557" y="304">加入模型提示</text><rect x="845" y="235" width="295" height="100" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="857" y="260">模型生成 + SSE</text><text x="857" y="283">逐段返回前端</text><text x="857" y="304">会话与消息写数据库</text><path d="M230 285 L265 285" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M510 285 L545 285" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M810 285 L845 285" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><path d="M950 145 L440 235" stroke="#315e7b" stroke-width="2" fill="none" marker-end="url(#study-arrow)"/><text class="lab" text-anchor="middle" x="715" y="187">知识库检索</text><text class="mt" x="20" y="402">③ 基础设施与本次验证边界</text><rect x="20" y="430" width="340" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="32" y="455">PostgreSQL</text><text x="32" y="478">用户、会话、消息及元数据</text><rect x="400" y="430" width="340" height="90" rx="10" fill="#eaf4fa" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="412" y="455">Redis / ES</text><text x="412" y="478">快速解析内容 / 文档检索</text><rect x="780" y="430" width="360" height="90" rx="10" fill="#fff2dd" stroke="#7095aa" stroke-width="1.5"/><text class="bh" x="792" y="455">真实模型依赖</text><text x="792" y="478">百炼调用曾返回 403</text><text x="792" y="499">不能算真实问答闭环</text><text x="20" y="560" class="lab">本图依据代码结构与历史运行记录；模型调用、向量化和检索链路是否成功需分别验证。</text></svg></div>
+
+
+  <h2>一、先用一句话理解这个项目</h2>
+  <div class="box"><strong>用户上传资料 → 系统解析资料 → 切成小段 → 生成向量并写入 Elasticsearch → 用户提问 → 混合检索和重排 → 大模型根据检索结果回答，并把来源返回给用户。</strong></div>
+  <p>所以 Lesson 5 的重点不只是“向量相似度”，而是完整链路：文件怎么进来、数据怎么存、用户能不能看别人的资料、服务怎么流式返回、外部服务挂了怎么办。</p>
+
+  <h2>二、整个系统像一条流水线</h2>
+  <div class="flow">
+    <div class="step">React 前端<br>上传 / 对话</div><div class="arrow">→</div>
+    <div class="step">FastAPI<br>接口层</div><div class="arrow">→</div>
+    <div class="step">DeepDoc<br>解析文档</div><div class="arrow">→</div>
+    <div class="step">切 chunk<br>清洗与分词</div><div class="arrow">→</div>
+    <div class="step">Embedding<br>向量化</div><div class="arrow">→</div>
+    <div class="step">Elasticsearch<br>检索 / 重排</div><div class="arrow">→</div>
+    <div class="step">DashScope LLM<br>流式回答</div>
+  </div>
+  <p>旁边还有三类基础设施：PostgreSQL 记用户、会话、消息和文档元数据；Redis 适合做会话状态、缓存和临时数据；Elasticsearch 负责全文检索、向量检索和结果存储。</p>
+
+  <h2>三、代码目录应该怎么读</h2>
+  <table>
+    <tr><th>目录 / 文件</th><th>大白话作用</th><th>面试时怎么说</th></tr>
+    <tr><td><code>backend/app/app_main.py</code></td><td>创建 FastAPI 应用，挂载路由和跨域配置。</td><td>应用入口，不是业务逻辑全部塞在一个文件里。</td></tr>
+    <tr><td><code>router/</code></td><td>把登录、会话、历史、上传、聊天等 HTTP 接口分开。</td><td>路由层负责协议和参数，业务下沉到 service。</td></tr>
+    <tr><td><code>service/core/file_parse.py</code></td><td>串起文档解析、切块、向量化和写入 ES。</td><td>这是离线 ingestion（入库）链路。</td></tr>
+    <tr><td><code>service/core/deepdoc/</code></td><td>解析 PDF、DOCX、Excel、HTML、Markdown 等资料。</td><td>复杂 PDF 需要 OCR、版面识别、表格识别，不能只靠简单字符串切分。</td></tr>
+    <tr><td><code>service/core/rag/app/naive.py</code></td><td>按文件类型解析，并把内容合并成 chunk。</td><td>chunk 是检索的基本单位，太大或太小都会影响召回和成本。</td></tr>
+    <tr><td><code>service/core/rag/nlp/</code></td><td>中文分词、关键词、Embedding、Rerank 等。</td><td>关键词检索和向量检索互补，重排负责最后精排。</td></tr>
+    <tr><td><code>service/core/rag/utils/es_conn.py</code></td><td>管理 Elasticsearch 连接、索引和批量写入。</td><td>生产环境要考虑连接池、超时、重试、批量大小和索引 mapping。</td></tr>
+    <tr><td><code>models/、database/、alembic/</code></td><td>数据库模型、操作函数和迁移脚本。</td><td>业务元数据与检索正文分离存储。</td></tr>
+    <tr><td><code>docker-compose.yml</code></td><td>描述 API、ES、PostgreSQL、Redis 等服务如何一起启动。</td><td>这是部署拓扑，不是 Python 代码本身。</td></tr>
+  </table>
+
+  <h2>四、离线入库和在线问答是两条链路</h2>
+  <h3>1. 上传资料：慢，但只需要做一次</h3>
+  <ol>
+    <li>前端上传文件，后端检查用户、文件类型和大小。</li>
+    <li>解析文本、表格、图片或 PDF 页面。</li>
+    <li>清洗乱码、保留标题和页码等 metadata。</li>
+    <li>切成 chunk，给每个 chunk 一个稳定的 <code>doc_id</code>、<code>chunk_id</code>、文件名和时间。</li>
+    <li>批量调用 Embedding 模型，写入 ES。</li>
+  </ol>
+  <h3>2. 用户提问：快，且会被调用很多次</h3>
+  <ol>
+    <li>把问题改写、分词或提取关键词。</li>
+    <li>同时做 BM25 全文检索和向量检索。</li>
+    <li>合并候选结果，必要时用 Reranker 精排。</li>
+    <li>过滤用户无权访问的文档。</li>
+    <li>把 Top-K 片段、引用信息和问题放进 Prompt。</li>
+    <li>调用 LLM，以 SSE/流式方式把答案逐步返回前端。</li>
+  </ol>
+  <div class="box warn"><strong>关键面试点：</strong>Embedding 发生在“入库时”和“问题检索时”；LLM 不是直接读完整数据库，而是只看到本次检索选出来的上下文。RAG 的质量首先受数据解析、切块和检索影响，然后才是 Prompt。</div>
+
+  <h2>五、为什么用 Elasticsearch，不直接用一个向量库</h2>
+  <table>
+    <tr><th>方式</th><th>擅长什么</th><th>短板</th></tr>
+    <tr><td>BM25 / 倒排索引</td><td>专有名词、编号、股票代码、精确关键词。</td><td>同义表达、语义相近但词不同的内容不容易找到。</td></tr>
+    <tr><td>向量检索</td><td>“意思相近”的问题和资料，即使字面不一样也能召回。</td><td>可能把语义相近但事实不相关的内容召回。</td></tr>
+    <tr><td>混合检索</td><td>把关键词的精确性和向量的语义能力结合。</td><td>需要调权重、去重、统一分数和评测。</td></tr>
+    <tr><td>Rerank</td><td>对少量候选重新判断“问题和片段是否真的匹配”。</td><td>增加一次模型调用和延迟，不能对全库运行。</td></tr>
+  </table>
+  <p>一个常见生产策略是：先召回几十条候选，再重排到 5～10 条，最后把少量高质量片段给 LLM。不要一上来把几十条甚至整本 PDF 塞给模型。</p>
+
+  <h2>六、chunk 为什么这么重要</h2>
+  <p>chunk 可以理解成“让检索系统拿来比较的一小段资料”。</p>
+  <table>
+    <tr><th>切得太小</th><th>切得太大</th><th>合理做法</th></tr>
+    <tr><td>上下文不完整，问题和答案被切开；召回后模型看不懂。</td><td>每个结果带很多无关内容；Token、延迟和显存成本上升。</td><td>按标题、段落、页、表格语义切分，保留必要 overlap，并保存来源 metadata。</td></tr>
+  </table>
+  <p>本项目的 <code>naive.py</code> 会针对 DOCX、PDF、Excel、TXT 等不同格式采用不同解析器，再做合并和 token 数控制。它不是“每 N 个字符硬切”这么简单。</p>
+
+  <h2>七、我实际跑通了什么</h2>
+  <div class="box ok">
+    <ul>
+      <li>RAR 资源已直接解压到原目录：<code>Lesson_5_RAG工业项目实战/swxy/</code>。</li>
+      <li><code>llm-course</code> 环境依赖已补齐，<code>pip check</code> 通过，后端源码 <code>compileall</code> 通过。</li>
+      <li>已安装 <code>opencv-python 4.11.0</code>、<code>xgboost 3.0.2</code>、Docker Compose <code>v5.7.0</code>。</li>
+      <li>FastAPI 主应用导入成功；OpenAPI 请求返回 <code>200</code>，发现 14 个接口路径。</li>
+      <li>课程自带 <code>test_txt.txt</code> 成功切成 5 个 chunk，<code>test_docx.docx</code> 成功切成 8 个 chunk。</li>
+      <li>PDF 的纯文本模式成功解析 <code>国电电力.pdf</code>，得到 59 个 chunk。</li>
+      <li>前端 <code>npm install</code> 完成，<code>npm run build</code> 的 TypeScript 检查和 Vite 生产构建均通过。</li>
+      <li>Elasticsearch、PostgreSQL、Redis 容器已启动并健康；数据库迁移已完成。</li>
+      <li>已验证注册、登录、创建会话、上传 TXT、读取解析内容和 SSE 接口；百炼模型调用曾返回 403，不能据此认定真实模型问答成功。</li>
+      <li>修复了前端 Axios 泛型兼容问题，并让 PDF/OCR 重依赖按需加载，修改都在原项目目录。</li>
+    </ul>
+  </div>
+  <div class="box warn">
+    <strong>当前运行方式：</strong>Elasticsearch、PostgreSQL、Redis 使用 Docker 容器；FastAPI 使用本机 <code>llm-course</code> 环境；前端使用 Vite。历史验证中页面、认证和文档解析可用，SSE 接口可建立，但真实百炼模型问答受 403 权限限制。Docker 中的 API 镜像因为 Debian 源网络问题暂未完成构建，但不影响本次本地联调。项目 <code>.env</code> 含云 API 密钥，建议后续轮换并避免提交到 Git。
+  </div>
+
+  <h2>八、面试时可以这样讲这个项目</h2>
+  <div class="qa"><div class="q">问：这个项目和普通 RAG Demo 的区别是什么？</div><div>答：普通 Demo 往往是“加载文件、向量化、相似度搜索、拼 Prompt”。这个项目增加了登录和会话、文档上传、异步/批量入库、ES 索引、数据库元数据、Redis、流式输出、来源引用和前端交互，设计覆盖从数据进入系统到答案返回的链路；本次真实模型问答尚未验证成功。</div></div>
+  <div class="qa"><div class="q">问：为什么要混合 BM25 和向量检索？</div><div>答：BM25 对专有名词、编号和精确词很强，向量检索对同义表达和语义相似很强。两者召回结果合并后再做去重和重排，通常比只用一种检索更稳，但最终必须用离线评测集调权重，而不是凭感觉。</div></div>
+  <div class="qa"><div class="q">问：如何防止 RAG 把答案编出来？</div><div>答：先提高召回内容的相关性和完整性；Prompt 要求只能依据给定资料回答，不能找到证据时明确说不知道；答案附带文档名、页码或 chunk 来源；再用命中率、引用准确率、答案忠实度做评测。RAG 不能保证零幻觉，只能降低无依据生成。</div></div>
+  <div class="qa"><div class="q">问：权限应该放在哪一层？</div><div>答：不能只在前端隐藏按钮。后端要在上传、查询、删除、历史消息和检索结果返回前都校验 user/session/knowledge base 的归属。尤其要在检索过滤阶段限制文档范围，否则模型可能看到用户无权访问的 chunk。</div></div>
+  <div class="qa"><div class="q">问：怎么定位“召回率低”？</div><div>答：先把问题、标准答案、应命中的文档 chunk 做成评测集；分别测解析是否丢字、chunk 是否切坏、Embedding 召回 Top-K、BM25 召回 Top-K、混合后排名和 Rerank 后排名。不要直接把所有问题归因给 LLM。</div></div>
+  <div class="qa"><div class="q">问：如何优化线上延迟？</div><div>答：离线阶段批量解析和批量向量化；在线阶段缓存热门问题和 Embedding，限制召回候选数，Rerank 只处理小集合，LLM 使用流式输出；同时记录解析耗时、检索耗时、Rerank 耗时、首 token 时间和总生成时间。</div></div>
+
+  <h2>九、你现在最应该记住的 10 个词</h2>
+  <table>
+    <tr><th>词</th><th>一句话记忆</th></tr>
+    <tr><td>Ingestion</td><td>把用户资料处理并写入检索系统的离线/准实时流水线。</td></tr>
+    <tr><td>Chunk</td><td>检索系统拿来比较和返回的最小知识片段。</td></tr>
+    <tr><td>Embedding</td><td>把文字变成可以计算语义距离的向量。</td></tr>
+    <tr><td>BM25</td><td>基于关键词和词频的经典全文检索算法。</td></tr>
+    <tr><td>Hybrid Search</td><td>关键词检索和向量检索一起召回。</td></tr>
+    <tr><td>Rerank</td><td>对初筛结果再次判断问题和片段的真实相关性。</td></tr>
+    <tr><td>Metadata</td><td>文件名、页码、用户、时间、权限等“正文以外但非常关键的信息”。</td></tr>
+    <tr><td>Grounding</td><td>让回答有检索证据，而不是只靠模型参数记忆。</td></tr>
+    <tr><td>SSE</td><td>服务器持续推送文本，让用户边生成边看到答案。</td></tr>
+    <tr><td>Observability</td><td>记录日志、指标和链路耗时，知道系统到底慢在哪里、错在哪里。</td></tr>
+  </table>
+
+  <h2>十、后续学习顺序</h2>
+  <ol>
+    <li>先能画出“上传入库”和“提问检索”两条链路，并指出每个代码文件的位置。</li>
+    <li>自己做一份 20～50 条问答评测集，记录 Recall@K、MRR、引用准确率和端到端延迟。</li>
+    <li>把混合检索中的 BM25、向量召回、融合、Rerank 分别开关，比较结果而不是只看最终答案。</li>
+    <li>补上权限过滤、重复文件、文档更新、索引删除、失败重试和日志追踪。</li>
+    <li>最后再研究部署、并发、缓存、批处理和模型服务优化。</li>
+  </ol>
+  <p class="small">本页是 Lesson 5 课程项目的学习笔记，不等同于生产环境验收报告。真正面试时，最好能结合一次具体实验说明：数据集是什么、Top-K 怎么选、指标如何测、失败案例是什么、你改动后提升了多少。</p>
+</main>
+</body>
+</html>

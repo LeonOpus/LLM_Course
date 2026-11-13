@@ -1,0 +1,20 @@
+# 本地运行数据与密钥
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+.cache/
+volumes/
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.gguf
+*.onnx
+*.zip
+*.rar
+*.7z
