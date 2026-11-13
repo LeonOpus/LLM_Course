@@ -1,0 +1,37 @@
+name: 发布技术文档
+on:
+  push:
+    branches: [main]
+    paths:
+      - '技术总结文档/**'
+      - 'tools/build_pages.py'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            技术总结文档
+            tools/build_pages.py
+          sparse-checkout-cone-mode: false
+      - name: 生成网页
+        run: python3 tools/build_pages.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _pages_build
+      - id: deployment
+        uses: actions/deploy-pages@v4
