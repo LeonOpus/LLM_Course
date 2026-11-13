@@ -1,0 +1,4 @@
+The quick brown fox jumps over the lazy dog. 
+The quick fox is very quick and jumps twice. 
+Dog, dog, DOG! Every dog likes the fox. 
+Hello-world, hello_world, hello!world.
