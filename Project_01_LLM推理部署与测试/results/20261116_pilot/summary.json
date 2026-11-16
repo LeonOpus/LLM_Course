@@ -1,0 +1,47 @@
+{
+  "created_at_utc": "2026-11-16T06:37:05.264454+00:00",
+  "base_url": "http://127.0.0.1:18101",
+  "model": "qwen-local",
+  "concurrency": 1,
+  "requests": 6,
+  "warmup": 1,
+  "max_output_tokens": 16,
+  "workload": "six short Chinese prompts, repeated; closed-loop concurrency",
+  "wall_seconds": 1.088475146010751,
+  "success": 6,
+  "failed": 0,
+  "request_throughput_rps": 5.512298578419482,
+  "output_throughput_tokens_s": 88.1967772547117,
+  "ttft_ms": {
+    "n": 6,
+    "mean": 14.315455327353751,
+    "p50": 14.331142490846105,
+    "p95": 14.736675249878317
+  },
+  "tpot_ms": {
+    "n": 6,
+    "mean": 11.137793922292378,
+    "p50": 11.0728728332712,
+    "p95": 11.438598983416645
+  },
+  "e2e_ms": {
+    "n": 6,
+    "mean": 181.38236416173945,
+    "p50": 180.14694500016049,
+    "p95": 186.07141049142228
+  },
+  "prompt_tokens": {
+    "n": 6,
+    "mean": 45.333333333333336,
+    "p50": 45.0,
+    "p95": 47.5
+  },
+  "output_tokens": {
+    "n": 6,
+    "mean": 16,
+    "p50": 16.0,
+    "p95": 16.0
+  },
+  "gpu_samples": 3,
+  "metric_notes": "TTFT first non-empty text chunk; TPOT=(E2E-TTFT)/(server completion tokens-1); E2E ends at [DONE]. Client queue before semaphore excluded per request; throughput uses total wall time. SSE chunks may contain multiple tokens."
+}

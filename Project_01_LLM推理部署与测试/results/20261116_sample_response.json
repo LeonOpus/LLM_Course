@@ -1,0 +1,15 @@
+{
+  "question": "请用一句话解释大模型推理中的 KV Cache。",
+  "answer": "在大模型推理中，KV Cache用于加速模型的推理过程，通过将模型的参数和输入数据存储在内存中，减少模型的加载时间。",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 40,
+    "total_tokens": 75,
+    "completion_tokens": 35
+  },
+  "note": "单条生成示例，不构成回答质量评估。",
+  "manual_review": {
+    "result": "不正确",
+    "reason": "该回答将 KV Cache 描述为存储模型参数和输入数据以减少加载时间；KV Cache 主要缓存已处理 token 的注意力 K/V，以避免自回归生成时重复计算。仅核查这一条。"
+  }
+}
